@@ -1,6 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-class MainView extends StatelessWidget {
+class MainView extends GetView {
+  static const String route = '/main';
+
   const MainView({super.key});
 
   @override
