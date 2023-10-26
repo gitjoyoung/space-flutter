@@ -18,7 +18,7 @@ class MyApp extends StatelessWidget {
         Get.lazyPut(() => null);
       }),
       getPages: [
-        GetPage(name: ViewRoute.main_page, page: () => MainView()),
+        GetPage(name: ViewRoute.mainPage, page: () => MainView()),
       ],
     );
   }
