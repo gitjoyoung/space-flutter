@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class Colors {
+class textColors {
 // 컬러 사전 지정
 // 사용 예시
 // Container(
@@ -12,3 +12,4 @@ class Colors {
   static const statusColor = Color(0xFF6C757D);
 
 }
+ 
