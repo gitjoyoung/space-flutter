@@ -2,6 +2,7 @@ import 'package:ace/routes/view_route.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import 'views/authpage/login.dart';
 import 'views/main_view.dart';
 
 void main() {
@@ -16,10 +17,11 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
         initialRoute: ViewRoute.mainPage,
         initialBinding: BindingsBuilder(() {
-          Get.lazyPut(() => null);
+          // Get.lazyPut(() => null);
         }),
         getPages: [
           GetPage(name: ViewRoute.mainPage, page: () => const MainView()),
+          GetPage(name: ViewRoute.loginPage, page: () => const LoginView()),
         ]);
   }
 }
