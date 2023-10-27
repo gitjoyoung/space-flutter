@@ -1,6 +1,11 @@
 import 'package:flutter/material.dart';
 
+<<<<<<< HEAD
+class Colors {
+  const Colors();
+=======
 class AppColors {
+>>>>>>> b6097376b9e1ae2cd489089242f6bbeca600877b
 // 컬러 사전 지정
 // 사용 예시
 // Container(
@@ -8,6 +13,11 @@ class AppColors {
 // )
   const AppColors();
 
+<<<<<<< HEAD
+  static const Color primaryColor = Color(0xFF007BFF);
+  static const Color secondaryColor = Color(0xFF6C757D);
+  static const Color statusColor = Color(0xFF6C757D);
+=======
   static const primaryColor = Color(0xFF007BFF);
   static const secondaryColor = Color(0xFF6C757D);
   static const statusColor = Color(0xFF6C757D);
@@ -53,4 +63,5 @@ class AppColors {
 //System
   static const systemWarnin = Color(0xFFFF0000);
   static const systemSuccess = Color(0xFF07A320);
+>>>>>>> b6097376b9e1ae2cd489089242f6bbeca600877b
 }
