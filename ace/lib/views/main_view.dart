@@ -9,19 +9,6 @@ class MainView extends GetView {
   const MainView({super.key});
 
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(
-        child: Column(
-          children: [
-            ElevatedButton(
-              onPressed: () {},
-              child: Text("d"),
-              style: ElevatedButton.styleFrom(
-                  shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10),) ,side: BorderSide(color: Colors.red),
-            ),),
-          ],
-        ),
-      ),
-    );
+    return Scaffold(body: Container());
   }
 }
