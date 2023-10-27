@@ -6,7 +6,8 @@ class textColors {
 // Container(
 //   color: primaryColor,
 // )
-
+  static const Color appBarTitle = const Color(0xFFFFFFFF);
+  
   static const primaryColor = Color(0xFF007BFF);
   static const secondaryColor = Color(0xFF6C757D);
   static const statusColor = Color(0xFF6C757D);
