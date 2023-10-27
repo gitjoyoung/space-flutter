@@ -14,12 +14,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-      initialBinding: BindingsBuilder(() {
-        Get.lazyPut(() => null);
-      }),
-      getPages: [
-        GetPage(name: ViewRoute.mainPage, page: () => MainView()),
-      ],
-    );
+        initialRoute: ViewRoute.mainPage,
+        initialBinding: BindingsBuilder(() {
+          Get.lazyPut(() => null);
+        }),
+        getPages: [
+          GetPage(name: ViewRoute.mainPage, page: () => const MainView()),
+        ]);
   }
 }
