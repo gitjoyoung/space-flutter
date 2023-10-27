@@ -1,3 +1,3 @@
 class ViewRoute {
-  static final String main_page = "/main";
+  static final String mainPage = "/main";
 }
