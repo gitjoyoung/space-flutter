@@ -8,8 +8,6 @@ class MainView extends GetView {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      body: Container(),
-    );
+    return Scaffold(body: Container());
   }
 }
