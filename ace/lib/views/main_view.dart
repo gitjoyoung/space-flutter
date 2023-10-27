@@ -12,7 +12,7 @@ class MainView extends GetView {
         body: Center(
             child: ElevatedButton(
       onPressed: () {
-        Get.toNamed(ViewRoute.registrationPage);
+        Get.toNamed(ViewRoute.changePasswordPage);
       },
       child: Text('회원가입'),
     )));
