@@ -10,7 +10,6 @@ class AppTypograpy {
   static const TextStyle mainTitleFont40 = TextStyle(
     fontFamily: "Pretendard",
     fontSize: 40.0,
-    height: 48,
     letterSpacing: -3,
     fontWeight: FontWeight.w700,
   );
@@ -19,7 +18,6 @@ class AppTypograpy {
   static const TextStyle mainTitleFont32 = TextStyle(
     fontFamily: "Pretendard",
     fontSize: 32.0,
-    height: 38,
     letterSpacing: -3,
     fontWeight: FontWeight.w700,
   );
@@ -28,7 +26,6 @@ class AppTypograpy {
   static const TextStyle leeSpeechBuble = TextStyle(
     fontFamily: "Pretendard",
     fontSize: 28.0,
-    height: 34,
     letterSpacing: -3,
     fontWeight: FontWeight.w700,
   );
@@ -37,7 +34,6 @@ class AppTypograpy {
   static const TextStyle subTitleFont24 = TextStyle(
     fontFamily: "Pretendard",
     fontSize: 24.0,
-    height: 28,
     letterSpacing: -3,
     fontWeight: FontWeight.w700,
   );
@@ -46,7 +42,6 @@ class AppTypograpy {
   static const TextStyle subTitleFont20 = TextStyle(
     fontFamily: "Pretendard",
     fontSize: 20.0,
-    height: 24,
     letterSpacing: -3,
     fontWeight: FontWeight.w700,
   );
@@ -56,7 +51,6 @@ class AppTypograpy {
   static const TextStyle popupTitleBold = TextStyle(
     fontFamily: "Pretendard",
     fontSize: 20.0,
-    height: 24,
     letterSpacing: -3,
     fontWeight: FontWeight.w700,
   );
@@ -65,7 +59,6 @@ class AppTypograpy {
   static const TextStyle popupTitleMedium = TextStyle(
     fontFamily: "Pretendard",
     fontSize: 24.0,
-    height: 24,
     letterSpacing: -3,
     fontWeight: FontWeight.w500,
   );
@@ -74,7 +67,6 @@ class AppTypograpy {
   static const TextStyle popupTitleRegular = TextStyle(
     fontFamily: "Pretendard",
     fontSize: 20.0,
-    height: 24,
     letterSpacing: -3,
     fontWeight: FontWeight.w400,
   );
@@ -83,7 +75,6 @@ class AppTypograpy {
   static const TextStyle tapButtonBold18 = TextStyle(
     fontFamily: "Pretendard",
     fontSize: 18.0,
-    height: 22,
     letterSpacing: -3,
     fontWeight: FontWeight.w700,
   );
@@ -92,7 +83,6 @@ class AppTypograpy {
   static const TextStyle tapButtonMedium18 = TextStyle(
     fontFamily: "Pretendard",
     fontSize: 18.0,
-    height: 22,
     letterSpacing: -3,
     fontWeight: FontWeight.w500,
   );
@@ -101,7 +91,6 @@ class AppTypograpy {
   static const TextStyle tapButtonRegular18 = TextStyle(
     fontFamily: "Pretendard",
     fontSize: 18.0,
-    height: 22,
     letterSpacing: -3,
     fontWeight: FontWeight.w400,
   );
@@ -110,7 +99,6 @@ class AppTypograpy {
   static const TextStyle tapButtonCardTitle16 = TextStyle(
     fontFamily: "Pretendard",
     fontSize: 16.0,
-    height: 20,
     letterSpacing: -3,
     fontWeight: FontWeight.w700,
   );
@@ -119,7 +107,6 @@ class AppTypograpy {
   static const TextStyle tapButtonNavgation16 = TextStyle(
     fontFamily: "Pretendard",
     fontSize: 16.0,
-    height: 20,
     letterSpacing: -3,
     fontWeight: FontWeight.w500,
   );
@@ -128,7 +115,6 @@ class AppTypograpy {
   static const TextStyle tapButtonSubtitle16 = TextStyle(
     fontFamily: "Pretendard",
     fontSize: 16.0,
-    height: 20,
     letterSpacing: -3,
     fontWeight: FontWeight.w400,
   );
@@ -137,7 +123,6 @@ class AppTypograpy {
   static const TextStyle button36Bold = TextStyle(
     fontFamily: "Pretendard",
     fontSize: 14.0,
-    height: 18,
     letterSpacing: -3,
     fontWeight: FontWeight.w700,
   );
@@ -146,7 +131,6 @@ class AppTypograpy {
   static const TextStyle button36Medium = TextStyle(
     fontFamily: "Pretendard",
     fontSize: 14.0,
-    height: 18,
     letterSpacing: -3,
     fontWeight: FontWeight.w500,
   );
@@ -155,7 +139,6 @@ class AppTypograpy {
   static const TextStyle button36Regular = TextStyle(
     fontFamily: "Pretendard",
     fontSize: 14.0,
-    height: 18,
     letterSpacing: -3,
     fontWeight: FontWeight.w400,
   );
@@ -164,7 +147,6 @@ class AppTypograpy {
   static const TextStyle button28Bold = TextStyle(
     fontFamily: "Pretendard",
     fontSize: 12.0,
-    height: 16,
     letterSpacing: -3,
     fontWeight: FontWeight.w700,
   );
@@ -173,7 +155,6 @@ class AppTypograpy {
   static const TextStyle button28Medium = TextStyle(
     fontFamily: "Pretendard",
     fontSize: 12.0,
-    height: 16,
     letterSpacing: -3,
     fontWeight: FontWeight.w500,
   );
@@ -182,7 +163,6 @@ class AppTypograpy {
   static const TextStyle cardBody = TextStyle(
     fontFamily: "Pretendard",
     fontSize: 12.0,
-    height: 16,
     letterSpacing: -3,
     fontWeight: FontWeight.w400,
   );
