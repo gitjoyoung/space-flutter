@@ -16,7 +16,7 @@ class RegistrationView extends GetView {
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(kToolbarHeight),
         child: Padding(
-          padding: const EdgeInsets.all(20),
+          padding: const EdgeInsets.all(8.0),
           child: AppBar(
               iconTheme: IconThemeData(
                 color: AppColors.neutral80,
@@ -25,16 +25,9 @@ class RegistrationView extends GetView {
               centerTitle: true,
               backgroundColor: Colors.transparent,
               elevation: 0,
-              title: Text(
-                '회원가입 하기',
-                style: TextStyle(
-                    fontFamily: "Pretendard",
-                    fontSize: 18.0,
-                    // height: 30,
-                    letterSpacing: -3,
-                    fontWeight: FontWeight.w700,
-                    color: AppColors.neutral80),
-              )),
+              title: Text('회원가입 하기',
+                  style: AppTypograpy.tapButtonBold18
+                      .copyWith(color: AppColors.neutral80))),
         ),
       ),
       body: Column(
