@@ -1,4 +1,6 @@
 import 'package:ace/routes/view_route.dart';
+import 'package:ace/views/authpage/chang_password_view.dart';
+import 'package:ace/views/authpage/registration_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -22,6 +24,9 @@ class MyApp extends StatelessWidget {
         getPages: [
           GetPage(name: ViewRoute.mainPage, page: () => const MainView()),
           GetPage(name: ViewRoute.loginPage, page: () => const LoginView()),
+          GetPage(
+              name: ViewRoute.changePasswordPage,
+              page: () => const ChangePasswordView()),
         ]);
   }
 }
