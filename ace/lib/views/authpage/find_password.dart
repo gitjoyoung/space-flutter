@@ -1,3 +1,4 @@
+import 'package:ace/controller/find_password_controller.dart';
 import 'package:ace/utils/button.dart';
 import 'package:ace/utils/colors.dart';
 import 'package:ace/utils/typography.dart';
@@ -6,10 +7,12 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 void main() {
+  Get.put(FindPasswordController());
+
   runApp(const GetMaterialApp(home: FindPassword()));
 }
 
-class FindPassword extends GetView {
+class FindPassword extends GetView<FindPasswordController> {
   const FindPassword({super.key});
 
   @override
@@ -18,7 +21,7 @@ class FindPassword extends GetView {
       appBar: AppBar(
           leading: IconButton(
               onPressed: () {
-                print('아이콘 버튼');
+                Get.back();
               },
               icon: Icon(Icons.arrow_back_ios)),
           elevation: 0,
@@ -46,7 +49,7 @@ class FindPassword extends GetView {
                     style: AppTypograpy.button36Regular,
                   ),
                 )),
-                  SizedBox(
+                SizedBox(
                   height: 40,
                 ),
                 Column(
@@ -58,18 +61,26 @@ class FindPassword extends GetView {
                       style: AppTypograpy.button28Bold,
                     ),
                     TextFormFieldCustom(
-                        hintText: '이메일을 입력해주세요.',
-                        controller: TextEditingController()),
+                        hintText: '이메일을 입력해주세요.', controller: controller.email),
                   ],
                 ),
                 SizedBox(
                   height: 300,
                 ),
-                ElevatedButton(
-                  onPressed: () {},
-                  child: Text('보내기'),
-                  style: AppButton.xLarge,
-                )
+                Obx(() {
+                  return ElevatedButton(
+                    onPressed: controller.isButtonEnabled.value
+                        ? () {
+                            controller.findPassword();
+                          }
+                        : null,
+                    child: const Text(
+                      '보내기',
+                      style: AppTypograpy.tapButtonMedium18,
+                    ),
+                    style: AppButton.xLarge,
+                  );
+                })
               ]),
         ),
       ),
