@@ -34,7 +34,7 @@ class RegistrationView extends GetView {
       body: Column(
         children: [
           SizedBox(
-            width: double.infinity, // 최대 너비 확보
+            width: double.infinity,
             child: Padding(
               padding: const EdgeInsets.only(right: 16.0),
               child: Text(
@@ -59,7 +59,6 @@ class RegistrationView extends GetView {
                   '*',
                   style: TextStyle(color: AppColors.systemWarnin, fontSize: 30),
                 ),
-                // 아이콘과 텍스트 사이 간격
               ],
             ),
           ),
@@ -76,8 +75,8 @@ class RegistrationView extends GetView {
                   filled: true,
                   fillColor: AppColors.neutral5,
                   border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10), // 테두리 둥근 모서리 설정
-                    borderSide: BorderSide.none, // 외곽선 제거
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide: BorderSide.none,
                   ),
                 ),
               ),
@@ -97,7 +96,6 @@ class RegistrationView extends GetView {
                   '*',
                   style: TextStyle(color: AppColors.systemWarnin, fontSize: 30),
                 ),
-                // 아이콘과 텍스트 사이 간격
               ],
             ),
           ),
@@ -114,8 +112,8 @@ class RegistrationView extends GetView {
                   filled: true,
                   fillColor: AppColors.neutral5,
                   border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10), // 테두리 둥근 모서리 설정
-                    borderSide: BorderSide.none, // 외곽선 제거
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide: BorderSide.none,
                   ),
                 ),
               ),
@@ -135,7 +133,6 @@ class RegistrationView extends GetView {
                   '*',
                   style: TextStyle(color: AppColors.systemWarnin, fontSize: 30),
                 ),
-                // 아이콘과 텍스트 사이 간격
               ],
             ),
           ),
@@ -152,8 +149,8 @@ class RegistrationView extends GetView {
                   filled: true,
                   fillColor: AppColors.neutral5,
                   border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10), // 테두리 둥근 모서리 설정
-                    borderSide: BorderSide.none, // 외곽선 제거
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide: BorderSide.none,
                   ),
                 ),
               ),
@@ -173,7 +170,6 @@ class RegistrationView extends GetView {
                   '*',
                   style: TextStyle(color: AppColors.systemWarnin, fontSize: 30),
                 ),
-                // 아이콘과 텍스트 사이 간격
               ],
             ),
           ),
@@ -190,24 +186,20 @@ class RegistrationView extends GetView {
                   filled: true,
                   fillColor: AppColors.neutral5,
                   border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10), // 테두리 둥근 모서리 설정
-                    borderSide: BorderSide.none, // 외곽선 제거
+                    borderRadius: BorderRadius.circular(10),
+                    borderSide: BorderSide.none,
                   ),
                 ),
               ),
             ),
           ),
-
-          SizedBox(height: 207), // 위젯 사이의 간격
-
+          SizedBox(height: 207),
           TextButton(
             style: TextButton.styleFrom(
-              minimumSize: Size(370, 50), // 버튼 크기 설정
-              backgroundColor: AppColors.neutral5, // 버튼 배경색 설정
+              minimumSize: Size(370, 50),
+              backgroundColor: AppColors.neutral5,
             ),
-            onPressed: () {
-              // 버튼 클릭시 실행될 함수
-            },
+            onPressed: () {},
             child: Text(
               '가입하기',
               style: AppTypograpy.tapButtonMedium18

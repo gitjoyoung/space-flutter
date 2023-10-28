@@ -10,6 +10,7 @@ void main() {
 
 class SignUpSuccess extends StatelessWidget {
   const SignUpSuccess({super.key});
+  static const String route = '/signsuccess';
 
   @override
   Widget build(BuildContext context) {
