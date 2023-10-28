@@ -1,6 +1,6 @@
+import 'package:ace/controller/login_controller.dart';
 import 'package:ace/routes/view_route.dart';
 import 'package:ace/views/authpage/chang_password_view.dart';
-import 'package:ace/views/authpage/registration_page.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -19,7 +19,7 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
         initialRoute: ViewRoute.mainPage,
         initialBinding: BindingsBuilder(() {
-          // Get.lazyPut(() => null);
+          Get.lazyPut(() => LoginController(), fenix: true);
         }),
         getPages: [
           GetPage(name: ViewRoute.mainPage, page: () => const MainView()),
