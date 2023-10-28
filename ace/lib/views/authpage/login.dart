@@ -36,7 +36,7 @@ void main() {
 }
 
 class LoginView extends GetView<LoginController> {
-  const LoginView({super.key});
+  const LoginView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -45,80 +45,82 @@ class LoginView extends GetView<LoginController> {
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Center(
-            child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.stretch,
-                children: [
-                  SvgPicture.asset('assets/login/sface.svg'),
-                  const SizedBox(
-                    height: 70,
-                  ),
-                  Container(
-                    height: 66,
-                    child: TextFormFieldCustom(
-                        hintText: '이메일 주소를 입력해주세요.',
-                        errorText: '이메일 주소가 틀립니다. 다시 한번 입력해주세요.',
-                        controller: controller.email),
-                  ),
-                  Container(
-                    height: 66,
-                    child: TextFormFieldCustom(
-                        hintText: '비밀번호를 입력해주세요.',
-                        errorText: '비밀번호가 틀립니다. 다시 한번 입력해주세요.',
-                        password: true,
-                        controller: controller.password),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: RichText(
-                      textAlign: TextAlign.center,
-                      text: TextSpan(
-                        style: AppTypograpy.button36Medium
-                            .copyWith(color: AppColors.neutral50),
-                        // style: const TextStyle(color: AppColors.neutral60),
-                        children: [
-                          TextSpan(
-                            recognizer: TapGestureRecognizer()
-                              ..onTap = () {
-                                Get.toNamed(ViewRoute.findPassword);
-                                print('비밀번호 찾기 클릭');
-                              },
-                            text: '비밀번호 찾기',
-                          ),
-                          const TextSpan(
-                            text: '  |  ',
-                          ),
-                          TextSpan(
-                            text: '회원가입하기',
-                            recognizer: TapGestureRecognizer()
-                              ..onTap = () {
-                                Get.toNamed(ViewRoute.registrationPage);
+            child: SingleChildScrollView(
+              child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: [
+                    SvgPicture.asset('assets/login/sface.svg'),
+                    const SizedBox(
+                      height: 70,
+                    ),
+                    Container(
+                      height: 66,
+                      child: TextFormFieldCustom(
+                          hintText: '이메일 주소를 입력해주세요.',
+                          errorText: '이메일 주소가 틀립니다. 다시 한번 입력해주세요.',
+                          controller: controller.email),
+                    ),
+                    Container(
+                      height: 66,
+                      child: TextFormFieldCustom(
+                          hintText: '비밀번호를 입력해주세요.',
+                          errorText: '비밀번호가 틀립니다. 다시 한번 입력해주세요.',
+                          password: true,
+                          controller: controller.password),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: RichText(
+                        textAlign: TextAlign.center,
+                        text: TextSpan(
+                          style: AppTypograpy.button36Medium
+                              .copyWith(color: AppColors.neutral50),
+                          // style: const TextStyle(color: AppColors.neutral60),
+                          children: [
+                            TextSpan(
+                              recognizer: TapGestureRecognizer()
+                                ..onTap = () {
+                                  Get.toNamed(ViewRoute.findPassword);
+                                  print('비밀번호 찾기 클릭');
+                                },
+                              text: '비밀번호 찾기',
+                            ),
+                            const TextSpan(
+                              text: '  |  ',
+                            ),
+                            TextSpan(
+                              text: '회원가입하기',
+                              recognizer: TapGestureRecognizer()
+                                ..onTap = () {
+                                  Get.toNamed(ViewRoute.registrationPage);
 
-                                print('회원가입하기 클릭');
-                              },
-                          ),
-                        ],
+                                  print('회원가입하기 클릭');
+                                },
+                            ),
+                          ],
+                        ),
                       ),
                     ),
-                  ),
-                  const SizedBox(
-                    height: 120,
-                  ),
-                  Obx(() {
-                    return ElevatedButton(
-                      onPressed: controller.isButtonEnabled.value
-                          ? () {
-                              controller.login();
-                            }
-                          : null,
-                      child: const Text(
-                        '로그인',
-                        style: AppTypograpy.tapButtonMedium18,
-                      ),
-                      style: AppButton.xLarge,
-                    );
-                  })
-                ]),
+                    const SizedBox(
+                      height: 120,
+                    ),
+                    Obx(() {
+                      return ElevatedButton(
+                        onPressed: controller.isButtonEnabled.value
+                            ? () {
+                                controller.login();
+                              }
+                            : null,
+                        child: const Text(
+                          '로그인',
+                          style: AppTypograpy.tapButtonMedium18,
+                        ),
+                        style: AppButton.xLarge,
+                      );
+                    })
+                  ]),
+            ),
           ),
         ),
       ),
