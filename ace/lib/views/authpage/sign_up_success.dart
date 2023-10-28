@@ -15,23 +15,24 @@ class SignUpSuccess extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-          child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          SvgPicture.asset(
-            'assets/login/signupsuccess.svg',
-            fit: BoxFit.contain,
-          ),
-          SizedBox(height: 100),
-          ElevatedButton(
-            onPressed: () {},
-            child: Text(
-              '시작하기',
-              style: AppTypograpy.button36Regular,
+          child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 16),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            SvgPicture.asset(
+              'assets/login/signupsuccess.svg',
+              height: 500,
+              width: 500,
             ),
-            style: AppButton.xLarge,
-          )
-        ],
+            SizedBox(height: 100),
+            ElevatedButton(
+              onPressed: () {},
+              child: Text('프로필 작성하기', style: AppTypograpy.button36Regular),
+              style: AppButton.xLarge,
+            )
+          ],
+        ),
       )),
     );
   }
