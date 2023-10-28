@@ -37,51 +37,53 @@ class FindPassword extends GetView<FindPasswordController> {
       body: Center(
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 8),
-          child: Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              crossAxisAlignment: CrossAxisAlignment.stretch,
-              children: [
-                Center(
-                    child: Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: Text(
-                    '''기존에 가입하신 이메일을 입력하시면, \n 새로운 비밀번호를 보내드립니다.''',
-                    style: AppTypograpy.button36Regular,
+          child: SingleChildScrollView(
+            child: Column(
+                mainAxisAlignment: MainAxisAlignment.start,
+                crossAxisAlignment: CrossAxisAlignment.stretch,
+                children: [
+                  Center(
+                      child: Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Text(
+                      '''기존에 가입하신 이메일을 입력하시면, \n 새로운 비밀번호를 보내드립니다.''',
+                      style: AppTypograpy.button36Regular,
+                    ),
+                  )),
+                  SizedBox(
+                    height: 40,
                   ),
-                )),
-                SizedBox(
-                  height: 40,
-                ),
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  crossAxisAlignment: CrossAxisAlignment.stretch,
-                  children: [
-                    Text(
-                      '이메일',
-                      style: AppTypograpy.button28Bold,
-                    ),
-                    TextFormFieldCustom(
-                        hintText: '이메일을 입력해주세요.', controller: controller.email),
-                  ],
-                ),
-                SizedBox(
-                  height: 300,
-                ),
-                Obx(() {
-                  return ElevatedButton(
-                    onPressed: controller.isButtonEnabled.value
-                        ? () {
-                            controller.findPassword();
-                          }
-                        : null,
-                    child: const Text(
-                      '보내기',
-                      style: AppTypograpy.tapButtonMedium18,
-                    ),
-                    style: AppButton.xLarge,
-                  );
-                })
-              ]),
+                  Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                    children: [
+                      Text(
+                        '이메일',
+                        style: AppTypograpy.button28Bold,
+                      ),
+                      TextFormFieldCustom(
+                          hintText: '이메일을 입력해주세요.', controller: controller.email),
+                    ],
+                  ),
+                  SizedBox(
+                    height: 300,
+                  ),
+                  Obx(() {
+                    return ElevatedButton(
+                      onPressed: controller.isButtonEnabled.value
+                          ? () {
+                              controller.findPassword();
+                            }
+                          : null,
+                      child: const Text(
+                        '보내기',
+                        style: AppTypograpy.tapButtonMedium18,
+                      ),
+                      style: AppButton.xLarge,
+                    );
+                  })
+                ]),
+          ),
         ),
       ),
     );
