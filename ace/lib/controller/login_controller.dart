@@ -3,10 +3,10 @@ import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 
 class LoginController extends GetxController {
-  var emailController = TextEditingController();
+  var idController = TextEditingController();
   var pwController = TextEditingController();
 
   login() {
-    Get.find<AuthController>().login(emailController.text, pwController.text);
+    Get.find<AuthController>().login(idController.text, pwController.text);
   }
 }
