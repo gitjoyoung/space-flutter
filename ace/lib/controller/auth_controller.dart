@@ -47,7 +47,10 @@ class AuthController extends GetxController {
     );
     if (res.data['status'] == 'success') {
       // 성공시 토큰값 업로드
+      print(res.data);
+
       token.value = res.data['data'];
+      print(token.value);
     }
   }
 }
