@@ -14,6 +14,12 @@ class SignUpSuccess extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
+
+    double imageWidth = width * 0.6;
+    double imageHeight = height * 0.6;
+
     return Scaffold(
       body: Center(
           child: Padding(
@@ -23,8 +29,8 @@ class SignUpSuccess extends StatelessWidget {
           children: [
             SvgPicture.asset(
               'assets/login/signupsuccess.svg',
-              height: 500,
-              width: 500,
+              height: imageHeight,
+              width: imageWidth,
             ),
             SizedBox(height: 100),
             ElevatedButton(

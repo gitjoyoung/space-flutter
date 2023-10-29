@@ -8,6 +8,12 @@ class SplashPage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
+
+    double imageWidth = width * 0.6;
+    double imageHeight = height * 0.6;
+
     return Scaffold(
       body: Center(
           child: Column(
@@ -15,8 +21,8 @@ class SplashPage extends StatelessWidget {
         children: [
           SvgPicture.asset(
             'assets/login/splash.svg',
-            height: 200,
-            width: 100,
+            width: imageWidth,
+            height: imageHeight,
           ),
           ElevatedButton(
             onPressed: () {
