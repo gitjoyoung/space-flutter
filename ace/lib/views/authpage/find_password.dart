@@ -1,6 +1,7 @@
 import 'package:ace/controller/find_password_controller.dart';
 import 'package:ace/utils/button.dart';
 import 'package:ace/utils/colors.dart';
+import 'package:ace/utils/email_validator.dart';
 import 'package:ace/utils/typography.dart';
 import 'package:ace/widgets/text_filed_custom.dart';
 import 'package:flutter/material.dart';
@@ -61,8 +62,11 @@ class FindPassword extends GetView<FindPasswordController> {
                         '이메일',
                         style: AppTypograpy.button28Bold,
                       ),
-                      TextFormFieldCustom(
-                          hintText: '이메일을 입력해주세요.', controller: controller.email),
+                      TextFieldCustom(
+                          validator: EmailValidator.isValid,
+                          hintText: '이메일을 입력해주세요.',
+                          errorText: '이메일 주소가 틀립니다. 다시 한번 입력해주세요.',
+                          controller: controller.email),
                     ],
                   ),
                   SizedBox(

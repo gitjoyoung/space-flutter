@@ -3,6 +3,7 @@ import 'package:ace/controller/find_password_controller.dart';
 import 'package:ace/controller/login_controller.dart';
 import 'package:ace/routes/view_route.dart';
 import 'package:ace/utils/button.dart';
+import 'package:ace/utils/email_validator.dart';
 import 'package:ace/utils/typography.dart';
 import 'package:ace/views/authpage/find_password.dart';
 import 'package:ace/views/authpage/registration_page.dart';
@@ -56,18 +57,27 @@ class LoginView extends GetView<LoginController> {
                     ),
                     Container(
                       height: 66,
-                      child: TextFormFieldCustom(
+                      child: TextFieldCustom(
+                          validator: EmailValidator.isValid,
                           hintText: '이메일 주소를 입력해주세요.',
                           errorText: '이메일 주소가 틀립니다. 다시 한번 입력해주세요.',
                           controller: controller.email),
                     ),
                     Container(
                       height: 66,
-                      child: TextFormFieldCustom(
-                          hintText: '비밀번호를 입력해주세요.',
-                          errorText: '비밀번호가 틀립니다. 다시 한번 입력해주세요.',
-                          password: true,
-                          controller: controller.password),
+                      child: TextFieldCustom(
+                        validator: (value) {
+                          if (value.length > 8) {
+                            return true;
+                          } else {
+                            return false;
+                          }
+                        },
+                        hintText: '비밀번호를 입력해주세요.',
+                        errorText: '비밀번호가 틀립니다. 다시 한번 입력해주세요.',
+                        password: true,
+                        controller: controller.password,
+                      ),
                     ),
                     Padding(
                       padding: const EdgeInsets.all(8.0),

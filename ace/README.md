@@ -5,14 +5,19 @@
 
 변수 선언시 camelCase 
 
+함수 선언시 camelCase
+
 class 선언시 PascalCase
 
 폴더 생성시 snakecase 소문자 특수문자 X
 
+폴더 하위 파일 명 snake_case 언더바 포함 해당 폴더명 기입 X
+예시 view -> authpage -> change_password.dart
+
 MVC 패턴 적용
 Model , View , Controller 
 
-View에서 가장 작게 나눠진 Widget 들  폴더에 따로 구분
+View에서 자주 사용하는 위젯들 widgets 폴더에 따로 구분
 
 util 자주쓰는 도구 함수 
 

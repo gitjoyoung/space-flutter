@@ -7,6 +7,7 @@ class MainView extends GetView {
 
   const MainView({super.key});
 
+  @override
   Widget build(BuildContext context) {
     return Scaffold(
         body: Center(
