@@ -22,6 +22,7 @@ class AuthController extends GetxController {
       return "이메일 또는 비밀번호를 입력하지 않았습니다";
     }
 
+   
     //이메일 양식 검증
     if (!EmailValidator.isValid(email)) {
       print("이메일 양식에 맞지 않습니다");
