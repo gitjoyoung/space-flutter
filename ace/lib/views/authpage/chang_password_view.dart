@@ -7,6 +7,12 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 class ChangePasswordView extends StatelessWidget {
   const ChangePasswordView({Key? key}) : super(key: key);
+<<<<<<< HEAD
+=======
+
+=======
+
+>>>>>>> 3604355999b0dfcc6f6d3eec4ca86d64343f07c0
 
   @override
   Widget build(BuildContext context) {
