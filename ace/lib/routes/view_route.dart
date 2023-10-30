@@ -5,4 +5,6 @@ class ViewRoute {
 
   static final String registrationPage = "/registration";
   static final String changePasswordPage = "/changepassword";
+  static final String splashPage = "/splash";
+  static final String signupSuccess = "/signupsucccess";
 }
