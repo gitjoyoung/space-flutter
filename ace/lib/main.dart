@@ -1,4 +1,7 @@
 import 'package:ace/controller/login_controller.dart';
+
+=======
+
 import 'package:ace/routes/view_route.dart';
 import 'package:ace/views/authpage/chang_password_view.dart';
 import 'package:flutter/material.dart';
@@ -21,6 +24,8 @@ class MyApp extends StatelessWidget {
         initialBinding: BindingsBuilder(() {
           Get.lazyPut(() => LoginController(), fenix: true);
         }),
+
+=======
         getPages: [
           GetPage(name: ViewRoute.mainPage, page: () => const MainView()),
           GetPage(name: ViewRoute.loginPage, page: () => const LoginView()),
@@ -28,5 +33,6 @@ class MyApp extends StatelessWidget {
               name: ViewRoute.changePasswordPage,
               page: () => const ChangePasswordView()),
         ]);
+
   }
 }
