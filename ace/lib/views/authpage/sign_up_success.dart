@@ -1,7 +1,9 @@
+import 'package:ace/routes/view_route.dart';
 import 'package:ace/utils/button.dart';
 import 'package:ace/utils/typography.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 
 void main() {
@@ -34,7 +36,9 @@ class SignUpSuccess extends StatelessWidget {
             ),
             SizedBox(height: 100),
             ElevatedButton(
-              onPressed: () {},
+              onPressed: () {
+                Get.toNamed(ViewRoute.mainPage);
+              },
               child: Text('프로필 작성하기', style: AppTypograpy.button36Regular),
               style: AppButton.xLarge,
             )
