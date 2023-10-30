@@ -7,7 +7,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 class ChangePasswordView extends StatelessWidget {
   const ChangePasswordView({Key? key}) : super(key: key);
-  static const String route = '/changepassword';
 
   @override
   Widget build(BuildContext context) {
