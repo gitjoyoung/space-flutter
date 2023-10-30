@@ -16,11 +16,14 @@ class AppButton {
   }
 
   // ElevatedButton에 특화된 스타일 생성
+
+
   static ButtonStyle createElevatedButtonStyle(double height, Color backColor,
       [Color? boradColor]) {
     return ElevatedButton.styleFrom(
       side:
           boradColor != null ? BorderSide(color: boradColor) : BorderSide.none,
+
       backgroundColor: backColor,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(10)),
@@ -29,6 +32,8 @@ class AppButton {
     ).merge(createButtonStyle(height)); // 기존 createButtonStyle과 병합
   }
 
+
+=======
 // 첫번째 인자값 높이 , 두번째 배경색상 , 세번째 테두리 색상
 
 // Primary
@@ -43,6 +48,7 @@ class AppButton {
 
   static final ButtonStyle xSmall =
       createElevatedButtonStyle(24, AppColors.primaryColor);
+
 
 // Outline
   static final ButtonStyle xLargeOutLine = createElevatedButtonStyle(
@@ -71,6 +77,9 @@ class AppButton {
       24, AppColors.systemWarnin, AppColors.systemWarnin);
 
   //Disabled / Secondary
+
+
+=======
   static final ButtonStyle xLargeDisabled =
       createElevatedButtonStyle(56, AppColors.neutral5, AppColors.neutral5);
 
@@ -82,4 +91,5 @@ class AppButton {
 
   static final ButtonStyle xSmallDisabled =
       createElevatedButtonStyle(24, AppColors.neutral5, AppColors.neutral5);
+
 }
