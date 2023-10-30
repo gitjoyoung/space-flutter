@@ -1,3 +1,5 @@
+import 'package:ace/routes/api_route.dart';
+import 'package:ace/routes/view_route.dart';
 import 'package:ace/views/authpage/chang_password_view.dart';
 import 'package:ace/views/authpage/find_password.dart';
 import 'package:ace/views/authpage/login.dart';
@@ -9,13 +11,15 @@ import 'package:get/get.dart';
 
 class AppPages {
   static final pages = [
-    GetPage(name: MainView.route, page: () => const MainView()),
-    GetPage(name: LoginView.route, page: () => const MainView()),
-    GetPage(name: RegistrationView.route, page: () => const RegistrationView()),
-    GetPage(name: FindPassword.route, page: () => const FindPassword()),
+    GetPage(name: ViewRoute.mainPage, page: () => const MainView()),
+    GetPage(name: ViewRoute.loginPage, page: () => const LoginView()),
     GetPage(
-        name: ChangePasswordView.route, page: () => const ChangePasswordView()),
-    GetPage(name: SplashPage.route, page: () => const SplashPage()),
-    GetPage(name: SignUpSuccess.route, page: () => const SignUpSuccess()),
+        name: ViewRoute.registrationPage, page: () => const RegistrationView()),
+    GetPage(name: ViewRoute.findPassword, page: () => const FindPassword()),
+    GetPage(
+        name: ViewRoute.changePasswordPage,
+        page: () => const ChangePasswordView()),
+    GetPage(name: ViewRoute.splashPage, page: () => const SplashPage()),
+    GetPage(name: ViewRoute.signupSuccess, page: () => const SignUpSuccess()),
   ];
 }
