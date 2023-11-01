@@ -48,7 +48,9 @@ class _TextFieldCustomState extends State<TextFieldCustom> {
                     obscure = !obscure;
                   });
                 },
-                icon: const Icon(Icons.remove_red_eye_outlined))
+                icon: obscure
+                    ? Icon(Icons.remove_red_eye_outlined)
+                    : Icon(Icons.password_sharp))
             : null,
         hintText: widget.hintText,
         hintStyle:
@@ -79,4 +81,3 @@ class _TextFieldCustomState extends State<TextFieldCustom> {
     );
   }
 }
-
