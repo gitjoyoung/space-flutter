@@ -17,6 +17,7 @@ class AvatarCustomizer extends StatelessWidget {
       body: Column(
         children: [
           // 1. 상단의 아바타 표시
+
           Expanded(
             flex: 2,
             child: Center(
