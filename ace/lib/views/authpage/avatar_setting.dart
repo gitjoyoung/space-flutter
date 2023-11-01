@@ -4,84 +4,100 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 void main() {
-  runApp(GetMaterialApp(home: AvatarSettingPage()));
+  runApp(GetMaterialApp(home: AvatarCustomizer()));
 }
 
-class AvatarSettingPage extends StatelessWidget {
-  final AvatarController avatarController = Get.put(AvatarController());
+class AvatarCustomizer extends StatelessWidget {
+  final AvatarController controller = Get.put(AvatarController());
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text('아바타 설정')),
+      appBar: AppBar(title: Text("아바타 설정")),
       body: Column(
         children: [
+          // 1. 상단의 아바타 표시
           Expanded(
+            flex: 2,
+            child: Center(
+              child: Obx(() {
+                return Stack(
+                  children: [
+                    SvgPicture.asset(
+                        'assets/face/on_face_${controller.faceIndex}.svg'),
+                    SvgPicture.asset(
+                      'assets/hair/off_hair_${controller.hairIndex}.svg',
+                    ),
+                    SvgPicture.asset(
+                        'assets/emotion/off_emotion_${controller.emotionIndex}.svg'),
+                    SvgPicture.asset(
+                        'assets/item/off_item_${controller.itemIndex}.svg'),
+                  ],
+                );
+              }),
+            ),
+          ),
+
+          // 2. 카테고리 선택 버튼
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              ElevatedButton(
+                  onPressed: () => controller.changeCategory('hair'),
+                  child: Text("헤어")),
+              ElevatedButton(
+                  onPressed: () => controller.changeCategory('emotion'),
+                  child: Text("표정")),
+              ElevatedButton(
+                  onPressed: () => controller.changeCategory('face'),
+                  child: Text("피부")),
+              ElevatedButton(
+                  onPressed: () => controller.changeCategory('item'),
+                  child: Text("아이템")),
+            ],
+          ),
+
+          // 3. 하단의 에셋 그리드
+          Expanded(
+            flex: 3,
             child: Obx(() {
-              return Stack(
-                children: [
-                  SvgPicture.asset('assets/face/on_face_1.svg',
-                      color: avatarController.currentAvatar.value.color),
-                  SvgPicture.asset(
-                      'assets/hair/off_hair_${avatarController.currentAvatar.value.hair}.svg'),
-                  // ... 다른 SVG 레이어들
-                ],
+              int count = 0; // 초기값 설정
+              String path = ''; // 초기값 설정
+              switch (controller.selectedCategory.value) {
+                case 'hair':
+                  count = 24;
+                  path = 'hair/off_hair_';
+                  break;
+                case 'face':
+                  count = 9;
+                  path = 'face/on_face_';
+                  break;
+                case 'emotion':
+                  count = 24;
+                  path = 'emotion/off_emotion_';
+                  break;
+                case 'item':
+                  count = 18;
+                  path = 'item/off_item_';
+                  break;
+              }
+
+              return GridView.builder(
+                gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 4),
+                itemCount: count,
+                itemBuilder: (context, index) {
+                  return GestureDetector(
+                    onTap: () {
+                      controller.changeIndex(index + 1);
+                    },
+                    child: SvgPicture.asset('assets/$path${index + 1}.svg'),
+                  );
+                },
               );
             }),
           ),
-          Expanded(
-            child: GridView.builder(
-              gridDelegate:
-                  SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 4),
-              itemCount: 24, // 헤어 스타일 수
-              itemBuilder: (context, index) {
-                return GestureDetector(
-                  onTap: () {
-                    avatarController
-                        .updateHair((index + 1).toString()); // 숫자로 헤어 업데이트
-                  },
-                  child: SvgPicture.asset(
-                      'path_to_hair_icon/hair_icon_${index + 1}.svg'),
-                );
-              },
-            ),
-          ),
-          Row(
-            children: [
-              // 색상 선택자
-              ColorOption(Colors.blue, avatarController.updateColor),
-              ColorOption(Colors.brown, avatarController.updateColor),
-              ColorOption(Colors.black, avatarController.updateColor),
-              ColorOption(Colors.pink, avatarController.updateColor),
-              // ... 다른 색상들
-            ],
-          ),
-          ElevatedButton(
-            onPressed: () {
-              // 설정 저장 및 페이지 닫기
-            },
-            child: Text('저장하기'),
-          ),
         ],
-      ),
-    );
-  }
-}
-
-class ColorOption extends StatelessWidget {
-  final Color color;
-  final Function(Color) onSelect;
-
-  ColorOption(this.color, this.onSelect);
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () => onSelect(color),
-      child: Container(
-        width: 50,
-        height: 50,
-        color: color,
       ),
     );
   }

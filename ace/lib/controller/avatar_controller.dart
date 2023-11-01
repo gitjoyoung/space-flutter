@@ -1,31 +1,38 @@
-import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class Avatar {
-  String hair;
-  String skin;
-  String expression;
-  Color color;
-
-  Avatar({
-    required this.hair,
-    required this.skin,
-    required this.expression,
-    required this.color,
-  });
-}
-
 class AvatarController extends GetxController {
-  var currentAvatar = Avatar(
-    hair: 'defaultHair',
-    skin: 'defaultSkin',
-    expression: 'defaultExpression',
-    color: Colors.black,
-  ).obs;
+  var selectedCategory = 'hair'.obs; // 기본 카테고리는 헤어로 설정
+  var hairIndex = 1.obs;
+  var faceIndex = 1.obs;
+  var emotionIndex = 1.obs;
+  var itemIndex = 1.obs;
+  var hairColor = '#030303'.obs;
 
-  void updateHair(String hair) => currentAvatar.value.hair = hair;
-  void updateSkin(String skin) => currentAvatar.value.skin = skin;
-  void updateExpression(String expression) =>
-      currentAvatar.value.expression = expression;
-  void updateColor(Color color) => currentAvatar.value.color = color;
+  // 카테고리를 변경하는 함수
+  void changeCategory(String category) {
+    selectedCategory.value = category;
+  }
+
+  // 선택한 에셋의 인덱스를 변경하는 함수
+  void changeIndex(int index) {
+    switch (selectedCategory.value) {
+      case 'hair':
+        hairIndex.value = index;
+        break;
+      case 'face':
+        faceIndex.value = index;
+        break;
+      case 'emotion':
+        emotionIndex.value = index;
+        break;
+      case 'item':
+        itemIndex.value = index;
+        break;
+    }
+  }
+
+  // 헤어의 색상을 변경하는 함수
+  void changeHairColor(String color) {
+    hairColor.value = color;
+  }
 }
