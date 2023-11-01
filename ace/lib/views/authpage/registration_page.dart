@@ -1,5 +1,8 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
+import 'package:ace/controller/signup_controller.dart';
+import 'package:ace/routes/view_route.dart';
+import 'package:ace/utils/button.dart';
 import 'package:ace/utils/colors.dart';
 import 'package:ace/utils/email_validator.dart';
 import 'package:ace/utils/typography.dart';
@@ -7,196 +10,171 @@ import 'package:ace/widgets/text_filed_custom.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class RegistrationView extends GetView {
+void main() {
+  Get.put(SignUpController());
+
+  runApp(
+    GetMaterialApp(
+      home: RegistrationView(),
+      getPages: [
+        GetPage(
+            name: ViewRoute.registrationPage, page: () => RegistrationView()),
+      ],
+    ),
+  );
+}
+
+class RegistrationView extends GetView<SignUpController> {
   static const String route = '/registration';
 
-  const RegistrationView({super.key});
+  const RegistrationView({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(kToolbarHeight),
-        child: Padding(
-          padding: const EdgeInsets.all(10),
-          child: AppBar(
-            iconTheme: IconThemeData(
-              color: AppColors.neutral80,
-              size: 20,
+    return Column(
+      mainAxisAlignment: MainAxisAlignment.center,
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        Scaffold(
+          appBar: PreferredSize(
+            preferredSize: const Size.fromHeight(kToolbarHeight),
+            child: Padding(
+              padding: const EdgeInsets.all(10),
+              child: AppBar(
+                iconTheme: IconThemeData(
+                  color: AppColors.neutral80,
+                  size: 20,
+                ),
+                centerTitle: true,
+                backgroundColor: Colors.transparent,
+                elevation: 0,
+                title: Text('회원가입 하기',
+                    style: AppTypograpy.tapButtonBold18
+                        .copyWith(color: AppColors.neutral80)),
+              ),
             ),
-            centerTitle: true,
-            backgroundColor: Colors.transparent,
-            elevation: 0,
-            title: Text('회원가입 하기',
-                style: AppTypograpy.tapButtonBold18
-                    .copyWith(color: AppColors.neutral80)),
+          ),
+          body: Padding(
+            padding: const EdgeInsets.all(10.0),
+            child: Column(
+              children: [
+                SizedBox(
+                  width: double.infinity,
+                  child: Text(
+                    '*표시는 필수입력항목 입니다.',
+                    style: AppTypograpy.cardBody
+                        .copyWith(color: AppColors.systemWarnin),
+                    textAlign: TextAlign.right,
+                  ),
+                ),
+                Row(
+                  children: [
+                    Text(
+                      '이름',
+                      style: AppTypograpy.tapButtonNavgation16
+                          .copyWith(color: AppColors.neutral80),
+                    ),
+                    SizedBox(width: 4),
+                    Text(
+                      '*',
+                      style: TextStyle(
+                          color: AppColors.systemWarnin, fontSize: 30),
+                    ),
+                  ],
+                ),
+                Container(
+                  height: 66,
+                  child: TextFieldCustom(
+                      hintText: '이름을 입력해 주세요', controller: controller.name),
+                ),
+                Row(
+                  children: [
+                    Text(
+                      '이메일',
+                      style: AppTypograpy.tapButtonNavgation16
+                          .copyWith(color: AppColors.neutral80),
+                    ),
+                    SizedBox(width: 4),
+                    Text(
+                      '*',
+                      style: TextStyle(
+                          color: AppColors.systemWarnin, fontSize: 30),
+                    ),
+                  ],
+                ),
+                Container(
+                  height: 66,
+                  child: TextFieldCustom(
+                      validator: EmailValidator.isValid,
+                      hintText: '이메일 주소를 입력해주세요.',
+                      errorText: '이메일 주소가 틀립니다. 다시 한번 입력해주세요.',
+                      controller: controller.email),
+                ),
+                Row(
+                  children: [
+                    Text(
+                      '비밀번호',
+                      style: AppTypograpy.tapButtonNavgation16
+                          .copyWith(color: AppColors.neutral80),
+                    ),
+                    SizedBox(width: 4),
+                    Text(
+                      '*',
+                      style: TextStyle(
+                          color: AppColors.systemWarnin, fontSize: 30),
+                    ),
+                  ],
+                ),
+                Container(
+                  height: 66,
+                  child: TextFieldCustom(
+                      hintText: '비밀번호를 입력해 주세요',
+                      controller: controller.password),
+                ),
+                Row(
+                  children: [
+                    Text(
+                      '휴대전화',
+                      style: AppTypograpy.tapButtonNavgation16
+                          .copyWith(color: AppColors.neutral80),
+                    ),
+                    SizedBox(width: 4),
+                    Text(
+                      '*',
+                      style: TextStyle(
+                          color: AppColors.systemWarnin, fontSize: 30),
+                    ),
+                  ],
+                ),
+                Container(
+                  height: 66,
+                  child: TextFieldCustom(
+                      hintText: '휴대폰 번호를 입력해주세요', controller: controller.phone),
+                ),
+                SizedBox(height: 207),
+                Obx(() {
+                  return ElevatedButton(
+                    onPressed: controller.isLoading.value
+                        ? () {
+                            controller.singup(
+                                controller.name.text,
+                                controller.email.text,
+                                controller.password.text,
+                                controller.phone.text);
+                          }
+                        : null,
+                    child: const Text(
+                      '로그인',
+                      style: AppTypograpy.tapButtonMedium18,
+                    ),
+                    style: AppButton.xLarge,
+                  );
+                })
+              ],
+            ),
           ),
         ),
-      ),
-      body: Column(
-        children: [
-          SizedBox(
-            width: double.infinity,
-            child: Padding(
-              padding: const EdgeInsets.only(right: 16.0),
-              child: Text(
-                '*표시는 필수입력항목 입니다.',
-                style: AppTypograpy.cardBody
-                    .copyWith(color: AppColors.systemWarnin),
-                textAlign: TextAlign.right,
-              ),
-            ),
-          ),
-          Padding(
-            padding: EdgeInsets.only(top: 16.0, left: 10.0, right: 10.0),
-            child: Row(
-              children: [
-                Text(
-                  '이름',
-                  style: AppTypograpy.tapButtonNavgation16
-                      .copyWith(color: AppColors.neutral80),
-                ),
-                SizedBox(width: 4),
-                Text(
-                  '*',
-                  style: TextStyle(color: AppColors.systemWarnin, fontSize: 30),
-                ),
-              ],
-            ),
-          ),
-          Container(
-            height: 66,
-            child: TextFieldCustom(
-                validator: EmailValidator.isValid,
-                hintText: '이름을 입력해 주세요',
-                controller: controller.email),
-          ),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 10.0),
-            child: Row(
-              children: [
-                Text(
-                  '이메일',
-                  style: AppTypograpy.tapButtonNavgation16
-                      .copyWith(color: AppColors.neutral80),
-                ),
-                SizedBox(width: 4),
-                Text(
-                  '*',
-                  style: TextStyle(color: AppColors.systemWarnin, fontSize: 30),
-                ),
-              ],
-            ),
-          ),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 10.0),
-            child: SizedBox(
-              width: 370,
-              height: 48,
-              child: TextField(
-                style: AppTypograpy.button36Regular
-                    .copyWith(color: AppColors.neutral80),
-                decoration: InputDecoration(
-                  hintText: '이메일을 입력해주세요',
-                  filled: true,
-                  fillColor: AppColors.neutral5,
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                    borderSide: BorderSide.none,
-                  ),
-                ),
-              ),
-            ),
-          ),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 10.0),
-            child: Row(
-              children: [
-                Text(
-                  '비밀번호',
-                  style: AppTypograpy.tapButtonNavgation16
-                      .copyWith(color: AppColors.neutral80),
-                ),
-                SizedBox(width: 4),
-                Text(
-                  '*',
-                  style: TextStyle(color: AppColors.systemWarnin, fontSize: 30),
-                ),
-              ],
-            ),
-          ),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 10.0),
-            child: SizedBox(
-              width: 370,
-              height: 48,
-              child: TextField(
-                style: AppTypograpy.button36Regular
-                    .copyWith(color: AppColors.neutral80),
-                decoration: InputDecoration(
-                  hintText: '비밀번호를 입력해주세요',
-                  filled: true,
-                  fillColor: AppColors.neutral5,
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                    borderSide: BorderSide.none,
-                  ),
-                ),
-              ),
-            ),
-          ),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 10.0),
-            child: Row(
-              children: [
-                Text(
-                  '휴대전화',
-                  style: AppTypograpy.tapButtonNavgation16
-                      .copyWith(color: AppColors.neutral80),
-                ),
-                SizedBox(width: 4),
-                Text(
-                  '*',
-                  style: TextStyle(color: AppColors.systemWarnin, fontSize: 30),
-                ),
-              ],
-            ),
-          ),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 10.0),
-            child: SizedBox(
-              width: 370,
-              height: 48,
-              child: TextField(
-                style: AppTypograpy.button36Regular
-                    .copyWith(color: AppColors.neutral80),
-                decoration: InputDecoration(
-                  hintText: '휴대폰 번호를 입력해주세요',
-                  filled: true,
-                  fillColor: AppColors.neutral5,
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                    borderSide: BorderSide.none,
-                  ),
-                ),
-              ),
-            ),
-          ),
-          SizedBox(height: 207),
-          TextButton(
-            style: TextButton.styleFrom(
-              minimumSize: Size(370, 50),
-              backgroundColor: AppColors.neutral5,
-            ),
-            onPressed: () {},
-            child: Text(
-              '가입하기',
-              style: AppTypograpy.tapButtonMedium18
-                  .copyWith(color: AppColors.neutral20),
-            ),
-          ),
-        ],
-      ),
+      ],
     );
   }
 }
