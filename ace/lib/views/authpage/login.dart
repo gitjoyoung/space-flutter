@@ -22,10 +22,10 @@ void main() {
 
   runApp(
     GetMaterialApp(
-      home: LoginView(),
+      home: const LoginView(),
       getPages: [
-        GetPage(name: ViewRoute.loginPage, page: () => LoginView()),
-        GetPage(name: ViewRoute.findPassword, page: () => FindPassword()),
+        GetPage(name: ViewRoute.loginPage, page: () => const LoginView()),
+        GetPage(name: ViewRoute.findPassword, page: () => const FindPassword()),
         GetPage(
             name: ViewRoute.registrationPage,
             page: () => RegistrationView()), // 이 부분을 추가
@@ -91,8 +91,9 @@ class LoginView extends GetView<LoginController> {
                             TextSpan(
                               recognizer: TapGestureRecognizer()
                                 ..onTap = () {
-                                  Get.toNamed(ViewRoute.findPassword);
                                   print('비밀번호 찾기 클릭');
+
+                                  Get.toNamed(ViewRoute.findPassword);
                                 },
                               text: '비밀번호 찾기',
                             ),
