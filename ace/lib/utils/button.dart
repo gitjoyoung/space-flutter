@@ -16,20 +16,12 @@ class AppButton {
   }
 
   // ElevatedButton에 특화된 스타일 생성
-<<<<<<< HEAD
-=======
 
-
->>>>>>> 3604355999b0dfcc6f6d3eec4ca86d64343f07c0
   static ButtonStyle createElevatedButtonStyle(double height, Color backColor,
       [Color? boradColor]) {
     return ElevatedButton.styleFrom(
       side:
           boradColor != null ? BorderSide(color: boradColor) : BorderSide.none,
-<<<<<<< HEAD
-=======
-
->>>>>>> 3604355999b0dfcc6f6d3eec4ca86d64343f07c0
       backgroundColor: backColor,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(10)),
@@ -38,11 +30,6 @@ class AppButton {
     ).merge(createButtonStyle(height)); // 기존 createButtonStyle과 병합
   }
 
-<<<<<<< HEAD
-=======
-
-=======
->>>>>>> 3604355999b0dfcc6f6d3eec4ca86d64343f07c0
 // 첫번째 인자값 높이 , 두번째 배경색상 , 세번째 테두리 색상
 
 // Primary
@@ -54,16 +41,9 @@ class AppButton {
 
   static final ButtonStyle small =
       createElevatedButtonStyle(32, AppColors.primaryColor);
-<<<<<<< HEAD
 
   static final ButtonStyle xSmall =
       createElevatedButtonStyle(24, AppColors.primaryColor);
-=======
-
-  static final ButtonStyle xSmall =
-      createElevatedButtonStyle(24, AppColors.primaryColor);
-
->>>>>>> 3604355999b0dfcc6f6d3eec4ca86d64343f07c0
 
 // Outline
   static final ButtonStyle xLargeOutLine = createElevatedButtonStyle(
@@ -92,29 +72,15 @@ class AppButton {
       24, AppColors.systemWarnin, AppColors.systemWarnin);
 
   //Disabled / Secondary
-<<<<<<< HEAD
+
   static final ButtonStyle xLargeDisabled =
       createElevatedButtonStyle(56, AppColors.neutral5, AppColors.neutral5);
 
-=======
-
-
-=======
-  static final ButtonStyle xLargeDisabled =
-      createElevatedButtonStyle(56, AppColors.neutral5, AppColors.neutral5);
-
->>>>>>> 3604355999b0dfcc6f6d3eec4ca86d64343f07c0
   static final ButtonStyle mediumDisabled =
       createElevatedButtonStyle(40, AppColors.neutral5, AppColors.neutral5);
 
   static final ButtonStyle smallDisabled =
       createElevatedButtonStyle(32, AppColors.neutral5, AppColors.neutral5);
-<<<<<<< HEAD
-=======
-
-  static final ButtonStyle xSmallDisabled =
-      createElevatedButtonStyle(24, AppColors.neutral5, AppColors.neutral5);
->>>>>>> 3604355999b0dfcc6f6d3eec4ca86d64343f07c0
 
   static final ButtonStyle xSmallDisabled =
       createElevatedButtonStyle(24, AppColors.neutral5, AppColors.neutral5);
