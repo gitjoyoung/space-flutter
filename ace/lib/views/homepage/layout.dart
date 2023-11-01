@@ -1,3 +1,4 @@
+import 'package:ace/utils/colors.dart';
 import 'package:ace/utils/typography.dart';
 import 'package:flutter/material.dart';
 
@@ -15,28 +16,53 @@ class Layout extends StatefulWidget {
 }
 
 class _LayoutState extends State<Layout> {
+  int _selectedIndex = 0; // 현재 선택된 탭의 인덱스
+
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index; // 선택된 탭의 인덱스를 업데이트
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      bottomNavigationBar: BottomNavigationBar(
-        showSelectedLabels: true, // 선택된 아이템의 라벨을 보여줄지 여부
-        showUnselectedLabels: true, // 선택되지 않은 아이템의 라벨을 보여줄지 여부
-        unselectedLabelStyle:
-            AppTypograpy.cardBody.copyWith(color: Colors.black),
-        selectedItemColor: Colors.blue, // 선택된 아이템의 색상
-        unselectedItemColor: Colors.black, // 선택되지 않은 아이템의 색상
-        items: [
-          BottomNavigationBarItem(
-              label: 'home1', icon: Icon(Icons.ac_unit_outlined)),
-          BottomNavigationBarItem(
-              label: 'talk', icon: Icon(Icons.ac_unit_outlined)),
-          BottomNavigationBarItem(
-              label: '캐치업!', icon: Icon(Icons.ac_unit_outlined)),
-          BottomNavigationBarItem(
-              label: '모각코!', icon: Icon(Icons.ac_unit_outlined)),
-          BottomNavigationBarItem(
-              label: '마이페이지', icon: Icon(Icons.ac_unit_outlined)),
-        ],
+      bottomNavigationBar: Container(
+        height: 60,
+        child: BottomNavigationBar(
+          type: BottomNavigationBarType.fixed,
+
+          currentIndex: _selectedIndex, // 현재 선택된 탭의 인덱스
+          onTap: _onItemTapped, // 탭을 탭했을 때 호출될 메서드
+          showSelectedLabels: true,
+          showUnselectedLabels: true,
+          unselectedLabelStyle:
+              AppTypograpy.cardBody.copyWith(color: Colors.black),
+          selectedItemColor: AppColors.primaryColor,
+          unselectedItemColor: AppColors.secondaryColor,
+          items: const [
+            BottomNavigationBarItem(
+              label: '홈',
+              icon: Icon(Icons.home),
+            ),
+            BottomNavigationBarItem(
+              label: 'talk',
+              icon: Icon(Icons.ac_unit_outlined),
+            ),
+            BottomNavigationBarItem(
+              label: '캐치업!',
+              icon: Icon(Icons.ac_unit_outlined),
+            ),
+            BottomNavigationBarItem(
+              label: '모각코!',
+              icon: Icon(Icons.ac_unit_outlined),
+            ),
+            BottomNavigationBarItem(
+              label: '마이페이지',
+              icon: Icon(Icons.ac_unit_outlined),
+            ),
+          ],
+        ),
       ),
       body: Text('data'),
     );

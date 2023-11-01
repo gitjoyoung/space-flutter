@@ -18,10 +18,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetMaterialApp(
-        initialRoute: ViewRoute.mainPage,
-        initialBinding: BindingsBuilder(() {
-          Get.lazyPut(() => LoginController(), fenix: true);
-        }),
-        getPages: AppPages.pages);
+      initialRoute: ViewRoute.mainPage,
+      initialBinding: BindingsBuilder(() {
+        Get.lazyPut(() => LoginController(), fenix: true);
+      }),
+      getPages: AppPages.pages,
+    );
   }
 }

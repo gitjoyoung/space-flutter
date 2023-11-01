@@ -7,10 +7,10 @@ import 'package:get/get.dart';
 
 class SplashPage extends StatelessWidget {
   const SplashPage({super.key});
-
+  static const String route = '/splashPage';
   @override
   Widget build(BuildContext context) {
-    ImageSizeConfig sizeConfig = ImageSizeConfig(context);
+    // ImageSizeConfig sizeConfig = ImageSizeConfig(context);
 
     return Scaffold(
       body: Center(
@@ -19,8 +19,8 @@ class SplashPage extends StatelessWidget {
         children: [
           SvgPicture.asset(
             'assets/login/splash.svg',
-            height: sizeConfig.imageHeight,
-            width: sizeConfig.imageWidth,
+            // height: sizeConfig.imageHeight,
+            // width: sizeConfig.imageWidth,
           ),
           ElevatedButton(
             onPressed: () {

@@ -20,17 +20,17 @@ class AppButton {
   static ButtonStyle createElevatedButtonStyle(double height, Color backColor,
       [Color? boradColor]) {
     return ElevatedButton.styleFrom(
-      side:
-          boradColor != null ? BorderSide(color: boradColor) : BorderSide.none,
-      backgroundColor: backColor,
-      shape: const RoundedRectangleBorder(
-        borderRadius: BorderRadius.all(Radius.circular(10)),
-      ),
-      minimumSize: Size.fromHeight(height),
-    ).merge(createButtonStyle(height)); // 기존 createButtonStyle과 병합
+        side: boradColor != null
+            ? BorderSide(color: boradColor)
+            : BorderSide.none,
+        backgroundColor: backColor,
+        shape: const RoundedRectangleBorder(
+          borderRadius: BorderRadius.all(Radius.circular(6)),
+        ),
+        padding: EdgeInsets.symmetric(vertical: 20),
+        minimumSize: Size.fromHeight(height),
+        maximumSize: Size.fromHeight(height));
   }
-
-// 첫번째 인자값 높이 , 두번째 배경색상 , 세번째 테두리 색상
 
 // Primary
   static final ButtonStyle xLarge =
@@ -47,16 +47,16 @@ class AppButton {
 
 // Outline
   static final ButtonStyle xLargeOutLine = createElevatedButtonStyle(
-      56, AppColors.prinary40, AppColors.primaryColor);
+      56, AppColors.backgroundblue, AppColors.strokeLineBlue);
 
   static final ButtonStyle mediumOutLine = createElevatedButtonStyle(
-      40, AppColors.prinary40, AppColors.primaryColor);
+      40, AppColors.backgroundblue, AppColors.strokeLineBlue);
 
   static final ButtonStyle smallOutLine = createElevatedButtonStyle(
-      32, AppColors.prinary40, AppColors.primaryColor);
+      32, AppColors.backgroundblue, AppColors.strokeLineBlue);
 
   static final ButtonStyle xSmallOutLine = createElevatedButtonStyle(
-      24, AppColors.prinary40, AppColors.primaryColor);
+      24, AppColors.backgroundblue, AppColors.strokeLineBlue);
 
 //Destructiveabled
   static final ButtonStyle xLargeDestructive = createElevatedButtonStyle(

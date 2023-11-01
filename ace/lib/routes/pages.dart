@@ -19,7 +19,6 @@ class AppPages {
         name: ViewRoute.changePasswordPage,
         page: () => const ChangePasswordView()),
     GetPage(name: ViewRoute.splashPage, page: () => const SplashPage()),
-    GetPage(
-        name: ViewRoute.singupSuccesspage, page: () => const SignUpSuccess()),
+    GetPage(name: ViewRoute.signupSuccess, page: () => const SignUpSuccess()),
   ];
 }
