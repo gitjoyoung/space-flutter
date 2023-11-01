@@ -1,7 +1,9 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
 import 'package:ace/utils/colors.dart';
+import 'package:ace/utils/email_validator.dart';
 import 'package:ace/utils/typography.dart';
+import 'package:ace/widgets/text_filed_custom.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -62,25 +64,12 @@ class RegistrationView extends GetView {
               ],
             ),
           ),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 10.0),
-            child: SizedBox(
-              width: 370,
-              height: 48,
-              child: TextField(
-                style: AppTypograpy.button36Regular
-                    .copyWith(color: AppColors.neutral80),
-                decoration: InputDecoration(
-                  hintText: '이름을 입력해주세요',
-                  filled: true,
-                  fillColor: AppColors.neutral5,
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                    borderSide: BorderSide.none,
-                  ),
-                ),
-              ),
-            ),
+          Container(
+            height: 66,
+            child: TextFieldCustom(
+                validator: EmailValidator.isValid,
+                hintText: '이름을 입력해 주세요',
+                controller: controller.email),
           ),
           Padding(
             padding: EdgeInsets.symmetric(horizontal: 10.0),
