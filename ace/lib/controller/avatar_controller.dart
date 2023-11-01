@@ -1,4 +1,5 @@
 import 'package:get/get.dart';
+import 'package:flutter/material.dart';
 
 class AvatarController extends GetxController {
   var selectedCategory = 'hair'.obs; // 기본 카테고리는 헤어로 설정
@@ -6,7 +7,28 @@ class AvatarController extends GetxController {
   var faceIndex = 1.obs;
   var emotionIndex = 1.obs;
   var itemIndex = 1.obs;
-  var hairColor = '#030303'.obs;
+  var hairColorHex = '#030303'.obs;
+
+  final List<String> itemAssets = [
+    'angel',
+    'beard',
+    'bone',
+    'cat',
+    'devil',
+    'flower',
+    'glasses1',
+    'glasses2',
+    'graduate',
+    'hand',
+    'hat',
+    'magician',
+    'mask',
+    'rabbit',
+    'ribbon',
+    'star',
+    'sunglass',
+    'tiara'
+  ];
 
   // 카테고리를 변경하는 함수
   void changeCategory(String category) {
@@ -31,8 +53,20 @@ class AvatarController extends GetxController {
     }
   }
 
-  // 헤어의 색상을 변경하는 함수
-  void changeHairColor(String color) {
+  final hairColor = Rx<Color>(Colors.black); // 기본 색상 설정
+  final List<Color> hairColors = [
+    const Color(0xFF030303), // 검정색
+    const Color(0xFFB3B3B3), // 회색
+    const Color(0xFF925319), // 갈색
+    const Color(0xFF6B4D20), // 짙은 갈색
+    const Color(0xFFEDD0AD), // 연한 갈색
+    const Color(0xFF337AFF), // 파란색
+    const Color(0xFFFF7777), // 분홍색
+    const Color(0xFFB33CDD),
+    // 다른 색상들 추가
+  ];
+
+  void changeHairColor(Color color) {
     hairColor.value = color;
   }
 }
