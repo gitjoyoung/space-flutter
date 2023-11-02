@@ -1,3 +1,4 @@
+
 import 'package:ace/routes/view_route.dart';
 import 'package:ace/views/authpage/chang_password_view.dart';
 import 'package:ace/views/authpage/find_password.dart';
@@ -11,10 +12,27 @@ import 'package:get/get.dart';
 class AppPages {
   static final pages = [
     GetPage(name: ViewRoute.mainPage, page: () => const MainView()),
-    GetPage(name: ViewRoute.loginPage, page: () => const LoginView()),
     GetPage(
-        name: ViewRoute.registrationPage, page: () => const RegistrationView()),
-    GetPage(name: ViewRoute.findPassword, page: () => const FindPassword()),
+      name: ViewRoute.loginPage,
+      page: () => const LoginView(),
+      binding: BindingsBuilder(() {
+        Get.put(LoginController());
+      }),
+    ),
+    GetPage(
+      name: ViewRoute.registrationPage,
+      page: () => const RegistrationView(),
+      binding: BindingsBuilder(() {
+        Get.put(SignUpController());
+      }),
+    ),
+    GetPage(
+      name: ViewRoute.findPassword,
+      page: () => const FindPassword(),
+      binding: BindingsBuilder(() {
+        Get.put(FindPasswordController());
+      }),
+    ),
     GetPage(
         name: ViewRoute.changePasswordPage,
         page: () => const ChangePasswordView()),
