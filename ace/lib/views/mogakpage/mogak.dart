@@ -1,4 +1,4 @@
-import 'package:ace/controller/sface/mogak_cotroller.dart';
+import 'package:ace/controller/mogak/mogak_cotroller.dart';
 import 'package:ace/utils/colors.dart';
 import 'package:ace/utils/typography.dart';
 import 'package:ace/widgets/card_tag.dart';
@@ -57,9 +57,8 @@ class Mogak extends GetView<MogakController> {
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.stretch,
                     children: [
-                      ListTile(onTap: () {
-                        
-                      },
+                      ListTile(
+                        onTap: () {},
                         contentPadding: EdgeInsets.only(left: 0),
                         title: Row(
                           children: [
