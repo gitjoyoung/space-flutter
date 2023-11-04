@@ -3,7 +3,10 @@ import 'package:ace/utils/typography.dart';
 import 'package:flutter/material.dart';
 
 class Tag extends StatelessWidget {
-  const Tag({super.key, required this.title});
+  const Tag({
+    super.key,
+    required this.title,
+  });
   final String title;
 
   @override
