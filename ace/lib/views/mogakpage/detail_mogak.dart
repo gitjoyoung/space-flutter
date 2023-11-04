@@ -9,6 +9,7 @@ class MogakDetail extends GetView {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(title: Text('모각 상세')),
       body: Column(
         children: [
           Container(
@@ -48,7 +49,10 @@ class MogakDetail extends GetView {
                       Row(
                         children: [
                           Text('1분전'),
-                          IconButton(onPressed: () {}, icon: Icon(Icons.abc),)
+                          IconButton(
+                            onPressed: () {},
+                            icon: Icon(Icons.abc),
+                          )
                         ],
                       )
                     ])
