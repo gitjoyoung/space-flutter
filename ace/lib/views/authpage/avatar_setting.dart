@@ -140,7 +140,13 @@ class AvatarCustomizer extends StatelessWidget {
                     child: controller.selectedCategory.value == 'item'
                         ? SvgPicture.asset(
                             'assets/item/off_item_${controller.itemAssets[index]}.svg')
-                        : SvgPicture.asset('assets/$path${index + 1}.svg'),
+                        : (controller.selectedCategory.value == 'hair'
+                            ? SvgPicture.asset(
+                                'assets/hair/off_hair_${index + 1}.svg',
+                                color: controller.hairColor.value,
+                                colorBlendMode: BlendMode.srcIn,
+                              )
+                            : SvgPicture.asset('assets/$path${index + 1}.svg')),
                   );
                 },
               );
