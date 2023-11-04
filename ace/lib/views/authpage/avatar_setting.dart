@@ -29,7 +29,6 @@ class AvatarCustomizer extends StatelessWidget {
                     SvgPicture.asset(
                       'assets/hair/off_hair_${controller.hairIndex}.svg',
                       color: controller.hairColor.value,
-                      colorBlendMode: BlendMode.srcIn,
                     ),
                     SvgPicture.asset(
                         'assets/emotion/off_emotion_${controller.emotionIndex}.svg'),
