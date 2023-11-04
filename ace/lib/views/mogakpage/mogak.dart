@@ -1,14 +1,19 @@
 import 'package:ace/controller/mogak/mogak_cotroller.dart';
+import 'package:ace/routes/pages.dart';
+import 'package:ace/routes/view_route.dart';
 import 'package:ace/utils/colors.dart';
 import 'package:ace/utils/typography.dart';
 import 'package:ace/widgets/card_tag.dart';
+import 'package:ace/widgets/comment_Icon.dart';
+import 'package:ace/widgets/mogak_content.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
 void main() {
-  runApp(const GetMaterialApp(
+  runApp( GetMaterialApp(
     home: Mogak(),
+    getPages: AppPages.pages,
   ));
 }
 
@@ -18,111 +23,136 @@ class Mogak extends GetView<MogakController> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        floatingActionButton: FloatingActionButton(
+          onPressed: () {
+            Get.toNamed(ViewRoute.mogakCreate);
+          },
+          clipBehavior: Clip.antiAlias,
+          elevation: 0,
+          child: SvgPicture.asset(
+            'assets/icons/Icon50/CatchUp.svg',
+            alignment: Alignment.center,
+            height: 80,
+            width: 80,
+          ),
+          backgroundColor: AppColors.prinary80,
+        ),
         appBar: AppBar(title: Text('모각코')),
-        body: Column(
-          children: [
-            Padding(
-              padding: const EdgeInsets.only(
-                  top: 16.0, bottom: 16, left: 8.0, right: 8.0),
-              child: TextField(
-                decoration: InputDecoration(
-                  fillColor: Colors.white,
-                  filled: true,
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: const BorderSide(
-                        color: AppColors.strokeLine05, width: 2.0),
-                    borderRadius: BorderRadius.circular(12),
+        body: Padding(
+          padding: const EdgeInsets.only(top: 16, left: 10, right: 10),
+          child: SingleChildScrollView(
+            child: Column(
+              children: [
+                TextField(
+                  decoration: InputDecoration(
+                    prefixIcon: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                      child: Icon(Icons.search),
+                    ),
+                    fillColor: Colors.white,
+                    filled: true,
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: const BorderSide(
+                          color: AppColors.strokeLine05, width: 2.0),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: const BorderSide(
+                          color: AppColors.primaryColor, width: 2.0),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    hintText: '검색',
                   ),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: const BorderSide(
-                        color: AppColors.primaryColor, width: 2.0),
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  labelText: '검색',
                 ),
-              ),
-            ),
-            ListTile(
-              leading: Icon(Icons.abc),
-              onTap: () {
-                print('핫한 모각코');
-              },
-              title: Text('핫한 모각코'),
-              trailing: Icon(Icons.arrow_forward_ios_rounded),
-            ),
-            Card(
-              child: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 10),
-                child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    crossAxisAlignment: CrossAxisAlignment.stretch,
+                ListTile(
+                  onTap: () {
+                    print('핫한 모각코');
+                  },
+                  contentPadding: EdgeInsets.zero,
+                  title: Row(
                     children: [
-                      ListTile(
-                        onTap: () {},
-                        contentPadding: EdgeInsets.only(left: 0),
-                        title: Row(
-                          children: [
-                            Icon(Icons.abc_outlined),
-                            Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 8.0),
-                              child: Text('우디'),
-                            ),
-                            Tag(title: '수료생'),
-                          ],
-                        ),
-                        trailing: Icon(Icons.heart_broken),
-                      ),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 8),
-                        child: RichText(
-                          text: TextSpan(
-                              style: AppTypograpy.tapButtonCardTitle16,
-                              children: [
-                                TextSpan(
-                                    text: '[모집중] ',
-                                    style: TextStyle(
-                                        color: AppColors.primaryColor)),
-                                TextSpan(text: '모각코 팀을 모집합니다')
-                              ]),
-                        ),
+                      SvgPicture.asset('assets/icons/Icon20/letter.svg'),
+                      SizedBox(
+                        width: 8,
                       ),
                       Text(
-                        '저희는 유니티로 개발을 공부해서 게임 제작을 목표로 하고자합니다. 유니티 3d를 이용해 할 수 있는 간단한 터치 게임부터 ...',
-                        style: AppTypograpy.button36Regular,
-                        maxLines: 2,
-                        overflow: TextOverflow.ellipsis,
+                        '핫한 모각코',
+                        style: AppTypograpy.tapButtonBold18,
                       ),
-                      ListTile(
-                        contentPadding: EdgeInsets.only(left: 0),
-                        trailing: Text('2023.09.04'),
-                        title: Row(children: [
-                          Icon(Icons.people),
-                          RichText(
-                            text: TextSpan(children: [
-                              TextSpan(
-                                  text: '3',
-                                  style: TextStyle(
-                                      color: AppColors.primaryColor,
-                                      fontWeight: FontWeight.bold)),
-                              TextSpan(text: '/4'),
-                              TextSpan(text: '참여')
-                            ]),
-                          )
-                        ]),
+                    ],
+                  ),
+                  trailing: SvgPicture.asset('assets/icons/Icon20/Right.svg'),
+                ),
+                Card(
+                  child: MogakContent(),
+                ),
+                SizedBox(
+                  height: 8,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    CommentIcon(
+                      assetIcon: 'assets/icons/Icon20/plus.svg',
+                      count: 3,
+                    ),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    CommentIcon(
+                      assetIcon: 'assets/icons/Icon20/fire.svg',
+                      count: 3,
+                    ),
+                  ],
+                ),
+                SizedBox(
+                  height: 32,
+                ),
+                ListTile(
+                  contentPadding: EdgeInsets.zero,
+                  onTap: () {
+                    print('모든 모각코');
+                  },
+                  title: Row(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      SvgPicture.asset('assets/icons/Icon20/letter.svg'),
+                      SizedBox(
+                        width: 8,
                       ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.end,
-                        children: [
-                          Icon(Icons.abc_outlined),
-                          Icon(Icons.abc_outlined),
-                          Icon(Icons.abc_outlined),
-                        ],
+                      Text(
+                        '모든 모각코',
+                        style: AppTypograpy.tapButtonBold18,
                       ),
-                    ]),
-              ),
-            )
-          ],
+                    ],
+                  ),
+                  trailing: SvgPicture.asset('assets/icons/Icon20/Right.svg'),
+                ),
+                Card(
+                  child: MogakContent(),
+                ),
+                SizedBox(
+                  height: 8,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    CommentIcon(
+                      assetIcon: 'assets/icons/Icon20/plus.svg',
+                      count: 3,
+                    ),
+                    SizedBox(
+                      width: 10,
+                    ),
+                    CommentIcon(
+                      assetIcon: 'assets/icons/Icon20/fire.svg',
+                      count: 3,
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          ),
         ));
   }
 }
