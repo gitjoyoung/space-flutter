@@ -1,4 +1,7 @@
-
+import 'package:ace/controller/change_password_controller.dart';
+import 'package:ace/controller/find_password_controller.dart';
+import 'package:ace/controller/login_controller.dart';
+import 'package:ace/controller/signup_controller.dart';
 import 'package:ace/routes/view_route.dart';
 import 'package:ace/views/authpage/chang_password_view.dart';
 import 'package:ace/views/authpage/find_password.dart';
@@ -35,7 +38,10 @@ class AppPages {
     ),
     GetPage(
         name: ViewRoute.changePasswordPage,
-        page: () => const ChangePasswordView()),
+        page: () => const ChangePasswordView(),
+        binding: BindingsBuilder(() {
+          Get.put(ChangePasswordController());
+        })),
     GetPage(name: ViewRoute.splashPage, page: () => const SplashPage()),
     GetPage(name: ViewRoute.signupSuccess, page: () => const SignUpSuccess()),
   ];
