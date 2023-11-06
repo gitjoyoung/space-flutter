@@ -7,6 +7,7 @@ import 'package:ace/utils/email_validator.dart';
 import 'package:ace/utils/typography.dart';
 import 'package:ace/views/authpage/find_password.dart';
 import 'package:ace/views/authpage/registration_page.dart';
+import 'package:ace/widgets/modal_costom.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -119,8 +120,24 @@ class LoginView extends GetView<LoginController> {
                     Obx(() {
                       return ElevatedButton(
                         onPressed: controller.isButtonEnabled.value
-                            ? () {
-                                controller.login();
+                            ? () async {
+                                bool? loginSuccess = await controller.login();
+                                if (loginSuccess == true) {
+                                  Get.to(() => ());
+                                } else {
+                                  ModalCostom(
+                                    context,
+                                    '로그인에 실패했습니다',
+                                    '다시시도해주세요',
+                                    Icons.warning,
+                                    AppColors
+                                        .prinary80, // 색상 이름이 AppColors.prinary80에서 AppColors.primary80로 수정되었습니다.
+                                    '다시하기',
+                                    () {
+                                      Get.back();
+                                    },
+                                  );
+                                }
                               }
                             : null,
                         child: const Text(
