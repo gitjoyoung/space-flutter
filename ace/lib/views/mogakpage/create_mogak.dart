@@ -1,5 +1,7 @@
+import 'package:ace/utils/button.dart';
 import 'package:ace/utils/colors.dart';
 import 'package:ace/utils/typography.dart';
+import 'package:ace/widgets/title_appbar_custom.dart';
 import 'package:ace/widgets/card_tag.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -7,18 +9,38 @@ import 'package:get/get.dart';
 class MogakCreate extends GetView {
   const MogakCreate({super.key});
 
+  void showCustomDialog() {
+    Get.defaultDialog(
+      content: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Text(
+          "그룹에 참여하시겠습니까?",
+          style: AppTypograpy.button36Bold,
+        ),
+      ),
+      confirm: ElevatedButton(
+          style: AppButton.small,
+          onPressed: () {
+            Get.back();
+          },
+          child: Text('참여하기')),
+      cancel: ElevatedButton(
+          style: AppButton.small,
+          onPressed: () {
+            Get.back();
+          },
+          child: Text('참여하기')),
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(title: Text('그룹 만들기')),
       body: Padding(
-        padding: const EdgeInsets.only(top: 24, left: 10, right: 10),
+        padding: const EdgeInsets.only(left: 10, right: 10),
         child: Column(children: [
-          ListTile(
-            titleAlignment: ListTileTitleAlignment.center,
-            title: Text('구룹 만들기'),
-            trailing: Icon(Icons.navigate_next_outlined),
-          ),
+          TitleAppBarCustom(),
           Card(
             child: Padding(
               padding: const EdgeInsets.only(
@@ -64,14 +86,18 @@ class MogakCreate extends GetView {
                 children: [
                   ListTile(
                     contentPadding: EdgeInsets.zero,
-                    onTap: () {},
+                    onTap: () {
+                      showCustomDialog();
+                    },
                     title: Text('모집 인원'),
                     trailing: Icon(Icons.navigate_next_outlined),
                   ),
                   Divider(),
                   ListTile(
                     contentPadding: EdgeInsets.zero,
-                    onTap: () {},
+                    onTap: () {
+                      showCustomDialog();
+                    },
                     title: Text('모집 상태'),
                     trailing: Icon(Icons.navigate_next_outlined),
                   ),
