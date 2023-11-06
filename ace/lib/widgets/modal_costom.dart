@@ -1,158 +1,75 @@
+// ignore_for_file: sort_child_properties_last, prefer_const_constructors
+
+import 'package:ace/utils/colors.dart';
+import 'package:ace/utils/typography.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-void main() => runApp(MyApp());
-
-class MyApp extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return GetMaterialApp(
-      title: 'test',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: Scaffold(
-        appBar: AppBar(title: Text("test")),
-        body: Center(
-          child: CustomModalButton(
-            titleText: "로그인에 실패하였습니다.",
-            contentText: "다시 시도해주세요.",
-          ),
-        ),
-      ),
-    );
-  }
-}
-
-class CustomModalController extends GetxController {
-  void showModal(String titleText, String contentText, IconData iconData,
-      Color iconColor) {
-    Get.dialog(
-      AlertDialog(
-        contentPadding: EdgeInsets.all(24),
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(16),
-        ),
-        content: Column(
+// ElevatedButton(
+//   onPressed: () {
+//     // ModalCustom 함수 호출
+//     ModalCustom(
+//       context,
+//       '타이틀',
+//       '내용이 여기에 들어갑니다.',
+//       Icons.check_circle_outline,
+//       Colors.green,
+//       '확인',
+//       () {
+//         // 버튼이 눌렸을 때 할 행동
+//         Get.back(); //돌아가기
+//       },
+//     );
+//   },
+//   child: Text('모달창 보기'),
+// )
+void ModalCostom(
+    BuildContext context,
+    String title,
+    String content,
+    IconData icon,
+    Color iconColor,
+    String buttonText,
+    VoidCallback onButtonPressed) {
+  Get.dialog(
+    Dialog(
+      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),
+      child: Container(
+        width: 300,
+        height: 213,
+        padding: EdgeInsets.all(24),
+        child: Column(
           mainAxisSize: MainAxisSize.min,
           children: [
-            Icon(
-              iconData,
-              size: 50,
-              color: iconColor,
-            ),
-            SizedBox(height: 16),
+            Icon(icon, size: 50, color: iconColor),
+            SizedBox(height: 7),
             Text(
-              titleText,
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+              title,
+              style: AppTypograpy.tapButtonNavgation16,
             ),
-            SizedBox(height: 8),
-            Text(contentText),
+            SizedBox(height: 7),
+            Text(
+              content,
+              style: AppTypograpy.cardBody.copyWith(color: AppColors.neutral40),
+            ),
+            SizedBox(height: 17),
+            ElevatedButton(
+              onPressed: onButtonPressed,
+              child: Padding(
+                padding: EdgeInsets.symmetric(
+                    vertical: 10, horizontal: 30), // 세로 10px, 가로 30px 패딩
+                child: Text(buttonText, style: AppTypograpy.button36Regular),
+              ),
+              style: ElevatedButton.styleFrom(
+                minimumSize: Size(165, 32),
+                shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(6),
+                ),
+              ),
+            )
           ],
         ),
-        actions: [
-          Center(
-            child: ElevatedButton(
-              onPressed: () {
-                Get.back();
-              },
-              child: Text("다시하기"),
-            ),
-          ),
-        ],
       ),
-    );
-  }
-}
-
-class CustomModalButton extends StatelessWidget {
-  final String titleText;
-  final String contentText;
-  final IconData iconData;
-  final Color iconColor;
-
-  CustomModalButton({
-    required this.titleText,
-    required this.contentText,
-    this.iconData = Icons.warning,
-    this.iconColor = Colors.blue,
-  });
-
-  final CustomModalController _controller = Get.put(CustomModalController());
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      children: [
-        ElevatedButton(
-          onPressed: () {
-            _controller.showModal(titleText, contentText, iconData, iconColor);
-          },
-          child: Text("모달창 보기"),
-        ),
-        ElevatedButton(
-          onPressed: () {
-            Get.dialog(CustomDialog(
-              titleText: titleText,
-              contentText: contentText,
-              iconData: iconData,
-              iconColor: iconColor,
-            ));
-          },
-          child: Text('test'),
-        ),
-      ],
-    );
-  }
-}
-
-class CustomDialog extends StatelessWidget {
-  final String titleText;
-  final String contentText;
-  final IconData iconData;
-  final Color iconColor;
-
-  const CustomDialog({
-    required this.titleText,
-    required this.contentText,
-    this.iconData = Icons.warning,
-    this.iconColor = Colors.blue,
-  });
-
-  @override
-  Widget build(BuildContext context) {
-    return AlertDialog(
-      contentPadding: EdgeInsets.all(24),
-      shape: RoundedRectangleBorder(
-        borderRadius: BorderRadius.circular(16),
-      ),
-      content: Column(
-        mainAxisSize: MainAxisSize.min,
-        children: [
-          Icon(
-            iconData,
-            size: 50,
-            color: iconColor,
-          ),
-          SizedBox(height: 16),
-          Text(
-            titleText,
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
-          ),
-          SizedBox(height: 8),
-          Text(contentText),
-        ],
-      ),
-      // actions: [
-      //   Center(
-      //     child: ElevatedButton(
-      //       onPressed: () {
-      //         Get.back();
-      //       },
-      //       child: Text("다시하기"),
-      //     ),
-      //   ),
-      // ],
-    );
-  }
+    ),
+  );
 }
