@@ -6,12 +6,13 @@ import 'package:ace/utils/typography.dart';
 import 'package:ace/widgets/card_tag.dart';
 import 'package:ace/widgets/comment_Icon.dart';
 import 'package:ace/widgets/mogak_content.dart';
+import 'package:ace/widgets/space_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
 void main() {
-  runApp( GetMaterialApp(
+  runApp(GetMaterialApp(
     home: Mogak(),
     getPages: AppPages.pages,
   ));
@@ -30,14 +31,13 @@ class Mogak extends GetView<MogakController> {
           clipBehavior: Clip.antiAlias,
           elevation: 0,
           child: SvgPicture.asset(
-            'assets/icons/Icon50/CatchUp.svg',
+            'assets/icons/icon50/CatchUp.svg',
             alignment: Alignment.center,
-            height: 80,
-            width: 80,
+            height: 50,
+            width: 50,
           ),
           backgroundColor: AppColors.prinary80,
         ),
-        appBar: AppBar(title: Text('모각코')),
         body: Padding(
           padding: const EdgeInsets.only(top: 16, left: 10, right: 10),
           child: SingleChildScrollView(
@@ -67,11 +67,12 @@ class Mogak extends GetView<MogakController> {
                 ListTile(
                   onTap: () {
                     print('핫한 모각코');
+                    Get.toNamed(ViewRoute.mogakList);
                   },
                   contentPadding: EdgeInsets.zero,
                   title: Row(
                     children: [
-                      SvgPicture.asset('assets/icons/Icon20/letter.svg'),
+                      SvgPicture.asset('assets/icons/icon20/letter.svg'),
                       SizedBox(
                         width: 8,
                       ),
@@ -81,7 +82,7 @@ class Mogak extends GetView<MogakController> {
                       ),
                     ],
                   ),
-                  trailing: SvgPicture.asset('assets/icons/Icon20/Right.svg'),
+                  trailing: SvgPicture.asset('assets/icons/icon20/Right.svg'),
                 ),
                 Card(
                   child: MogakContent(),
@@ -93,14 +94,14 @@ class Mogak extends GetView<MogakController> {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     CommentIcon(
-                      assetIcon: 'assets/icons/Icon20/plus.svg',
+                      svgIcon: 'assets/icons/icon20/plus.svg',
                       count: 3,
                     ),
                     SizedBox(
                       width: 10,
                     ),
                     CommentIcon(
-                      assetIcon: 'assets/icons/Icon20/fire.svg',
+                      svgIcon: 'assets/icons/icon20/like.svg',
                       count: 3,
                     ),
                   ],
@@ -116,7 +117,7 @@ class Mogak extends GetView<MogakController> {
                   title: Row(
                     mainAxisAlignment: MainAxisAlignment.start,
                     children: [
-                      SvgPicture.asset('assets/icons/Icon20/letter.svg'),
+                      SvgPicture.asset('assets/icons/icon20/letter.svg'),
                       SizedBox(
                         width: 8,
                       ),
@@ -126,7 +127,7 @@ class Mogak extends GetView<MogakController> {
                       ),
                     ],
                   ),
-                  trailing: SvgPicture.asset('assets/icons/Icon20/Right.svg'),
+                  trailing: SvgPicture.asset('assets/icons/icon20/Right.svg'),
                 ),
                 Card(
                   child: MogakContent(),
@@ -138,14 +139,14 @@ class Mogak extends GetView<MogakController> {
                   mainAxisAlignment: MainAxisAlignment.end,
                   children: [
                     CommentIcon(
-                      assetIcon: 'assets/icons/Icon20/plus.svg',
+                      svgIcon: 'assets/icons/icon20/plus.svg',
                       count: 3,
                     ),
                     SizedBox(
                       width: 10,
                     ),
                     CommentIcon(
-                      assetIcon: 'assets/icons/Icon20/fire.svg',
+                      svgIcon: 'assets/icons/icon20/like.svg',
                       count: 3,
                     ),
                   ],
