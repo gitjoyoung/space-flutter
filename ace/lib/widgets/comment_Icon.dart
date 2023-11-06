@@ -6,11 +6,10 @@ import 'package:flutter_svg/svg.dart';
 class CommentIcon extends StatelessWidget {
   const CommentIcon({
     Key? key,
-    required this.assetIcon,
-    required this.count,
+    required this.count, required this.svgIcon,
   }) : super(key: key);
-  final String assetIcon;
   final int count;
+  final String svgIcon;
   @override
   Widget build(BuildContext context) {
     final avatarExists = [true, true, true];
@@ -25,12 +24,12 @@ class CommentIcon extends StatelessWidget {
               width: 40,
               height: 20,
             ),
-            for (int i = 0; i < 3; i++) 
-              if (avatarExists[i]) 
+            for (int i = 0; i < 3; i++)
+              if (avatarExists[i])
                 Positioned(
-                  left: i * 10, 
+                  left: i * 10,
                   child: SvgPicture.asset(
-                    "assets/icons/Icon50/man-a.svg",
+                    "assets/icons/icon50/man-a.svg",
                     width: 20,
                     height: 20,
                   ),
@@ -40,7 +39,7 @@ class CommentIcon extends StatelessWidget {
         SizedBox(
           width: 1,
         ),
-        SvgPicture.asset(assetIcon),
+        SvgPicture.asset(svgIcon),
         Text(
           count.toString(),
           style: AppTypograpy.cardBody.copyWith(color: Colors.blue),
