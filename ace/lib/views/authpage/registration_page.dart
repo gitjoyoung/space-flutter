@@ -6,6 +6,7 @@ import 'package:ace/utils/button.dart';
 import 'package:ace/utils/colors.dart';
 import 'package:ace/utils/email_validator.dart';
 import 'package:ace/utils/typography.dart';
+import 'package:ace/views/authpage/login.dart';
 import 'package:ace/widgets/text_filed_custom.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -20,6 +21,7 @@ void main() {
       getPages: [
         GetPage(
             name: ViewRoute.registrationPage, page: () => RegistrationView()),
+        GetPage(name: ViewRoute.loginPage, page: () => const LoginView()),
       ],
     ),
   );
@@ -153,20 +155,26 @@ class RegistrationView extends GetView<SignUpController> {
                   hintText: '휴대폰 번호를 입력해주세요', controller: controller.phone),
             ),
             SizedBox(height: 20),
-            Obx(() {
-              return ElevatedButton(
-                onPressed: controller.isLoading.value
-                    ? () {
-                        controller.signup();
+            ElevatedButton(
+              onPressed: controller.isLoading.value
+                  ? null
+                  : () async {
+                      var result = await controller.signup();
+                      if (result == null) {
+                        if (!controller.isLoading.value) {
+                          Get.toNamed(ViewRoute.loginPage);
+                          print('회원가입 성공');
+                        }
+                      } else {
+                        print('회원가입 실패');
                       }
-                    : null,
-                child: const Text(
-                  '로그인',
-                  style: AppTypograpy.tapButtonMedium18,
-                ),
-                style: AppButton.xLarge,
-              );
-            })
+                    },
+              child: Text(
+                '회원가입',
+                style: AppTypograpy.tapButtonMedium18,
+              ),
+              style: AppButton.xLarge,
+            )
           ],
         ),
       ),
