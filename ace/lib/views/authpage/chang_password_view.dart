@@ -1,11 +1,28 @@
 // ignore_for_file: prefer_const_constructors
 
+import 'package:ace/controller/change_password_controller.dart';
+import 'package:ace/routes/view_route.dart';
+import 'package:ace/utils/button.dart';
 import 'package:ace/utils/colors.dart';
 import 'package:ace/utils/typography.dart';
+import 'package:ace/views/authpage/login.dart';
+import 'package:ace/widgets/text_filed_custom.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 
-class ChangePasswordView extends StatelessWidget {
+void main() {
+  Get.put(ChangePasswordController());
+
+  runApp(GetMaterialApp(home: ChangePasswordView(), getPages: [
+    GetPage(
+        name: ViewRoute.changePasswordPage,
+        page: () => const ChangePasswordView()),
+    GetPage(name: ViewRoute.loginPage, page: () => const LoginView()),
+  ]));
+}
+
+class ChangePasswordView extends GetView<ChangePasswordController> {
   const ChangePasswordView({Key? key}) : super(key: key);
 
   @override
@@ -78,29 +95,12 @@ class ChangePasswordView extends StatelessWidget {
               ],
             ),
           ),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 10.0),
-            child: SizedBox(
-              width: 370,
-              height: 48,
-              child: TextField(
-                style: AppTypograpy.button36Regular
-                    .copyWith(color: AppColors.neutral80),
-                decoration: InputDecoration(
-                  hintText: '비밀번호',
-                  filled: true,
-                  fillColor: AppColors.neutral5,
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                    borderSide: BorderSide.none,
-                  ),
-                  suffixIcon: IconButton(
-                    icon: Icon(Icons.visibility_outlined),
-                    onPressed: () {},
-                  ),
-                ),
-              ),
-            ),
+          Container(
+            height: 66,
+            child: TextFieldCustom(
+                hintText: '비밀번호',
+                password: true,
+                controller: controller.currentPassword),
           ),
           Padding(
             padding: EdgeInsets.all(10.0),
@@ -114,43 +114,35 @@ class ChangePasswordView extends StatelessWidget {
               ],
             ),
           ),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 10.0),
-            child: SizedBox(
-              width: 370,
-              height: 48,
-              child: TextField(
-                style: AppTypograpy.button36Regular
-                    .copyWith(color: AppColors.neutral80),
-                decoration: InputDecoration(
-                  hintText: '비밀번호',
-                  filled: true,
-                  fillColor: AppColors.neutral5,
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                    borderSide: BorderSide.none,
-                  ),
-                  suffixIcon: IconButton(
-                    icon: Icon(Icons.visibility_outlined),
-                    onPressed: () {},
-                  ),
-                ),
-              ),
-            ),
+          Container(
+            height: 66,
+            child: TextFieldCustom(
+                hintText: '비밀번호',
+                password: true,
+                controller: controller.newPassword),
           ),
           SizedBox(height: 313),
-          TextButton(
-            style: TextButton.styleFrom(
-              minimumSize: Size(370, 50),
-              backgroundColor: AppColors.neutral5,
-            ),
-            onPressed: () {},
+          ElevatedButton(
+            onPressed: controller.isLoading.value
+                ? null
+                : () async {
+                    var currentPass = controller.currentPassword.text;
+                    var newPass = controller.newPassword.text;
+
+                    // 비밀번호 변경을 시도합니다.
+                    await controller.changePasswordstate(currentPass, newPass);
+                    if (controller.isSuccess.value) {
+                      Get.offAllNamed(ViewRoute.loginPage);
+                    } else {
+                      '비밀번호 변경 실패';
+                    }
+                  },
             child: Text(
               '변경하기',
-              style: AppTypograpy.tapButtonMedium18
-                  .copyWith(color: AppColors.neutral20),
+              style: AppTypograpy.tapButtonMedium18,
             ),
-          ),
+            style: AppButton.xLarge,
+          )
         ],
       ),
     );

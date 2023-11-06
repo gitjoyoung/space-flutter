@@ -8,43 +8,26 @@ import 'package:get/get.dart';
 
 class SignUpController extends GetxController {
   final Rx<String> token = Rx<String>("");
+  var name = TextEditingController();
   var email = TextEditingController();
   var password = TextEditingController();
-  var name = TextEditingController();
   var phone = TextEditingController();
   var isLoading = false.obs;
-
-  _pushButtonState() {
-    isLoading.value = email.text.isNotEmpty &&
-        password.text.isNotEmpty &&
-        name.text.isNotEmpty &&
-        phone.text.isNotEmpty;
-  }
 
   @override
   void onInit() {
     super.onInit();
 
-    name.addListener(() {
-      _pushButtonState();
-      print("Name 값이 변경됨: ${name.text}");
-    });
-    email.addListener(() {
-      _pushButtonState();
-      print("Email 값이 변경됨: ${email.text}");
-    });
-    password.addListener(() {
-      _pushButtonState();
-      print("PW 값이 변경됨: ${password.text}");
-    });
-    phone.addListener(() {
-      _pushButtonState();
-      print("Phone 값이 변경됨: ${phone.text}");
-    });
+    // 리스너들
+    name.addListener(_pushButtonState);
+    email.addListener(_pushButtonState);
+    password.addListener(_pushButtonState);
+    phone.addListener(_pushButtonState);
   }
 
   @override
   void onClose() {
+    // 컨트롤러들 해제
     email.dispose();
     password.dispose();
     name.dispose();
@@ -52,50 +35,78 @@ class SignUpController extends GetxController {
     super.onClose();
   }
 
-  Dio dio = Dio();
+  // 버튼 상태 업데이트 함수
+  void _pushButtonState() {
+    isLoading.value = name.text.isNotEmpty &&
+        email.text.isNotEmpty &&
+        password.text.isNotEmpty &&
+        phone.text.isNotEmpty;
+  }
 
-  singup(String name, String emai, String password, String phone) async {
-    // 이름 공백 검증
-    if (name.contains(' ')) {
-      // print("사용자 이름에 공백을 포함할 수 없습니다");
-      return "사용자 이름에 공백을 포함할 수 없습니다";
+  // 한글 이름 검증
+  bool validateKoreanName(String name) {
+    if (name.isEmpty) {
+      return false;
     }
-    //이메일 양식 검증
-    if (!EmailValidator.isValid(emai)) {
+    // 정규표현식을 사용하여 한글 이름 체크
+    if (!RegExp(r'^[가-힣]{2,4}$').hasMatch(name)) {
+      return false;
+    }
+    return true; // 검증 통과
+  }
+
+  // 회원가입 함수
+  signup() async {
+    // 입력값 가져오기
+    String nameInput = name.text;
+    String emailInput = email.text;
+    String passwordInput = password.text;
+    String phoneInput = phone.text;
+
+    // 한글 이름 검증
+    if (!validateKoreanName(nameInput)) {
+      return "사용자 이름에 공백을 포함할 수 없습니다.";
+    }
+
+    // 이메일 검증
+    if (!EmailValidator.isValid(emailInput)) {
       print("올바른 이메일 형식이 아닙니다.");
       return "올바른 이메일 형식이 아닙니다.";
     }
 
-    // 비밀번호 길이 검증
-    if (password.length < 8) {
+    // 비밀번호 검증
+    if (passwordInput.length < 8) {
       print("8자리 이상으로 입력해주세요. ");
       return "8자리 이상으로 입력해주세요.";
     }
-    String encodedPassword = base64Encode(utf8.encode(password));
+    String encodedPassword = base64Encode(utf8.encode(passwordInput));
 
-    // 전화번호가 숫자만으로 이루어져 있는지 확인
-    //문자열이 숫자로만 구성되어 있는지를 검사
-    RegExp numberRegExp = RegExp(r'^[0-9]+$');
-    if (!numberRegExp.hasMatch(phone)) {
-      // print("전화번호는 숫자만 포함해야 합니다");
+    // 전화번호 검증
+    if (!RegExp(r'^[0-9]+$').hasMatch(phoneInput)) {
+      print("전화번호는 숫자만 포함해야 합니다");
       return "전화번호는 숫자만 포함해야 합니다";
     }
 
-    var res = await dio.post(
+    // API 요청
+    var res = await Dio().post(
       ApiRoute.signup,
       data: {
-        'email': emai,
+        'email': emailInput,
         'password': encodedPassword,
-        'name': name,
-        'phone': phone,
+        'name': nameInput,
+        'phone': phoneInput,
       },
     );
-    if (res.data['status'] == 'success') {
-      // 성공시 토큰값 업로드
-      print(res.data);
 
+    // 응답 처리
+    if (res.data['status'] == 'success') {
+      // 성공시 토큰값 저장
       token.value = res.data['data'];
       print(token.value);
+      return null; // 성공 표시
+    } else {
+      // 실패시 메시지 출력
+      return res.data['message'];
     }
   }
 }
