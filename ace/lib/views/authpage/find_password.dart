@@ -3,6 +3,7 @@ import 'package:ace/utils/button.dart';
 import 'package:ace/utils/colors.dart';
 import 'package:ace/utils/email_validator.dart';
 import 'package:ace/utils/typography.dart';
+import 'package:ace/widgets/modal_costom.dart';
 import 'package:ace/widgets/text_filed_custom.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -73,8 +74,25 @@ class FindPassword extends GetView<FindPasswordController> {
                 Obx(() {
                   return ElevatedButton(
                     onPressed: controller.isButtonEnabled.value
-                        ? () {
-                            controller.findPassword();
+                        ? () async {
+                            // try-catch 구문을 추가하여 에러를 처리합니다.
+                            try {
+                              bool result = await controller.findPassword();
+                              if (result) {
+                                // 성공: 모달 표시
+                                ModalCostom(
+                                    context,
+                                    '새로운 비밀번호를 보냈습니다.',
+                                    '메일함을 확인하세요',
+                                    Icons.send,
+                                    AppColors.prinary80,
+                                    '확인하기', () {
+                                  Get.back();
+                                });
+                              } else {}
+                            } catch (error) {
+                              print(error);
+                            }
                           }
                         : null,
                     child: const Text(
