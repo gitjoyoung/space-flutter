@@ -1,3 +1,4 @@
+import 'package:ace/controller/auth_controller.dart';
 import 'package:ace/controller/change_password_controller.dart';
 import 'package:ace/controller/find_password_controller.dart';
 import 'package:ace/controller/home/home_controller.dart';
@@ -24,12 +25,19 @@ import 'package:get/get.dart';
 
 class AppPages {
   static final pages = [
-    GetPage(name: ViewRoute.mainPage, page: () => const MainView()),
+    GetPage(
+      name: ViewRoute.mainPage,
+      page: () => const MainView(),
+      binding: BindingsBuilder(() {
+        Get.put(AuthController());
+      }),
+    ),
     GetPage(
       name: ViewRoute.loginPage,
       page: () => const LoginView(),
       binding: BindingsBuilder(() {
         Get.put(LoginController());
+        Get.put(AuthController());
       }),
     ),
     GetPage(
@@ -37,6 +45,7 @@ class AppPages {
       page: () => const RegistrationView(),
       binding: BindingsBuilder(() {
         Get.put(SignUpController());
+        Get.put(AuthController());
       }),
     ),
     GetPage(
@@ -51,6 +60,7 @@ class AppPages {
         page: () => const ChangePasswordView(),
         binding: BindingsBuilder(() {
           Get.put(ChangePasswordController());
+          Get.put(AuthController());
         })),
     GetPage(name: ViewRoute.splashPage, page: () => const SplashPage()),
     GetPage(name: ViewRoute.signupSuccess, page: () => const SignUpSuccess()),

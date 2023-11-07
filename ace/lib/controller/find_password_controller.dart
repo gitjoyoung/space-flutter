@@ -43,6 +43,7 @@ class FindPasswordController extends GetxController {
         'email': email.text,
       },
     );
+    print(res.data);
     if (res.data['status'] == 'success') {
       print('비밀번호 이메일로 보냈습니다 ');
     }

@@ -12,6 +12,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+import 'package:get/get_connect/http/src/utils/utils.dart';
 
 import '../../utils/colors.dart';
 import '../../widgets/text_filed_custom.dart';
@@ -41,6 +42,7 @@ class LoginView extends GetView<LoginController> {
   const LoginView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    AuthController authController = Get.find<AuthController>();
     return Scaffold(
       body: DefaultTextStyle(
         style: const TextStyle(fontFamily: "Pretendard"),
@@ -121,22 +123,27 @@ class LoginView extends GetView<LoginController> {
                       return ElevatedButton(
                         onPressed: controller.isButtonEnabled.value
                             ? () async {
-                                bool? loginSuccess = await controller.login();
-                                if (loginSuccess == true) {
-                                  Get.to(() => ());
+                                // Attempt login and get the token
+                                String? token = await AuthController().login(
+                                    controller.email.text,
+                                    controller.password.text);
+
+                                // Check the token and navigate or show an error accordingly
+                                if (token != null && token.isNotEmpty) {
+                                  print('로그인 후 토큰 : $token');
+                                  Get.toNamed(ViewRoute.home);
                                 } else {
+                                  // No need for the try-catch if you are sure no exceptions will be thrown
+                                  print('로그인에 실패했습니다.');
                                   ModalCostom(
-                                    context,
-                                    '로그인에 실패했습니다',
-                                    '다시시도해주세요',
-                                    Icons.warning,
-                                    AppColors
-                                        .prinary80, // 색상 이름이 AppColors.prinary80에서 AppColors.primary80로 수정되었습니다.
-                                    '다시하기',
-                                    () {
-                                      Get.back();
-                                    },
-                                  );
+                                      context,
+                                      '로그인에 실패했습니다.',
+                                      '다시시도해 주세요',
+                                      Icons.warning,
+                                      AppColors.primary80,
+                                      '다시하기', () {
+                                    Get.back();
+                                  });
                                 }
                               }
                             : null,

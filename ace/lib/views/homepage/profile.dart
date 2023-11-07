@@ -173,7 +173,7 @@ class Profile extends StatelessWidget {
                               child: Text(
                                 '초기화',
                                 style: AppTypograpy.tapButtonSubtitle16
-                                    .copyWith(color: AppColors.prinary60),
+                                    .copyWith(color: AppColors.primary60),
                               ),
                             ),
                           ),
