@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:ace/routes/api_route.dart';
+import 'package:ace/routes/view_route.dart';
 import 'package:ace/utils/email_validator.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -127,5 +128,8 @@ class SignUpController extends GetxController {
   void _showSuccess(String message) {
     Get.snackbar('성공', message,
         backgroundColor: Colors.green, snackPosition: SnackPosition.BOTTOM);
+    Future.delayed(Duration(seconds: 2), () {
+      Get.toNamed(ViewRoute.signupSuccess);
+    });
   }
 }

@@ -7,14 +7,12 @@ import 'package:ace/utils/colors.dart';
 import 'package:ace/utils/email_validator.dart';
 import 'package:ace/utils/typography.dart';
 import 'package:ace/views/authpage/login.dart';
+import 'package:ace/views/authpage/sign_up_success.dart';
 import 'package:ace/widgets/text_filed_custom.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 void main() {
-  Get.put(SignUpController());
-  Get.lazyPut(() => SignUpController());
-
   runApp(
     GetMaterialApp(
       home: RegistrationView(),
@@ -22,6 +20,7 @@ void main() {
         GetPage(
             name: ViewRoute.registrationPage, page: () => RegistrationView()),
         GetPage(name: ViewRoute.loginPage, page: () => const LoginView()),
+        GetPage(name: ViewRoute.signupSuccess, page: () => SignUpSuccess()),
       ],
     ),
   );
@@ -32,6 +31,8 @@ class RegistrationView extends GetView<SignUpController> {
 
   @override
   Widget build(BuildContext context) {
+    Get.put(SignUpController());
+    Get.lazyPut(() => SignUpController());
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(kToolbarHeight),
