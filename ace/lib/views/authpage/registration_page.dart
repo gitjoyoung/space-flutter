@@ -162,7 +162,7 @@ class RegistrationView extends GetView<SignUpController> {
                       var result = await controller.signup();
                       if (result == null) {
                         if (!controller.isLoading.value) {
-                          Get.toNamed(ViewRoute.loginPage);
+                          Get.toNamed(ViewRoute.signupSuccess);
                           print('회원가입 성공');
                         }
                       } else {

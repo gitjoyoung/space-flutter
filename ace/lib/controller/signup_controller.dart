@@ -3,6 +3,7 @@ import 'dart:convert';
 import 'package:ace/routes/api_route.dart';
 import 'package:ace/utils/email_validator.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:get/get.dart';
 
@@ -65,25 +66,30 @@ class SignUpController extends GetxController {
 
     // 한글 이름 검증
     if (!validateKoreanName(nameInput)) {
+      _showError('사용자 이름에 공백을 포함할 수 없습니다.');
+      // ("사용자 이름에 공백을 포함할 수 없습니다.");
       return "사용자 이름에 공백을 포함할 수 없습니다.";
     }
 
     // 이메일 검증
     if (!EmailValidator.isValid(emailInput)) {
-      print("올바른 이메일 형식이 아닙니다.");
+      _showError('올바른 이메일 형식이 아닙니다.');
+      // print("올바른 이메일 형식이 아닙니다.");
       return "올바른 이메일 형식이 아닙니다.";
     }
 
     // 비밀번호 검증
     if (passwordInput.length < 8) {
-      print("8자리 이상으로 입력해주세요. ");
+      _showError('8자리 이상으로 입력해주세요.');
+      // print("8자리 이상으로 입력해주세요. ");
       return "8자리 이상으로 입력해주세요.";
     }
     String encodedPassword = base64Encode(utf8.encode(passwordInput));
 
     // 전화번호 검증
     if (!RegExp(r'^[0-9]+$').hasMatch(phoneInput)) {
-      print("전화번호는 숫자만 포함해야 합니다");
+      _showError('전화번호는 숫자만 포함해야 합니다');
+      // print("전화번호는 숫자만 포함해야 합니다");
       return "전화번호는 숫자만 포함해야 합니다";
     }
 
@@ -97,16 +103,29 @@ class SignUpController extends GetxController {
         'phone': phoneInput,
       },
     );
+    print(res.data);
 
     // 응답 처리
     if (res.data['status'] == 'success') {
       // 성공시 토큰값 저장
       token.value = res.data['data'];
-      print(token.value);
+      _showSuccess('회원가입이 완료되었습니다.');
+      // print(token.value);
       return null; // 성공 표시
     } else {
       // 실패시 메시지 출력
-      return res.data['message'];
+      // return res.data['message'];
+      _showError(res.data['message']);
     }
+  }
+
+  void _showError(String message) {
+    Get.snackbar('오류', message,
+        backgroundColor: Colors.redAccent, snackPosition: SnackPosition.BOTTOM);
+  }
+
+  void _showSuccess(String message) {
+    Get.snackbar('성공', message,
+        backgroundColor: Colors.green, snackPosition: SnackPosition.BOTTOM);
   }
 }

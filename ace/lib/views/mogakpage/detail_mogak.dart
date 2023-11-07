@@ -46,7 +46,6 @@ class MogakDetail extends GetView {
       bottomNavigationBar: Container(
         margin: EdgeInsets.all(8),
         color: Colors.white,
-        
         child: TextField(
           decoration: InputDecoration(
             suffixIcon: IconButton(
@@ -59,11 +58,11 @@ class MogakDetail extends GetView {
             fillColor: AppColors.strokeLine05,
             hintText: '댓글을 입력하세요...',
             border: OutlineInputBorder(
-              borderSide: const BorderSide(
-                  color: AppColors.neutral50, width: 2.0),
+              borderSide:
+                  const BorderSide(color: AppColors.neutral50, width: 2.0),
               borderRadius: BorderRadius.circular(12),
             ),
-           contentPadding: EdgeInsets.fromLTRB(15, 10, 15, 10),// 내부 패딩 조정
+            contentPadding: EdgeInsets.fromLTRB(15, 10, 15, 10), // 내부 패딩 조정
           ),
         ),
       ),
@@ -175,7 +174,7 @@ class MogakDetail extends GetView {
                             Text(
                               '16',
                               style: AppTypograpy.cardBody
-                                  .copyWith(color: AppColors.prinary80),
+                                  .copyWith(color: AppColors.primary80),
                             ),
                           ],
                         )

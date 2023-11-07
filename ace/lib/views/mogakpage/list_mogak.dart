@@ -39,7 +39,7 @@ class MogakList extends StatelessWidget {
                   Text(
                     '날자순',
                     style: AppTypograpy.cardBody
-                        .copyWith(color: AppColors.prinary80),
+                        .copyWith(color: AppColors.primary80),
                   )
                 ],
               ),
