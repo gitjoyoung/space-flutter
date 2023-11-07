@@ -8,7 +8,7 @@ import 'package:ace/views/authpage/find_password.dart';
 import 'package:ace/views/authpage/login.dart';
 import 'package:ace/views/authpage/registration_page.dart';
 import 'package:ace/views/authpage/sign_up_success.dart';
-import 'package:ace/views/authpage/splash_page.dart';
+import 'package:ace/views/authpage/splash.dart';
 import 'package:ace/views/main_view.dart';
 import 'package:get/get.dart';
 

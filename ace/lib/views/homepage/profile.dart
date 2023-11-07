@@ -1,15 +1,19 @@
+import 'package:ace/controller/avatar_controller.dart';
 import 'package:ace/utils/button.dart';
 import 'package:ace/utils/colors.dart';
 import 'package:ace/utils/email_validator.dart';
 import 'package:ace/utils/typography.dart';
+import 'package:ace/views/authpage/avatar_setting.dart';
 import 'package:ace/widgets/text_filed_custom.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 
 void main() {
-  runApp(const MaterialApp(
+  runApp(const GetMaterialApp(
     home: Profile(),
   ));
+  Get.put(AvatarController());
 }
 
 class Profile extends StatelessWidget {
@@ -203,7 +207,15 @@ class Profile extends StatelessWidget {
                       backgroundColor: Colors.grey,
                     ),
                     InkWell(
-                      onTap: () {},
+                      onTap: () {
+                        Get.dialog(
+                          Dialog(
+                            child:
+                                AvatarCustomizer(), // 여기서 아바타 설정 페이지 위젯을 직접 호출
+                          ),
+                          barrierDismissible: true, // 모달 창 바깥을 터치하면 닫히도록 설정
+                        );
+                      },
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
