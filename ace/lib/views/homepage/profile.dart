@@ -1,7 +1,7 @@
 import 'package:ace/controller/avatar_controller.dart';
 import 'package:ace/utils/button.dart';
 import 'package:ace/utils/colors.dart';
-import 'package:ace/utils/email_validator.dart';
+
 import 'package:ace/utils/typography.dart';
 import 'package:ace/views/authpage/avatar_setting.dart';
 import 'package:ace/widgets/text_filed_custom.dart';
