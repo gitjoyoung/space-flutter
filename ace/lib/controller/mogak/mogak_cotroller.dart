@@ -7,7 +7,12 @@ import 'package:get/get.dart';
 
 class MogakController extends GetxController {
   Rx<String> selectMogak = Rx<String>("");
+
+
+
   RxList<AllMogakModel> allMogakModels = RxList<AllMogakModel>();
+
+
 
   var dio = Dio();
 

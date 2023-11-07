@@ -56,6 +56,7 @@ class AvatarCustomizer extends GetView<AvatarController> {
               style: AppButton.medium,
               onPressed: () {
                 controller.uploadAvatarImage();
+                Get.back();
               },
               child: const Text(
                 '저장하기',

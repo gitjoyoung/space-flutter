@@ -8,8 +8,10 @@ class ViewRoute {
   static final String splashPage = "/splashPage";
   static final String signupSuccess = "/signupSuccess";
 
+  static final String home = "/home";
+
   static final String mogak = "/mogak";
   static final String mogakDetail = "/mogakDetail";
   static final String mogakCreate = "/mogakCreate";
-
+  static final String mogakList = "/mogakList";
 }

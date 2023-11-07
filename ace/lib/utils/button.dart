@@ -27,23 +27,22 @@ class AppButton {
         shape: const RoundedRectangleBorder(
           borderRadius: BorderRadius.all(Radius.circular(6)),
         ),
-        padding: EdgeInsets.symmetric(vertical: 20),
         minimumSize: Size.fromHeight(height),
         maximumSize: Size.fromHeight(height));
   }
 
 // Primary
   static final ButtonStyle xLarge =
-      createElevatedButtonStyle(56, AppColors.primaryColor);
+      createElevatedButtonStyle(56, AppColors.prinary80);
 
   static final ButtonStyle medium =
-      createElevatedButtonStyle(40, AppColors.primaryColor);
+      createElevatedButtonStyle(40, AppColors.prinary80);
 
   static final ButtonStyle small =
-      createElevatedButtonStyle(32, AppColors.primaryColor);
+      createElevatedButtonStyle(32, AppColors.prinary80);
 
   static final ButtonStyle xSmall =
-      createElevatedButtonStyle(24, AppColors.primaryColor);
+      createElevatedButtonStyle(24, AppColors.prinary80);
 
 // Outline
   static final ButtonStyle xLargeOutLine = createElevatedButtonStyle(
