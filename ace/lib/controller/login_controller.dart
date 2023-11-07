@@ -12,7 +12,6 @@ class LoginController extends GetxController {
     print('로그인 버튼 클릭');
     try {
       Get.find<AuthController>().login(email.text, password.text);
-      
     } catch (e) {
       print('통신실패 : ${e}');
     }
