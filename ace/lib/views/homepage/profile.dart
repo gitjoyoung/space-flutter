@@ -1,4 +1,6 @@
+import 'package:ace/controller/auth_controller.dart';
 import 'package:ace/controller/avatar_controller.dart';
+import 'package:ace/controller/profile_controller.dart';
 import 'package:ace/utils/button.dart';
 import 'package:ace/utils/colors.dart';
 import 'package:ace/utils/email_validator.dart';
@@ -15,13 +17,22 @@ void main() {
   ));
 }
 
-class Profile extends StatelessWidget {
+class Profile extends StatefulWidget {
   const Profile({super.key});
 
   @override
+  State<Profile> createState() => _ProfileState();
+}
+
+class _ProfileState extends State<Profile> {
+  String _selectedValue = '';
+  @override
   Widget build(BuildContext context) {
     Get.put(AvatarController());
-    String _selectedValue = '개발자';
+    Get.put(AuthController());
+    final AvatarController avatarController = Get.find<AvatarController>();
+    final ProfileController profileController = Get.put(ProfileController());
+
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -74,7 +85,7 @@ class Profile extends StatelessWidget {
                             },
                             hintText: '닉네임을 입력해주세요.',
                             errorText: '닉네임이 틀립니다. 다시 한번 입력해주세요.',
-                            controller: TextEditingController(),
+                            controller: profileController.nickname,
                           ),
                           const Text(
                             '활동 유형',
@@ -90,7 +101,14 @@ class Profile extends StatelessWidget {
                                       style: AppTypograpy.button36Regular),
                                   value: '개발자',
                                   groupValue: _selectedValue,
-                                  onChanged: (value) {},
+                                  onChanged: (String? value) {
+                                    print(
+                                        "Selected value: $value"); // 현재 선택된 값을 콘솔에 출력합니다.
+                                    setState(() {
+                                      _selectedValue = value!;
+                                      profileController.updatePosition(value);
+                                    });
+                                  },
                                 ),
                               ),
                               Expanded(
@@ -100,7 +118,12 @@ class Profile extends StatelessWidget {
                                       style: AppTypograpy.button36Regular),
                                   value: '디자이너',
                                   groupValue: _selectedValue,
-                                  onChanged: (value) {},
+                                  onChanged: (String? value) {
+                                    setState(() {
+                                      _selectedValue = value!;
+                                      profileController.updatePosition(value);
+                                    });
+                                  },
                                 ),
                               ),
                               Expanded(
@@ -110,7 +133,12 @@ class Profile extends StatelessWidget {
                                       style: AppTypograpy.button36Regular),
                                   value: '헤드헌터',
                                   groupValue: _selectedValue,
-                                  onChanged: (value) {},
+                                  onChanged: (String? value) {
+                                    setState(() {
+                                      _selectedValue = value!;
+                                      profileController.updatePosition(value);
+                                    });
+                                  },
                                 ),
                               ),
                             ],
@@ -202,10 +230,17 @@ class Profile extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
-                    CircleAvatar(
-                      radius: 50,
-                      backgroundColor: Colors.grey,
-                    ),
+                    Obx(() {
+                      String avatarUrl = avatarController.avatarUrl.value;
+                      return CircleAvatar(
+                        radius: 50,
+                        backgroundColor: Colors.grey,
+                        // avatarUrl이 비어 있지 않다면 이미지를 로드하여 보여줍니다.
+                        backgroundImage: avatarUrl.isNotEmpty
+                            ? NetworkImage(avatarUrl)
+                            : null,
+                      );
+                    }),
                     InkWell(
                       onTap: () {
                         Get.dialog(
