@@ -45,8 +45,11 @@ class AuthController extends GetxController {
         'password': encodedPassword,
       },
     );
+    print(res.data);
     if (res.data['status'] == 'success') {
       // 성공시 토큰값 업로드
+      print(res.data);
+
       token.value = res.data['data'];
       print('로그인 성공 : ${token.value}');
     }
