@@ -87,7 +87,7 @@ class Mogak extends GetView<MogakController> {
             height: 50,
             width: 50,
           ),
-          backgroundColor: AppColors.prinary80,
+          backgroundColor: AppColors.primary80,
         ),
         body: Padding(
           padding: const EdgeInsets.only(top: 16, left: 10, right: 10),

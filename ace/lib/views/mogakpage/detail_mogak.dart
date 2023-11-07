@@ -228,7 +228,7 @@ class MogakDetail extends GetView<MogakDetailController> {
                               Text(
                                 '16',
                                 style: AppTypograpy.cardBody
-                                    .copyWith(color: AppColors.prinary80),
+                                    .copyWith(color: AppColors.primary80),
                               ),
                             ],
                           )

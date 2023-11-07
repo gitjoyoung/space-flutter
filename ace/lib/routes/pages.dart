@@ -1,3 +1,4 @@
+import 'package:ace/controller/auth_controller.dart';
 import 'package:ace/controller/change_password_controller.dart';
 import 'package:ace/controller/find_password_controller.dart';
 import 'package:ace/controller/home/home_controller.dart';
@@ -13,7 +14,10 @@ import 'package:ace/views/authpage/login.dart';
 import 'package:ace/views/authpage/registration_page.dart';
 import 'package:ace/views/authpage/sign_up_success.dart';
 import 'package:ace/views/authpage/splash.dart';
+
 import 'package:ace/views/homepage/home_layout.dart';
+import 'package:ace/views/homepage/profile.dart';
+
 import 'package:ace/views/main_view.dart';
 import 'package:ace/views/mogakpage/create_mogak.dart';
 import 'package:ace/views/mogakpage/detail_mogak.dart';
@@ -23,12 +27,19 @@ import 'package:get/get.dart';
 
 class AppPages {
   static final pages = [
-    GetPage(name: ViewRoute.mainPage, page: () => const MainView()),
+    GetPage(
+      name: ViewRoute.mainPage,
+      page: () => const MainView(),
+      binding: BindingsBuilder(() {
+        Get.put(AuthController());
+      }),
+    ),
     GetPage(
       name: ViewRoute.loginPage,
       page: () => const LoginView(),
       binding: BindingsBuilder(() {
         Get.put(LoginController());
+        Get.put(AuthController());
       }),
     ),
     GetPage(
@@ -36,6 +47,7 @@ class AppPages {
       page: () => const RegistrationView(),
       binding: BindingsBuilder(() {
         Get.put(SignUpController());
+        Get.put(AuthController());
       }),
     ),
     GetPage(
@@ -50,9 +62,11 @@ class AppPages {
         page: () => const ChangePasswordView(),
         binding: BindingsBuilder(() {
           Get.put(ChangePasswordController());
+          Get.put(AuthController());
         })),
     GetPage(name: ViewRoute.splashPage, page: () => const SplashPage()),
     GetPage(name: ViewRoute.signupSuccess, page: () => const SignUpSuccess()),
+    GetPage(name: ViewRoute.profile, page: () => const Profile()),
 
     // 홈페이지
     GetPage(

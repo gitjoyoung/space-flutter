@@ -15,6 +15,9 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       initialRoute: ViewRoute.splashPage,
       getPages: AppPages.pages,
+      // initialBinding: BindingsBuilder(() {
+      //   Get.put(AuthController());
+      // }),
     );
   }
 }

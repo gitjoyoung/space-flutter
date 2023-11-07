@@ -35,7 +35,7 @@ class AuthController extends GetxController {
     }
 
     String encodedPassword = base64Encode(utf8.encode(password));
-
+    print(encodedPassword.runtimeType);
     // 'email': "sniperfactory@gmail.com",
     // 'password': "MTIzMTIzMTIz",
     var res = await dio.post(
@@ -45,13 +45,14 @@ class AuthController extends GetxController {
         'password': encodedPassword,
       },
     );
+    print(res.data);
     if (res.data['status'] == 'success') {
       // 성공시 토큰값 업로드
       print(res.data);
 
       token.value = res.data['data'];
-      print(token.value);
+      print('로그인 성공 : ${token.value}');
     }
+    return res.data['data'];
   }
 }
-

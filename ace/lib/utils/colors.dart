@@ -16,10 +16,10 @@ class AppColors {
 //color: AppColors.neutral100
   static const neutral100 = Color(0xFF030303);
   static const neutral90 = Color(0xFF1A1A1A);
-  static const neutral80 = Color(0xFF4D4D4D);
-  static const neutral70 = Color(0xFF808080);
-  static const neutral60 = Color(0xFF999999);
-  static const neutral50 = Color(0xFFB3B3B3);
+  static const neutral80 = Color(0xFF333333);
+  static const neutral70 = Color(0xFF4D4D4D);
+  static const neutral60 = Color(0xFF666666);
+  static const neutral50 = Color(0xFF808080);
   //메인타이틀
   static const neutral40 = Color(0xFF999999);
   static const neutral30 = Color(0xFFB3B3B3);
@@ -28,21 +28,21 @@ class AppColors {
   static const neutral5 = Color(0xFFF3F3F3);
 
 //Primary
-//color: AppColors.prinary100
-  static const prinary100 = Color(0xFF0059FF);
-  static const prinary90 = Color(0xFF196AFF);
-  static const prinary80 = Color(0xFF337AFF);
-  static const prinary70 = Color(0xFF4C8BFF);
-  static const prinary60 = Color(0xFF669BFF);
-  static const prinary50 = Color(0xFF7FACFF);
-  static const prinary40 = Color(0xFF99BDFF);
-  static const prinary30 = Color(0xFFB2CDFF);
-  static const prinary20 = Color(0xFFCCDEFF);
-  static const prinary10 = Color(0xFFE5EEFF);
-  static const prinary5 = Color(0xFFF5F8FF);
+//color: AppColors.primary100
+  static const primary100 = Color(0xFF0059FF);
+  static const primary90 = Color(0xFF196AFF);
+  static const primary80 = Color(0xFF337AFF);
+  static const primary70 = Color(0xFF4C8BFF);
+  static const primary60 = Color(0xFF669BFF);
+  static const primary50 = Color(0xFF7FACFF);
+  static const primary40 = Color(0xFF99BDFF);
+  static const primary30 = Color(0xFFB2CDFF);
+  static const primary20 = Color(0xFFCCDEFF);
+  static const primary10 = Color(0xFFE5EEFF);
+  static const primary5 = Color(0xFFF5F8FF);
 
 //Stroke & Line
-//color: AppColors.prinary100
+//color: AppColors.primary100
   static const strokeLineBlue = Color(0xFF99BDFF);
   static const strokeLine10 = Color(0xFFE6E6E6);
   static const strokeLine05 = Color(0xFFF3F3F3);

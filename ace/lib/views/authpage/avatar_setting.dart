@@ -17,11 +17,20 @@ class AvatarCustomizer extends GetView<AvatarController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-          backgroundColor: Colors.transparent,
-          elevation: 0,
-          title: Text('  아바타 설정',
-              style: AppTypograpy.popupTitleBold.copyWith(color: Colors.black)),
-          centerTitle: false),
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        title: Text('  아바타 설정',
+            style: AppTypograpy.popupTitleBold.copyWith(color: Colors.black)),
+        centerTitle: false,
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.close, color: Colors.black),
+            onPressed: () {
+              Get.back(); // GetX를 사용하여 다이얼로그를 닫습니다.
+            },
+          ),
+        ],
+      ),
       bottomNavigationBar: BottomAppBar(
           child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -35,7 +44,7 @@ class AvatarCustomizer extends GetView<AvatarController> {
               child: Text(
                 '초기화',
                 style: AppTypograpy.tapButtonSubtitle16
-                    .copyWith(color: AppColors.prinary60),
+                    .copyWith(color: AppColors.primary60),
               ),
             ),
           ),
@@ -47,6 +56,7 @@ class AvatarCustomizer extends GetView<AvatarController> {
               style: AppButton.medium,
               onPressed: () {
                 controller.uploadAvatarImage();
+                Get.back();
               },
               child: const Text(
                 '저장하기',

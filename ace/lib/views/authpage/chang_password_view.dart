@@ -132,7 +132,7 @@ class ChangePasswordView extends GetView<ChangePasswordController> {
                     // 비밀번호 변경을 시도합니다.
                     await controller.changePasswordstate(currentPass, newPass);
                     if (controller.isSuccess.value) {
-                      Get.offAllNamed(ViewRoute.loginPage);
+                      Get.toNamed(ViewRoute.loginPage);
                     } else {
                       '비밀번호 변경 실패';
                     }

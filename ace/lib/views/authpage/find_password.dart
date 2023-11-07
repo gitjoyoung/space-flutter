@@ -85,7 +85,7 @@ class FindPassword extends GetView<FindPasswordController> {
                                     '새로운 비밀번호를 보냈습니다.',
                                     '메일함을 확인하세요',
                                     Icons.send,
-                                    AppColors.prinary80,
+                                    AppColors.primary80,
                                     '확인하기', () {
                                   Get.back();
                                 });

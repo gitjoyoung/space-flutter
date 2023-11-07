@@ -6,29 +6,30 @@ import 'package:get/get.dart';
 
 class SplashPage extends StatelessWidget {
   const SplashPage({super.key});
-  static const String route = '/splashPage';
-  static const String loginPage = "/login";
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Center(
+      body: Padding(
+        padding: const EdgeInsets.all(10.0),
+        child: Center(
           child: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          SvgPicture.asset(
-            'assets/login/splash.svg',
-            // height: sizeConfig.imageHeight,
-            // width: sizeConfig.imageWidth,
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              SvgPicture.asset(
+                'assets/login/splash.svg',
+              ),
+              SizedBox(height: 20),
+              ElevatedButton(
+                onPressed: () {
+                  Get.toNamed(ViewRoute.loginPage);
+                },
+                child: Text('시작하기'),
+                style: AppButton.xLarge,
+              )
+            ],
           ),
-          ElevatedButton(
-            onPressed: () {
-              Get.toNamed(ViewRoute.loginPage);
-            },
-            child: Text('시작하기'),
-            style: AppButton.xLarge,
-          )
-        ],
-      )),
+        ),
+      ),
     );
   }
 }

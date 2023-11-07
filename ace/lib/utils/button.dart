@@ -33,16 +33,16 @@ class AppButton {
 
 // Primary
   static final ButtonStyle xLarge =
-      createElevatedButtonStyle(56, AppColors.prinary80);
+      createElevatedButtonStyle(56, AppColors.primary80);
 
   static final ButtonStyle medium =
-      createElevatedButtonStyle(40, AppColors.prinary80);
+      createElevatedButtonStyle(40, AppColors.primary80);
 
   static final ButtonStyle small =
-      createElevatedButtonStyle(32, AppColors.prinary80);
+      createElevatedButtonStyle(32, AppColors.primary80);
 
   static final ButtonStyle xSmall =
-      createElevatedButtonStyle(24, AppColors.prinary80);
+      createElevatedButtonStyle(24, AppColors.primary80);
 
 // Outline
   static final ButtonStyle xLargeOutLine = createElevatedButtonStyle(

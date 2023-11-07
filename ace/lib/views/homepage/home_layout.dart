@@ -38,7 +38,7 @@ class HomeLayOut extends GetView<HomeController> {
             showSelectedLabels: true,
             showUnselectedLabels: true,
             selectedLabelStyle:
-                AppTypograpy.cardBody.copyWith(color: AppColors.prinary80),
+                AppTypograpy.cardBody.copyWith(color: AppColors.primary80),
             unselectedLabelStyle:
                 AppTypograpy.cardBody.copyWith(color: AppColors.neutral60),
             selectedItemColor: AppColors.primaryColor,
