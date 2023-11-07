@@ -159,20 +159,21 @@ class RegistrationView extends GetView<SignUpController> {
               onPressed: controller.isLoading.value
                   ? null
                   : () async {
-                      var result = await controller.signup();
-                      if (result == null) {
-                        if (!controller.isLoading.value) {
+                      print('회원가입 버튼 클릭됨');
+                      await controller.signup();
+                      if (!controller.isLoading.value) {
+                        if (controller.token.value.isNotEmpty) {
+                          print('회원가입성공으로 이동');
                           Get.toNamed(ViewRoute.signupSuccess);
-                          print('회원가입 성공');
+                        } else {
+                          print('회원가입 실패');
                         }
-                      } else {
-                        print('회원가입 실패');
                       }
                     },
-              child: Text(
-                '회원가입',
-                style: AppTypograpy.tapButtonMedium18,
-              ),
+              child: Obx(() => Text(
+                    controller.isLoading.value ? '회원가입하기' : '회원가입',
+                    style: AppTypograpy.tapButtonMedium18,
+                  )),
               style: AppButton.xLarge,
             )
           ],
