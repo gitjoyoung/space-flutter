@@ -19,6 +19,8 @@ class AllMogakModel {
   final int temperature;
   final Author? author;
   final List<AppliedProfiles>? appliedProfiles;
+  final List? talks;
+  final List? upProfiles;
 
   AllMogakModel({
     required this.id,
@@ -35,6 +37,8 @@ class AllMogakModel {
     required this.temperature,
     required this.author,
     required this.appliedProfiles,
+    required this.talks,
+    required this.upProfiles,
   });
 
   Map<String, dynamic> toMap() {
@@ -85,6 +89,8 @@ class AllMogakModel {
                   AppliedProfiles.fromMap(item as Map<String, dynamic>))
               .toList()
           : null,
+      talks: map['talks'], // 추가 (리스트 변환을 위해 적절한 처리 필요)
+      upProfiles: map['upProfiles'], // 추가 (리스트 변환을 위해 적절한 처리 필요)
     );
   }
 

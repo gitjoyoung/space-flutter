@@ -6,13 +6,15 @@ import 'package:flutter_svg/svg.dart';
 class CommentIcon extends StatelessWidget {
   const CommentIcon({
     Key? key,
-    required this.count, required this.svgIcon,
+    required this.count,
+    required this.svgIcon,
   }) : super(key: key);
   final int count;
   final String svgIcon;
   @override
   Widget build(BuildContext context) {
-    final avatarExists = [true, true, true];
+    final int displayCount = count.clamp(0, 3); // 0과 3 사이의 값을 갖도록 제한
+    final double boxWidth = 20 + (displayCount - 1) * 10; // 가로 사이즈 계산
 
     return Row(
       mainAxisSize: MainAxisSize.min,
@@ -20,20 +22,17 @@ class CommentIcon extends StatelessWidget {
       children: [
         Stack(
           children: [
-            SizedBox(
-              width: 40,
-              height: 20,
-            ),
-            for (int i = 0; i < 3; i++)
-              if (avatarExists[i])
-                Positioned(
-                  left: i * 10,
-                  child: SvgPicture.asset(
-                    "assets/icons/icon50/man-a.svg",
-                    width: 20,
-                    height: 20,
-                  ),
+            SizedBox(width: boxWidth, height: 20), // 동적으로 계산된 가로 사이즈
+            // 아이콘들을 겹치게 배치
+            for (int i = 0; i < displayCount; i++)
+              Positioned(
+                left: i * 10,
+                child: SvgPicture.asset(
+                  "assets/icons/icon50/man-a.svg",
+                  width: 20,
+                  height: 20,
                 ),
+              ),
           ],
         ),
         SizedBox(

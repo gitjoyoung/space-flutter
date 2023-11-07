@@ -1,7 +1,7 @@
+import 'package:ace/controller/mogak/mogak_cotroller.dart';
 import 'package:ace/routes/view_route.dart';
 import 'package:ace/views/catchpage/catch.dart';
 import 'package:ace/views/homepage/home.dart';
-import 'package:ace/views/homepage/home_layout.dart';
 import 'package:ace/views/mogakpage/mogak.dart';
 import 'package:ace/views/mypage/my.dart';
 import 'package:ace/views/talkpage/talk.dart';
@@ -26,16 +26,12 @@ class HomeController extends GetxController {
         return Home();
       case 1:
         return Talk();
-
       case 2:
         return Catch();
-
       case 3:
         return Mogak();
-
       case 4:
         return My();
-
       default:
         return Home();
     }
