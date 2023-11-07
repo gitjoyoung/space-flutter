@@ -11,12 +11,10 @@ import 'package:ace/views/authpage/login.dart';
 import 'package:ace/views/authpage/registration_page.dart';
 import 'package:ace/views/authpage/sign_up_success.dart';
 import 'package:ace/views/authpage/splash.dart';
-<<<<<<< HEAD
-=======
 
 import 'package:ace/views/homepage/home_layout.dart';
+import 'package:ace/views/homepage/profile.dart';
 
->>>>>>> 360846a6a8ed3efdd10aaf62b70af060e4d5dbd5
 import 'package:ace/views/main_view.dart';
 import 'package:ace/views/mogakpage/create_mogak.dart';
 import 'package:ace/views/mogakpage/detail_mogak.dart';
@@ -56,6 +54,7 @@ class AppPages {
         })),
     GetPage(name: ViewRoute.splashPage, page: () => const SplashPage()),
     GetPage(name: ViewRoute.signupSuccess, page: () => const SignUpSuccess()),
+    GetPage(name: ViewRoute.profile, page: () => const Profile()),
 
     // 홈페이지
     GetPage(
