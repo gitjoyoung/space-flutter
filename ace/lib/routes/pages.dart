@@ -3,6 +3,8 @@ import 'package:ace/controller/find_password_controller.dart';
 import 'package:ace/controller/home/home_controller.dart';
 import 'package:ace/controller/login_controller.dart';
 import 'package:ace/controller/mogak/mogak_cotroller.dart';
+import 'package:ace/controller/mogak/mogak_create_contoller.dart';
+import 'package:ace/controller/mogak/mogak_detail_cotroller.dart';
 import 'package:ace/controller/signup_controller.dart';
 import 'package:ace/routes/view_route.dart';
 import 'package:ace/views/authpage/chang_password_view.dart';
@@ -57,6 +59,8 @@ class AppPages {
       name: ViewRoute.home,
       page: () => const HomeLayOut(),
       binding: BindingsBuilder(() {
+        Get.put(MogakController());
+
         Get.put(HomeController());
       }),
     ),
@@ -69,8 +73,27 @@ class AppPages {
         Get.put(MogakController());
       }),
     ),
-    GetPage(name: ViewRoute.mogakDetail, page: () => const MogakDetail()),
-    GetPage(name: ViewRoute.mogakCreate, page: () => const MogakCreate()),
-    GetPage(name: ViewRoute.mogakList, page: () => const MogakList()),
+    GetPage(
+      name: ViewRoute.mogakDetail,
+      page: () => const MogakDetail(),
+      binding: BindingsBuilder(() {
+        Get.put(MogakDetailController());
+      }),
+    ),
+    GetPage(
+      name: ViewRoute.mogakCreate,
+      page: () => const MogakCreate(),
+      binding: BindingsBuilder(() {
+        Get.put(MogakCreateController());
+      }),
+    ),
+    GetPage(
+      name: ViewRoute.mogakTopList,
+      page: () => const MogakList(title: '핫한 모각코'),
+    ),
+    GetPage(
+      name: ViewRoute.mogakAllList,
+      page: () => const MogakList(title: '모든 모각코'),
+    ),
   ];
 }

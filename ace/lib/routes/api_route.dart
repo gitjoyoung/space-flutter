@@ -10,6 +10,7 @@ class ApiRoute {
 
 // 특정 모각 가져오기 생성 삭제
   static const String mogak = "${baseUrl}api/mogak/";
+
   static const String topMogak = "${baseUrl}api/top/mogak/";
 
   static const String avatarUpload = "${baseUrl}api/upload";

@@ -13,5 +13,7 @@ class ViewRoute {
   static final String mogak = "/mogak";
   static final String mogakDetail = "/mogakDetail";
   static final String mogakCreate = "/mogakCreate";
-  static final String mogakList = "/mogakList";
+  static final String mogakAllList = "/mogakAllList";
+  static final String mogakTopList = "/mogakTopList";
+
 }
