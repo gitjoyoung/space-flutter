@@ -13,7 +13,6 @@ void main() {
   runApp(const GetMaterialApp(
     home: Profile(),
   ));
-  Get.put(AvatarController());
 }
 
 class Profile extends StatelessWidget {
@@ -21,6 +20,7 @@ class Profile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    Get.put(AvatarController());
     String _selectedValue = '개발자';
     return Scaffold(
       appBar: AppBar(
@@ -209,19 +209,12 @@ class Profile extends StatelessWidget {
                     InkWell(
                       onTap: () {
                         Get.dialog(
-<<<<<<< HEAD
                           Dialog(
                             child:
                                 AvatarCustomizer(), // 여기서 아바타 설정 페이지 위젯을 직접 호출
                           ),
                           barrierDismissible: true, // 모달 창 바깥을 터치하면 닫히도록 설정
                         );
-=======
-                            Dialog(
-                              child: AvatarCustomizer(),
-                            ),
-                            barrierDismissible: true);
->>>>>>> 360846a6a8ed3efdd10aaf62b70af060e4d5dbd5
                       },
                       child: Row(
                         mainAxisSize: MainAxisSize.min,
