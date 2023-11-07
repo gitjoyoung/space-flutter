@@ -1,5 +1,6 @@
 import 'dart:typed_data';
 
+import 'package:ace/controller/auth_controller.dart';
 import 'package:dio/dio.dart';
 import 'package:get/get.dart' hide MultipartFile, FormData;
 
@@ -15,6 +16,7 @@ class AvatarController extends GetxController {
   var emotionIndex = 1.obs;
   var itemIndex = 1.obs;
   var hairColorHex = '#030303'.obs;
+  RxString avatarUrl = RxString('');
 
   final List<String> itemAssets = [
     'angel',
@@ -131,7 +133,7 @@ class AvatarController extends GetxController {
       Dio dio = Dio();
 
       String authToken =
-          'Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImNsbzVmZDVyODAwMDBsNzA4ejhjbWEycnQiLCJlbWFpbCI6InRsc3RtZGdoODYyMEBnbWFpbC5jb20iLCJ2ZXJpZmllZEVtYWlsIjpmYWxzZSwidmVyaWZpZWRQaG9uZSI6ZmFsc2UsIm5hbWUiOiJtYXJjbyIsInByb2ZpbGUiOnsiaWQiOiJjbG81ZmRocWIwMDA0bWswOTFtNXA1cDI1Iiwibmlja25hbWUiOiLrp4jrpbTsvZQiLCJhdmF0YXIiOm51bGwsImJpbyI6IuyViOuFle2VmOyEuOyalC4gbWFyY2_snoXri4jri6QuIiwicG9zaXRpb24iOiJERVZFTE9QRVIiLCJyb2xlIjoiQURNSU4iLCJiYWRnZSI6bnVsbH0sImlhdCI6MTY5ODMwNzUwOX0.UCRp9pf20ZRl_hlcFyAvfWtwOJBD5N5xcWoz8OwvoLM'; // Replace with your access token
+          'Bearer ${Get.find<AuthController>().getToken()}'; // Replace with your access token
 
       var formData = FormData.fromMap({
         'file': MultipartFile.fromBytes(
@@ -142,7 +144,10 @@ class AvatarController extends GetxController {
 
       var response = await dio.post(
         'https://dev.sniperfactory.com/api/upload',
-        options: Options(headers: {'Authorization': authToken}),
+        options: Options(headers: {
+          'Authorization':
+              'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImNsbzNrNWRtaDAwMDBtcjA4aG50aWFsYTMiLCJlbWFpbCI6InNuaXBlcmZhY3RvcnlAZ21haWwuY29tIiwidmVyaWZpZWRFbWFpbCI6ZmFsc2UsInZlcmlmaWVkUGhvbmUiOmZhbHNlLCJuYW1lIjoi7YWM7Iqk7Yq47JWE7J2065SUMjIiLCJwcm9maWxlIjp7ImlkIjoiY2xvM2s3anh2MDAwMW1yMDh0czg4YjF3NiIsIm5pY2tuYW1lIjoiVGVzdDIyIiwiYXZhdGFyIjpudWxsLCJiaW8iOiLthYzsiqTtirjsnoTri7kyMiIsInBvc2l0aW9uIjoiREVWRUxPUEVSIiwicm9sZSI6Ik5FV0JJRSIsImJhZGdlIjpudWxsfSwiaWF0IjoxNjk4MTA1ODY5fQ.pcKQAvtiFgjt3MgePBn42aSkodF4-MUbIdjGVKBiom0.SG7fVD0p1BThPZM6q3yOqvvIi_-XbGQiC8G2IVe_Tls'
+        }),
         data: formData,
       );
 
@@ -157,5 +162,9 @@ class AvatarController extends GetxController {
     } catch (e) {
       print(e);
     }
+  }
+
+  String getAvatarUrl() {
+    return avatarUrl.value;
   }
 }
