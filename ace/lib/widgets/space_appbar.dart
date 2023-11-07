@@ -5,7 +5,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
 AppBar SpaceAppBar() {
-  final HomeController homeController = Get.find<HomeController>();
+  // final HomeController homeController = Get.find<HomeController>();
 
   return AppBar(
     automaticallyImplyLeading: false,
@@ -13,7 +13,7 @@ AppBar SpaceAppBar() {
     backgroundColor: Colors.white,
     title: InkWell(
       onTap: () {
-        homeController.goToHome();
+        // homeController.goToHome();
         print('Logo tapped');
       },
       child: SvgPicture.asset('assets/login/spacelogo.svg'),
