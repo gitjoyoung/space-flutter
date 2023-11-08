@@ -1,38 +1,37 @@
 import 'package:ace/controller/auth_controller.dart';
 import 'package:ace/controller/avatar_controller.dart';
 import 'package:ace/controller/profile_controller.dart';
+import 'package:ace/routes/pages.dart';
+import 'package:ace/routes/view_route.dart';
 import 'package:ace/utils/button.dart';
 import 'package:ace/utils/colors.dart';
 
 import 'package:ace/utils/typography.dart';
 import 'package:ace/views/authpage/avatar_setting.dart';
+import 'package:ace/views/homepage/home.dart';
+import 'package:ace/views/homepage/home_layout.dart';
 import 'package:ace/widgets/text_filed_custom.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
 void main() {
-  runApp(const GetMaterialApp(
+  runApp(GetMaterialApp(
     home: Profile(),
+    getPages: AppPages.pages,
   ));
 }
 
-class Profile extends StatefulWidget {
+class Profile extends GetView<ProfileController> {
   const Profile({super.key});
 
-  @override
-  State<Profile> createState() => _ProfileState();
-}
-
-class _ProfileState extends State<Profile> {
-  String _selectedValue = '';
   @override
   Widget build(BuildContext context) {
     Get.put(AvatarController());
     Get.put(AuthController());
     final AvatarController avatarController = Get.find<AvatarController>();
     final ProfileController profileController = Get.put(ProfileController());
-
+    String _selectedValue = '';
     return Scaffold(
       appBar: AppBar(
         elevation: 0,
@@ -95,50 +94,75 @@ class _ProfileState extends State<Profile> {
                             mainAxisSize: MainAxisSize.min,
                             children: [
                               Expanded(
-                                child: RadioListTile(
-                                  contentPadding: const EdgeInsets.all(0),
-                                  title: Text('개발자',
-                                      style: AppTypograpy.button36Regular),
-                                  value: '개발자',
-                                  groupValue: _selectedValue,
-                                  onChanged: (String? value) {
-                                    print(
-                                        "Selected value: $value"); // 현재 선택된 값을 콘솔에 출력합니다.
-                                    setState(() {
-                                      _selectedValue = value!;
-                                      profileController.updatePosition(value);
-                                    });
-                                  },
+                                child: Obx(
+                                  () => RadioListTile(
+                                    contentPadding: const EdgeInsets.all(0),
+                                    title: Text('개발자',
+                                        style: AppTypograpy.button36Regular),
+                                    value: '개발자',
+                                    groupValue: profileController
+                                        .positionMap.entries
+                                        .firstWhere(
+                                          (entry) =>
+                                              entry.value ==
+                                              profileController.position.value,
+                                          orElse: () => MapEntry('', ''),
+                                        )
+                                        .key, // 역매핑을 통해 현재 선택된 포지션의 키를 얻습니다.
+                                    onChanged: (String? value) {
+                                      if (value != null) {
+                                        profileController.updatePosition(value);
+                                      }
+                                    },
+                                  ),
                                 ),
                               ),
                               Expanded(
-                                child: RadioListTile(
-                                  contentPadding: const EdgeInsets.all(0),
-                                  title: Text('디자이너',
-                                      style: AppTypograpy.button36Regular),
-                                  value: '디자이너',
-                                  groupValue: _selectedValue,
-                                  onChanged: (String? value) {
-                                    setState(() {
-                                      _selectedValue = value!;
-                                      profileController.updatePosition(value);
-                                    });
-                                  },
+                                child: Obx(
+                                  () => RadioListTile(
+                                    contentPadding: const EdgeInsets.all(0),
+                                    title: Text('디자이너',
+                                        style: AppTypograpy.button36Regular),
+                                    value: '디자이너',
+                                    groupValue: profileController
+                                        .positionMap.entries
+                                        .firstWhere(
+                                          (entry) =>
+                                              entry.value ==
+                                              profileController.position.value,
+                                          orElse: () => MapEntry('', ''),
+                                        )
+                                        .key, // 역매핑을 통해 현재 선택된 포지션의 키를 얻습니다.
+                                    onChanged: (String? value) {
+                                      if (value != null) {
+                                        profileController.updatePosition(value);
+                                      }
+                                    },
+                                  ),
                                 ),
                               ),
                               Expanded(
-                                child: RadioListTile(
-                                  contentPadding: const EdgeInsets.all(0),
-                                  title: Text('헤드헌터',
-                                      style: AppTypograpy.button36Regular),
-                                  value: '헤드헌터',
-                                  groupValue: _selectedValue,
-                                  onChanged: (String? value) {
-                                    setState(() {
-                                      _selectedValue = value!;
-                                      profileController.updatePosition(value);
-                                    });
-                                  },
+                                child: Obx(
+                                  () => RadioListTile(
+                                    contentPadding: const EdgeInsets.all(0),
+                                    title: Text('헤드헌터',
+                                        style: AppTypograpy.button36Regular),
+                                    value: '헤드헌터',
+                                    groupValue: profileController
+                                        .positionMap.entries
+                                        .firstWhere(
+                                          (entry) =>
+                                              entry.value ==
+                                              profileController.position.value,
+                                          orElse: () => MapEntry('', ''),
+                                        )
+                                        .key, // 역매핑을 통해 현재 선택된 포지션의 키를 얻습니다.
+                                    onChanged: (String? value) {
+                                      if (value != null) {
+                                        profileController.updatePosition(value);
+                                      }
+                                    },
+                                  ),
                                 ),
                               ),
                             ],
@@ -211,7 +235,11 @@ class _ProfileState extends State<Profile> {
                           Expanded(
                             child: ElevatedButton(
                               style: AppButton.medium,
-                              onPressed: () {},
+                              onPressed: () {
+                                // updateProfile 함수를 호출합니다.
+                                profileController.updateProfile();
+                                Get.toNamed(ViewRoute.home);
+                              },
                               child: Text(
                                 '저장하기',
                                 style: AppTypograpy.tapButtonSubtitle16,

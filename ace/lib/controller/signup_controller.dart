@@ -1,12 +1,18 @@
 import 'dart:convert';
 
+import 'package:ace/controller/auth_controller.dart';
 import 'package:ace/routes/api_route.dart';
+import 'package:ace/routes/view_route.dart';
+
 import 'package:ace/utils/email_validator.dart';
+import 'package:ace/views/authpage/sign_up_success.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class SignUpController extends GetxController {
+  final AuthController authController = Get.find<AuthController>();
+
   final Rx<String> token = Rx<String>("");
   var name = TextEditingController();
   var email = TextEditingController();
@@ -24,14 +30,14 @@ class SignUpController extends GetxController {
     phone.addListener(_pushButtonState);
   }
 
-  @override
-  void onClose() {
-    email.dispose();
-    password.dispose();
-    name.dispose();
-    phone.dispose();
-    super.onClose();
-  }
+  // @override
+  // void onClose() {
+  //   email.dispose();
+  //   password.dispose();
+  //   name.dispose();
+  //   phone.dispose();
+  //   super.onClose();
+  // }
 
   void _pushButtonState() {
     isLoading.value = name.text.isNotEmpty &&
@@ -93,7 +99,16 @@ class SignUpController extends GetxController {
         token.value = response.data['data'] ?? '';
         if (token.value.isNotEmpty) {
           _showSuccess('회원가입이 완료되었습니다.');
+
           print(response.data['data']);
+          print('qwe');
+          print(token.value);
+          print('qwe');
+          print(isLoading.value);
+          authController.saveToken(response.data['data']);
+          print(ViewRoute.signupSuccess);
+          print('Current context is: ${Get.context}');
+          Get.to(() => const SignUpSuccess());
         } else {
           _showError('회원가입은 성공했지만, 토큰을 받지 못했습니다.');
           print('실패');
@@ -109,12 +124,12 @@ class SignUpController extends GetxController {
   }
 
   void _showError(String message) {
-    // Get.snackbar('오류', message,
-    // backgroundColor: Colors.redAccent, snackPosition: SnackPosition.BOTTOM);
+    Get.snackbar('오류', message,
+        backgroundColor: Colors.redAccent, snackPosition: SnackPosition.BOTTOM);
   }
 
   void _showSuccess(String message) {
-    // Get.snackbar('성공', message,
-    //     backgroundColor: Colors.green, snackPosition: SnackPosition.BOTTOM);
+    Get.snackbar('성공', message,
+        backgroundColor: Colors.green, snackPosition: SnackPosition.BOTTOM);
   }
 }
