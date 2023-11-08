@@ -82,32 +82,32 @@ class AppPages {
 
     // 모각
     GetPage(
-      name: ViewRoute.mogak,
+      name: ViewRoute.mogakPage,
       page: () => const Mogak(),
       binding: BindingsBuilder(() {
         Get.put(MogakController());
       }),
     ),
     GetPage(
-      name: ViewRoute.mogakDetail,
+      name: ViewRoute.mogakDetailPage,
       page: () => const MogakDetail(),
       binding: BindingsBuilder(() {
         Get.put(MogakDetailController());
       }),
     ),
     GetPage(
-      name: ViewRoute.mogakCreate,
+      name: ViewRoute.mogakCreatePage,
       page: () => const MogakCreate(),
       binding: BindingsBuilder(() {
         Get.put(MogakCreateController());
       }),
     ),
     GetPage(
-      name: ViewRoute.mogakTopList,
+      name: ViewRoute.mogakTopListPage,
       page: () => const MogakList(title: '핫한 모각코'),
     ),
     GetPage(
-      name: ViewRoute.mogakAllList,
+      name: ViewRoute.mogakAllListPage,
       page: () => const MogakList(title: '모든 모각코'),
     ),
   ];

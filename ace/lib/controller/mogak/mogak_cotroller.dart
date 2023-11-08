@@ -6,53 +6,88 @@ import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 
 class MogakController extends GetxController {
-  late Rx<AllMogakModel> selectMogak;
-
   RxList<AllMogakModel> allMogakModels = RxList<AllMogakModel>();
   RxList<AllMogakModel> topMogakModels = RxList<AllMogakModel>();
   var isLoading = false.obs;
+  final dio = Dio(); // 재사용 가능한 Dio 인스턴스
 
-  var dio = Dio();
-  Future<bool> fetchMogaks(
+  Future<bool> fetchListMogak(
       String apiRoute, RxList<AllMogakModel> targetList) async {
     try {
-      final response = await Dio().get(apiRoute);
+      final response = await dio.get(apiRoute);
       if (response.statusCode == 200) {
-        List<dynamic> jsonArray = response.data['data'];
-        List<AllMogakModel> mogakList = jsonArray
+        final List<dynamic> jsonArray = response.data['data'];
+        for (var item in jsonArray) {
+          print(item);
+        }
+        final mogakList = jsonArray
             .map((jsonItem) => AllMogakModel.fromJson(json.encode(jsonItem)))
             .toList();
-        for (final mogak in mogakList) {
-          print(mogak.toMap());
-        }
         targetList.assignAll(mogakList);
+        // print(mogakList.first.talks.toString());
+
+        // for (var mogakItem in mogakList) {
+        //   print('Mogak with ID ${mogakItem.id}:');
+        //   print('Title: ${mogakItem.title}');
+        //   print('Content: ${mogakItem.content}');
+        //   print('Max Members: ${mogakItem.authorId}');
+        //   print('HashTag: ${mogakItem.hashtag}');
+        //   print('Visibility Status: ${mogakItem.visiblityStatus}');
+        //   print('Talks:${mogakItem.talks.toString()}');
+
+        //   print('\n'); // 아이템 사이에 공백 추가
+        // }
         return true;
-      } else {
-        print('모델링 실패');
-        return false;
       }
-    } catch (e) {
-      print('통신 실패: $e');
+      print('모델링 실패: ${response.statusCode}');
       return false;
+    } on DioError catch (e) {
+      print('Dio 오류: ${e.message}');
+      return false;
+    } catch (e) {
+      print('일반 오류: $e');
+      return false;
+    }
+  }
+
+  String token =
+      "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImNsbzNrNWRtaDAwMDBtcjA4aG50aWFsYTMiLCJlbWFpbCI6InNuaXBlcmZhY3RvcnlAZ21haWwuY29tIiwidmVyaWZpZWRFbWFpbCI6ZmFsc2UsInZlcmlmaWVkUGhvbmUiOmZhbHNlLCJuYW1lIjoi6rmA7Iqk7YypIiwicHJvZmlsZSI6eyJpZCI6ImNsbzNrN2p4djAwMDFtcjA4dHM4OGIxdzYiLCJuaWNrbmFtZSI6Iuq5gOyKpO2MqeyUqCIsImF2YXRhciI6Imh0dHBzOi8vc25pcGVyZmFjdG9yeS5zMy5hcC1ub3J0aGVhc3QtMi5hbWF6b25hd3MuY29tL2NsbzVmZDVyODAwMDBsNzA4ejhjbWEycnQvc2NyZWVuc2hvdC5wbmciLCJwb3NpdGlvbiI6IkRFVkVMT1BFUiIsInJvbGUiOiJORVdCSUUifSwiaWF0IjoxNjk5MzU2MTk0fQ.b_aXzMeNetKTHy9C0VjZB2xUuLewjdY7hwqj-yQSAME";
+
+  Future<bool> LikeMogak(
+    String mogakId,
+  ) async {
+    try {
+      print('모각아이디 ' + mogakId);
+      final response = await dio.post(ApiRoute.mogakLikeApi,
+          data: {"mogakId": mogakId},
+          options: Options(headers: {"Authorization": token}));
+      if (response.statusCode == 200) {
+        var resdata = response.data['data'];
+        print('like: $resdata');
+        return true;
+      }
+      return false;
+    } catch (e) {
+      print('like 일반 오류: $e');
+      return false;
+    }
+  }
+
+  Future<void> refreshMogaks() async {
+    isLoading(true); // 로딩 시작
+    try {
+      await Future.wait([
+        fetchListMogak(ApiRoute.mogakApi, allMogakModels),
+        fetchListMogak(ApiRoute.mogakTopApi, topMogakModels),
+      ]);
+    } finally {
+      isLoading(false); // 로딩 종료
     }
   }
 
   @override
   void onInit() {
     super.onInit();
-    // 두 개의 API 호출을 병렬로 실행하고, 모두 성공했을 때 true 반환
-    Future.wait([
-      fetchMogaks(ApiRoute.mogak, allMogakModels),
-      fetchMogaks(ApiRoute.topMogak, topMogakModels),
-    ]).then((results) {
-      // 모든 API 호출이 성공했을 때 true로 설정
-      bool allSuccess = results.every((result) => result == true);
-      if (allSuccess) {
-        isLoading.value = true;
-      } else {
-        // 데이터 로딩 실패 - 에러 처리 로직 추가
-        // 사용자에게 에러 메시지를 표시할 수 있음
-      }
-    });
+    refreshMogaks(); // onInit에서 데이터 새로고침을 호출
   }
 }

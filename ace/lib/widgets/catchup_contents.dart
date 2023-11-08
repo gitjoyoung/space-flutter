@@ -47,7 +47,7 @@ class CatchupContent extends GetView<MogakDetailController> {
             ),
             InkWell(
               onTap: () {
-                Get.toNamed(ViewRoute.mogakDetail, arguments: data?.id);
+                Get.toNamed(ViewRoute.mogakDetailPage, arguments: data?.id);
                 print('${data?.id}  제목 클릭');
               },
               child: Padding(
@@ -71,7 +71,7 @@ class CatchupContent extends GetView<MogakDetailController> {
             ),
             InkWell(
               onTap: () {
-                Get.toNamed(ViewRoute.mogakDetail, arguments: data?.id);
+                Get.toNamed(ViewRoute.mogakDetailPage, arguments: data?.id);
                 print('${data?.id}   내용 클릭');
               },
               child: Text(

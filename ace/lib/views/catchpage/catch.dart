@@ -126,7 +126,7 @@ class Catch extends GetView<MogakController> {
                           ),
                           trailing: InkWell(
                               onTap: () {
-                                Get.toNamed(ViewRoute.mogakTopList);
+                                Get.toNamed(ViewRoute.mogakTopListPage);
                               },
                               child: SvgPicture.asset(
                                   'assets/icons/icon20/Right.svg')),
@@ -176,7 +176,7 @@ class Catch extends GetView<MogakController> {
                           contentPadding: EdgeInsets.zero,
                           onTap: () {
                             print('캐치업');
-                            Get.toNamed(ViewRoute.mogakAllList);
+                            Get.toNamed(ViewRoute.mogakAllListPage);
                           },
                           title: Row(
                             mainAxisAlignment: MainAxisAlignment.start,

@@ -86,7 +86,7 @@ class HomeLayOut extends GetView<HomeController> {
           ),
         ),
       ),
-      body: Obx(() => controller.currentPage),
+      body: SafeArea(child: Obx(() => controller.currentPage)),
     );
   }
 }

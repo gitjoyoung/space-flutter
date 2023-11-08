@@ -77,7 +77,7 @@ class Mogak extends GetView<MogakController> {
     return Scaffold(
         floatingActionButton: FloatingActionButton(
           onPressed: () {
-            Get.toNamed(ViewRoute.mogakCreate);
+            Get.toNamed(ViewRoute.mogakCreatePage);
           },
           clipBehavior: Clip.antiAlias,
           elevation: 0,
@@ -89,147 +89,84 @@ class Mogak extends GetView<MogakController> {
           ),
           backgroundColor: AppColors.primary80,
         ),
-        body: Padding(
-          padding: const EdgeInsets.only(top: 16, left: 10, right: 10),
-          child: SingleChildScrollView(
-            child: Column(
-              children: [
-                Container(
-                  height: 48,
-                  child: TextField(
-                    decoration: InputDecoration(
-                      prefixIcon: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 16),
-                        child: Icon(Icons.search),
+        body: RefreshIndicator(
+          onRefresh: () => controller.refreshMogaks(),
+          child: Padding(
+            padding: const EdgeInsets.only(top: 16, left: 10, right: 10),
+            child: SingleChildScrollView(
+              child: Column(
+                children: [
+                  Container(
+                    height: 48,
+                    child: TextField(
+                      decoration: InputDecoration(
+                        prefixIcon: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 16),
+                          child: Icon(Icons.search),
+                        ),
+                        fillColor: Colors.white,
+                        filled: true,
+                        enabledBorder: OutlineInputBorder(
+                          borderSide: const BorderSide(
+                              color: AppColors.strokeLine05, width: 2.0),
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        focusedBorder: OutlineInputBorder(
+                          borderSide: const BorderSide(
+                              color: AppColors.primaryColor, width: 2.0),
+                          borderRadius: BorderRadius.circular(12),
+                        ),
+                        hintText: '내용 검색하기',
                       ),
-                      fillColor: Colors.white,
-                      filled: true,
-                      enabledBorder: OutlineInputBorder(
-                        borderSide: const BorderSide(
-                            color: AppColors.strokeLine05, width: 2.0),
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      focusedBorder: OutlineInputBorder(
-                        borderSide: const BorderSide(
-                            color: AppColors.primaryColor, width: 2.0),
-                        borderRadius: BorderRadius.circular(12),
-                      ),
-                      hintText: '내용 검색하기',
                     ),
                   ),
-                ),
-                Obx(
-                  () => !controller.isLoading.value
-                      ? buildSkeleton()
-                      : Column(
-                          children: [
-                            ListTile(
-                              contentPadding: EdgeInsets.zero,
-                              title: Row(
-                                children: [
-                                  SvgPicture.asset(
-                                      'assets/icons/icon20/letter.svg'),
-                                  SizedBox(
-                                    width: 8,
-                                  ),
-                                  Text(
-                                    '핫한 모각코',
-                                    style: AppTypograpy.tapButtonBold18,
-                                  ),
-                                ],
+                  Obx(
+                    () => controller.isLoading.value
+                        ? buildSkeleton()
+                        : Column(
+                            children: [
+                              ListTile(
+                                contentPadding: EdgeInsets.zero,
+                                title: Row(
+                                  children: [
+                                    SvgPicture.asset(
+                                        'assets/icons/icon20/letter.svg'),
+                                    SizedBox(
+                                      width: 8,
+                                    ),
+                                    Text(
+                                      '핫한 모각코',
+                                      style: AppTypograpy.tapButtonBold18,
+                                    ),
+                                  ],
+                                ),
+                                trailing: InkWell(
+                                    onTap: () {
+                                      Get.toNamed(ViewRoute.mogakTopListPage);
+                                    },
+                                    child: SvgPicture.asset(
+                                        'assets/icons/icon20/Right.svg')),
                               ),
-                              trailing: InkWell(
-                                  onTap: () {
-                                    Get.toNamed(ViewRoute.mogakTopList);
-                                  },
-                                  child: SvgPicture.asset(
-                                      'assets/icons/icon20/Right.svg')),
-                            ),
-                            controller.allMogakModels.isEmpty
-                                ? Container()
-                                : Card(
-                                    elevation: 0, // 그림자 제거
-                                    shape: RoundedRectangleBorder(
-                                      side: BorderSide(
-                                          color: AppColors.strokeLine10,
-                                          width: 1.0), // 윤곽선 색과 두께 설정
-                                      borderRadius: BorderRadius.circular(
-                                          10), // 윤곽선 둥글기 설정
+                              controller.topMogakModels.isEmpty
+                                  ? Container()
+                                  : Card(
+                                      elevation: 0, // 그림자 제거
+                                      shape: RoundedRectangleBorder(
+                                        side: BorderSide(
+                                            color: AppColors.strokeLine10,
+                                            width: 1.0), // 윤곽선 색과 두께 설정
+                                        borderRadius: BorderRadius.circular(
+                                            10), // 윤곽선 둥글기 설정
+                                      ),
+                                      child: MogakContent(
+                                        data: controller.topMogakModels.first,
+                                        maxLength: 3,
+                                      ),
                                     ),
-                                    child: MogakContent(
-                                      data: controller.allMogakModels.first,
-                                      maxLength: 3,
-                                    ),
-                                  ),
-                            SizedBox(
-                              height: 8,
-                            ),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.end,
-                              children: [
-                                CommentIcon(
-                                  svgIcon: 'assets/icons/icon20/plus.svg',
-                                  count: controller.allMogakModels.first
-                                          .appliedProfiles?.length ??
-                                      0,
-                                ),
-                                SizedBox(
-                                  width: 10,
-                                ),
-                                CommentIcon(
-                                  svgIcon: 'assets/icons/icon20/like.svg',
-                                  count: controller
-                                      .allMogakModels.first.temperature,
-                                ),
-                              ],
-                            ),
-                            SizedBox(
-                              height: 25,
-                            ),
-                            ListTile(
-                              contentPadding: EdgeInsets.zero,
-                              onTap: () {
-                                print('모든 모각코');
-                                Get.toNamed(ViewRoute.mogakAllList);
-                              },
-                              title: Row(
-                                mainAxisAlignment: MainAxisAlignment.start,
-                                children: [
-                                  SvgPicture.asset(
-                                      'assets/icons/icon20/letter.svg'),
-                                  SizedBox(
-                                    width: 8,
-                                  ),
-                                  Text(
-                                    '모든 모각코',
-                                    style: AppTypograpy.tapButtonBold18,
-                                  ),
-                                ],
+                              SizedBox(
+                                height: 8,
                               ),
-                              trailing: SvgPicture.asset(
-                                  'assets/icons/icon20/Right.svg'),
-                            ),
-                            Obx(() => controller.allMogakModels.isEmpty
-                                ? SizedBox()
-                                : Card(
-                                    elevation: 0, // 그림자 제거
-                                    shape: RoundedRectangleBorder(
-                                      side: BorderSide(
-                                          color: AppColors.strokeLine10,
-                                          width: 1.0), // 윤곽선 색과 두께 설정
-                                      borderRadius: BorderRadius.circular(
-                                          10), // 윤곽선 둥글기 설정
-                                    ),
-                                    child: MogakContent(
-                                      data: controller.topMogakModels.first,
-                                      maxLength: 3,
-                                    ),
-                                  )),
-                            SizedBox(
-                              height: 8,
-                            ),
-                            Obx(
-                              () => Row(
+                              Row(
                                 mainAxisAlignment: MainAxisAlignment.end,
                                 children: [
                                   CommentIcon(
@@ -248,11 +185,75 @@ class Mogak extends GetView<MogakController> {
                                   ),
                                 ],
                               ),
-                            ),
-                          ],
-                        ),
-                )
-              ],
+                              SizedBox(
+                                height: 25,
+                              ),
+                              ListTile(
+                                contentPadding: EdgeInsets.zero,
+                                title: Row(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  children: [
+                                    SvgPicture.asset(
+                                        'assets/icons/icon20/letter.svg'),
+                                    SizedBox(
+                                      width: 8,
+                                    ),
+                                    Text(
+                                      '모든 모각코',
+                                      style: AppTypograpy.tapButtonBold18,
+                                    ),
+                                  ],
+                                ),
+                                trailing: InkWell(
+                                    onTap: () {
+                                      Get.toNamed(ViewRoute.mogakAllListPage);
+                                    },
+                                    child: SvgPicture.asset(
+                                        'assets/icons/icon20/Right.svg')),
+                              ),
+                              controller.allMogakModels.isEmpty
+                                  ? SizedBox()
+                                  : Card(
+                                      elevation: 0, // 그림자 제거
+                                      shape: RoundedRectangleBorder(
+                                        side: BorderSide(
+                                            color: AppColors.strokeLine10,
+                                            width: 1.0), // 윤곽선 색과 두께 설정
+                                        borderRadius: BorderRadius.circular(
+                                            10), // 윤곽선 둥글기 설정
+                                      ),
+                                      child: MogakContent(
+                                        data: controller.allMogakModels.first,
+                                        maxLength: 3,
+                                      ),
+                                    ),
+                              SizedBox(
+                                height: 8,
+                              ),
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.end,
+                                children: [
+                                  CommentIcon(
+                                    svgIcon: 'assets/icons/icon20/plus.svg',
+                                    count: controller.allMogakModels.first
+                                            .appliedProfiles?.length ??
+                                        0,
+                                  ),
+                                  SizedBox(
+                                    width: 10,
+                                  ),
+                                  CommentIcon(
+                                    svgIcon: 'assets/icons/icon20/like.svg',
+                                    count: controller
+                                        .allMogakModels.first.temperature,
+                                  ),
+                                ],
+                              ),
+                            ],
+                          ),
+                  )
+                ],
+              ),
             ),
           ),
         ));

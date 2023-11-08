@@ -1,7 +1,11 @@
 import 'package:ace/controller/mogak/mogak_detail_cotroller.dart';
+import 'package:ace/models/mogak/appliedProfiles_model.dart';
+import 'package:ace/models/mogak/mogak_model.dart';
+import 'package:ace/models/mogak/talk_model.dart';
 import 'package:ace/utils/button.dart';
 import 'package:ace/utils/colors.dart';
 import 'package:ace/utils/typography.dart';
+import 'package:ace/views/talkpage/talk.dart';
 import 'package:ace/widgets/modal_costom.dart';
 import 'package:ace/widgets/space_appbar.dart';
 import 'package:ace/widgets/title_appbar_custom.dart';
@@ -17,81 +21,13 @@ class MogakDetail extends GetView<MogakDetailController> {
 
   const MogakDetail({Key? key, this.onPressed}) : super(key: key);
 
-  void showCustomDialog() {
-    Get.dialog(
-      Dialog(
-        shape: RoundedRectangleBorder(
-          borderRadius: BorderRadius.circular(10), // 라운드 테두리를 줄 값 설정
-        ),
-        child: Container(
-          width: 242,
-          height: 140,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(
-                    bottom: 16, left: 8, right: 8, top: 16),
-                child: Text(
-                  "그룹에 참여하시겠습니까?",
-                  style: TextStyle(
-                    fontSize: 16,
-                    fontWeight: FontWeight.bold,
-                  ),
-                ),
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  SizedBox(
-                    width: 100,
-                    child: ElevatedButton(
-                      style: AppButton.smallOutLine.copyWith(
-                        elevation: MaterialStateProperty.all<double?>(0),
-                      ),
-                      onPressed: () {
-                        Get.back(); // 참여하기 버튼 클릭시 실행될 동작
-                      },
-                      child: Text(
-                        '취소하기',
-                        style: AppTypograpy.button36Regular
-                            .copyWith(color: AppColors.primaryColor),
-                      ),
-                    ),
-                  ),
-                  SizedBox(width: 10),
-                  SizedBox(
-                    width: 100,
-                    child: ElevatedButton(
-                      style: AppButton.small.copyWith(
-                        elevation: MaterialStateProperty.all<double?>(0),
-                      ),
-                      onPressed: () {
-                        Get.back(); // 참여하기 버튼 클릭시 실행될 동작
-                      },
-                      child: Text(
-                        '참여하기',
-                        style: AppTypograpy.button36Regular
-                            .copyWith(color: Colors.white),
-                      ),
-                    ),
-                  ),
-                  // 버튼 사이 간격 조절
-                ],
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
-    final String? id = Get.arguments;
-    Get.put(MogakDetailController());
+    final AllMogakModel data = Get.arguments as AllMogakModel;
+
+    final keyboardHeight = MediaQuery.of(context).viewInsets.bottom;
     return Scaffold(
+      resizeToAvoidBottomInset: true,
       appBar: SpaceAppBar(),
       bottomNavigationBar: Container(
         margin: EdgeInsets.all(8),
@@ -117,122 +53,195 @@ class MogakDetail extends GetView<MogakDetailController> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            // Obx(() => Text(controller.mogakDetail.first.title ?? "")),
-            Text(id!),
-            TitleAppBarCustom(title: '모각코 상세보기'),
+            TitleAppBarCustom(title: '모각코 상세보기' ),
+
+            // 내용
             Container(
-              color: Colors.white,
+              color: Colors.grey[100],
               child: Padding(
-                padding:
-                    EdgeInsets.only(top: 12, left: 10, right: 10, bottom: 12),
+                padding: EdgeInsets.only( bottom: 20),
                 child: Column(
                   children: [
-                    MogakContent(),
-                    SizedBox(
-                      height: 90,
-                      child: ListView(
-                        scrollDirection: Axis.horizontal,
-                        children: [
-                          Column(
-                            children: [
-                              AvatarCustom(
-                                height: 68,
-                                width: 70,
+                    // 메인내용
+                    Card(
+                      margin: EdgeInsets.all(0),
+                      elevation: 0,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 10),
+                        child: Column(
+                          children: [
+                            MogakContent(data: data, maxLength: 100),
+                            SizedBox(
+                              height: 90,
+                              child: ListView.builder(
+                                scrollDirection: Axis.horizontal,
+                                itemCount: controller
+                                    .mogakDetail.value?.appliedProfiles?.length,
+                                itemBuilder: (context, index) {
+                                  return Padding(
+                                    padding: const EdgeInsets.only(right: 10),
+                                    child: Column(
+                                      children: [
+                                        AvatarCustom(
+                                          badge: controller.mogakDetail.value
+                                              ?.author?.badge?.shortName,
+                                          avatarUrl: controller
+                                                  .mogakDetail
+                                                  .value
+                                                  ?.appliedProfiles?[index]
+                                                  .avatar ??
+                                              null,
+                                          height: 68,
+                                          width: 70,
+                                        ),
+                                        Text(
+                                          controller
+                                                  .mogakDetail
+                                                  .value
+                                                  ?.appliedProfiles?[index]
+                                                  .nickname ??
+                                              "",
+                                          style: AppTypograpy.button28Bold,
+                                        ),
+                                      ],
+                                    ),
+                                  );
+                                },
                               ),
-                              Text(
-                                '마르코',
-                                style: AppTypograpy.button28Bold,
-                              )
-                            ],
-                          ),
-                          SizedBox(
-                            width: 12,
-                          ),
-                        ],
-                      ),
-                    ),
-                    SizedBox(
-                      height: 29,
-                    ),
-                    ElevatedButton(
-                      onPressed: () {
-                        print(id);
-                        showCustomDialog();
-                      },
-                      child: Text(
-                        '참여하기',
-                        style: AppTypograpy.tapButtonMedium18,
-                      ),
-                      style: AppButton.xLarge,
-                    ),
-                    Container(
-                      height: 10,
-                    ),
-                    Row(children: [
-                      SvgPicture.asset('assets/icons/icon20/speaker.svg'),
-                      SizedBox(
-                        width: 8,
-                      ),
-                      Text(
-                        '이어달린 톡',
-                        style: AppTypograpy.tapButtonBold18,
-                      )
-                    ]),
-                    SizedBox(
-                      height: 16,
-                    ),
-                    ListView(
-                        shrinkWrap: true,
-                        physics: NeverScrollableScrollPhysics(),
-                        children: [
-                          Row(children: [
-                            AvatarCustom(
-                              height: 68,
-                              width: 70,
                             ),
                             Padding(
-                              padding:
-                                  const EdgeInsets.symmetric(horizontal: 8),
-                              child: Text(
-                                '케빈',
-                                style: AppTypograpy.button36Bold,
+                              padding: const EdgeInsets.symmetric(vertical: 25),
+                              child: ElevatedButton(
+                                onPressed: () {
+                                  controller.showCustomDialog();
+                                },
+                                child: Text(
+                                  '참여하기',
+                                  style: AppTypograpy.tapButtonMedium18,
+                                ),
+                                style: AppButton.xLarge,
                               ),
                             ),
-                            Tag(title: '수료생'),
-                          ]),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          Card(
-                            color: AppColors.strokeLine05,
-                            child: Padding(
-                              padding: const EdgeInsets.only(
-                                  top: 24, bottom: 24, left: 16, right: 16),
-                              child: Text(
-                                  style: AppTypograpy.button36Medium,
-                                  '와 새로운 기능이 정리가 잘 되어있네요! 좋은 정보 공유 감사드립니다! 글을 너무 잘 쓰시는것같아요!'),
-                            ),
-                          ),
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.end,
+                          ],
+                        ),
+                      ),
+                    ),
+                    SizedBox(
+                      height: 10,
+                    ),
+                    Card(
+                      margin: EdgeInsets.all(0),
+                      elevation: 0,
+                      child: Padding(
+                        padding: const EdgeInsets.symmetric(vertical: 20),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 10),
+                          child: Column(
                             children: [
-                              Text(
-                                '1분전',
-                                style: AppTypograpy.cardBody
-                                    .copyWith(color: AppColors.neutral40),
-                              ),
+                              Row(children: [
+                                SvgPicture.asset('assets/icons/icon20/speaker.svg'),
+                                SizedBox(
+                                  width: 8,
+                                ),
+                                Text(
+                                  '이어달린 톡',
+                                  style: AppTypograpy.tapButtonBold18,
+                                )
+                              ]),
                               SizedBox(
-                                width: 16,
+                                height: 16,
                               ),
-                              SvgPicture.asset('assets/icons/icon20/like.svg'),
-                              Text(
-                                '16',
-                                style: AppTypograpy.cardBody
-                                    .copyWith(color: AppColors.primary80),
-                              ),
+                              Obx(() {
+                                final talks = controller?.mogakDetail?.value?.talks;
+                                if (talks == null || talks.isEmpty) {
+                                  print('댓글 데이타 없음');
+                                  return Text(
+                                      '데이타를 불러오는 중이거나 댓글이 없습니다'); // 혹은 다른 적절한 위젯을 반환하여 렌더링을 하지 않도록 처리
+                                }
+                                print('댓글 데이타 있음' + talks.toString());
+                                return ListView.builder(
+                                  shrinkWrap: true,
+                                  physics: NeverScrollableScrollPhysics(),
+                                  itemCount: talks.length, // 데이터 리스트의 길이
+                                  itemBuilder: (context, index) {
+                                    final TalkModel? item = talks[index];
+                                              
+                                    return Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Row(
+                                          children: [
+                                            AvatarCustom(
+                                              avatarUrl: item!.author.avatar,
+                                              badge: item.author.badge?.shortName,
+                                              height: 68,
+                                              width: 70,
+                                            ),
+                                            Padding(
+                                              padding: const EdgeInsets.symmetric(
+                                                  horizontal: 8),
+                                              child: Text(
+                                                item!.author
+                                                    .nickname, // 데이터에서 이름을 가져와서 표시
+                                                style: AppTypograpy.button36Bold,
+                                              ),
+                                            ),
+                                            Tag(
+                                                title: item.author.role
+                                                    .toString()), // 데이터에서 태그를 가져와서 표시
+                                          ],
+                                        ),
+                                        SizedBox(
+                                          height: 10,
+                                        ),
+                                        SizedBox(
+                                          width: double.infinity,
+                                          child: Card(
+                                            elevation: 0,
+                                            color: AppColors.strokeLine05,
+                                            child: Padding(
+                                              padding: const EdgeInsets.all(16),
+                                              child: Text(
+                                                item.content, // 데이터에서 댓글 내용을 가져와서 표시
+                                                style: AppTypograpy.button36Medium,
+                                              ),
+                                            ),
+                                          ),
+                                        ),
+                                        Row(
+                                          mainAxisAlignment: MainAxisAlignment.end,
+                                          children: [
+                                            Text(
+                                              item!.createdAt
+                                                  .toString(), // 데이터에서 타임스탬프를 가져와서 표시
+                                              style: AppTypograpy.cardBody.copyWith(
+                                                  color: AppColors.neutral40),
+                                            ),
+                                            SizedBox(
+                                              width: 16,
+                                            ),
+                                            SvgPicture.asset(
+                                                'assets/icons/icon20/like.svg'),
+                                            Text(
+                                              item.temperature
+                                                  .toString(), // 데이터에서 좋아요 수를 가져와서 표시
+                                              style: AppTypograpy.cardBody.copyWith(
+                                                  color: AppColors.primary80),
+                                            ),
+                                          ],
+                                        )
+                                      ],
+                                    );
+                                  },
+                                );
+                              }),
                             ],
-                          )
-                        ])
+                          ),
+                        ),
+                      ),
+                    ),
+
+                    // 댓글 이미지
                   ],
                 ),
               ),
