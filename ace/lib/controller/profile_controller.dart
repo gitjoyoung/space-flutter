@@ -57,7 +57,8 @@ class ProfileController extends GetxController {
         // 새로운 토큰을 받아 저장합니다.
         print(response.data);
         authController.saveToken(response.data['data']);
-        print(authController.getToken());
+
+        print('갱신된 토큰' + authController.getToken());
       } else {
         throw Exception('프로필 업데이트에 실패했습니다.');
       }
