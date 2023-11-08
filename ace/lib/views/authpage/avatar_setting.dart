@@ -22,7 +22,7 @@ class AvatarCustomizer extends GetView<AvatarController> {
         backgroundColor: Colors.transparent,
         elevation: 0,
         title: Text('  아바타 설정',
-            style: AppTypograpy.popupTitleBold.copyWith(color: Colors.black)),
+            style: AppTypography.popupTitleBold.copyWith(color: Colors.black)),
         centerTitle: false,
         actions: <Widget>[
           IconButton(
@@ -45,7 +45,7 @@ class AvatarCustomizer extends GetView<AvatarController> {
               },
               child: Text(
                 '초기화',
-                style: AppTypograpy.tapButtonSubtitle16
+                style: AppTypography.tapButtonSubtitle16
                     .copyWith(color: AppColors.primary60),
               ),
             ),

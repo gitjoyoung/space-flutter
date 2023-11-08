@@ -24,11 +24,15 @@ class TitleAppBarCustom extends StatelessWidget {
               Get.back();
               // 뒤로가기 버튼 기능, 예를 들어 Navigator.pop(context);
             },
-            child: SvgPicture.asset('assets/icons/icon20/left.svg' , height: 20, width: 20,),
+            child: SvgPicture.asset(
+              'assets/icons/icon20/left.svg',
+              height: 20,
+              width: 20,
+            ),
           ),
           Text(
             title ?? '모각 상세',
-            style: AppTypograpy.tapButtonBold18,
+            style: AppTypography.tapButtonBold18,
           ),
           Opacity(
             opacity: 0, // 오른쪽에 똑같은 공간을 만들기 위해 투명한 아이콘을 넣음

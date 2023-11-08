@@ -43,7 +43,7 @@ class RegistrationView extends GetView<SignUpController> {
             backgroundColor: Colors.transparent,
             elevation: 0,
             title: Text('회원가입 하기',
-                style: AppTypograpy.tapButtonBold18
+                style: AppTypography.tapButtonBold18
                     .copyWith(color: AppColors.neutral80)),
           ),
         ),
@@ -56,7 +56,7 @@ class RegistrationView extends GetView<SignUpController> {
               width: double.infinity,
               child: Text(
                 '*표시는 필수입력항목 입니다.',
-                style: AppTypograpy.cardBody
+                style: AppTypography.cardBody
                     .copyWith(color: AppColors.systemWarnin),
                 textAlign: TextAlign.right,
               ),
@@ -65,7 +65,7 @@ class RegistrationView extends GetView<SignUpController> {
               children: [
                 Text(
                   '이름',
-                  style: AppTypograpy.tapButtonNavgation16
+                  style: AppTypography.tapButtonNavgation16
                       .copyWith(color: AppColors.neutral80),
                 ),
                 SizedBox(width: 4),
@@ -86,7 +86,7 @@ class RegistrationView extends GetView<SignUpController> {
               children: [
                 Text(
                   '이메일',
-                  style: AppTypograpy.tapButtonNavgation16
+                  style: AppTypography.tapButtonNavgation16
                       .copyWith(color: AppColors.neutral80),
                 ),
                 SizedBox(width: 4),
@@ -108,7 +108,7 @@ class RegistrationView extends GetView<SignUpController> {
               children: [
                 Text(
                   '비밀번호',
-                  style: AppTypograpy.tapButtonNavgation16
+                  style: AppTypography.tapButtonNavgation16
                       .copyWith(color: AppColors.neutral80),
                 ),
                 SizedBox(width: 4),
@@ -136,7 +136,7 @@ class RegistrationView extends GetView<SignUpController> {
               children: [
                 Text(
                   '휴대전화',
-                  style: AppTypograpy.tapButtonNavgation16
+                  style: AppTypography.tapButtonNavgation16
                       .copyWith(color: AppColors.neutral80),
                 ),
                 SizedBox(width: 4),
@@ -159,7 +159,7 @@ class RegistrationView extends GetView<SignUpController> {
                       print('회원가입 버튼 클릭됨');
                       await controller.signup();
 
-                      Get.toNamed(ViewRoute.signupSuccess);
+                      Get.toNamed(ViewRoute.signupSuccessPage);
 
                       // 회원가입 성공 후의 처리는 signup() 함수 내에서 이루어지므로,
                       // 여기서는 추가적인 처리가 필요하지 않습니다.
@@ -167,7 +167,7 @@ class RegistrationView extends GetView<SignUpController> {
                     },
               child: Obx(() => Text(
                     controller.isLoading.value ? '회원가입하기' : '회원가입',
-                    style: AppTypograpy.tapButtonMedium18,
+                    style: AppTypography.tapButtonMedium18,
                   )),
               style: AppButton.xLarge,
             )

@@ -73,7 +73,7 @@ class ChangePasswordView extends GetView<ChangePasswordController> {
                     child: Text(
                       '비밀번호 변경',
                       textAlign: TextAlign.center,
-                      style: AppTypograpy.tapButtonBold18
+                      style: AppTypography.tapButtonBold18
                           .copyWith(color: AppColors.neutral80),
                     ),
                   ),
@@ -89,7 +89,7 @@ class ChangePasswordView extends GetView<ChangePasswordController> {
               children: [
                 Text(
                   '현재 비밀번호',
-                  style: AppTypograpy.tapButtonNavgation16
+                  style: AppTypography.tapButtonNavgation16
                       .copyWith(color: AppColors.neutral80),
                 ),
               ],
@@ -108,7 +108,7 @@ class ChangePasswordView extends GetView<ChangePasswordController> {
               children: [
                 Text(
                   '새 비밀번호',
-                  style: AppTypograpy.tapButtonNavgation16
+                  style: AppTypography.tapButtonNavgation16
                       .copyWith(color: AppColors.neutral80),
                 ),
               ],
@@ -139,7 +139,7 @@ class ChangePasswordView extends GetView<ChangePasswordController> {
                   },
             child: Text(
               '변경하기',
-              style: AppTypograpy.tapButtonMedium18,
+              style: AppTypography.tapButtonMedium18,
             ),
             style: AppButton.xLarge,
           )

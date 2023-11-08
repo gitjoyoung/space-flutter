@@ -31,7 +31,7 @@ class ChangePasswordController extends GetxController {
       _dio.options.headers['Authorization'] = 'Bearer $storedToken';
 
       var response = await _dio.post(
-        ApiRoute.changePassword,
+        ApiRoute.changePasswordApi,
         data: {
           'currentPassword': currentPassword,
           'newPassword': newPassword,

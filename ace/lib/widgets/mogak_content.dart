@@ -38,7 +38,7 @@ class MogakContent extends GetView<MogakController> {
                     padding: const EdgeInsets.symmetric(horizontal: 8.0),
                     child: Text(
                       data?.author?.nickname ?? "닉네임없음",
-                      style: AppTypograpy.button28Bold,
+                      style: AppTypography.button28Bold,
                     ),
                   ),
                   Tag(title: '수료생'),
@@ -60,7 +60,7 @@ class MogakContent extends GetView<MogakController> {
                 padding: const EdgeInsets.symmetric(vertical: 8),
                 child: RichText(
                   text: TextSpan(
-                      style: AppTypograpy.tapButtonCardTitle16,
+                      style: AppTypography.tapButtonCardTitle16,
                       children: [
                         TextSpan(
                             text: RegExp(r'\[.*?\]')
@@ -82,7 +82,7 @@ class MogakContent extends GetView<MogakController> {
               },
               child: Text(
                 data?.content ?? "",
-                style: AppTypograpy.button36Regular,
+                style: AppTypography.button36Regular,
                 maxLines: maxLength ?? 2,
                 overflow: TextOverflow.ellipsis,
               ),
@@ -93,7 +93,7 @@ class MogakContent extends GetView<MogakController> {
                   data?.createdAt == null
                       ? ""
                       : "${data!.createdAt.year}.${data!.createdAt.month.toString().padLeft(2, '0')}.${data!.createdAt.day.toString().padLeft(2, '0')}",
-                  style: AppTypograpy.cardBody.copyWith(
+                  style: AppTypography.cardBody.copyWith(
                     color: AppColors.neutral40,
                   )),
               title: Row(children: [
@@ -106,7 +106,7 @@ class MogakContent extends GetView<MogakController> {
                   width: 6,
                 ),
                 RichText(
-                  text: TextSpan(style: AppTypograpy.cardBody, children: [
+                  text: TextSpan(style: AppTypography.cardBody, children: [
                     TextSpan(
                         text: data?.appliedProfiles?.length.toString() ?? "0",
                         style: TextStyle(

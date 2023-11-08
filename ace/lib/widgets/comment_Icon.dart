@@ -41,7 +41,7 @@ class CommentIcon extends StatelessWidget {
         SvgPicture.asset(svgIcon),
         Text(
           count.toString(),
-          style: AppTypograpy.cardBody.copyWith(color: Colors.blue),
+          style: AppTypography.cardBody.copyWith(color: Colors.blue),
         )
       ],
     );
