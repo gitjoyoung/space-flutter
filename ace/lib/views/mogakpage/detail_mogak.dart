@@ -53,13 +53,13 @@ class MogakDetail extends GetView<MogakDetailController> {
       body: SingleChildScrollView(
         child: Column(
           children: [
-            TitleAppBarCustom(title: '모각코 상세보기' ),
+            TitleAppBarCustom(title: '모각코 상세보기'),
 
             // 내용
             Container(
               color: Colors.grey[100],
               child: Padding(
-                padding: EdgeInsets.only( bottom: 20),
+                padding: EdgeInsets.only(bottom: 20),
                 child: Column(
                   children: [
                     // 메인내용
@@ -101,7 +101,7 @@ class MogakDetail extends GetView<MogakDetailController> {
                                                   ?.appliedProfiles?[index]
                                                   .nickname ??
                                               "",
-                                          style: AppTypograpy.button28Bold,
+                                          style: AppTypography.button28Bold,
                                         ),
                                       ],
                                     ),
@@ -117,7 +117,7 @@ class MogakDetail extends GetView<MogakDetailController> {
                                 },
                                 child: Text(
                                   '참여하기',
-                                  style: AppTypograpy.tapButtonMedium18,
+                                  style: AppTypography.tapButtonMedium18,
                                 ),
                                 style: AppButton.xLarge,
                               ),
@@ -139,20 +139,22 @@ class MogakDetail extends GetView<MogakDetailController> {
                           child: Column(
                             children: [
                               Row(children: [
-                                SvgPicture.asset('assets/icons/icon20/speaker.svg'),
+                                SvgPicture.asset(
+                                    'assets/icons/icon20/speaker.svg'),
                                 SizedBox(
                                   width: 8,
                                 ),
                                 Text(
                                   '이어달린 톡',
-                                  style: AppTypograpy.tapButtonBold18,
+                                  style: AppTypography.tapButtonBold18,
                                 )
                               ]),
                               SizedBox(
                                 height: 16,
                               ),
                               Obx(() {
-                                final talks = controller?.mogakDetail?.value?.talks;
+                                final talks =
+                                    controller?.mogakDetail?.value?.talks;
                                 if (talks == null || talks.isEmpty) {
                                   print('댓글 데이타 없음');
                                   return Text(
@@ -165,25 +167,29 @@ class MogakDetail extends GetView<MogakDetailController> {
                                   itemCount: talks.length, // 데이터 리스트의 길이
                                   itemBuilder: (context, index) {
                                     final TalkModel? item = talks[index];
-                                              
+
                                     return Column(
-                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
                                       children: [
                                         Row(
                                           children: [
                                             AvatarCustom(
                                               avatarUrl: item!.author.avatar,
-                                              badge: item.author.badge?.shortName,
+                                              badge:
+                                                  item.author.badge?.shortName,
                                               height: 68,
                                               width: 70,
                                             ),
                                             Padding(
-                                              padding: const EdgeInsets.symmetric(
-                                                  horizontal: 8),
+                                              padding:
+                                                  const EdgeInsets.symmetric(
+                                                      horizontal: 8),
                                               child: Text(
                                                 item!.author
                                                     .nickname, // 데이터에서 이름을 가져와서 표시
-                                                style: AppTypograpy.button36Bold,
+                                                style:
+                                                    AppTypography.button36Bold,
                                               ),
                                             ),
                                             Tag(
@@ -203,19 +209,23 @@ class MogakDetail extends GetView<MogakDetailController> {
                                               padding: const EdgeInsets.all(16),
                                               child: Text(
                                                 item.content, // 데이터에서 댓글 내용을 가져와서 표시
-                                                style: AppTypograpy.button36Medium,
+                                                style: AppTypography
+                                                    .button36Medium,
                                               ),
                                             ),
                                           ),
                                         ),
                                         Row(
-                                          mainAxisAlignment: MainAxisAlignment.end,
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.end,
                                           children: [
                                             Text(
                                               item!.createdAt
                                                   .toString(), // 데이터에서 타임스탬프를 가져와서 표시
-                                              style: AppTypograpy.cardBody.copyWith(
-                                                  color: AppColors.neutral40),
+                                              style: AppTypography.cardBody
+                                                  .copyWith(
+                                                      color:
+                                                          AppColors.neutral40),
                                             ),
                                             SizedBox(
                                               width: 16,
@@ -225,8 +235,10 @@ class MogakDetail extends GetView<MogakDetailController> {
                                             Text(
                                               item.temperature
                                                   .toString(), // 데이터에서 좋아요 수를 가져와서 표시
-                                              style: AppTypograpy.cardBody.copyWith(
-                                                  color: AppColors.primary80),
+                                              style: AppTypography.cardBody
+                                                  .copyWith(
+                                                      color:
+                                                          AppColors.primary80),
                                             ),
                                           ],
                                         )

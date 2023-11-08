@@ -33,7 +33,7 @@ class FindPassword extends GetView<FindPasswordController> {
             size: 20,
           ),
           title: Text('비밀번호 찾기',
-              style: AppTypograpy.tapButtonBold18
+              style: AppTypography.tapButtonBold18
                   .copyWith(color: AppColors.neutral80))),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 8),
@@ -47,7 +47,7 @@ class FindPassword extends GetView<FindPasswordController> {
                   padding: const EdgeInsets.all(8.0),
                   child: Text(
                     '''기존에 가입하신 이메일을 입력하시면, \n 새로운 비밀번호를 보내드립니다.''',
-                    style: AppTypograpy.button36Regular,
+                    style: AppTypography.button36Regular,
                   ),
                 )),
                 SizedBox(
@@ -59,7 +59,7 @@ class FindPassword extends GetView<FindPasswordController> {
                   children: [
                     Text(
                       '이메일',
-                      style: AppTypograpy.button28Bold,
+                      style: AppTypography.button28Bold,
                     ),
                     TextFieldCustom(
                         validator: EmailValidator.isValid,
@@ -97,7 +97,7 @@ class FindPassword extends GetView<FindPasswordController> {
                         : null,
                     child: const Text(
                       '보내기',
-                      style: AppTypograpy.tapButtonMedium18,
+                      style: AppTypography.tapButtonMedium18,
                     ),
                     style: AppButton.xLarge,
                   );

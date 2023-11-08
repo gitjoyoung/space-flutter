@@ -10,7 +10,7 @@ class ViewRoute {
 
   static final String profilePage = "/profile";
 
-  static final String home = "/home";
+  static final String homePage = "/home";
 
   static final String mogakPage = "/mogak";
   static final String mogakDetailPage = "/mogakDetail";

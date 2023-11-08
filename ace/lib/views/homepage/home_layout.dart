@@ -11,7 +11,7 @@ import 'package:get/get.dart';
 void main() {
   runApp(GetMaterialApp(
     home: HomeLayOut(),
-    initialRoute: ViewRoute.home,
+    initialRoute: ViewRoute.homePage,
     getPages: AppPages.pages,
   ));
 }
@@ -38,9 +38,9 @@ class HomeLayOut extends GetView<HomeController> {
             showSelectedLabels: true,
             showUnselectedLabels: true,
             selectedLabelStyle:
-                AppTypograpy.cardBody.copyWith(color: AppColors.primary80),
+                AppTypography.cardBody.copyWith(color: AppColors.primary80),
             unselectedLabelStyle:
-                AppTypograpy.cardBody.copyWith(color: AppColors.neutral60),
+                AppTypography.cardBody.copyWith(color: AppColors.neutral60),
             selectedItemColor: AppColors.primaryColor,
             unselectedItemColor: AppColors.secondaryColor,
             items: const [

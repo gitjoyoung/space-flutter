@@ -63,7 +63,7 @@ class Profile extends GetView<ProfileController> {
                       ),
                       Text(
                         '*표시는 필수입력항목 입니다.',
-                        style: AppTypograpy.cardBody.copyWith(
+                        style: AppTypography.cardBody.copyWith(
                           fontSize: 8,
                           color: AppColors.systemWarnin,
                         ),
@@ -76,7 +76,7 @@ class Profile extends GetView<ProfileController> {
                         children: [
                           Text(
                             '닉네임',
-                            style: AppTypograpy.button28Bold,
+                            style: AppTypography.button28Bold,
                           ),
                           TextFieldCustom(
                             validator: (p0) {
@@ -88,7 +88,7 @@ class Profile extends GetView<ProfileController> {
                           ),
                           const Text(
                             '활동 유형',
-                            style: AppTypograpy.button28Bold,
+                            style: AppTypography.button28Bold,
                           ),
                           Row(
                             mainAxisSize: MainAxisSize.min,
@@ -98,7 +98,7 @@ class Profile extends GetView<ProfileController> {
                                   () => RadioListTile(
                                     contentPadding: const EdgeInsets.all(0),
                                     title: Text('개발자',
-                                        style: AppTypograpy.button36Regular),
+                                        style: AppTypography.button36Regular),
                                     value: '개발자',
                                     groupValue: profileController
                                         .positionMap.entries
@@ -122,7 +122,7 @@ class Profile extends GetView<ProfileController> {
                                   () => RadioListTile(
                                     contentPadding: const EdgeInsets.all(0),
                                     title: Text('디자이너',
-                                        style: AppTypograpy.button36Regular),
+                                        style: AppTypography.button36Regular),
                                     value: '디자이너',
                                     groupValue: profileController
                                         .positionMap.entries
@@ -146,7 +146,7 @@ class Profile extends GetView<ProfileController> {
                                   () => RadioListTile(
                                     contentPadding: const EdgeInsets.all(0),
                                     title: Text('헤드헌터',
-                                        style: AppTypograpy.button36Regular),
+                                        style: AppTypography.button36Regular),
                                     value: '헤드헌터',
                                     groupValue: profileController
                                         .positionMap.entries
@@ -169,7 +169,7 @@ class Profile extends GetView<ProfileController> {
                           ),
                           const Text(
                             '링크 추가',
-                            style: AppTypograpy.button28Bold,
+                            style: AppTypography.button28Bold,
                           ),
                           TextFieldCustom(
                             validator: (value) {
@@ -224,7 +224,7 @@ class Profile extends GetView<ProfileController> {
                               onPressed: () {},
                               child: Text(
                                 '초기화',
-                                style: AppTypograpy.tapButtonSubtitle16
+                                style: AppTypography.tapButtonSubtitle16
                                     .copyWith(color: AppColors.primary60),
                               ),
                             ),
@@ -238,11 +238,11 @@ class Profile extends GetView<ProfileController> {
                               onPressed: () {
                                 // updateProfile 함수를 호출합니다.
                                 profileController.updateProfile();
-                                Get.toNamed(ViewRoute.home);
+                                Get.toNamed(ViewRoute.homePage);
                               },
                               child: Text(
                                 '저장하기',
-                                style: AppTypograpy.tapButtonSubtitle16,
+                                style: AppTypography.tapButtonSubtitle16,
                               ),
                             ),
                           )
@@ -284,7 +284,7 @@ class Profile extends GetView<ProfileController> {
                         children: [
                           Text(
                             '아바타 수정하기',
-                            style: AppTypograpy.cardBody
+                            style: AppTypography.cardBody
                                 .copyWith(color: AppColors.primaryColor),
                           ),
                           Container(

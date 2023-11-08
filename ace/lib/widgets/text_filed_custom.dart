@@ -54,7 +54,7 @@ class _TextFieldCustomState extends State<TextFieldCustom> {
             : null,
         hintText: widget.hintText,
         hintStyle:
-            AppTypograpy.button36Medium.copyWith(color: AppColors.neutral50),
+            AppTypography.button36Medium.copyWith(color: AppColors.neutral50),
         filled: true,
         fillColor: AppColors.strokeLine05,
         focusedBorder: OutlineInputBorder(
@@ -72,7 +72,7 @@ class _TextFieldCustomState extends State<TextFieldCustom> {
           borderRadius: BorderRadius.circular(12),
         ),
         errorText: isError ? widget.errorText : null,
-        errorStyle: AppTypograpy.cardBody.copyWith(height: 0.3),
+        errorStyle: AppTypography.cardBody.copyWith(height: 0.3),
         errorBorder: OutlineInputBorder(
           borderSide: const BorderSide(color: Colors.red, width: 2.0),
           borderRadius: BorderRadius.circular(12),

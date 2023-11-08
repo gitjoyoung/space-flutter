@@ -33,7 +33,7 @@ void main() {
             name: ViewRoute.findPasswordPage, page: () => const FindPassword()),
         GetPage(
             name: ViewRoute.registrationPage, page: () => RegistrationView()),
-        GetPage(name: ViewRoute.home, page: () => HomeLayOut()), // 이 부분을 추가
+        GetPage(name: ViewRoute.homePage, page: () => HomeLayOut()), // 이 부분을 추가
         // 이 부분을 추가
         // 다른 라우트들
       ],
@@ -90,7 +90,7 @@ class LoginView extends GetView<LoginController> {
                       child: RichText(
                         textAlign: TextAlign.center,
                         text: TextSpan(
-                          style: AppTypograpy.button36Medium
+                          style: AppTypography.button36Medium
                               .copyWith(color: AppColors.neutral50),
                           // style: const TextStyle(color: AppColors.neutral60),
                           children: [
@@ -134,7 +134,7 @@ class LoginView extends GetView<LoginController> {
                                 // Check the token and navigate or show an error accordingly
                                 if (token != null && token.isNotEmpty) {
                                   print('로그인 후 토큰 : $token');
-                                  Get.toNamed(ViewRoute.home);
+                                  Get.toNamed(ViewRoute.homePage);
                                 } else {
                                   // No need for the try-catch if you are sure no exceptions will be thrown
                                   print('로그인에 실패했습니다.');
@@ -152,7 +152,7 @@ class LoginView extends GetView<LoginController> {
                             : null,
                         child: const Text(
                           '로그인',
-                          style: AppTypograpy.tapButtonMedium18,
+                          style: AppTypography.tapButtonMedium18,
                         ),
                         style: AppButton.xLarge,
                       );

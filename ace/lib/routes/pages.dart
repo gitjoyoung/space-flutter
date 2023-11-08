@@ -71,7 +71,7 @@ class AppPages {
 
     // 홈페이지
     GetPage(
-      name: ViewRoute.home,
+      name: ViewRoute.homePage,
       page: () => const HomeLayOut(),
       binding: BindingsBuilder(() {
         Get.put(MogakController());

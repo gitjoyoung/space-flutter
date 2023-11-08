@@ -45,12 +45,13 @@ void ModalCostom(
             SizedBox(height: 7),
             Text(
               title,
-              style: AppTypograpy.tapButtonNavgation16,
+              style: AppTypography.tapButtonNavgation16,
             ),
             SizedBox(height: 7),
             Text(
               content,
-              style: AppTypograpy.cardBody.copyWith(color: AppColors.neutral40),
+              style:
+                  AppTypography.cardBody.copyWith(color: AppColors.neutral40),
             ),
             SizedBox(height: 17),
             ElevatedButton(
@@ -58,7 +59,7 @@ void ModalCostom(
               child: Padding(
                 padding: EdgeInsets.symmetric(
                     vertical: 10, horizontal: 30), // 세로 10px, 가로 30px 패딩
-                child: Text(buttonText, style: AppTypograpy.button36Regular),
+                child: Text(buttonText, style: AppTypography.button36Regular),
               ),
               style: ElevatedButton.styleFrom(
                 minimumSize: Size(165, 32),

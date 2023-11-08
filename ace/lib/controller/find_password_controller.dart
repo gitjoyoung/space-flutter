@@ -38,7 +38,7 @@ class FindPasswordController extends GetxController {
       return "이메일 양식에 맞지 않습니다";
     }
     var res = await dio.post(
-      ApiRoute.forgetPassword,
+      ApiRoute.forgetPasswordApi,
       data: {
         'email': email.text,
       },

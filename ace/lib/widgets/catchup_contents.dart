@@ -35,7 +35,7 @@ class CatchupContent extends GetView<MogakDetailController> {
                     padding: const EdgeInsets.symmetric(horizontal: 8.0),
                     child: Text(
                       data?.author?.nickname ?? "",
-                      style: AppTypograpy.button28Bold,
+                      style: AppTypography.button28Bold,
                     ),
                   ),
                   Tag(title: '수료생'),
@@ -54,7 +54,7 @@ class CatchupContent extends GetView<MogakDetailController> {
                 padding: const EdgeInsets.symmetric(vertical: 8),
                 child: RichText(
                   text: TextSpan(
-                      style: AppTypograpy.tapButtonCardTitle16,
+                      style: AppTypography.tapButtonCardTitle16,
                       children: [
                         TextSpan(
                             text: RegExp(r'\[.*?\]')
@@ -76,7 +76,7 @@ class CatchupContent extends GetView<MogakDetailController> {
               },
               child: Text(
                 data?.content ?? "",
-                style: AppTypograpy.button36Regular,
+                style: AppTypography.button36Regular,
                 maxLines: maxLength ?? 2,
                 overflow: TextOverflow.ellipsis,
               ),
@@ -87,7 +87,7 @@ class CatchupContent extends GetView<MogakDetailController> {
                   data?.createdAt == null
                       ? ""
                       : "${data!.createdAt.year}.${data!.createdAt.month.toString().padLeft(2, '0')}.${data!.createdAt.day.toString().padLeft(2, '0')}",
-                  style: AppTypograpy.cardBody.copyWith(
+                  style: AppTypography.cardBody.copyWith(
                     color: AppColors.neutral40,
                   )),
               title: Row(children: [

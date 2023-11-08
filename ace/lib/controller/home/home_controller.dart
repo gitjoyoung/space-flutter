@@ -17,7 +17,7 @@ class HomeController extends GetxController {
 
   void goToHome() {
     tabIndex(0);
-    Get.offAllNamed(ViewRoute.home);
+    Get.offAllNamed(ViewRoute.homePage);
   }
 
   Widget get currentPage {

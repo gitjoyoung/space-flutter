@@ -39,7 +39,7 @@ class AuthController extends GetxController {
     // 'email': "sniperfactory@gmail.com",
     // 'password': "MTIzMTIzMTIz",
     var res = await dio.post(
-      ApiRoute.login,
+      ApiRoute.loginAPi,
       data: {
         'email': email,
         'password': encodedPassword,

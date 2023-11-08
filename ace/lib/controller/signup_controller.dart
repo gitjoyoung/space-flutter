@@ -86,7 +86,7 @@ class SignUpController extends GetxController {
 
     try {
       var response = await Dio().post(
-        ApiRoute.signup,
+        ApiRoute.signupAPi,
         data: {
           'email': emailInput,
           'password': encodedPassword,

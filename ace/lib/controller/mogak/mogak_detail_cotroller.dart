@@ -50,7 +50,7 @@ class MogakDetailController extends GetxController {
 
     try {
       print('통신 실행');
-      final response = await dio.get(ApiRoute.mogakApi + mogakDetail.value!.id ,
+      final response = await dio.get(ApiRoute.mogakApi + mogakDetail.value!.id,
           options: Options(headers: {"Authorization": token}));
 
       if (response.statusCode == 200) {
@@ -133,7 +133,7 @@ class MogakDetailController extends GetxController {
                     bottom: 16, left: 8, right: 8, top: 16),
                 child: Text(
                   "그룹에 참여하시겠습니까?",
-                  style: AppTypograpy.tapButtonCardTitle16,
+                  style: AppTypography.tapButtonCardTitle16,
                 ),
               ),
               Row(
@@ -150,7 +150,7 @@ class MogakDetailController extends GetxController {
                       },
                       child: Text(
                         '취소하기',
-                        style: AppTypograpy.button36Regular
+                        style: AppTypography.button36Regular
                             .copyWith(color: AppColors.primaryColor),
                       ),
                     ),
@@ -167,7 +167,7 @@ class MogakDetailController extends GetxController {
                       },
                       child: Text(
                         '참여하기',
-                        style: AppTypograpy.button36Regular
+                        style: AppTypography.button36Regular
                             .copyWith(color: Colors.white),
                       ),
                     ),

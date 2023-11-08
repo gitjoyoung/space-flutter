@@ -44,7 +44,7 @@ class SignUpSuccess extends GetView {
                       Get.toNamed(ViewRoute.profilePage);
                     },
                     child:
-                        Text('프로필 작성하기', style: AppTypograpy.button36Regular),
+                        Text('프로필 작성하기', style: AppTypography.button36Regular),
                     style: AppButton.xLarge,
                   )
                 ],
