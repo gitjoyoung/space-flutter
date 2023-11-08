@@ -159,7 +159,7 @@ class RegistrationView extends GetView<SignUpController> {
                       print('회원가입 버튼 클릭됨');
                       await controller.signup();
 
-                      Get.toNamed(ViewRoute.signupSuccess);
+                      Get.toNamed(ViewRoute.signupSuccessPage);
 
                       // 회원가입 성공 후의 처리는 signup() 함수 내에서 이루어지므로,
                       // 여기서는 추가적인 처리가 필요하지 않습니다.
