@@ -27,7 +27,7 @@ class AvatarCustom extends StatelessWidget {
       child: Stack(
         alignment: Alignment.center,
         children: [
-          if (avatarUrl != null)
+          if (avatarUrl != null && avatarUrl!.contains("https"))
             Image.network(
               avatarUrl!,
               width: actualWidth * 0.8,
@@ -49,10 +49,10 @@ class AvatarCustom extends StatelessWidget {
                 color: Colors.blue, // 파란색 배경
                 borderRadius: BorderRadius.circular(5.0), // 라운드 값 설정
               ),
-              height: actualHeight * 0.25,
+              height: actualHeight * 0.27,
               width: actualWidth * 0.8,
               child: Center(
-                child: Text("개발자/1기",
+                child: Text(badge ?? "개발자/1기",
                     style: TextStyle(
                         fontSize: actualHeight * 0.15, color: Colors.white)),
               ),

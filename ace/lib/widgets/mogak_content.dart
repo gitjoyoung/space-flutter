@@ -1,8 +1,9 @@
-import 'package:ace/controller/mogak/mogak_detail_cotroller.dart';
+import 'package:ace/controller/mogak/mogak_cotroller.dart';
 import 'package:ace/models/mogak/mogak_model.dart';
 import 'package:ace/routes/view_route.dart';
 import 'package:ace/utils/colors.dart';
 import 'package:ace/utils/typography.dart';
+import 'package:ace/views/mogakpage/test.dart';
 import 'package:ace/widgets/avatar_custom.dart';
 import 'package:ace/widgets/card_tag.dart';
 import 'package:ace/widgets/tag_row.dart';
@@ -10,7 +11,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
-class MogakContent extends GetView<MogakDetailController> {
+class MogakContent extends GetView<MogakController> {
   const MogakContent({this.data, this.maxLength, super.key});
 
   final AllMogakModel? data;
@@ -28,13 +29,15 @@ class MogakContent extends GetView<MogakDetailController> {
               title: Row(
                 children: [
                   AvatarCustom(
+                    badge: data?.author?.badge?.shortName,
+                    avatarUrl: data?.author?.avatar,
                     height: 48,
                     width: 43,
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 8.0),
                     child: Text(
-                      data?.author?.nickname ?? "",
+                      data?.author?.nickname ?? "닉네임없음",
                       style: AppTypograpy.button28Bold,
                     ),
                   ),
@@ -42,12 +45,15 @@ class MogakContent extends GetView<MogakDetailController> {
                 ],
               ),
               trailing: InkWell(
-                  onTap: () {},
+                  onTap: () {
+                    print('좋아요 클릭');
+                    controller.LikeMogak(data?.id ?? "");
+                  },
                   child: SvgPicture.asset('assets/icons/icon20/like.svg')),
             ),
             InkWell(
               onTap: () {
-                Get.toNamed(ViewRoute.mogakDetail, arguments: data?.id);
+                Get.toNamed(ViewRoute.mogakDetailPage, arguments: data);
                 print('${data?.id}  제목 클릭');
               },
               child: Padding(
@@ -71,7 +77,7 @@ class MogakContent extends GetView<MogakDetailController> {
             ),
             InkWell(
               onTap: () {
-                Get.toNamed(ViewRoute.mogakDetail, arguments: data?.id);
+                Get.toNamed(ViewRoute.mogakDetailPage, arguments: data);
                 print('${data?.id}   내용 클릭');
               },
               child: Text(
@@ -119,10 +125,13 @@ class MogakContent extends GetView<MogakDetailController> {
                 ),
               ]),
             ),
-            TagsRow(
-              tagsString: (data?.hashtag?.trim().isEmpty ?? true)
-                  ? "#태그없음"
-                  : data!.hashtag!,
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: TagsRow(
+                tagsString: (data?.hashtag?.trim().isEmpty ?? true)
+                    ? "#태그없음"
+                    : data!.hashtag!,
+              ),
             ),
           ]),
     );

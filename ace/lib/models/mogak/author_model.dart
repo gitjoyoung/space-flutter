@@ -7,12 +7,13 @@ class Author {
   final String? avatar; // 아바타 이미지 URL
   final String nickname;
   final Badge? badge;
-
+  final String? role;
   Author(
       {required this.id,
       required this.avatar,
       required this.nickname,
-      required this.badge});
+      required this.badge,
+      required this.role});
 
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
@@ -31,6 +32,7 @@ class Author {
       badge: map['badge'] != null
           ? Badge.fromMap(map['badge'] as Map<String, dynamic>)
           : null,
+      role: map['role'] != null ? map['role'] as String : null,
     );
   }
 
