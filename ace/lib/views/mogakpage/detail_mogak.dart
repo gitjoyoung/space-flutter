@@ -134,106 +134,109 @@ class MogakDetail extends GetView<MogakDetailController> {
                       elevation: 0,
                       child: Padding(
                         padding: const EdgeInsets.symmetric(vertical: 20),
-                        child: Column(
-                          children: [
-                            Row(children: [
-                              SvgPicture.asset('assets/icons/icon20/speaker.svg'),
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 10),
+                          child: Column(
+                            children: [
+                              Row(children: [
+                                SvgPicture.asset('assets/icons/icon20/speaker.svg'),
+                                SizedBox(
+                                  width: 8,
+                                ),
+                                Text(
+                                  '이어달린 톡',
+                                  style: AppTypograpy.tapButtonBold18,
+                                )
+                              ]),
                               SizedBox(
-                                width: 8,
+                                height: 16,
                               ),
-                              Text(
-                                '이어달린 톡',
-                                style: AppTypograpy.tapButtonBold18,
-                              )
-                            ]),
-                            SizedBox(
-                              height: 16,
-                            ),
-                            Obx(() {
-                              final talks = controller?.mogakDetail?.value?.talks;
-                              if (talks == null || talks.isEmpty) {
-                                print('댓글 데이타 없음');
-                                return Text(
-                                    '데이타를 불러오는 중이거나 댓글이 없습니다'); // 혹은 다른 적절한 위젯을 반환하여 렌더링을 하지 않도록 처리
-                              }
-                              print('댓글 데이타 있음' + talks.toString());
-                              return ListView.builder(
-                                shrinkWrap: true,
-                                physics: NeverScrollableScrollPhysics(),
-                                itemCount: talks.length, // 데이터 리스트의 길이
-                                itemBuilder: (context, index) {
-                                  final TalkModel? item = talks[index];
-                      
-                                  return Column(
-                                    crossAxisAlignment: CrossAxisAlignment.start,
-                                    children: [
-                                      Row(
-                                        children: [
-                                          AvatarCustom(
-                                            avatarUrl: item!.author.avatar,
-                                            badge: item.author.badge?.shortName,
-                                            height: 68,
-                                            width: 70,
-                                          ),
-                                          Padding(
-                                            padding: const EdgeInsets.symmetric(
-                                                horizontal: 8),
-                                            child: Text(
-                                              item!.author
-                                                  .nickname, // 데이터에서 이름을 가져와서 표시
-                                              style: AppTypograpy.button36Bold,
+                              Obx(() {
+                                final talks = controller?.mogakDetail?.value?.talks;
+                                if (talks == null || talks.isEmpty) {
+                                  print('댓글 데이타 없음');
+                                  return Text(
+                                      '데이타를 불러오는 중이거나 댓글이 없습니다'); // 혹은 다른 적절한 위젯을 반환하여 렌더링을 하지 않도록 처리
+                                }
+                                print('댓글 데이타 있음' + talks.toString());
+                                return ListView.builder(
+                                  shrinkWrap: true,
+                                  physics: NeverScrollableScrollPhysics(),
+                                  itemCount: talks.length, // 데이터 리스트의 길이
+                                  itemBuilder: (context, index) {
+                                    final TalkModel? item = talks[index];
+                                              
+                                    return Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Row(
+                                          children: [
+                                            AvatarCustom(
+                                              avatarUrl: item!.author.avatar,
+                                              badge: item.author.badge?.shortName,
+                                              height: 68,
+                                              width: 70,
                                             ),
-                                          ),
-                                          Tag(
-                                              title: item.author.role
-                                                  .toString()), // 데이터에서 태그를 가져와서 표시
-                                        ],
-                                      ),
-                                      SizedBox(
-                                        height: 10,
-                                      ),
-                                      SizedBox(
-                                        width: double.infinity,
-                                        child: Card(
-                                          elevation: 0,
-                                          color: AppColors.strokeLine05,
-                                          child: Padding(
-                                            padding: const EdgeInsets.all(16),
-                                            child: Text(
-                                              item.content, // 데이터에서 댓글 내용을 가져와서 표시
-                                              style: AppTypograpy.button36Medium,
+                                            Padding(
+                                              padding: const EdgeInsets.symmetric(
+                                                  horizontal: 8),
+                                              child: Text(
+                                                item!.author
+                                                    .nickname, // 데이터에서 이름을 가져와서 표시
+                                                style: AppTypograpy.button36Bold,
+                                              ),
+                                            ),
+                                            Tag(
+                                                title: item.author.role
+                                                    .toString()), // 데이터에서 태그를 가져와서 표시
+                                          ],
+                                        ),
+                                        SizedBox(
+                                          height: 10,
+                                        ),
+                                        SizedBox(
+                                          width: double.infinity,
+                                          child: Card(
+                                            elevation: 0,
+                                            color: AppColors.strokeLine05,
+                                            child: Padding(
+                                              padding: const EdgeInsets.all(16),
+                                              child: Text(
+                                                item.content, // 데이터에서 댓글 내용을 가져와서 표시
+                                                style: AppTypograpy.button36Medium,
+                                              ),
                                             ),
                                           ),
                                         ),
-                                      ),
-                                      Row(
-                                        mainAxisAlignment: MainAxisAlignment.end,
-                                        children: [
-                                          Text(
-                                            item!.createdAt
-                                                .toString(), // 데이터에서 타임스탬프를 가져와서 표시
-                                            style: AppTypograpy.cardBody.copyWith(
-                                                color: AppColors.neutral40),
-                                          ),
-                                          SizedBox(
-                                            width: 16,
-                                          ),
-                                          SvgPicture.asset(
-                                              'assets/icons/icon20/like.svg'),
-                                          Text(
-                                            item.temperature
-                                                .toString(), // 데이터에서 좋아요 수를 가져와서 표시
-                                            style: AppTypograpy.cardBody.copyWith(
-                                                color: AppColors.primary80),
-                                          ),
-                                        ],
-                                      )
-                                    ],
-                                  );
-                                },
-                              );
-                            }),
-                          ],
+                                        Row(
+                                          mainAxisAlignment: MainAxisAlignment.end,
+                                          children: [
+                                            Text(
+                                              item!.createdAt
+                                                  .toString(), // 데이터에서 타임스탬프를 가져와서 표시
+                                              style: AppTypograpy.cardBody.copyWith(
+                                                  color: AppColors.neutral40),
+                                            ),
+                                            SizedBox(
+                                              width: 16,
+                                            ),
+                                            SvgPicture.asset(
+                                                'assets/icons/icon20/like.svg'),
+                                            Text(
+                                              item.temperature
+                                                  .toString(), // 데이터에서 좋아요 수를 가져와서 표시
+                                              style: AppTypograpy.cardBody.copyWith(
+                                                  color: AppColors.primary80),
+                                            ),
+                                          ],
+                                        )
+                                      ],
+                                    );
+                                  },
+                                );
+                              }),
+                            ],
+                          ),
                         ),
                       ),
                     ),

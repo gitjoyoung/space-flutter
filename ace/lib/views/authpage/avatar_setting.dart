@@ -1,3 +1,4 @@
+import 'package:ace/controller/auth_controller.dart';
 import 'package:ace/controller/avatar_controller.dart';
 import 'package:ace/utils/button.dart';
 import 'package:ace/utils/colors.dart';
@@ -9,6 +10,7 @@ import 'package:screenshot/screenshot.dart';
 
 void main() {
   Get.put(AvatarController());
+  Get.put(AuthController());
   runApp(GetMaterialApp(home: AvatarCustomizer()));
 }
 

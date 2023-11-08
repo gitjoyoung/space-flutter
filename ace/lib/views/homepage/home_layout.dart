@@ -9,7 +9,6 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
 void main() {
-  Get.put(HomeController());
   runApp(GetMaterialApp(
     home: HomeLayOut(),
     initialRoute: ViewRoute.home,
@@ -22,10 +21,11 @@ class HomeLayOut extends GetView<HomeController> {
 
   @override
   Widget build(BuildContext context) {
+    Get.put(HomeController());
     return Scaffold(
       appBar: SpaceAppBar(),
       bottomNavigationBar: Container(
-        height: 60,
+        height: 80,
         child: Obx(
           () => BottomNavigationBar(
             type: BottomNavigationBarType.fixed,

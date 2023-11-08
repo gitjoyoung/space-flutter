@@ -1,3 +1,4 @@
+import 'package:ace/controller/auth_controller.dart';
 import 'package:ace/routes/pages.dart';
 import 'package:ace/routes/view_route.dart';
 import 'package:flutter/material.dart';
@@ -15,9 +16,9 @@ class MyApp extends StatelessWidget {
     return GetMaterialApp(
       initialRoute: ViewRoute.splashPage,
       getPages: AppPages.pages,
-      // initialBinding: BindingsBuilder(() {
-      //   Get.put(AuthController());
-      // }),
+      initialBinding: BindingsBuilder(() {
+        Get.put(AuthController());
+      }),
     );
   }
 }

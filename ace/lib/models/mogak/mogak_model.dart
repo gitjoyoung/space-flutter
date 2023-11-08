@@ -118,7 +118,7 @@ void main() async {
             .map((jsonItem) => AllMogakModel.fromJson(json.encode(jsonItem)))
             .toList();
         for (final mogak in mogakList) {
-          print(mogak.toMap());
+          print( mogak.toMap());
         }
       } else {
         // 요청이 실패하면 예외를 throw합니다.
