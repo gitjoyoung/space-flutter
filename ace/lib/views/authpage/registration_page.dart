@@ -1,6 +1,8 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
+import 'package:ace/controller/auth_controller.dart';
 import 'package:ace/controller/signup_controller.dart';
+import 'package:ace/routes/pages.dart';
 import 'package:ace/routes/view_route.dart';
 import 'package:ace/utils/button.dart';
 import 'package:ace/utils/colors.dart';
@@ -14,15 +16,7 @@ import 'package:get/get.dart';
 
 void main() {
   runApp(
-    GetMaterialApp(
-      home: RegistrationView(),
-      getPages: [
-        GetPage(
-            name: ViewRoute.registrationPage, page: () => RegistrationView()),
-        GetPage(name: ViewRoute.loginPage, page: () => const LoginView()),
-        GetPage(name: ViewRoute.signupSuccess, page: () => SignUpSuccess()),
-      ],
-    ),
+    GetMaterialApp(home: RegistrationView(), getPages: AppPages.pages),
   );
 }
 
@@ -31,8 +25,10 @@ class RegistrationView extends GetView<SignUpController> {
 
   @override
   Widget build(BuildContext context) {
-    Get.put(SignUpController());
+    // Get.put(SignUpController());
+    Get.put(AuthController());
     Get.lazyPut(() => SignUpController());
+
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(kToolbarHeight),
@@ -162,14 +158,12 @@ class RegistrationView extends GetView<SignUpController> {
                   : () async {
                       print('회원가입 버튼 클릭됨');
                       await controller.signup();
-                      if (!controller.isLoading.value) {
-                        if (controller.token.value.isNotEmpty) {
-                          print('회원가입성공으로 이동');
-                          Get.toNamed(ViewRoute.signupSuccess);
-                        } else {
-                          print('회원가입 실패');
-                        }
-                      }
+
+                      Get.toNamed(ViewRoute.signupSuccess);
+
+                      // 회원가입 성공 후의 처리는 signup() 함수 내에서 이루어지므로,
+                      // 여기서는 추가적인 처리가 필요하지 않습니다.
+                      // 성공, 실패, 에러 등의 처리는 모두 signup() 함수 내에서 처리됩니다.
                     },
               child: Obx(() => Text(
                     controller.isLoading.value ? '회원가입하기' : '회원가입',
