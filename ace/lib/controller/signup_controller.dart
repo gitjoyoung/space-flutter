@@ -106,7 +106,7 @@ class SignUpController extends GetxController {
           print('qwe');
           print(isLoading.value);
           authController.saveToken(response.data['data']);
-          print(ViewRoute.signupSuccess);
+          print(ViewRoute.signupSuccessPage);
           print('Current context is: ${Get.context}');
           Get.to(() => const SignUpSuccess());
         } else {
