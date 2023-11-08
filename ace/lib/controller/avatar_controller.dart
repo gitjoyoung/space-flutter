@@ -145,17 +145,16 @@ class AvatarController extends GetxController {
       var response = await dio.post(
         'https://dev.sniperfactory.com/api/upload',
         options: Options(headers: {
-          'Authorization':
-              'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImNsbzNrNWRtaDAwMDBtcjA4aG50aWFsYTMiLCJlbWFpbCI6InNuaXBlcmZhY3RvcnlAZ21haWwuY29tIiwidmVyaWZpZWRFbWFpbCI6ZmFsc2UsInZlcmlmaWVkUGhvbmUiOmZhbHNlLCJuYW1lIjoi7YWM7Iqk7Yq47JWE7J2065SUMjIiLCJwcm9maWxlIjp7ImlkIjoiY2xvM2s3anh2MDAwMW1yMDh0czg4YjF3NiIsIm5pY2tuYW1lIjoiVGVzdDIyIiwiYXZhdGFyIjpudWxsLCJiaW8iOiLthYzsiqTtirjsnoTri7kyMiIsInBvc2l0aW9uIjoiREVWRUxPUEVSIiwicm9sZSI6Ik5FV0JJRSIsImJhZGdlIjpudWxsfSwiaWF0IjoxNjk4MTA1ODY5fQ.pcKQAvtiFgjt3MgePBn42aSkodF4-MUbIdjGVKBiom0.SG7fVD0p1BThPZM6q3yOqvvIi_-XbGQiC8G2IVe_Tls'
+          'Authorization': authToken, // set content-length
         }),
         data: formData,
       );
 
       if (response.statusCode == 200) {
         var imagedata = response.data['data'];
-        var avatarUrl = imagedata[0]['url'];
-
-        print(avatarUrl);
+        var avatarImageUrl = imagedata[0]['url'];
+        avatarUrl.value = avatarImageUrl;
+        print(avatarUrl.value);
       } else {
         print('이미지 업로드 실패: ${response.statusCode}');
       }
