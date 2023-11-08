@@ -103,6 +103,7 @@ class SignUpController extends GetxController {
         'phone': phoneInput,
       },
     );
+
     print(res.data);
 
     // 응답 처리

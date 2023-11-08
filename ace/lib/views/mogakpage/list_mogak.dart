@@ -19,7 +19,7 @@ class MogakList extends GetView<MogakController> {
     final isTopMogak = title == '핫한 모각코';
 
     final listToDisplay =
-        isTopMogak ? controller.allMogakModels: controller.topMogakModels  ;
+        isTopMogak ? controller.topMogakModels : controller.allMogakModels;
     return Scaffold(
       appBar: SpaceAppBar(),
       body: SingleChildScrollView(
@@ -50,7 +50,9 @@ class MogakList extends GetView<MogakController> {
                 ],
               ),
             ),
-            SizedBox(height: 16,),
+            SizedBox(
+              height: 16,
+            ),
             Obx(() {
               // allMogakModels 리스트를 이용하여 ListView.builder로 목록을 구성합니다.
               return ListView.builder(
@@ -71,7 +73,10 @@ class MogakList extends GetView<MogakController> {
                             borderRadius:
                                 BorderRadius.circular(10), // 윤곽선 둥글기 설정
                           ),
-                          child: MogakContent(data: item,maxLength: 5,)),
+                          child: MogakContent(
+                            data: item,
+                            maxLength: 5,
+                          )),
                       Padding(
                         padding: const EdgeInsets.only(top: 8, bottom: 16),
                         child: Row(

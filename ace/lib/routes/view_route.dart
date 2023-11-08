@@ -12,10 +12,14 @@ class ViewRoute {
 
   static final String home = "/home";
 
-  static final String mogak = "/mogak";
-  static final String mogakDetail = "/mogakDetail";
-  static final String mogakCreate = "/mogakCreate";
-  static final String mogakAllList = "/mogakAllList";
-  static final String mogakTopList = "/mogakTopList";
+  static final String mogakPage = "/mogak";
+  static final String mogakDetailPage = "/mogakDetail";
+  static final String mogakCreatePage = "/mogakCreate";
+  static final String mogakAllListPage = "/mogakAllList";
+  static final String mogakTopListPage = "/mogakTopList";
 
 }
+
+
+// 작명 규칙 해당 페이지명 + 기능명 + Page
+// ex) 로그인 페이지 : loginPage 
