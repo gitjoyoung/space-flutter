@@ -26,7 +26,7 @@ class RegistrationView extends GetView<SignUpController> {
   @override
   Widget build(BuildContext context) {
     // Get.put(SignUpController());
-    Get.put(AuthController());
+    // Get.put(AuthController());
     Get.lazyPut(() => SignUpController());
 
     return Scaffold(
@@ -158,8 +158,6 @@ class RegistrationView extends GetView<SignUpController> {
                   : () async {
                       print('회원가입 버튼 클릭됨');
                       await controller.signup();
-
-                      Get.toNamed(ViewRoute.signupSuccessPage);
 
                       // 회원가입 성공 후의 처리는 signup() 함수 내에서 이루어지므로,
                       // 여기서는 추가적인 처리가 필요하지 않습니다.
