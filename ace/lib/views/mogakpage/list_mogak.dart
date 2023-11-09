@@ -5,7 +5,7 @@ import 'package:ace/utils/typography.dart';
 import 'package:ace/widgets/comment_Icon.dart';
 import 'package:ace/widgets/space_appbar.dart';
 import 'package:ace/widgets/title_appbar_custom.dart';
-import 'package:ace/widgets/mogak_content.dart';
+import 'package:ace/widgets/mogak/mogak_content.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -30,7 +30,9 @@ class MogakList extends GetView<MogakController> {
               title: title,
             ),
             InkWell(
-              onTap: () {},
+              onTap: () {
+                controller.sortMogaksByDate();
+              },
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.end,
                 children: [
@@ -54,24 +56,20 @@ class MogakList extends GetView<MogakController> {
               height: 16,
             ),
             Obx(() {
-              // allMogakModels 리스트를 이용하여 ListView.builder로 목록을 구성합니다.
               return ListView.builder(
                 physics: NeverScrollableScrollPhysics(),
-                shrinkWrap:
-                    true, // SingleChildScrollView 내부에서 ListView를 사용하려면 이를 추가합니다.
+                shrinkWrap: true,
                 itemCount: listToDisplay.length,
                 itemBuilder: (context, index) {
                   final item = listToDisplay[index];
                   return Column(
                     children: [
                       Card(
-                          elevation: 0, // 그림자 제거
+                          elevation: 0,
                           shape: RoundedRectangleBorder(
                             side: BorderSide(
-                                color: AppColors.strokeLine10,
-                                width: 1.0), // 윤곽선 색과 두께 설정
-                            borderRadius:
-                                BorderRadius.circular(10), // 윤곽선 둥글기 설정
+                                color: AppColors.strokeLine10, width: 1.0),
+                            borderRadius: BorderRadius.circular(10),
                           ),
                           child: MogakContent(
                             data: item,
@@ -83,8 +81,8 @@ class MogakList extends GetView<MogakController> {
                           mainAxisAlignment: MainAxisAlignment.end,
                           children: [
                             CommentIcon(
-                              svgIcon: 'assets/icons/icon20/plus.svg',
-                              count: item.appliedProfiles?.length ?? 0,
+                              svgIcon: 'assets/icons/icon20/Chat2.svg',
+                              count: item.talks?.length ?? 0,
                             ),
                             SizedBox(
                               width: 10,
@@ -97,7 +95,7 @@ class MogakList extends GetView<MogakController> {
                         ),
                       ),
                     ],
-                  ); // MogakContent 위젯에 데이터를 전달합니다.
+                  );
                 },
               );
             }),

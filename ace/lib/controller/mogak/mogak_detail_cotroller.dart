@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:ace/controller/auth_controller.dart';
+import 'package:ace/models/mogak/author_model.dart';
 import 'package:ace/models/mogak/mogak_model.dart';
 import 'package:ace/models/mogak/profile.dart';
 import 'package:ace/routes/api_route.dart';
@@ -12,59 +13,79 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class MogakDetailController extends GetxController {
+  String token = Get.find<AuthController>().getToken();
   RxString visiblityStatus = RxString('OPEN'); // 모집 상태
   RxString postContent = RxString('');
+  TextEditingController commentController = TextEditingController();
   Rx<AllMogakModel?> mogakDetail = Rx<AllMogakModel?>(null);
+  RxBool join = RxBool(false);
+  Rx<Author?> author = Rx<Author?>(null);
+
   var isLoading = true.obs;
   late String id;
-  var dio = Dio();
-  String token = Get.find<AuthController>().getToken();
-
-  Future<void> fetchCommentMogak() async {
-    var response = await dio.get(ApiRoute.mogakTalkApi,
-        data: {
-          "mogakId": mogakDetail.value!.id, 
-          "content": postContent,
-        },
-        options: Options(headers: {"Authorization": token}));
-    if (response.statusCode == 200) {
-      print(response.data.toString());
-    } else {
-      print('통신실패');
-    }
-  }
+  final dio = Dio();
 
   @override
   void onInit() {
     super.onInit();
     if (Get.arguments is AllMogakModel) {
       mogakDetail.value = Get.arguments as AllMogakModel;
-      // 'id' 필드를 사용할 경우, 아래와 같이 설정할 수 있습니다.
       id = mogakDetail.value?.id ?? '';
-      // 상세 정보를 가져오는 함수를 호출할 수 있습니다.
-      fetchMogakDetail(id);
+      if (mogakDetail.value?.author != null) {
+        print(' 모각 데이타' + mogakDetail.value!.author!.nickname.toString());
+        author.value = mogakDetail.value!.author!;
+      }
+      fetchDetailMogak(id);
     } else {
-      // 'Get.arguments'가 'AllMogakModel' 타입이 아닌 경우 에러 처리
       print("모각 디테일 주소 오류");
     }
   }
 
-  Future<void> fetchMogakDetail(String id) async {
+  bool isUserApplied() {
+    return mogakDetail.value?.appliedProfiles
+            ?.any((profile) => profile.id == token) ??
+        false;
+  }
+
+// 댓글 통신
+  Future<void> fetchCommentMogak() async {
     isLoading(true);
+    try {
+      var response = await dio.post(
+        ApiRoute.mogakTalkApi,
+        data: {
+          "mogakId": mogakDetail.value!.id,
+          "content": commentController.text,
+        },
+        options: Options(headers: {"Authorization": token}),
+      );
+      if (response.statusCode == 200) {
+        print("댓글 업로드 성공: ${response.data}");
+        fetchDetailMogak(mogakDetail.value!.id);
+      } else {
+        print('댓글 업로드 통신실패: ${response.statusCode}');
+      }
+    } on DioError catch (e) {
+      print('Dio 에러: ${e.response?.data ?? e.message}');
+    } catch (e) {
+      print('일반 에러: $e');
+    } finally {
+      commentController.clear();
+    }
+  }
 
+// 글 목록
+  Future<void> fetchDetailMogak(String id) async {
+    isLoading(true);
     // 글아이디 clo5fdhqb0004mk091m5p5p25
-
     // final url =  'https://dev.sniperfactory.com/api/mogak/clomvvdld0000jk08yhd30kq3';
-
     try {
       print('통신 실행');
       final response = await dio.get(ApiRoute.mogakApi + mogakDetail.value!.id,
           options: Options(headers: {"Authorization": token}));
-
       if (response.statusCode == 200) {
         var jsonArray = response.data['data'];
-        print("모각 상세조회 리스폰스 데이타 " + jsonArray);
-
+        print("모각 상세조회 리스폰스 데이타 " + jsonArray.toString());
         mogakDetail.value = AllMogakModel.fromMap(jsonArray);
       } else {
         print('모각 상세조회  통신 실패');
@@ -74,6 +95,7 @@ class MogakDetailController extends GetxController {
     }
   }
 
+// 글 수정
   Future<void> fetchEditMogak() async {
     var res = await dio.get(ApiRoute.mogakApi,
         data: {
@@ -92,7 +114,6 @@ class MogakDetailController extends GetxController {
       print('통신 실행');
       final response = await dio.post(ApiRoute.mogakApi + mogakId + '/apply',
           options: Options(headers: {"Authorization": token}));
-
       if (response.statusCode == 200) {
         print("토큰 :" + token);
 
@@ -164,7 +185,9 @@ class MogakDetailController extends GetxController {
                       ),
                       onPressed: () {
                         print('모각참여하기 버튼 ' + mogakId);
-                        fetchJoinMogak(mogakId);
+                        fetchJoinMogak(mogakId)
+                            .then((value) => fetchDetailMogak(mogakId));
+
                         Get.back(); // 참여하기 버튼 클릭시 실행될 동작
                       },
                       child: Text(

@@ -10,6 +10,10 @@ class TitleAppBarCustom extends StatelessWidget {
   });
   final String? title;
 
+// 앱바 타이틀 뒤로가기 위젯
+// 사용방법 타이틀 전달
+
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -31,7 +35,7 @@ class TitleAppBarCustom extends StatelessWidget {
             ),
           ),
           Text(
-            title ?? '모각 상세',
+            title ?? '상세',
             style: AppTypography.tapButtonBold18,
           ),
           Opacity(

@@ -9,6 +9,7 @@ class Tag extends StatelessWidget {
   });
   final String title;
 
+// 태그 #태그 위젯  사용법 타이틀만 받아주면 됨
   @override
   Widget build(BuildContext context) {
     return Card(

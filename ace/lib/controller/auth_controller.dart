@@ -19,6 +19,27 @@ class AuthController extends GetxController {
     super.onInit();
   }
 
+  Map<String, dynamic>? decodeJwt(String token) {
+    try {
+      final parts = token.split('.');
+      if (parts.length != 3) {
+        return null;
+      }
+
+      final header = json.decode(utf8.decode(base64Url.decode(parts[0])));
+      final payload = json.decode(utf8.decode(base64Url.decode(parts[1])));
+
+      final decodedToken = {
+        'header': header,
+        'payload': payload,
+      };
+
+      return decodedToken;
+    } catch (e) {
+      return null;
+    }
+  }
+
   void showModal(BuildContext context) {
     ModalCustom(
       // 함수 이름을 ModalCustom으로 변경
