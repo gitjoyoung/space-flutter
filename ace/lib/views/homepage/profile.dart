@@ -36,10 +36,6 @@ class Profile extends GetView<ProfileController> {
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Colors.transparent,
-        leading: Text(
-          'data',
-          style: TextStyle(color: Colors.black),
-        ),
       ),
       body: SingleChildScrollView(
         child: Padding(
@@ -74,9 +70,20 @@ class Profile extends GetView<ProfileController> {
                         alignment: WrapAlignment.start,
 
                         children: [
-                          Text(
-                            '닉네임',
-                            style: AppTypography.button28Bold,
+                          Row(
+                            children: [
+                              Text(
+                                '닉네임',
+                                style: AppTypography.button28Bold,
+                              ),
+                              SizedBox(width: 4),
+                              Text(
+                                '*',
+                                style: TextStyle(
+                                    color: AppColors.systemWarnin,
+                                    fontSize: 24),
+                              ),
+                            ],
                           ),
                           TextFieldCustom(
                             validator: (p0) {
@@ -238,7 +245,6 @@ class Profile extends GetView<ProfileController> {
                               onPressed: () {
                                 // updateProfile 함수를 호출합니다.
                                 profileController.updateProfile();
-                                Get.toNamed(ViewRoute.homePage);
                               },
                               child: Text(
                                 '저장하기',
@@ -260,13 +266,32 @@ class Profile extends GetView<ProfileController> {
                   children: [
                     Obx(() {
                       String avatarUrl = avatarController.avatarUrl.value;
-                      return CircleAvatar(
-                        radius: 50,
-                        backgroundColor: Colors.grey,
-                        // avatarUrl이 비어 있지 않다면 이미지를 로드하여 보여줍니다.
-                        backgroundImage: avatarUrl.isNotEmpty
-                            ? NetworkImage(avatarUrl)
-                            : null,
+                      return Stack(
+                        alignment: Alignment.center,
+                        children: [
+                          if (avatarUrl.isNotEmpty)
+                            Image.asset(
+                              'assets/profile/avatar_background.png',
+                            ),
+                          if (avatarUrl.isNotEmpty)
+                            CircleAvatar(
+                              radius: 50,
+                              backgroundColor:
+                                  Colors.transparent, // 배경색을 투명으로 설정
+                              child: ClipOval(
+                                child: Image.network(
+                                  avatarUrl,
+                                  // 이미지 크기를 조절하세요.
+
+                                  fit: BoxFit.cover, // 이미지를 확대해서 보여주도록 설정
+                                ),
+                              ),
+                            )
+                          else
+                            Image.asset(
+                              'assets/profile/no-avatar.png',
+                            ),
+                        ],
                       );
                     }),
                     InkWell(
