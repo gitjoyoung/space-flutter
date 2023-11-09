@@ -3,6 +3,7 @@ import 'package:ace/utils/typography.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
+// 댓글 아이콘 및
 class CommentIcon extends StatelessWidget {
   const CommentIcon({
     Key? key,
@@ -38,7 +39,10 @@ class CommentIcon extends StatelessWidget {
         SizedBox(
           width: 1,
         ),
-        SvgPicture.asset(svgIcon),
+        SvgPicture.asset(
+          svgIcon,
+          height: 16,
+        ),
         Text(
           count.toString(),
           style: AppTypography.cardBody.copyWith(color: Colors.blue),

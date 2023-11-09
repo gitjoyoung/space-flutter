@@ -50,7 +50,7 @@ class MogakCreateController extends GetxController {
         ),
       );
 
-      if (response.data['status'] == 'sucsess') {
+      if (response.data['status'] == 'success') {
         // 성공적으로 데이터가 생성되었을 때의 처리
         print(response.data.toString());
         Get.back();

@@ -4,6 +4,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
+
+// 스캣폴드 앱바 에 넣어주면 됨
+
 AppBar SpaceAppBar() {
   final HomeController homeController = Get.find<HomeController>();
 

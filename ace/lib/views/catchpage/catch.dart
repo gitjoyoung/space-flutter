@@ -5,7 +5,7 @@ import 'package:ace/utils/colors.dart';
 import 'package:ace/utils/typography.dart';
 import 'package:ace/widgets/catchup_contents.dart';
 import 'package:ace/widgets/comment_Icon.dart';
-import 'package:ace/widgets/mogak_content.dart';
+import 'package:ace/widgets/mogak/mogak_content.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
