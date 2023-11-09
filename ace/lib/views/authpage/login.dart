@@ -7,14 +7,11 @@ import 'package:ace/utils/email_validator.dart';
 import 'package:ace/utils/typography.dart';
 import 'package:ace/views/authpage/find_password.dart';
 import 'package:ace/views/authpage/registration_page.dart';
-import 'package:ace/views/homepage/home.dart';
 import 'package:ace/views/homepage/home_layout.dart';
-import 'package:ace/widgets/modal_costom.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
-import 'package:get/get_connect/http/src/utils/utils.dart';
 
 import '../../utils/colors.dart';
 import '../../widgets/text_filed_custom.dart';
@@ -29,10 +26,10 @@ void main() {
       home: const LoginView(),
       getPages: [
         GetPage(name: ViewRoute.loginPage, page: () => const LoginView()),
-        GetPage(name: ViewRoute.findPassword, page: () => const FindPassword()),
+        GetPage(name: ViewRoute.findPasswordPage, page: () => const FindPassword()),
         GetPage(
             name: ViewRoute.registrationPage, page: () => RegistrationView()),
-        GetPage(name: ViewRoute.home, page: () => HomeLayOut()), // 이 부분을 추가
+        GetPage(name: ViewRoute.homePage, page: () => HomeLayOut()), // 이 부분을 추가
         // 이 부분을 추가
         // 다른 라우트들
       ],
@@ -88,7 +85,7 @@ class LoginView extends GetView<LoginController> {
                       child: RichText(
                         textAlign: TextAlign.center,
                         text: TextSpan(
-                          style: AppTypograpy.button36Medium
+                          style: AppTypography.button36Medium
                               .copyWith(color: AppColors.neutral50),
                           // style: const TextStyle(color: AppColors.neutral60),
                           children: [
@@ -97,7 +94,7 @@ class LoginView extends GetView<LoginController> {
                                 ..onTap = () {
                                   print('비밀번호 찾기 클릭');
 
-                                  Get.toNamed(ViewRoute.findPassword);
+                                  Get.toNamed(ViewRoute.findPasswordPage);
                                 },
                               text: '비밀번호 찾기',
                             ),
@@ -132,7 +129,7 @@ class LoginView extends GetView<LoginController> {
                             : null,
                         child: const Text(
                           '로그인',
-                          style: AppTypograpy.tapButtonMedium18,
+                          style: AppTypography.tapButtonMedium18,
                         ),
                         style: AppButton.xLarge,
                       );

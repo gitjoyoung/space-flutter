@@ -3,7 +3,7 @@ import 'package:ace/utils/typography.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class Home extends GetView<HomeController> {
+class Home extends GetView {
   const Home({super.key});
 
   @override
@@ -13,7 +13,7 @@ class Home extends GetView<HomeController> {
       children: [
         Text(
           controller.token,
-          style: AppTypograpy.button28Medium,
+          style: AppTypography.button28Medium,
         ),
       ],
     );

@@ -136,7 +136,7 @@ class Mogak extends GetView<MogakController> {
                                     ),
                                     Text(
                                       '핫한 모각코',
-                                      style: AppTypograpy.tapButtonBold18,
+                                      style: AppTypography.tapButtonBold18,
                                     ),
                                   ],
                                 ),
@@ -200,7 +200,7 @@ class Mogak extends GetView<MogakController> {
                                     ),
                                     Text(
                                       '모든 모각코',
-                                      style: AppTypograpy.tapButtonBold18,
+                                      style: AppTypography.tapButtonBold18,
                                     ),
                                   ],
                                 ),

@@ -78,9 +78,9 @@ class MogakCreate extends GetView<MogakCreateController> {
                         onChanged: (value) {
                           controller.postTitle(value);
                         },
-                        style: AppTypograpy.tapButtonNavgation16,
+                        style: AppTypography.tapButtonNavgation16,
                         decoration: InputDecoration(
-                          hintStyle: AppTypograpy.tapButtonNavgation16
+                          hintStyle: AppTypography.tapButtonNavgation16
                               .copyWith(color: AppColors.neutral20),
                           border: InputBorder.none,
                           hintText: '제목을 입력해주세요.',
@@ -90,12 +90,12 @@ class MogakCreate extends GetView<MogakCreateController> {
                         onChanged: (value) {
                           controller.postContent(value);
                         },
-                        style: AppTypograpy.button36Regular,
+                        style: AppTypography.button36Regular,
                         keyboardType: TextInputType.multiline,
                         maxLines: null, // 또는 특정 숫자를 지정할 수 있습니다.
                         minLines: 10, // 최소 줄 수를 설정하여 초기 높이를 조절할 수 있습니다.
                         decoration: InputDecoration(
-                          hintStyle: AppTypograpy.button36Regular
+                          hintStyle: AppTypography.button36Regular
                               .copyWith(color: AppColors.neutral20),
                           hintText: '내용을 입력해주세요.',
                           border: InputBorder.none,
@@ -106,9 +106,9 @@ class MogakCreate extends GetView<MogakCreateController> {
                         onChanged: (value) {
                           controller.postHashTag(value);
                         },
-                        style: AppTypograpy.button36Regular,
+                        style: AppTypography.button36Regular,
                         decoration: InputDecoration(
-                          hintStyle: AppTypograpy.button36Regular
+                          hintStyle: AppTypography.button36Regular
                               .copyWith(color: AppColors.neutral20),
                           border: InputBorder.none,
                           hintText: '태그를 입력해주세요.',
@@ -159,7 +159,7 @@ class MogakCreate extends GetView<MogakCreateController> {
                                             Text(
                                               '모집인원',
                                               style:
-                                                  AppTypograpy.tapButtonBold18,
+                                                  AppTypography.tapButtonBold18,
                                             ),
                                             IconButton(
                                               onPressed: () {
@@ -206,7 +206,7 @@ class MogakCreate extends GetView<MogakCreateController> {
                                                           .maxParticipants(
                                                               parsedValue);
                                                     },
-                                                    style: AppTypograpy
+                                                    style: AppTypography
                                                         .popupTitleBold,
                                                     textAlign: TextAlign
                                                         .center, // 텍스트 정렬을 가운데로 설정
@@ -218,7 +218,7 @@ class MogakCreate extends GetView<MogakCreateController> {
                                                             .enforced,
                                                     decoration: InputDecoration(
                                                       hintText: '0',
-                                                      hintStyle: AppTypograpy
+                                                      hintStyle: AppTypography
                                                           .popupTitleBold,
                                                       contentPadding:
                                                           EdgeInsets.only(
@@ -237,7 +237,7 @@ class MogakCreate extends GetView<MogakCreateController> {
                                             const Text(
                                               '명',
                                               style:
-                                                  AppTypograpy.tapButtonBold18,
+                                                  AppTypography.tapButtonBold18,
                                             ),
                                           ],
                                         )
@@ -250,12 +250,12 @@ class MogakCreate extends GetView<MogakCreateController> {
                           },
                           title: Text(
                             '모집 인원',
-                            style: AppTypograpy.tapButtonNavgation16,
+                            style: AppTypography.tapButtonNavgation16,
                           ),
                           trailing: controller.maxParticipants != 0
                               ? RichText(
                                   text: TextSpan(
-                                      style: AppTypograpy.tapButtonNavgation16,
+                                      style: AppTypography.tapButtonNavgation16,
                                       children: [
                                         TextSpan(
                                           text:
@@ -297,7 +297,7 @@ class MogakCreate extends GetView<MogakCreateController> {
                                       children: [
                                         Text(
                                           '모집상태',
-                                          style: AppTypograpy.tapButtonBold18,
+                                          style: AppTypography.tapButtonBold18,
                                         ),
                                         IconButton(
                                           onPressed: () {
@@ -375,14 +375,14 @@ class MogakCreate extends GetView<MogakCreateController> {
                         },
                         title: Text(
                           '모집 상태',
-                          style: AppTypograpy.tapButtonNavgation16,
+                          style: AppTypography.tapButtonNavgation16,
                         ),
                         trailing: Obx(
                           () {
                             if (controller.visiblityStatus.value != '') {
                               return RichText(
                                 text: TextSpan(
-                                  style: AppTypograpy.tapButtonNavgation16,
+                                  style: AppTypography.tapButtonNavgation16,
                                   children: [
                                     TextSpan(
                                       text: controller.visiblityStatus.value,
@@ -413,7 +413,7 @@ class MogakCreate extends GetView<MogakCreateController> {
                 style: AppButton.xLarge,
                 child: Text(
                   '등록하기',
-                  style: AppTypograpy.button36Bold,
+                  style: AppTypography.button36Bold,
                 )),
             SizedBox(
               height: 115,

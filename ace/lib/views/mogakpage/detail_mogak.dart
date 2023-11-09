@@ -128,7 +128,7 @@ class MogakDetail extends GetView<MogakDetailController> {
                                                   ?.appliedProfiles?[index]
                                                   .nickname ??
                                               "",
-                                          style: AppTypograpy.button28Bold,
+                                          style: AppTypography.button28Bold,
                                         ),
                                       ],
                                     ),
@@ -144,7 +144,7 @@ class MogakDetail extends GetView<MogakDetailController> {
                                 },
                                 child: Text(
                                   '참여하기',
-                                  style: AppTypograpy.tapButtonMedium18,
+                                  style: AppTypography.tapButtonMedium18,
                                 ),
                                 style: AppButton.xLarge,
                               ),
@@ -175,7 +175,7 @@ class MogakDetail extends GetView<MogakDetailController> {
                               ),
                               Text(
                                 '이어달린 톡',
-                                style: AppTypograpy.tapButtonBold18,
+                                style: AppTypography.tapButtonBold18,
                               )
                             ]),
                             SizedBox(
@@ -218,7 +218,7 @@ class MogakDetail extends GetView<MogakDetailController> {
                                             child: Text(
                                               item!.author
                                                   .nickname, // 데이터에서 이름을 가져와서 표시
-                                              style: AppTypograpy.button36Bold,
+                                              style: AppTypography.button36Bold,
                                             ),
                                           ),
                                           Tag(
@@ -239,7 +239,7 @@ class MogakDetail extends GetView<MogakDetailController> {
                                             child: Text(
                                               item.content, // 데이터에서 댓글 내용을 가져와서 표시
                                               style:
-                                                  AppTypograpy.button36Medium,
+                                                  AppTypography.button36Medium,
                                             ),
                                           ),
                                         ),
@@ -251,7 +251,7 @@ class MogakDetail extends GetView<MogakDetailController> {
                                           Text(
                                             item!.createdAt
                                                 .toString(), // 데이터에서 타임스탬프를 가져와서 표시
-                                            style: AppTypograpy.cardBody
+                                            style: AppTypography.cardBody
                                                 .copyWith(
                                                     color: AppColors.neutral40),
                                           ),
@@ -263,7 +263,7 @@ class MogakDetail extends GetView<MogakDetailController> {
                                           Text(
                                             item.temperature
                                                 .toString(), // 데이터에서 좋아요 수를 가져와서 표시
-                                            style: AppTypograpy.cardBody
+                                            style: AppTypography.cardBody
                                                 .copyWith(
                                                     color: AppColors.primary80),
                                           ),

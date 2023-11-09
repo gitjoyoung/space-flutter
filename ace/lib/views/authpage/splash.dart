@@ -1,8 +1,16 @@
 import 'package:ace/routes/view_route.dart';
 import 'package:ace/utils/button.dart';
+import 'package:ace/views/authpage/login.dart';
+import 'package:ace/views/authpage/sign_up_success.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
+
+void main() {
+  runApp(GetMaterialApp(home: const SplashPage(), getPages: [
+    GetPage(name: ViewRoute.loginPage, page: () => const LoginView()),
+  ]));
+}
 
 class SplashPage extends StatelessWidget {
   const SplashPage({super.key});

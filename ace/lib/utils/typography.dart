@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-class AppTypograpy {
+class AppTypography {
 // 글자 크기 사전 지정
 // 사용 예시
 // Text("This is Main Title", style: Typography.mainTitle),

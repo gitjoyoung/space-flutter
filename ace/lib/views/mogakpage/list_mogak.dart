@@ -44,7 +44,7 @@ class MogakList extends GetView<MogakController> {
                   ),
                   Text(
                     '날자순',
-                    style: AppTypograpy.cardBody
+                    style: AppTypography.cardBody
                         .copyWith(color: AppColors.primary80),
                   )
                 ],

@@ -120,7 +120,7 @@ class Catch extends GetView<MogakController> {
                               ),
                               Text(
                                 '핫한 캐치업',
-                                style: AppTypograpy.tapButtonBold18,
+                                style: AppTypography.tapButtonBold18,
                               ),
                             ],
                           ),
@@ -187,7 +187,7 @@ class Catch extends GetView<MogakController> {
                               ),
                               Text(
                                 '캐치업!',
-                                style: AppTypograpy.tapButtonBold18,
+                                style: AppTypography.tapButtonBold18,
                               ),
                             ],
                           ),

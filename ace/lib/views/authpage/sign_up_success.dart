@@ -11,7 +11,7 @@ import 'package:get/get_navigation/get_navigation.dart';
 
 void main() {
   runApp(GetMaterialApp(home: const SignUpSuccess(), getPages: [
-    GetPage(name: ViewRoute.profile, page: () => const Profile()),
+    GetPage(name: ViewRoute.profilePage, page: () => const Profile()),
   ]));
 }
 
@@ -41,10 +41,10 @@ class SignUpSuccess extends GetView {
                   SizedBox(height: 100),
                   ElevatedButton(
                     onPressed: () {
-                      Get.toNamed(ViewRoute.profile);
+                      Get.toNamed(ViewRoute.profilePage);
                     },
                     child:
-                        Text('프로필 작성하기', style: AppTypograpy.button36Regular),
+                        Text('프로필 작성하기', style: AppTypography.button36Regular),
                     style: AppButton.xLarge,
                   )
                 ],

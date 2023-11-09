@@ -51,7 +51,7 @@ class AppPages {
       }),
     ),
     GetPage(
-      name: ViewRoute.findPassword,
+      name: ViewRoute.findPasswordPage,
       page: () => const FindPassword(),
       binding: BindingsBuilder(() {
         Get.put(FindPasswordController());
@@ -65,12 +65,13 @@ class AppPages {
           Get.put(AuthController());
         })),
     GetPage(name: ViewRoute.splashPage, page: () => const SplashPage()),
-    GetPage(name: ViewRoute.signupSuccess, page: () => const SignUpSuccess()),
-    GetPage(name: ViewRoute.profile, page: () => const Profile()),
+    GetPage(
+        name: ViewRoute.signupSuccessPage, page: () => const SignUpSuccess()),
+    GetPage(name: ViewRoute.profilePage, page: () => const Profile()),
 
     // 홈페이지
     GetPage(
-      name: ViewRoute.home,
+      name: ViewRoute.homePage,
       page: () => const HomeLayOut(),
       binding: BindingsBuilder(() {
         Get.put(MogakController());

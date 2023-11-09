@@ -41,7 +41,7 @@ class AuthController extends GetxController {
     // 'email': "sniperfactory@gmail.com",
     // 'password': "MTIzMTIzMTIz",
     var res = await dio.post(
-      ApiRoute.login,
+      ApiRoute.loginAPi,
       data: {
         'email': email,
         'password': encodedPassword,
@@ -54,7 +54,7 @@ class AuthController extends GetxController {
 
       token.value = res.data['data'];
       print('로그인 성공 : ${token.value}');
-      Get.toNamed(ViewRoute.home);
+      Get.toNamed(ViewRoute.homePage);
     } else {
       Get.back();
     }

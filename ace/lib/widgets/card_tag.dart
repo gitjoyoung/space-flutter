@@ -17,8 +17,8 @@ class Tag extends StatelessWidget {
         padding:
             const EdgeInsets.only(top: 4.0, bottom: 4, left: 8.0, right: 8.0),
         child: Text(title,
-            style:
-                AppTypograpy.cardBody.copyWith(color: AppColors.background100)),
+            style: AppTypography.cardBody
+                .copyWith(color: AppColors.background100)),
       ),
     );
   }

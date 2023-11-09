@@ -85,7 +85,7 @@ class SignUpController extends GetxController {
 
     try {
       var response = await Dio().post(
-        ApiRoute.signup,
+        ApiRoute.signupAPi,
         data: {
           'email': emailInput,
           'password': passwordInput,
@@ -100,13 +100,9 @@ class SignUpController extends GetxController {
           _showSuccess('회원가입이 완료되었습니다.');
 
           print(response.data['data']);
-          print('qwe');
-          print(token.value);
-          print('qwe');
-          print(isLoading.value);
+
           authController.saveToken(response.data['data']);
-          print(ViewRoute.signupSuccess);
-          print('Current context is: ${Get.context}');
+
           Get.to(() => const SignUpSuccess());
         } else {
           _showError('회원가입은 성공했지만, 토큰을 받지 못했습니다.');
