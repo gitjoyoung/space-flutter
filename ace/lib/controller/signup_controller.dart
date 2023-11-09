@@ -82,14 +82,13 @@ class SignUpController extends GetxController {
       return;
     }
 
-    String encodedPassword = base64Encode(utf8.encode(passwordInput));
 
     try {
       var response = await Dio().post(
         ApiRoute.signup,
         data: {
           'email': emailInput,
-          'password': encodedPassword,
+          'password': passwordInput,
           'name': nameInput,
           'phone': phoneInput,
         },

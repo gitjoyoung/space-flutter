@@ -44,7 +44,6 @@ class LoginView extends GetView<LoginController> {
   const LoginView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    AuthController authController = Get.find<AuthController>();
     return Scaffold(
       body: DefaultTextStyle(
         style: const TextStyle(fontFamily: "Pretendard"),
@@ -72,7 +71,7 @@ class LoginView extends GetView<LoginController> {
                       height: 66,
                       child: TextFieldCustom(
                         validator: (value) {
-                          if (value.length > 8) {
+                          if (value.length > 7) {
                             return true;
                           } else {
                             return false;
@@ -126,27 +125,9 @@ class LoginView extends GetView<LoginController> {
                         onPressed: controller.isButtonEnabled.value
                             ? () async {
                                 // Attempt login and get the token
-                                String? token = await AuthController().login(
+                                await controller.authController.login(
                                     controller.email.text,
                                     controller.password.text);
-
-                                // Check the token and navigate or show an error accordingly
-                                if (token != null && token.isNotEmpty) {
-                                  print('로그인 후 토큰 : $token');
-                                  Get.toNamed(ViewRoute.home);
-                                } else {
-                                  // No need for the try-catch if you are sure no exceptions will be thrown
-                                  print('로그인에 실패했습니다.');
-                                  ModalCostom(
-                                      context,
-                                      '로그인에 실패했습니다.',
-                                      '다시시도해 주세요',
-                                      Icons.warning,
-                                      AppColors.primary80,
-                                      '다시하기', () {
-                                    Get.back();
-                                  });
-                                }
                               }
                             : null,
                         child: const Text(
