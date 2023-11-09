@@ -1,3 +1,4 @@
+import 'package:ace/controller/auth_controller.dart';
 import 'package:ace/routes/api_route.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -10,6 +11,8 @@ class MogakCreateController extends GetxController {
   RxString postHashTag = RxString(''); // 해시태그
   RxString visiblityStatus = RxString(''); // 모집 상태
   var dio = Dio();
+
+  String token = Get.find<AuthController>().getToken();
 
   Future<void> createMogak() async {
     if (postTitle.isEmpty) {
@@ -32,6 +35,7 @@ class MogakCreateController extends GetxController {
       return;
     }
     try {
+      print(token);
       var response = await dio.post(
         ApiRoute.mogakCreateApi,
         data: {
@@ -42,20 +46,17 @@ class MogakCreateController extends GetxController {
           "visiblityStatus": visiblityStatus.value
         },
         options: Options(
-          headers: {
-            "Authorization":
-                "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImNsbzNrNWRtaDAwMDBtcjA4aG50aWFsYTMiLCJlbWFpbCI6InNuaXBlcmZhY3RvcnlAZ21haWwuY29tIiwidmVyaWZpZWRFbWFpbCI6ZmFsc2UsInZlcmlmaWVkUGhvbmUiOmZhbHNlLCJuYW1lIjoi6rmA7Iqk7YypIiwicHJvZmlsZSI6eyJpZCI6ImNsbzNrN2p4djAwMDFtcjA4dHM4OGIxdzYiLCJuaWNrbmFtZSI6Iuq5gOyKpO2MqeyUqCIsImF2YXRhciI6Imh0dHBzOi8vc25pcGVyZmFjdG9yeS5zMy5hcC1ub3J0aGVhc3QtMi5hbWF6b25hd3MuY29tL2NsbzVmZDVyODAwMDBsNzA4ejhjbWEycnQvc2NyZWVuc2hvdC5wbmciLCJwb3NpdGlvbiI6IkRFVkVMT1BFUiIsInJvbGUiOiJORVdCSUUifSwiaWF0IjoxNjk5MzU2MTk0fQ.b_aXzMeNetKTHy9C0VjZB2xUuLewjdY7hwqj-yQSAME",
-          },
+          headers: {"Authorization": token},
         ),
       );
 
-      if (response.statusCode == 200) {
+      if (response.data['status'] == 'sucsess') {
         // 성공적으로 데이터가 생성되었을 때의 처리
         print(response.data.toString());
         Get.back();
       } else {
         // 서버가 200 외의 상태 코드를 반환했을 때의 처리
-        print('Failed to create mogak. Status code: ${response.statusCode}');
+        print('통신 실패: ${response.data}');
       }
     } catch (e) {
       showErrorDialog('에러 발생: $e');

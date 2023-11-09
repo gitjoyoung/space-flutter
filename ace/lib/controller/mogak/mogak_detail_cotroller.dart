@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:ace/controller/auth_controller.dart';
 import 'package:ace/models/mogak/mogak_model.dart';
 import 'package:ace/models/mogak/profile.dart';
 import 'package:ace/routes/api_route.dart';
@@ -11,17 +12,28 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class MogakDetailController extends GetxController {
-  RxBool isLiked = RxBool(false);
   RxString visiblityStatus = RxString('OPEN'); // 모집 상태
-  RxString postContent = RxString('저희는 유니티로 개발을 공부해서...');
+  RxString postContent = RxString('');
   Rx<AllMogakModel?> mogakDetail = Rx<AllMogakModel?>(null);
   var isLoading = true.obs;
   late String id;
   var dio = Dio();
+  String token = Get.find<AuthController>().getToken();
 
-  String authId = "clo5fdhqb0004mk091m5p5p25";
-  String token =
-      "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImNsbzNrNWRtaDAwMDBtcjA4aG50aWFsYTMiLCJlbWFpbCI6InNuaXBlcmZhY3RvcnlAZ21haWwuY29tIiwidmVyaWZpZWRFbWFpbCI6ZmFsc2UsInZlcmlmaWVkUGhvbmUiOmZhbHNlLCJuYW1lIjoi6rmA7Iqk7YypIiwicHJvZmlsZSI6eyJpZCI6ImNsbzNrN2p4djAwMDFtcjA4dHM4OGIxdzYiLCJuaWNrbmFtZSI6Iuq5gOyKpO2MqeyUqCIsImF2YXRhciI6Imh0dHBzOi8vc25pcGVyZmFjdG9yeS5zMy5hcC1ub3J0aGVhc3QtMi5hbWF6b25hd3MuY29tL2NsbzVmZDVyODAwMDBsNzA4ejhjbWEycnQvc2NyZWVuc2hvdC5wbmciLCJwb3NpdGlvbiI6IkRFVkVMT1BFUiIsInJvbGUiOiJORVdCSUUifSwiaWF0IjoxNjk5MzU2MTk0fQ.b_aXzMeNetKTHy9C0VjZB2xUuLewjdY7hwqj-yQSAME";
+  Future<void> fetchCommentMogak() async {
+    var response = await dio.get(ApiRoute.mogakTalkApi,
+        data: {
+          "mogakId": mogakDetail.value!.id, 
+          "content": postContent,
+        },
+        options: Options(headers: {"Authorization": token}));
+    if (response.statusCode == 200) {
+      print(response.data.toString());
+    } else {
+      print('통신실패');
+    }
+  }
+
   @override
   void onInit() {
     super.onInit();
@@ -33,48 +45,32 @@ class MogakDetailController extends GetxController {
       fetchMogakDetail(id);
     } else {
       // 'Get.arguments'가 'AllMogakModel' 타입이 아닌 경우 에러 처리
-      print("Error: Get.arguments is not a AllMogakModel");
+      print("모각 디테일 주소 오류");
     }
   }
 
-  void toggleLike() {
-    isLiked.value = !isLiked.value;
-  }
-
-  // clo5fdhqb0004mk091m5p5p25
-
   Future<void> fetchMogakDetail(String id) async {
     isLoading(true);
-    // final url =
-    //     'https://dev.sniperfactory.com/api/mogak/clomvvdld0000jk08yhd30kq3';
+
+    // 글아이디 clo5fdhqb0004mk091m5p5p25
+
+    // final url =  'https://dev.sniperfactory.com/api/mogak/clomvvdld0000jk08yhd30kq3';
 
     try {
       print('통신 실행');
-      final response = await dio.get(ApiRoute.mogakApi + mogakDetail.value!.id ,
+      final response = await dio.get(ApiRoute.mogakApi + mogakDetail.value!.id,
           options: Options(headers: {"Authorization": token}));
 
       if (response.statusCode == 200) {
         var jsonArray = response.data['data'];
-        print(jsonArray);
+        print("모각 상세조회 리스폰스 데이타 " + jsonArray);
 
         mogakDetail.value = AllMogakModel.fromMap(jsonArray);
-
-        // mogakDetail.assignAll(mogakList); // 응답 데이터를 옵저버블 변수에 할당합니다.
       } else {
-        // 에러 처리
-        print('Failed to load mogak detail');
+        print('모각 상세조회  통신 실패');
       }
     } finally {
       isLoading(false);
-    }
-  }
-
-  Future<void> fetchProfile(String authId) async {
-    var response = await dio.get(ApiRoute.profileApi + authId,
-        options: Options(headers: {"Authorization": token}));
-    if (response.statusCode == 200) {
-      ProfileModel profile = ProfileModel.fromMap(response.data['data']);
-      print(profile.toMap());
     }
   }
 
@@ -90,32 +86,36 @@ class MogakDetailController extends GetxController {
     print(res.data);
   }
 
-  Future<void> fetchJoinMogak(String id) async {
+  Future<void> fetchJoinMogak(String mogakId) async {
     isLoading(true);
-    // final url = 'https://dev.sniperfactory.com/api/mogak/$id';
-
     try {
       print('통신 실행');
-      final response = await dio.get(ApiRoute.mogakApi + id + '/apply',
+      final response = await dio.post(ApiRoute.mogakApi + mogakId + '/apply',
           options: Options(headers: {"Authorization": token}));
 
       if (response.statusCode == 200) {
-        var jsonArray = response.data['data'];
-        print(jsonArray);
+        print("토큰 :" + token);
 
-        mogakDetail.value = AllMogakModel.fromMap(jsonArray);
-
-        // mogakDetail.assignAll(mogakList); // 응답 데이터를 옵저버블 변수에 할당합니다.
+        print("모각참여 통신 성공 메세지 :" + response.data.toString());
       } else {
-        // 에러 처리
-        print('Failed to load mogak detail');
+        print('모각 참여하기 통신 실패');
       }
     } finally {
       isLoading(false);
     }
   }
 
-  void showCustomDialog() {
+// 프로필 조회
+  Future<void> fetchProfile(String authId) async {
+    var response = await dio.get(ApiRoute.profileApi + authId,
+        options: Options(headers: {"Authorization": token}));
+    if (response.statusCode == 200) {
+      ProfileModel profile = ProfileModel.fromMap(response.data['data']);
+      print(profile.toMap());
+    }
+  }
+
+  void showCustomDialog(String mogakId) {
     Get.dialog(
       Dialog(
         shape: RoundedRectangleBorder(
@@ -146,7 +146,7 @@ class MogakDetailController extends GetxController {
                         elevation: MaterialStateProperty.all<double?>(0),
                       ),
                       onPressed: () {
-                        Get.back(); // 참여하기 버튼 클릭시 실행될 동작
+                        Get.back();
                       },
                       child: Text(
                         '취소하기',
@@ -163,6 +163,8 @@ class MogakDetailController extends GetxController {
                         elevation: MaterialStateProperty.all<double?>(0),
                       ),
                       onPressed: () {
+                        print('모각참여하기 버튼 ' + mogakId);
+                        fetchJoinMogak(mogakId);
                         Get.back(); // 참여하기 버튼 클릭시 실행될 동작
                       },
                       child: Text(
