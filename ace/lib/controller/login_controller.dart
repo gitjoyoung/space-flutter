@@ -8,7 +8,6 @@ class LoginController extends GetxController {
   var email = TextEditingController();
   var password = TextEditingController();
   var isButtonEnabled = false.obs;
-    AuthController authController = Get.find<AuthController>();
 
   login() {
     print('로그인 버튼 클릭');
