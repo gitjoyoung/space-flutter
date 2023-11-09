@@ -50,128 +50,134 @@ class RegistrationView extends GetView<SignUpController> {
       ),
       body: Padding(
         padding: const EdgeInsets.all(10.0),
-        child: Column(
-          children: [
-            SizedBox(
-              width: double.infinity,
-              child: Text(
-                '*표시는 필수입력항목 입니다.',
-                style: AppTypography.cardBody
-                    .copyWith(color: AppColors.systemWarnin),
-                textAlign: TextAlign.right,
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              SizedBox(
+                width: double.infinity,
+                child: Text(
+                  '*표시는 필수입력항목 입니다.',
+                  style: AppTypography.cardBody
+                      .copyWith(color: AppColors.systemWarnin),
+                  textAlign: TextAlign.right,
+                ),
               ),
-            ),
-            Row(
-              children: [
-                Text(
-                  '이름',
-                  style: AppTypography.tapButtonNavgation16
-                      .copyWith(color: AppColors.neutral80),
-                ),
-                SizedBox(width: 4),
-                Text(
-                  '*',
-                  style: TextStyle(color: AppColors.systemWarnin, fontSize: 30),
-                ),
-              ],
-            ),
-            Container(
-              height: 66,
-              child: TextFieldCustom(
-                  validator: controller.validateKoreanName,
-                  hintText: '이름을 입력해 주세요',
-                  controller: controller.name),
-            ),
-            Row(
-              children: [
-                Text(
-                  '이메일',
-                  style: AppTypography.tapButtonNavgation16
-                      .copyWith(color: AppColors.neutral80),
-                ),
-                SizedBox(width: 4),
-                Text(
-                  '*',
-                  style: TextStyle(color: AppColors.systemWarnin, fontSize: 30),
-                ),
-              ],
-            ),
-            Container(
-              height: 66,
-              child: TextFieldCustom(
-                  validator: EmailValidator.isValid,
-                  hintText: '이메일 주소를 입력해주세요.',
-                  errorText: '이메일 주소가 틀립니다. 다시 한번 입력해주세요.',
-                  controller: controller.email),
-            ),
-            Row(
-              children: [
-                Text(
-                  '비밀번호',
-                  style: AppTypography.tapButtonNavgation16
-                      .copyWith(color: AppColors.neutral80),
-                ),
-                SizedBox(width: 4),
-                Text(
-                  '*',
-                  style: TextStyle(color: AppColors.systemWarnin, fontSize: 30),
-                ),
-              ],
-            ),
-            Container(
-              height: 66,
-              child: TextFieldCustom(
-                  validator: (value) {
-                    if (value.length > 8) {
-                      return true;
-                    } else {
-                      return false;
-                    }
-                  },
-                  hintText: '비밀번호를 입력해주세요.',
-                  password: true,
-                  controller: controller.password),
-            ),
-            Row(
-              children: [
-                Text(
-                  '휴대전화',
-                  style: AppTypography.tapButtonNavgation16
-                      .copyWith(color: AppColors.neutral80),
-                ),
-                SizedBox(width: 4),
-                Text(
-                  '*',
-                  style: TextStyle(color: AppColors.systemWarnin, fontSize: 30),
-                ),
-              ],
-            ),
-            Container(
-              height: 66,
-              child: TextFieldCustom(
-                  hintText: '휴대폰 번호를 입력해주세요', controller: controller.phone),
-            ),
-            SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: controller.isLoading.value
-                  ? null
-                  : () async {
-                      print('회원가입 버튼 클릭됨');
-                      await controller.signup();
-
-                      Get.toNamed(ViewRoute.signupSuccessPage);
-
-                      // 회원가입 성공 후의 처리는 signup() 함수 내에서 이루어지므로,
-                      // 여기서는 추가적인 처리가 필요하지 않습니다.
-                      // 성공, 실패, 에러 등의 처리는 모두 signup() 함수 내에서 처리됩니다.
+              Row(
+                children: [
+                  Text(
+                    '이름',
+                    style: AppTypography.tapButtonNavgation16
+                        .copyWith(color: AppColors.neutral80),
+                  ),
+                  SizedBox(width: 4),
+                  Text(
+                    '*',
+                    style:
+                        TextStyle(color: AppColors.systemWarnin, fontSize: 30),
+                  ),
+                ],
+              ),
+              Container(
+                height: 66,
+                child: TextFieldCustom(
+                    validator: controller.validateKoreanName,
+                    hintText: '이름을 입력해 주세요',
+                    controller: controller.name),
+              ),
+              Row(
+                children: [
+                  Text(
+                    '이메일',
+                    style: AppTypography.tapButtonNavgation16
+                        .copyWith(color: AppColors.neutral80),
+                  ),
+                  SizedBox(width: 4),
+                  Text(
+                    '*',
+                    style:
+                        TextStyle(color: AppColors.systemWarnin, fontSize: 30),
+                  ),
+                ],
+              ),
+              Container(
+                height: 66,
+                child: TextFieldCustom(
+                    validator: EmailValidator.isValid,
+                    hintText: '이메일 주소를 입력해주세요.',
+                    errorText: '이메일 주소가 틀립니다. 다시 한번 입력해주세요.',
+                    controller: controller.email),
+              ),
+              Row(
+                children: [
+                  Text(
+                    '비밀번호',
+                    style: AppTypography.tapButtonNavgation16
+                        .copyWith(color: AppColors.neutral80),
+                  ),
+                  SizedBox(width: 4),
+                  Text(
+                    '*',
+                    style:
+                        TextStyle(color: AppColors.systemWarnin, fontSize: 30),
+                  ),
+                ],
+              ),
+              Container(
+                height: 66,
+                child: TextFieldCustom(
+                    validator: (value) {
+                      if (value.length > 8) {
+                        return true;
+                      } else {
+                        return false;
+                      }
                     },
-              child: Obx(() => Text(
-                    controller.isLoading.value ? '회원가입하기' : '회원가입',
-                    style: AppTypography.tapButtonMedium18,
-                  )),
-              style: AppButton.xLarge,
-            )
-          ],
+                    hintText: '비밀번호를 입력해주세요.',
+                    password: true,
+                    controller: controller.password),
+              ),
+              Row(
+                children: [
+                  Text(
+                    '휴대전화',
+                    style: AppTypography.tapButtonNavgation16
+                        .copyWith(color: AppColors.neutral80),
+                  ),
+                  SizedBox(width: 4),
+                  Text(
+                    '*',
+                    style:
+                        TextStyle(color: AppColors.systemWarnin, fontSize: 30),
+                  ),
+                ],
+              ),
+              Container(
+                height: 66,
+                child: TextFieldCustom(
+                    hintText: '휴대폰 번호를 입력해주세요', controller: controller.phone),
+              ),
+              SizedBox(height: 20),
+              ElevatedButton(
+                onPressed: controller.isLoading.value
+                    ? null
+                    : () async {
+                        print('회원가입 버튼 클릭됨');
+                        await controller.signup();
+
+                        Get.toNamed(ViewRoute.signupSuccessPage);
+
+                        // 회원가입 성공 후의 처리는 signup() 함수 내에서 이루어지므로,
+                        // 여기서는 추가적인 처리가 필요하지 않습니다.
+                        // 성공, 실패, 에러 등의 처리는 모두 signup() 함수 내에서 처리됩니다.
+                      },
+                child: Obx(() => Text(
+                      controller.isLoading.value ? '회원가입하기' : '회원가입',
+                      style: AppTypography.tapButtonMedium18,
+                    )),
+                style: AppButton.xLarge,
+              )
+            ],
+          ),
         ),
       ),
     );
