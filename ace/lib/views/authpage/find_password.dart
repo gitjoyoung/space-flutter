@@ -3,7 +3,7 @@ import 'package:ace/utils/button.dart';
 import 'package:ace/utils/colors.dart';
 import 'package:ace/utils/email_validator.dart';
 import 'package:ace/utils/typography.dart';
-import 'package:ace/widgets/modal_costom.dart';
+import 'package:ace/widgets/modal_custom.dart';
 import 'package:ace/widgets/text_filed_custom.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -80,8 +80,7 @@ class FindPassword extends GetView<FindPasswordController> {
                               bool result = await controller.findPassword();
                               if (result) {
                                 // 성공: 모달 표시
-                                ModalCostom(
-                                    context,
+                                ModalCustom(
                                     '새로운 비밀번호를 보냈습니다.',
                                     '메일함을 확인하세요',
                                     Icons.send,

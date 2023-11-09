@@ -23,14 +23,8 @@ import 'package:get/get.dart';
 //   },
 //   child: Text('모달창 보기'),
 // )
-void ModalCostom(
-    BuildContext context,
-    String title,
-    String content,
-    IconData icon,
-    Color iconColor,
-    String buttonText,
-    VoidCallback onButtonPressed) {
+void ModalCustom(String title, String content, IconData icon, Color iconColor,
+    String buttonText, VoidCallback onButtonPressed) {
   Get.dialog(
     Dialog(
       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(16)),

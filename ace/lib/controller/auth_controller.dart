@@ -4,7 +4,8 @@ import 'package:ace/routes/api_route.dart';
 import 'package:ace/routes/view_route.dart';
 import 'package:ace/utils/colors.dart';
 import 'package:ace/utils/email_validator.dart';
-import 'package:ace/widgets/modal_costom.dart';
+import 'package:ace/widgets/modal_custom.dart';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -19,8 +20,8 @@ class AuthController extends GetxController {
   }
 
   void showModal(BuildContext context) {
-    ModalCostom(
-      context,
+    ModalCustom(
+      // 함수 이름을 ModalCustom으로 변경
       '로그인에 실패했습니다.',
       '다시시도해 주세요',
       Icons.warning,

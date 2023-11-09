@@ -20,21 +20,23 @@ class SplashPage extends StatelessWidget {
       body: Padding(
         padding: const EdgeInsets.all(10.0),
         child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              SvgPicture.asset(
-                'assets/login/splash.svg',
-              ),
-              SizedBox(height: 20),
-              ElevatedButton(
-                onPressed: () {
-                  Get.toNamed(ViewRoute.loginPage);
-                },
-                child: Text('시작하기'),
-                style: AppButton.xLarge,
-              )
-            ],
+          child: SingleChildScrollView(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                SvgPicture.asset(
+                  'assets/login/splash.svg',
+                ),
+                SizedBox(height: 20),
+                ElevatedButton(
+                  onPressed: () {
+                    Get.toNamed(ViewRoute.loginPage);
+                  },
+                  child: Text('시작하기'),
+                  style: AppButton.xLarge,
+                )
+              ],
+            ),
           ),
         ),
       ),
