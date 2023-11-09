@@ -1,5 +1,6 @@
 import 'package:ace/controller/auth_controller.dart';
 import 'package:ace/controller/avatar_controller.dart';
+import 'package:ace/routes/view_route.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -35,12 +36,8 @@ class ProfileController extends GetxController {
 
       String avatar = avatarController.getAvatarUrl();
       if (avatar.isEmpty) {
-        throw Exception('아바타이 없습니다. 로그인이 필요합니다.');
+        throw Exception('아바타가 없습니다. 로그인이 필요합니다.');
       }
-      print(nickname.text);
-      print(bio);
-      print(position.value);
-      print(avatar);
 
       var response = await Dio().post(
         'https://dev.sniperfactory.com/api/me/profile',
@@ -55,10 +52,12 @@ class ProfileController extends GetxController {
 
       if (response.statusCode == 200) {
         // 새로운 토큰을 받아 저장합니다.
+
+        authController.token.value = response.data['data'];
         print(response.data);
-        authController.saveToken(response.data['data']);
 
         print('갱신된 토큰' + authController.getToken());
+        Get.toNamed(ViewRoute.homePage);
       } else {
         throw Exception('프로필 업데이트에 실패했습니다.');
       }

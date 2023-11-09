@@ -82,7 +82,6 @@ class SignUpController extends GetxController {
       return;
     }
 
-
     try {
       var response = await Dio().post(
         ApiRoute.signupAPi,
@@ -100,10 +99,11 @@ class SignUpController extends GetxController {
           _showSuccess('회원가입이 완료되었습니다.');
 
           print(response.data['data']);
+          print(response.data);
+          authController.token.value = response.data['data'];
+          // authController.saveToken(response.data['data']);
 
-          authController.saveToken(response.data['data']);
-
-          Get.to(() => const SignUpSuccess());
+          Get.toNamed(ViewRoute.signupSuccessPage);
         } else {
           _showError('회원가입은 성공했지만, 토큰을 받지 못했습니다.');
           print('실패');

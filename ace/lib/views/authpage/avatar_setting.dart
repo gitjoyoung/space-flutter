@@ -79,7 +79,7 @@ class AvatarCustomizer extends GetView<AvatarController> {
                 child: Stack(
                   alignment: Alignment.center,
                   children: [
-                    Image.asset('assets/icons/avatar_background.png'),
+                    Image.asset('assets/profile/avatar_background.png'),
                     Screenshot(
                       controller: controller.screenshotController,
                       child: Stack(
@@ -129,7 +129,7 @@ class AvatarCustomizer extends GetView<AvatarController> {
                   ),
                   child: Container(
                     padding: EdgeInsets.symmetric(
-                        vertical: 10.0, horizontal: 30.0), // 텍스트에만 패딩 적용
+                        vertical: 10.0, horizontal: 20.0), // 텍스트에만 패딩 적용
                     decoration: BoxDecoration(
                       border: isSelected
                           ? Border(
@@ -159,8 +159,7 @@ class AvatarCustomizer extends GetView<AvatarController> {
             if (controller.selectedCategory.value == 'hair') {
               return Padding(
                 padding: const EdgeInsets.symmetric(
-                    horizontal: 10.0,
-                    vertical: 8), // 여기에서 Row 전체에 좌우 패딩을 추가합니다.
+                    horizontal: 5.0, vertical: 8), // 여기에서 Row 전체에 좌우 패딩을 추가합니다.
                 child: Row(
                   mainAxisAlignment:
                       MainAxisAlignment.spaceAround, // 균등한 간격으로 정렬

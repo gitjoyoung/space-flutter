@@ -24,7 +24,7 @@ class HomeLayOut extends GetView<HomeController> {
     return Scaffold(
       appBar: SpaceAppBar(),
       bottomNavigationBar: Container(
-        height: 80,
+        height: 100,
         child: Obx(
           () => BottomNavigationBar(
             type: BottomNavigationBarType.fixed,

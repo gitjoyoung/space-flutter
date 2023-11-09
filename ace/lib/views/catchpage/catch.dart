@@ -1,3 +1,4 @@
+import 'package:ace/controller/auth_controller.dart';
 import 'package:ace/controller/mogak/mogak_cotroller.dart';
 import 'package:ace/routes/view_route.dart';
 import 'package:ace/utils/colors.dart';
@@ -75,6 +76,8 @@ class Catch extends GetView<MogakController> {
       );
   @override
   Widget build(BuildContext context) {
+    Get.put(AuthController());
+    final AuthController authController = Get.find<AuthController>();
     return Scaffold(
         body: Padding(
       padding: const EdgeInsets.only(top: 16, left: 10, right: 10),
@@ -126,7 +129,8 @@ class Catch extends GetView<MogakController> {
                           ),
                           trailing: InkWell(
                               onTap: () {
-                                Get.toNamed(ViewRoute.mogakTopListPage);
+                                print(authController.getToken());
+                                // Get.toNamed(ViewRoute.mogakTopListPage);
                               },
                               child: SvgPicture.asset(
                                   'assets/icons/icon20/Right.svg')),

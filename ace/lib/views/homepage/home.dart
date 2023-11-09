@@ -3,7 +3,7 @@ import 'package:ace/utils/typography.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class Home extends GetView {
+class Home extends GetView<HomeController> {
   const Home({super.key});
 
   @override
