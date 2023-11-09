@@ -1,19 +1,36 @@
 import 'dart:convert';
 
 import 'package:ace/routes/api_route.dart';
+import 'package:ace/routes/view_route.dart';
+import 'package:ace/utils/colors.dart';
 import 'package:ace/utils/email_validator.dart';
+import 'package:ace/widgets/modal_costom.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class AuthController extends GetxController {
   final Rx<String> token = Rx<String>("");
+  Dio dio = Dio();
 
   @override
   void onInit() {
     super.onInit();
   }
 
-  Dio dio = Dio();
+  void showModal(BuildContext context) {
+    ModalCostom(
+      context,
+      '로그인에 실패했습니다.',
+      '다시시도해 주세요',
+      Icons.warning,
+      AppColors.primary80,
+      '다시하기',
+      () {
+        Get.back();
+      },
+    );
+  }
 
   login(String email, String password) async {
     // 이메일 비밀번호 검증
@@ -48,10 +65,14 @@ class AuthController extends GetxController {
     print(res.data);
     if (res.data['status'] == 'success') {
       // 성공시 토큰값 업로드
-      print(res.data);
 
       token.value = res.data['data'];
       print('로그인 성공 : ${token.value}');
+      Get.toNamed(ViewRoute.homePage);
+    } else {
+      // 통신이 실패했을 때만 예외 처리
+      print('로그인에 실패했습니다.');
+      showModal(Get.context!);
     }
     return res.data['data'];
   }
@@ -60,7 +81,7 @@ class AuthController extends GetxController {
     return token.value; // 반응형 변수의 현재 값을 반환합니다.
   }
 
-  void saveToken(String newToken) {
-    token.value = newToken;
-  }
+  // void saveToken(String newToken) {
+  //   token.value = newToken;
+  // }
 }
