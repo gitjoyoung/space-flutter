@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:ace/models/mogak/appliedProfiles_model.dart';
+import 'package:ace/models/mogak/appliedprofiles_model.dart';
 import 'package:ace/models/mogak/author_model.dart';
 import 'package:ace/models/mogak/talk_model.dart';
 import 'package:dio/dio.dart';
@@ -20,7 +20,7 @@ class AllMogakModel {
   final int temperature;
   final Author? author;
   final List<AppliedProfiles>? appliedProfiles;
-  final List<TalkModel>? talks;
+  List<TalkModel>? talks;
   final List? upProfiles;
 
   AllMogakModel({
@@ -101,6 +101,14 @@ class AllMogakModel {
 
   String toJson() => json.encode(toMap());
 
+  void addTalks(List<TalkModel> newTalks) {
+    if (this.talks != null) {
+      this.talks!.addAll(newTalks);
+    } else {
+      this.talks = newTalks;
+    }
+  }
+
   factory AllMogakModel.fromJson(String source) =>
       AllMogakModel.fromMap(json.decode(source) as Map<String, dynamic>);
 }
@@ -118,7 +126,7 @@ void main() async {
             .map((jsonItem) => AllMogakModel.fromJson(json.encode(jsonItem)))
             .toList();
         for (final mogak in mogakList) {
-          print( mogak.toMap());
+          print(mogak.toMap());
         }
       } else {
         // 요청이 실패하면 예외를 throw합니다.
