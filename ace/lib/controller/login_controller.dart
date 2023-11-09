@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class LoginController extends GetxController {
+  AuthController authController = Get.find<AuthController>();
   var email = TextEditingController();
   var password = TextEditingController();
   var isButtonEnabled = false.obs;
