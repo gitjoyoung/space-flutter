@@ -2,7 +2,7 @@ import 'package:ace/controller/mogak/mogak_create_contoller.dart';
 import 'package:ace/utils/button.dart';
 import 'package:ace/utils/colors.dart';
 import 'package:ace/utils/typography.dart';
-import 'package:ace/widgets/modal_costom.dart';
+import 'package:ace/widgets/modal_custom.dart';
 import 'package:ace/widgets/space_appbar.dart';
 import 'package:ace/widgets/tag_row.dart';
 import 'package:ace/widgets/title_appbar_custom.dart';
