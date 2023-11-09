@@ -21,7 +21,6 @@ class HomeLayOut extends GetView<HomeController> {
 
   @override
   Widget build(BuildContext context) {
-    Get.put(HomeController());
     return Scaffold(
       appBar: SpaceAppBar(),
       bottomNavigationBar: Container(

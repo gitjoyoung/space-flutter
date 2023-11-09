@@ -1,7 +1,9 @@
 import 'dart:convert';
 
 import 'package:ace/routes/api_route.dart';
+import 'package:ace/routes/view_route.dart';
 import 'package:ace/utils/email_validator.dart';
+import 'package:ace/widgets/modal_costom.dart';
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 
@@ -48,10 +50,13 @@ class AuthController extends GetxController {
     print(res.data);
     if (res.data['status'] == 'success') {
       // 성공시 토큰값 업로드
-      print(res.data);
+   
 
       token.value = res.data['data'];
       print('로그인 성공 : ${token.value}');
+      Get.toNamed(ViewRoute.homePage);
+    } else {
+      Get.back();
     }
     return res.data['data'];
   }
