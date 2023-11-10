@@ -1,9 +1,11 @@
 import 'dart:convert';
 
 import 'package:ace/controller/auth_controller.dart';
+import 'package:ace/models/mogak/appliedprofiles_model.dart';
 import 'package:ace/models/mogak/author_model.dart';
 import 'package:ace/models/mogak/mogak_model.dart';
 import 'package:ace/models/mogak/profile.dart';
+import 'package:ace/models/mogak/talk_model.dart';
 import 'package:ace/routes/api_route.dart';
 import 'package:ace/utils/button.dart';
 import 'package:ace/utils/colors.dart';
@@ -20,7 +22,6 @@ class MogakDetailController extends GetxController {
   Rx<AllMogakModel?> mogakDetail = Rx<AllMogakModel?>(null);
   RxBool join = RxBool(false);
 
-  var isLoading = true.obs;
   late String id;
   final dio = Dio();
 
@@ -30,7 +31,7 @@ class MogakDetailController extends GetxController {
     if (Get.arguments is AllMogakModel) {
       mogakDetail.value = Get.arguments as AllMogakModel;
       id = mogakDetail.value?.id ?? '';
-   
+
       fetchDetailMogak(id);
     } else {
       print("모각 디테일 주소 오류");
@@ -45,7 +46,6 @@ class MogakDetailController extends GetxController {
 
 // 댓글 통신
   Future<void> fetchCommentMogak() async {
-    isLoading(true);
     try {
       var response = await dio.post(
         ApiRoute.mogakTalkApi,
@@ -57,37 +57,43 @@ class MogakDetailController extends GetxController {
       );
       if (response.statusCode == 200) {
         print("댓글 업로드 성공: ${response.data}");
-        fetchDetailMogak(mogakDetail.value!.id);
+        commentController.clear();
       } else {
         print('댓글 업로드 통신실패: ${response.statusCode}');
       }
-    } on DioError catch (e) {
-      print('Dio 에러: ${e.response?.data ?? e.message}');
     } catch (e) {
       print('일반 에러: $e');
     } finally {
-      commentController.clear();
+      fetchDetailMogak(id);
     }
   }
 
 // 글 목록
   Future<void> fetchDetailMogak(String id) async {
-    isLoading(true);
     // 글아이디 clo5fdhqb0004mk091m5p5p25
     // final url =  'https://dev.sniperfactory.com/api/mogak/clomvvdld0000jk08yhd30kq3';
     try {
-      print('통신 실행');
+      print(mogakDetail.value!.talks!.isNotEmpty
+          ? mogakDetail.value!.talks!.last.toString()
+          : "No talks available");
+
       final response = await dio.get(ApiRoute.mogakApi + mogakDetail.value!.id,
           options: Options(headers: {"Authorization": token}));
       if (response.statusCode == 200) {
         var jsonArray = response.data['data'];
-        print("모각 상세조회 리스폰스 데이타 " + jsonArray.toString());
-        mogakDetail.value = AllMogakModel.fromMap(jsonArray);
+        mogakDetail.value?.talks = List<TalkModel>.from(
+            jsonArray['talks'].map((x) => TalkModel.fromMap(x)));
+        mogakDetail.value?.appliedProfiles = List<AppliedProfiles>.from(
+            jsonArray['appliedProfiles']
+                .map((x) => AppliedProfiles.fromMap(x)));
+        mogakDetail.refresh();
       } else {
         print('모각 상세조회  통신 실패');
       }
     } finally {
-      isLoading(false);
+      print(mogakDetail.value!.talks!.isNotEmpty
+          ? mogakDetail.value!.talks!.last.toString()
+          : "No talks available");
     }
   }
 
@@ -105,7 +111,6 @@ class MogakDetailController extends GetxController {
   }
 
   Future<void> fetchJoinMogak(String mogakId) async {
-    isLoading(true);
     try {
       print('통신 실행');
       final response = await dio.post(ApiRoute.mogakApi + mogakId + '/apply',
@@ -117,9 +122,7 @@ class MogakDetailController extends GetxController {
       } else {
         print('모각 참여하기 통신 실패');
       }
-    } finally {
-      isLoading(false);
-    }
+    } finally {}
   }
 
 // 프로필 조회
@@ -145,9 +148,9 @@ class MogakDetailController extends GetxController {
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              Padding(
-                padding: const EdgeInsets.only(
-                    bottom: 16, left: 8, right: 8, top: 16),
+              const Padding(
+                padding:
+                    EdgeInsets.only(bottom: 16, left: 8, right: 8, top: 16),
                 child: Text(
                   "그룹에 참여하시겠습니까?",
                   style: AppTypography.tapButtonCardTitle16,
@@ -172,7 +175,7 @@ class MogakDetailController extends GetxController {
                       ),
                     ),
                   ),
-                  SizedBox(width: 10),
+                  const SizedBox(width: 10),
                   SizedBox(
                     width: 100,
                     child: ElevatedButton(
