@@ -10,6 +10,9 @@ class My extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+// Get.put(AvatarController());
+    // Get.put(AuthController());
+    // final AvatarController avatarController = Get.find<AvatarController>();
     return Scaffold(
       body: Padding(
         padding: const EdgeInsets.all(10),
@@ -18,54 +21,75 @@ class My extends StatelessWidget {
             children: [
               SizedBox(height: 16),
               Container(
-                  width: 130,
-                  height: 150,
-                  decoration: BoxDecoration(
-                    image: DecorationImage(
-                      image: AssetImage("assets/item/myavatar.png"),
-                      fit: BoxFit.cover,
+                width: 370,
+                height: 420,
+                decoration: BoxDecoration(
+                  color: Colors.white,
+                  borderRadius: BorderRadius.circular(10),
+                  border: Border.all(
+                    color: AppColors.strokeLine10,
+                    width: 1.0,
+                  ),
+                ),
+                child: ListView(
+                  children: [
+                    Container(
+                      height: 150,
+                      width: 200,
+                      child: SvgPicture.asset(
+                        "assets/item/myavatar.svg",
+                        fit: BoxFit.cover,
+                      ),
                     ),
-                  )),
-              SizedBox(height: 16),
-              DottedDashedLine(
-                  axis: Axis.horizontal,
-                  height: 0,
-                  width: 310,
-                  dashColor: AppColors.neutral10),
-              SizedBox(height: 218),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  SvgPicture.asset('assets/icons/Icon20/laptop.svg'),
-                  SizedBox(width: 8),
-                  Text(
-                    '스페이서 달성',
-                    style: AppTypography.tapButtonBold18,
-                  ),
-                ],
-              ),
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Icon(
-                    Icons.arrow_back_ios,
-                    color: Colors.grey,
-                    size: 16.0,
-                  ),
-                  Container(
-                      width: 175,
-                      height: 120,
-                      decoration: BoxDecoration(
-                        image: DecorationImage(
-                          image: AssetImage("assets/item/mypage.png"),
-                          fit: BoxFit.cover,
+                    SizedBox(height: 16),
+                    DottedDashedLine(
+                        axis: Axis.horizontal,
+                        height: 0,
+                        width: 310,
+                        dashColor: AppColors.neutral10),
+                    SizedBox(height: 16),
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        SvgPicture.asset("assets/icons/Icon20/laptop.svg"),
+                        SizedBox(width: 8),
+                        Text(
+                          '스페이서 달성',
+                          style: AppTypography.tapButtonBold18,
                         ),
-                      )),
-                  Icon(
-                    Icons.arrow_forward_ios,
-                    size: 16.0,
-                  ),
-                ],
+                      ],
+                    ),
+                    SizedBox(height: 16),
+                    Container(
+                      width: 370,
+                      child: Padding(
+                        padding: const EdgeInsets.all(10.0),
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Icon(
+                              Icons.arrow_back_ios,
+                              color: Colors.grey,
+                              size: 16.0,
+                            ),
+                            Container(
+                              height: 120,
+                              width: 200,
+                              child: SvgPicture.asset(
+                                "assets/item/mypage.jpg",
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                            Icon(
+                              Icons.arrow_forward_ios,
+                              size: 16.0,
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
               ),
               SizedBox(height: 16),
               myPageCustom(
