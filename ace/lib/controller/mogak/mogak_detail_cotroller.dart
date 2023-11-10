@@ -19,7 +19,6 @@ class MogakDetailController extends GetxController {
   TextEditingController commentController = TextEditingController();
   Rx<AllMogakModel?> mogakDetail = Rx<AllMogakModel?>(null);
   RxBool join = RxBool(false);
-  Rx<Author?> author = Rx<Author?>(null);
 
   var isLoading = true.obs;
   late String id;
@@ -31,10 +30,7 @@ class MogakDetailController extends GetxController {
     if (Get.arguments is AllMogakModel) {
       mogakDetail.value = Get.arguments as AllMogakModel;
       id = mogakDetail.value?.id ?? '';
-      if (mogakDetail.value?.author != null) {
-        print(' 모각 데이타' + mogakDetail.value!.author!.nickname.toString());
-        author.value = mogakDetail.value!.author!;
-      }
+   
       fetchDetailMogak(id);
     } else {
       print("모각 디테일 주소 오류");

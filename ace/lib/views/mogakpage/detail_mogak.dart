@@ -115,8 +115,12 @@ class MogakDetail extends GetView<MogakDetailController> {
                                       child: Column(
                                         children: [
                                           AvatarCustom(
-                                            badge: controller.mogakDetail.value
-                                                ?.author?.badge?.shortName,
+                                            authorBadge: controller
+                                                    .mogakDetail
+                                                    .value
+                                                    ?.appliedProfiles?[index]
+                                                    .badge ??
+                                                null,
                                             avatarUrl: controller
                                                     .mogakDetail
                                                     .value
@@ -196,10 +200,7 @@ class MogakDetail extends GetView<MogakDetailController> {
                               if (talks == null || talks.isEmpty) {
                                 return SizedBox(
                                   height: 100,
-                                  child: Center(
-                                      child: SizedBox(
-                                    height: 50,
-                                  )),
+                                  child: Center(child: Text('댓글이 없습니다!')),
                                 ); // 혹은 다른 적절한 위젯을 반환하여 렌더링을 하지 않도록 처리
                               }
                               return Padding(
@@ -218,9 +219,12 @@ class MogakDetail extends GetView<MogakDetailController> {
                                         Row(
                                           children: [
                                             AvatarCustom(
+                                              authorBadge: controller
+                                                  .mogakDetail
+                                                  .value
+                                                  ?.author
+                                                  ?.badge,
                                               avatarUrl: item!.author.avatar,
-                                              badge:
-                                                  item.author.badge?.shortName,
                                               height: 68,
                                               width: 70,
                                             ),

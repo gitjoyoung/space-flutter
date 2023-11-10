@@ -13,7 +13,7 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
 class MogakContent extends GetView<MogakController> {
-  const MogakContent( {this.data, this.maxLength, this.author, super.key});
+  const MogakContent({this.data, this.maxLength, this.author, super.key});
 
   final AllMogakModel? data;
   final int? maxLength;
@@ -32,7 +32,7 @@ class MogakContent extends GetView<MogakController> {
               title: Row(
                 children: [
                   AvatarCustom(
-                    badge: data?.author?.badge?.shortName,
+                    authorBadge: data?.author?.badge,
                     avatarUrl: data?.author?.avatar,
                     height: 48,
                     width: 43,

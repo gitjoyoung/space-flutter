@@ -1,5 +1,8 @@
 import 'package:ace/controller/auth_controller.dart';
 import 'package:ace/routes/api_route.dart';
+import 'package:ace/utils/button.dart';
+import 'package:ace/utils/colors.dart';
+import 'package:ace/utils/typography.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -16,20 +19,17 @@ class MogakCreateController extends GetxController {
 
   Future<void> createMogak() async {
     if (postTitle.isEmpty) {
-      showErrorDialog('제목이 비어있습니다.');
+      showErrorDialog('제목이 비어있습니다!');
       return;
     }
-
     if (postContent.isEmpty) {
-      showErrorDialog('내용이 비어있습니다.');
+      showErrorDialog('내용이 비어있습니다!');
       return;
     }
-
     if (maxParticipants <= 0) {
-      showErrorDialog('모집인원을 정해주세요.');
+      showErrorDialog('모집인원을 정해주세요!');
       return;
     }
-
     if (!["HIDDEN", "OPEN", "CLOSE"].contains(visiblityStatus.value)) {
       showErrorDialog('모집상태를 선택하지 않았습니다.');
       return;
@@ -66,14 +66,41 @@ class MogakCreateController extends GetxController {
 
   void showErrorDialog(String message) {
     Get.defaultDialog(
-      title: '에러 발생',
-      content: Text(message),
+      titlePadding: EdgeInsets.all(0),
+      title: '',
+      content: Column(
+        children: [
+          Icon(
+            Icons.warning,
+            size: 50,
+            color: AppColors.primary80,
+          ),
+          SizedBox(
+            height: 10,
+          ),
+          Text(
+            message,
+            style: AppTypography.tapButtonCardTitle16,
+          ),
+          SizedBox(
+            height: 10,
+          ),
+          Text(
+            '모각 등록에 실패하였습니다.',
+            style: AppTypography.cardBody.copyWith(color: AppColors.neutral40),
+          ),
+        ],
+      ),
       actions: [
-        ElevatedButton(
-          onPressed: () {
-            Get.back(); // 다이얼로그를 닫습니다.
-          },
-          child: Text('확인'),
+        Padding(
+          padding: const EdgeInsets.only(bottom: 16, left: 16, right: 16),
+          child: ElevatedButton(
+            style: AppButton.medium,
+            onPressed: () {
+              Get.back(); // 다이얼로그를 닫습니다.
+            },
+            child: Text('확인'),
+          ),
         ),
       ],
     );
