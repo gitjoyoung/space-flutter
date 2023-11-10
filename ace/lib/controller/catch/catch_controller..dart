@@ -1,54 +1,30 @@
 import 'package:ace/controller/auth_controller.dart';
-import 'package:ace/models/catch/catch_model.dart';
+import 'package:ace/models/catch/catch_maode2.dart';
+// import 'package:ace/models/catch/catch_model.dart';
 import 'package:ace/routes/api_route.dart';
+import 'package:ace/routes/view_route.dart';
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
 
 class CatchController extends GetxController {
   String token = Get.find<AuthController>().getToken();
+
   RxList<AllCatchModel> allCatchModels = RxList<AllCatchModel>();
   RxList<AllCatchModel> topCatchModels = RxList<AllCatchModel>();
   var isLoading = false.obs;
   final dio = Dio();
 
-  Future<void> fetchListCatch(
-      String url, RxList<AllCatchModel> targetList) async {
+  Future<List<AllCatchModel>> fetchAllCatchModels(String endpoint) async {
     try {
-      final response = await _dio.get(url);
-      if (response.statusCode == 200) {
-        final responseData = response.data['data'];
-        if (responseData == null) {
-          targetList.clear();
-          return;
-        }
-        if (responseData is! List) {
-          throw Exception(
-              'Expected a list but got ${responseData.runtimeType}');
-        }
-
-        final List<AllCatchModel> fetchedCatchs = [];
-        for (var json in responseData) {
-          if (json == null) {
-            // 로그에 null 데이터가 있음을 기록
-            print('Null data encountered in the list');
-            continue; // 리스트의 다음 항목으로 건너뛰기
-          }
-          if (json is! Map<String, dynamic>) {
-            // 로그에 유효하지 않은 타입의 데이터가 있음을 기록
-            print(
-                'Invalid data type encountered: Expected a Map but got ${json.runtimeType}');
-            continue; // 리스트의 다음 항목으로 건너뛰기
-          }
-          fetchedCatchs.add(AllCatchModel.fromJson(json));
-        }
-        targetList.assignAll(fetchedCatchs);
-      } else {
-        throw Exception('Failed to load data: HTTP ${response.statusCode}');
-      }
-    } on DioError catch (dioError) {
-      throw Exception('Dio error: ${dioError.message}');
+      var response = await dio.get(endpoint);
+      // JSON 데이터를 AllCatchModel 리스트로 변환합니다.
+      List<AllCatchModel> models = (response.data['data'] as List)
+          .map((item) => AllCatchModel.fromJson(item))
+          .toList();
+      return models;
     } catch (e) {
-      throw Exception('Error: $e');
+      print('Failed to load data: $e');
+      throw Exception('Failed to load data: $e');
     }
   }
 
@@ -70,9 +46,10 @@ class CatchController extends GetxController {
   Future<void> refreshCatchs() async {
     isLoading(true);
     try {
-      // 각각의 API로부터 데이터를 가져와서 리스트를 업데이트합니다.
-      await fetchListCatch(ApiRoute.catchApi, allCatchModels);
-      await fetchListCatch(ApiRoute.catchTopApi, topCatchModels);
+      // 모든 "catch" 모델 데이터를 가져와서 상태를 업데이트합니다.
+      allCatchModels.assignAll(await fetchAllCatchModels(ApiRoute.catchApi));
+      // 상위 "catch" 모델 데이터를 가져와서 상태를 업데이트합니다.
+      topCatchModels.assignAll(await fetchAllCatchModels(ApiRoute.catchTopApi));
       print('Data loaded successfully.');
     } catch (e) {
       print('Failed to load data: $e');

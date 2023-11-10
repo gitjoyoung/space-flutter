@@ -1,5 +1,6 @@
 import 'package:ace/controller/catch/catch_controller..dart';
 import 'package:ace/controller/mogak/mogak_cotroller.dart';
+import 'package:ace/models/catch/catch_maode2.dart';
 import 'package:ace/routes/view_route.dart';
 import 'package:ace/utils/colors.dart';
 import 'package:ace/utils/typography.dart';
@@ -17,10 +18,10 @@ class CatchList extends GetView<CatchController> {
 
   @override
   Widget build(BuildContext context) {
-    final isTopMogak = title == '핫한 캐치업';
+    // final isTopMogak = title == '핫한 캐치업';
 
-    final listToDisplay =
-        isTopMogak ? controller.topCatchModels : controller.allCatchModels;
+    // final listToDisplay =
+    //     isTopMogak ? controller.topCatchModels : controller.allCatchModels;
     return Scaffold(
       appBar: SpaceAppBar(),
       body: SingleChildScrollView(
@@ -60,9 +61,19 @@ class CatchList extends GetView<CatchController> {
                 physics: NeverScrollableScrollPhysics(),
                 shrinkWrap:
                     true, // SingleChildScrollView 내부에서 ListView를 사용하려면 이를 추가합니다.
-                itemCount: listToDisplay.length,
+                itemCount: 1,
                 itemBuilder: (context, index) {
-                  final item = listToDisplay[index];
+                  final item = AllCatchModel(
+                      id: "clo2q884r0001la085w99s7zm",
+                      title: "안드로이드 플러터 앱 release",
+                      content: "안드로이드 플러터 앱 release.",
+                      url:
+                          "https://velog.io/@kw2577/%EC%95%88%EB%93%9C%EB%A1%9C%EC%9D%B4%EB%93%9C-%ED%94%8C%EB%9F%AC%ED%84%B0-%EC%95%B1-release",
+                      thumbnail:
+                          "https://velog.velcdn.com/images/kw2577/post/bc2868ed-b910-40ad-adcd-a1099befc091/image.png",
+                      authorId: "clo2moojy0001mg08zd57870v",
+                      temperature: 0,
+                      status: "PUBLISHED");
                   return Column(
                     children: [
                       Card(
