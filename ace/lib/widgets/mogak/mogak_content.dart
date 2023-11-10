@@ -31,7 +31,7 @@ class MogakContent extends GetView<MogakController> {
               contentPadding: EdgeInsets.only(left: 0),
               title: Row(
                 children: [
-                  author != null
+                  author?.badge != null
                       ? BadgeAvatarCustom(
                           authorBadge: author?.badge,
                           avatarUrl: author?.avatar,
@@ -39,8 +39,8 @@ class MogakContent extends GetView<MogakController> {
                           width: 43,
                         )
                       : BadgeAvatarCustom(
-                          authorBadge: author?.badge,
-                          avatarUrl: author?.avatar,
+                          authorBadge: data?.author?.badge,
+                          avatarUrl: data?.author?.avatar,
                           height: 48,
                           width: 43,
                         ),
