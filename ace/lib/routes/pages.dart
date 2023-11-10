@@ -12,7 +12,7 @@ import 'package:ace/routes/view_route.dart';
 import 'package:ace/views/authpage/chang_password_view.dart';
 import 'package:ace/views/authpage/find_password.dart';
 import 'package:ace/views/authpage/login.dart';
-import 'package:ace/views/authpage/registration_page.dart';
+import 'package:ace/views/authpage/registration.dart';
 import 'package:ace/views/authpage/sign_up_success.dart';
 import 'package:ace/views/authpage/splash.dart';
 import 'package:ace/views/catchpage/catch.dart';
@@ -26,6 +26,7 @@ import 'package:ace/views/mogakpage/create_mogak.dart';
 import 'package:ace/views/mogakpage/detail_mogak.dart';
 import 'package:ace/views/mogakpage/list_mogak.dart';
 import 'package:ace/views/mogakpage/mogak.dart';
+
 import 'package:get/get.dart';
 
 class AppPages {
@@ -78,7 +79,6 @@ class AppPages {
       page: () => const HomeLayOut(),
       binding: BindingsBuilder(() {
         Get.put(MogakController());
-
         Get.put(HomeController());
       }),
     ),

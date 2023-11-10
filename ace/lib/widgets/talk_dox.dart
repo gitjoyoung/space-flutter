@@ -52,15 +52,15 @@ class SpeechBubble extends StatelessWidget {
 class BubblePainter extends CustomPainter {
   @override
   void paint(Canvas canvas, Size size) {
-    var paint = Paint()..color = const Color.fromARGB(255, 139, 29, 29);
+    var paint = Paint()..color = Color.fromARGB(255, 255, 255, 255);
 
     var path = Path();
     path.lineTo(0, size.height);
     path.lineTo(size.width, size.height);
     path.lineTo(size.width, 0);
     path.lineTo(0, 0);
-    path.lineTo(0, size.height / 2 - 2);
-    path.lineTo(-10, size.height / 2 + 10); // 말풍선 꼬리 부분
+    path.lineTo(0, size.height / 3 + 7);
+    path.lineTo(-10, size.height / 1.4 + 10); // 말풍선 꼬리 부분
     path.lineTo(0, size.height / 2 + 12);
     path.close();
 
