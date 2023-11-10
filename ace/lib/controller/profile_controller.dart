@@ -6,7 +6,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 //프로필 정보를 업데이트하고 새 토큰을 받는 함수를 정의합니다.
-//
 
 class ProfileController extends GetxController {
   final AvatarController avatarController = Get.find<AvatarController>();
@@ -30,12 +29,13 @@ class ProfileController extends GetxController {
 // 프로필 정보를 업데이트하고 새 토큰을 받는 함수를 정의합니다.
   Future<void> updateProfile() async {
     try {
+      // 토큰을 가져옵니다.
       String token = authController.getToken();
       // 토큰이 비어 있는지 확인합니다.
       if (token.isEmpty) {
         throw Exception('토큰이 없습니다. 로그인이 필요합니다.');
       }
-
+// 아바타 url을 가져옵니다.
       String avatar = avatarController.getAvatarUrl();
       if (avatar.isEmpty) {
         throw Exception('아바타가 없습니다. 로그인이 필요합니다.');
@@ -54,7 +54,6 @@ class ProfileController extends GetxController {
 
       if (response.statusCode == 200) {
         // 새로운 토큰을 받아 저장합니다.
-
         authController.token.value = response.data['data'];
         print(response.data);
 
