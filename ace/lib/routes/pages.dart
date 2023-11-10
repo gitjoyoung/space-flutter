@@ -1,4 +1,5 @@
 import 'package:ace/controller/auth_controller.dart';
+
 import 'package:ace/controller/change_password_controller.dart';
 import 'package:ace/controller/find_password_controller.dart';
 import 'package:ace/controller/home/home_controller.dart';
@@ -23,6 +24,7 @@ import 'package:ace/views/mogakpage/create_mogak.dart';
 import 'package:ace/views/mogakpage/detail_mogak.dart';
 import 'package:ace/views/mogakpage/list_mogak.dart';
 import 'package:ace/views/mogakpage/mogak.dart';
+
 import 'package:get/get.dart';
 
 class AppPages {
@@ -75,7 +77,6 @@ class AppPages {
       page: () => const HomeLayOut(),
       binding: BindingsBuilder(() {
         Get.put(MogakController());
-
         Get.put(HomeController());
       }),
     ),
