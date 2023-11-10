@@ -1,13 +1,11 @@
 import 'package:ace/controller/catch/catch_controller..dart';
-import 'package:ace/controller/mogak/mogak_cotroller.dart';
-import 'package:ace/routes/view_route.dart';
+
 import 'package:ace/utils/colors.dart';
 import 'package:ace/utils/typography.dart';
 import 'package:ace/widgets/catchup_contents.dart';
 import 'package:ace/widgets/comment_Icon.dart';
 import 'package:ace/widgets/space_appbar.dart';
 import 'package:ace/widgets/title_appbar_custom.dart';
-import 'package:ace/widgets/mogak_content.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';

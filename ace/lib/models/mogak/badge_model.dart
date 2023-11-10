@@ -1,10 +1,10 @@
 import 'dart:convert';
 
-class Badge {
+class BadgeModel {
   final String shortName;
   final String fgColor;
   final String bgColor;
-  Badge({
+  BadgeModel({
     required this.shortName,
     required this.fgColor,
     required this.bgColor,
@@ -18,8 +18,8 @@ class Badge {
     };
   }
 
-  factory Badge.fromMap(Map<String, dynamic> map) {
-    return Badge(
+  factory BadgeModel.fromMap(Map<String, dynamic> map) {
+    return BadgeModel(
       shortName: map['shortName'] as String,
       fgColor: map['fgColor'] as String,
       bgColor: map['bgColor'] as String,
@@ -28,6 +28,6 @@ class Badge {
 
   String toJson() => json.encode(toMap());
 
-  factory Badge.fromJson(String source) =>
-      Badge.fromMap(json.decode(source) as Map<String, dynamic>);
+  factory BadgeModel.fromJson(String source) =>
+      BadgeModel.fromMap(json.decode(source) as Map<String, dynamic>);
 }

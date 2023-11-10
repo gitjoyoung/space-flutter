@@ -1,18 +1,14 @@
-import 'dart:ffi';
-
 import 'package:ace/controller/mogak/mogak_detail_cotroller.dart';
-import 'package:ace/models/mogak/appliedProfiles_model.dart';
-import 'package:ace/models/mogak/author_model.dart';
+
 import 'package:ace/models/mogak/mogak_model.dart';
 import 'package:ace/models/mogak/talk_model.dart';
 import 'package:ace/utils/button.dart';
 import 'package:ace/utils/colors.dart';
 import 'package:ace/utils/typography.dart';
-import 'package:ace/views/talkpage/talk.dart';
-import 'package:ace/widgets/modal_custom.dart';
+
 import 'package:ace/widgets/space_appbar.dart';
 import 'package:ace/widgets/title_appbar_custom.dart';
-import 'package:ace/widgets/avatar_custom.dart';
+import 'package:ace/widgets/badge_avatar_custom.dart';
 import 'package:ace/widgets/card_tag.dart';
 import 'package:ace/widgets/mogak/mogak_content.dart';
 import 'package:flutter/material.dart';
@@ -114,9 +110,13 @@ class MogakDetail extends GetView<MogakDetailController> {
                                       padding: const EdgeInsets.only(right: 10),
                                       child: Column(
                                         children: [
-                                          AvatarCustom(
-                                            badge: controller.mogakDetail.value
-                                                ?.author?.badge?.shortName,
+                                          BadgeAvatarCustom(
+                                            authorBadge: controller
+                                                    .mogakDetail
+                                                    .value
+                                                    ?.appliedProfiles?[index]
+                                                    .badge ??
+                                                null,
                                             avatarUrl: controller
                                                     .mogakDetail
                                                     .value
@@ -196,10 +196,7 @@ class MogakDetail extends GetView<MogakDetailController> {
                               if (talks == null || talks.isEmpty) {
                                 return SizedBox(
                                   height: 100,
-                                  child: Center(
-                                      child: SizedBox(
-                                    height: 50,
-                                  )),
+                                  child: Center(child: Text('댓글이 없습니다!')),
                                 ); // 혹은 다른 적절한 위젯을 반환하여 렌더링을 하지 않도록 처리
                               }
                               return Padding(
@@ -217,10 +214,13 @@ class MogakDetail extends GetView<MogakDetailController> {
                                       children: [
                                         Row(
                                           children: [
-                                            AvatarCustom(
+                                            BadgeAvatarCustom(
+                                              authorBadge: controller
+                                                  .mogakDetail
+                                                  .value
+                                                  ?.author
+                                                  ?.badge,
                                               avatarUrl: item!.author.avatar,
-                                              badge:
-                                                  item.author.badge?.shortName,
                                               height: 68,
                                               width: 70,
                                             ),
