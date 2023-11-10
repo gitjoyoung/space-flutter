@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:ace/models/mogak/appliedprofiles_model.dart';
 import 'package:ace/models/mogak/author_model.dart';
 import 'package:ace/models/mogak/talk_model.dart';
-import 'package:dio/dio.dart';
 
 class AllMogakModel {
   final String id;
@@ -111,36 +110,4 @@ class AllMogakModel {
 
   factory AllMogakModel.fromJson(String source) =>
       AllMogakModel.fromMap(json.decode(source) as Map<String, dynamic>);
-}
-
-void main() async {
-  const token = "clo2moojy0001mg08zd57870v";
-  Future<void> fetchData() async {
-    try {
-      final response =
-          await Dio().get('https://dev.sniperfactory.com/api/mogak');
-
-      if (response.statusCode == 200) {
-        List<dynamic> jsonArray = response.data['data'];
-        List<AllMogakModel> mogakList = jsonArray
-            .map((jsonItem) => AllMogakModel.fromJson(json.encode(jsonItem)))
-            .toList();
-        for (final mogak in mogakList) {
-          print(mogak.toMap());
-        }
-      } else {
-        // 요청이 실패하면 예외를 throw합니다.
-        throw Exception('Failed to load data');
-      }
-    } catch (e) {
-      // 예외 처리
-      throw Exception('Failed to load data: $e');
-    }
-  }
-
-  try {
-    await fetchData();
-  } catch (e) {
-    print('Error: $e');
-  }
 }
