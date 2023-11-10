@@ -101,8 +101,8 @@ class Profile extends GetView<ProfileController> {
                             mainAxisSize: MainAxisSize.min,
                             children: [
                               Expanded(
-//이 코드는 현재 선택된 포지션에 해당하는 키를 groupValue로 설정하여,
-////해당 포지션의 라디오 버튼이 선택된 상태로 표시되도록 합니다. 사용자가 다른 라디오 버튼을 선택하면,
+                                //이 코드는 현재 선택된 포지션에 해당하는 키를 groupValue로 설정하여,
+                                ////해당 포지션의 라디오 버튼이 선택된 상태로 표시되도록 합니다. 사용자가 다른 라디오 버튼을 선택하면,
                                 ///onChanged 콜백이 호출되고 profileController.updatePosition 메서드를 통해 새로운 포지션 값으로 상태가 업데이트됩니다.
                                 ///상태가 업데이트되면 Obx 블록 내부의 UI도 새로운 groupValue에 따라 갱신되어 현재 선택된 라디오 버튼이 변경됩니다.
                                 child: Obx(
