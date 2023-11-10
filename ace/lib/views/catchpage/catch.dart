@@ -1,17 +1,16 @@
 import 'package:ace/controller/auth_controller.dart';
-import 'package:ace/controller/mogak/mogak_cotroller.dart';
+import 'package:ace/controller/catch/catch_controller..dart';
 import 'package:ace/routes/view_route.dart';
 import 'package:ace/utils/colors.dart';
 import 'package:ace/utils/typography.dart';
 import 'package:ace/widgets/catchup_contents.dart';
 import 'package:ace/widgets/comment_Icon.dart';
-import 'package:ace/widgets/mogak_content.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 import 'package:shimmer/shimmer.dart';
 
-class Catch extends GetView<MogakController> {
+class Catch extends GetView<CatchController> {
   const Catch({super.key});
 
   Widget buildSkeleton() => SingleChildScrollView(
@@ -76,172 +75,176 @@ class Catch extends GetView<MogakController> {
       );
   @override
   Widget build(BuildContext context) {
-    Get.put(AuthController());
-    final AuthController authController = Get.find<AuthController>();
+    Get.put(CatchController());
     return Scaffold(
-        body: Padding(
-      padding: const EdgeInsets.only(top: 16, left: 10, right: 10),
-      child: SingleChildScrollView(
-        child: Column(
-          children: [
-            Container(
-              height: 48,
-              child: TextField(
-                decoration: InputDecoration(
-                  prefixIcon: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 16),
-                    child: Icon(Icons.search),
+        body: RefreshIndicator(
+      onRefresh: () => controller.refreshCatchs(),
+      child: Padding(
+        padding: const EdgeInsets.only(top: 16, left: 10, right: 10),
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              Container(
+                height: 48,
+                child: TextField(
+                  decoration: InputDecoration(
+                    prefixIcon: Padding(
+                      padding: const EdgeInsets.symmetric(horizontal: 16),
+                      child: Icon(Icons.search),
+                    ),
+                    fillColor: Colors.white,
+                    filled: true,
+                    enabledBorder: OutlineInputBorder(
+                      borderSide: const BorderSide(
+                          color: AppColors.strokeLine05, width: 2.0),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderSide: const BorderSide(
+                          color: AppColors.primaryColor, width: 2.0),
+                      borderRadius: BorderRadius.circular(12),
+                    ),
+                    hintText: '내용 검색하기',
                   ),
-                  fillColor: Colors.white,
-                  filled: true,
-                  enabledBorder: OutlineInputBorder(
-                    borderSide: const BorderSide(
-                        color: AppColors.strokeLine05, width: 2.0),
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  focusedBorder: OutlineInputBorder(
-                    borderSide: const BorderSide(
-                        color: AppColors.primaryColor, width: 2.0),
-                    borderRadius: BorderRadius.circular(12),
-                  ),
-                  hintText: '내용 검색하기',
                 ),
               ),
-            ),
-            Obx(
-              () => !controller.isLoading.value
-                  ? buildSkeleton()
-                  : Column(
-                      children: [
-                        ListTile(
-                          contentPadding: EdgeInsets.zero,
-                          title: Row(
-                            children: [
-                              SvgPicture.asset('assets/icons/icon20/dart.svg'),
-                              SizedBox(
-                                width: 8,
-                              ),
-                              Text(
-                                '핫한 캐치업',
-                                style: AppTypography.tapButtonBold18,
-                              ),
-                            ],
+              Obx(
+                () => !controller.isLoading.value
+                    ? buildSkeleton()
+                    : Column(
+                        children: [
+                          ListTile(
+                            contentPadding: EdgeInsets.zero,
+                            title: Row(
+                              children: [
+                                SvgPicture.asset(
+                                    'assets/icons/icon20/dart.svg'),
+                                SizedBox(
+                                  width: 8,
+                                ),
+                                Text(
+                                  '핫한 캐치업',
+                                  style: AppTypography.tapButtonBold18,
+                                ),
+                              ],
+                            ),
+                            trailing: InkWell(
+                                onTap: () {
+                                  // Get.toNamed(ViewRoute.mogakTopListPage);
+                                },
+                                child: SvgPicture.asset(
+                                    'assets/icons/icon20/Right.svg')),
                           ),
-                          trailing: InkWell(
-                              onTap: () {
-                                print(authController.getToken());
-                                // Get.toNamed(ViewRoute.mogakTopListPage);
-                              },
-                              child: SvgPicture.asset(
-                                  'assets/icons/icon20/Right.svg')),
-                        ),
-                        controller.allMogakModels.isEmpty
-                            ? Container()
-                            : Card(
-                                elevation: 0, // 그림자 제거
-                                shape: RoundedRectangleBorder(
-                                  side: BorderSide(
-                                      color: AppColors.strokeLine10,
-                                      width: 1.0), // 윤곽선 색과 두께 설정
-                                  borderRadius:
-                                      BorderRadius.circular(10), // 윤곽선 둥글기 설정
+                          controller.allCatchModels.isEmpty
+                              ? Container()
+                              : Card(
+                                  elevation: 0, // 그림자 제거
+                                  shape: RoundedRectangleBorder(
+                                    side: BorderSide(
+                                        color: AppColors.strokeLine10,
+                                        width: 1.0), // 윤곽선 색과 두께 설정
+                                    borderRadius:
+                                        BorderRadius.circular(10), // 윤곽선 둥글기 설정
+                                  ),
+                                  child: CatchupContent(
+                                    data: controller.allCatchModels.first,
+                                    maxLength: 3,
+                                  ),
                                 ),
-                                child: CatchupContent(
-                                  data: controller.allMogakModels.first,
-                                  maxLength: 3,
-                                ),
-                              ),
-                        SizedBox(
-                          height: 8,
-                        ),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.end,
-                          children: [
-                            CommentIcon(
-                              svgIcon: 'assets/icons/icon20/plus.svg',
-                              count: controller.allMogakModels.first
-                                      .appliedProfiles?.length ??
-                                  0,
-                            ),
-                            SizedBox(
-                              width: 10,
-                            ),
-                            CommentIcon(
-                              svgIcon: 'assets/icons/icon20/like.svg',
-                              count:
-                                  controller.allMogakModels.first.temperature,
-                            ),
-                          ],
-                        ),
-                        SizedBox(
-                          height: 25,
-                        ),
-                        ListTile(
-                          contentPadding: EdgeInsets.zero,
-                          onTap: () {
-                            print('캐치업');
-                            Get.toNamed(ViewRoute.mogakAllListPage);
-                          },
-                          title: Row(
-                            mainAxisAlignment: MainAxisAlignment.start,
-                            children: [
-                              SvgPicture.asset('assets/icons/icon20/dart.svg'),
-                              SizedBox(
-                                width: 8,
-                              ),
-                              Text(
-                                '캐치업!',
-                                style: AppTypography.tapButtonBold18,
-                              ),
-                            ],
+                          SizedBox(
+                            height: 8,
                           ),
-                          trailing:
-                              SvgPicture.asset('assets/icons/icon20/Right.svg'),
-                        ),
-                        Obx(() => controller.allMogakModels.isEmpty
-                            ? SizedBox()
-                            : Card(
-                                elevation: 0, // 그림자 제거
-                                shape: RoundedRectangleBorder(
-                                  side: BorderSide(
-                                      color: AppColors.strokeLine10,
-                                      width: 1.0), // 윤곽선 색과 두께 설정
-                                  borderRadius:
-                                      BorderRadius.circular(10), // 윤곽선 둥글기 설정
-                                ),
-                                child: CatchupContent(
-                                  data: controller.topMogakModels.first,
-                                  maxLength: 3,
-                                ),
-                              )),
-                        SizedBox(
-                          height: 8,
-                        ),
-                        Obx(
-                          () => Row(
+                          Row(
                             mainAxisAlignment: MainAxisAlignment.end,
                             children: [
-                              CommentIcon(
-                                svgIcon: 'assets/icons/icon20/plus.svg',
-                                count: controller.topMogakModels.first
-                                        .appliedProfiles?.length ??
-                                    0,
-                              ),
+                              // CommentIcon(
+                              //   svgIcon: 'assets/icons/icon20/plus.svg',
+                              //   count: controller.allCatchModels.first.upProfiles
+                              //           ?.length ??
+                              //       0,
+                              // ),
                               SizedBox(
                                 width: 10,
                               ),
-                              CommentIcon(
-                                svgIcon: 'assets/icons/icon20/like.svg',
-                                count:
-                                    controller.topMogakModels.first.temperature,
-                              ),
+                              // CommentIcon(
+                              //   svgIcon: 'assets/icons/icon20/like.svg',
+                              //   count:
+                              //       controller.topCatchModels.first.temperature,
+                              // ),
                             ],
                           ),
-                        ),
-                      ],
-                    ),
-            )
-          ],
+                          SizedBox(
+                            height: 25,
+                          ),
+                          ListTile(
+                            contentPadding: EdgeInsets.zero,
+                            onTap: () {
+                              print('캐치업');
+                              Get.toNamed(ViewRoute.mogakAllListPage);
+                            },
+                            title: Row(
+                              mainAxisAlignment: MainAxisAlignment.start,
+                              children: [
+                                SvgPicture.asset(
+                                    'assets/icons/icon20/dart.svg'),
+                                SizedBox(
+                                  width: 8,
+                                ),
+                                Text(
+                                  '캐치업!',
+                                  style: AppTypography.tapButtonBold18,
+                                ),
+                              ],
+                            ),
+                            trailing: SvgPicture.asset(
+                                'assets/icons/icon20/Right.svg'),
+                          ),
+                          Obx(
+                            () => controller.allCatchModels.isEmpty
+                                ? SizedBox()
+                                : Card(
+                                    elevation: 0, // 그림자 제거
+                                    shape: RoundedRectangleBorder(
+                                      side: BorderSide(
+                                          color: AppColors.strokeLine10,
+                                          width: 1.0), // 윤곽선 색과 두께 설정
+                                      borderRadius: BorderRadius.circular(
+                                          10), // 윤곽선 둥글기 설정
+                                    ),
+                                    child: Column(
+                                      children: controller.topCatchModels
+                                          .map((catchModel) {
+                                        return CatchupContent(
+                                          data: catchModel,
+                                          maxLength: 3,
+                                        );
+                                      }).toList(),
+                                    ),
+                                  ),
+                          ),
+                          SizedBox(
+                            height: 8,
+                          ),
+                          Obx(
+                            () => Row(
+                              mainAxisAlignment: MainAxisAlignment.end,
+                              children: [
+                                SizedBox(
+                                  width: 10,
+                                ),
+                                // CommentIcon(
+                                //   svgIcon: 'assets/icons/icon20/like.svg',
+                                //   count: controller
+                                //       .topCatchModels.first.temperature,
+                                // ),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+              )
+            ],
+          ),
         ),
       ),
     ));
