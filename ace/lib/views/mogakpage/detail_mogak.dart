@@ -96,7 +96,7 @@ class MogakDetail extends GetView<MogakDetailController> {
                           child: Column(
                             children: [
                               MogakContent(
-                                  author: mogakDetail!.author ?? null,
+                                  author: mogakDetail?.author ?? null,
                                   data: controller.mogakDetail.value,
                                   maxLength: 100),
                               SizedBox(
