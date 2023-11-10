@@ -1,4 +1,5 @@
 import 'package:ace/controller/mogak/mogak_cotroller.dart';
+import 'package:ace/models/mogak/author_model.dart';
 import 'package:ace/models/mogak/mogak_model.dart';
 import 'package:ace/routes/view_route.dart';
 import 'package:ace/utils/colors.dart';
@@ -12,10 +13,12 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
 class MogakContent extends GetView<MogakController> {
-  const MogakContent({this.data, this.maxLength, super.key});
+  const MogakContent( {this.data, this.maxLength, this.author, super.key});
 
   final AllMogakModel? data;
   final int? maxLength;
+  final Author? author;
+
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -37,17 +40,17 @@ class MogakContent extends GetView<MogakController> {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 8.0),
                     child: Text(
-                      data?.author?.nickname ?? "닉네임없음",
+                      author?.nickname ?? data?.author?.nickname ?? "닉네임없음",
                       style: AppTypography.button28Bold,
                     ),
                   ),
-                  Tag(title: '수료생'),
+                  Tag(title: author?.role ?? data?.author?.role ?? "역할없음"),
                 ],
               ),
               trailing: InkWell(
                   onTap: () {
                     print('좋아요 클릭');
-                    controller.LikeMogak(data?.id ?? "");
+                    controller.fetchLikeModak(data!.id);
                   },
                   child: SvgPicture.asset('assets/icons/icon20/like.svg')),
             ),
@@ -87,6 +90,8 @@ class MogakContent extends GetView<MogakController> {
                 overflow: TextOverflow.ellipsis,
               ),
             ),
+
+            // 참여인원 날자 표시
             ListTile(
               contentPadding: EdgeInsets.only(left: 0),
               trailing: Text(
