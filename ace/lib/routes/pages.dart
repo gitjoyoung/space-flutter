@@ -1,4 +1,5 @@
 import 'package:ace/controller/auth_controller.dart';
+import 'package:ace/controller/catch/catch_controller..dart';
 import 'package:ace/controller/change_password_controller.dart';
 import 'package:ace/controller/find_password_controller.dart';
 import 'package:ace/controller/home/home_controller.dart';
@@ -14,6 +15,8 @@ import 'package:ace/views/authpage/login.dart';
 import 'package:ace/views/authpage/registration_page.dart';
 import 'package:ace/views/authpage/sign_up_success.dart';
 import 'package:ace/views/authpage/splash.dart';
+import 'package:ace/views/catchpage/catch.dart';
+import 'package:ace/views/catchpage/list_catch.dart';
 
 import 'package:ace/views/homepage/home_layout.dart';
 import 'package:ace/views/homepage/profile.dart';
@@ -109,6 +112,21 @@ class AppPages {
     GetPage(
       name: ViewRoute.mogakAllListPage,
       page: () => const MogakList(title: '모든 모각코'),
+    ),
+    GetPage(
+      name: ViewRoute.catchPage,
+      page: () => const Catch(),
+      binding: BindingsBuilder(() {
+        Get.put(CatchController());
+      }),
+    ),
+    GetPage(
+      name: ViewRoute.catchlAllListPage,
+      page: () => const CatchList(title: '핫한 캐치업'),
+    ),
+    GetPage(
+      name: ViewRoute.catchlTopListPage,
+      page: () => const CatchList(title: '캐치업!'),
     ),
   ];
 }
