@@ -99,8 +99,9 @@ class AuthController extends GetxController {
     return res.data['data'];
   }
 
+// 반응형 토큰의 현재 값을 반환합니다.
   String getToken() {
-    return token.value; // 반응형 변수의 현재 값을 반환합니다.
+    return token.value;
   }
 
   // void saveToken(String newToken) {

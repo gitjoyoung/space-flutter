@@ -5,10 +5,14 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+//프로필 정보를 업데이트하고 새 토큰을 받는 함수를 정의합니다.
+//
+
 class ProfileController extends GetxController {
   final AvatarController avatarController = Get.find<AvatarController>();
   final AuthController authController = Get.find<AuthController>();
 
+//데이터 타입 저장
   var nickname = TextEditingController();
   var bio = 'ㅁㄴㅇ';
   var position = 'DEVELOPER'.obs;
@@ -17,8 +21,6 @@ class ProfileController extends GetxController {
     '디자이너': 'DESIGNER',
     '헤드헌터': 'SCOUTER',
   };
-
-  // ... 기존 코드 ...
 
   void updatePosition(String newPositionKey) {
     position.value = positionMap[newPositionKey] ?? '';

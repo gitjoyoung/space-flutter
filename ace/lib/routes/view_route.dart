@@ -17,6 +17,10 @@ class ViewRoute {
   static final String mogakCreatePage = "/mogakCreate";
   static final String mogakAllListPage = "/mogakAllList";
   static final String mogakTopListPage = "/mogakTopList";
+
+  static final String catchPage = "/catch";
+  static final String catchlAllListPage = "/catchAllList";
+  static final String catchlTopListPage = "/catchTopList";
 }
 
 
