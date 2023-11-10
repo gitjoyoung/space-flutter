@@ -86,16 +86,38 @@ class MogakController extends GetxController {
   }
 
   // 핫한 모각코나 모든 모각코를 정렬하는 함수
-  void sortMogaksByDate() {
-    if (isSortedList.isTrue) {
-      topMogakModels.sort((a, b) => b.createdAt.compareTo(a.createdAt));
-      allMogakModels.sort((a, b) => b.createdAt.compareTo(a.createdAt));
+  // void sortMogaksByDate() {
+  //   if (isSortedList.isTrue) {
+  //     topMogakModels.sort((a, b) => b.createdAt.compareTo(a.createdAt));
+  //     allMogakModels.sort((a, b) => b.createdAt.compareTo(a.createdAt));
+  //   } else {
+  //     topMogakModels.sort((a, b) => a.createdAt.compareTo(b.createdAt));
+  //     allMogakModels.sort((a, b) => a.createdAt.compareTo(b.createdAt));
+  //   }
+  //   isSortedList.toggle(); // 정렬 상태 변경
+  //   update(); // UI 갱신을 위해 GetX update 호출
+  // }
+
+  void sortMogaksByDate(bool isTopMogak) {
+    RxList<AllMogakModel> targetList;
+
+    if (isTopMogak) {
+      targetList = topMogakModels;
+    } else if (!isTopMogak) {
+      targetList = allMogakModels;
     } else {
-      topMogakModels.sort((a, b) => a.createdAt.compareTo(b.createdAt));
-      allMogakModels.sort((a, b) => a.createdAt.compareTo(b.createdAt));
+      print("Invalid list type");
+      return;
     }
-    isSortedList.toggle(); // 정렬 상태 변경
-    update(); // UI 갱신을 위해 GetX update 호출
+
+    if (isSortedList.isTrue) {
+      targetList.sort((a, b) => b.createdAt.compareTo(a.createdAt));
+    } else {
+      targetList.sort((a, b) => a.createdAt.compareTo(b.createdAt));
+    }
+
+    isSortedList.toggle();
+    update();
   }
 
   @override
