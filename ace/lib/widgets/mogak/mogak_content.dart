@@ -13,11 +13,10 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
 class MogakContent extends GetView<MogakController> {
-  const MogakContent({this.data, this.maxLength, this.author, super.key});
+  const MogakContent({this.data, this.maxLength, super.key});
 
   final AllMogakModel? data;
   final int? maxLength;
-  final Author? author;
 
   @override
   Widget build(BuildContext context) {
@@ -31,27 +30,24 @@ class MogakContent extends GetView<MogakController> {
               contentPadding: EdgeInsets.only(left: 0),
               title: Row(
                 children: [
-                  author?.badge != null
-                      ? BadgeAvatarCustom(
-                          authorBadge: author?.badge,
-                          avatarUrl: author?.avatar,
-                          height: 48,
-                          width: 43,
-                        )
-                      : BadgeAvatarCustom(
-                          authorBadge: data?.author?.badge,
-                          avatarUrl: data?.author?.avatar,
-                          height: 48,
-                          width: 43,
-                        ),
+                  BadgeAvatarCustom(
+                    authorBadge: data?.author?.badge,
+                    avatarUrl: data?.author?.avatar,
+                    height: 48,
+                    width: 43,
+                  ),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 8.0),
                     child: Text(
-                      author?.nickname ?? data?.author?.nickname ?? "닉네임없음",
+                      data?.author?.nickname ??
+                          data?.author?.nickname ??
+                          "닉네임없음",
                       style: AppTypography.button28Bold,
                     ),
                   ),
-                  Tag(title: author?.role ?? data?.author?.role ?? "역할없음"),
+                  Tag(
+                      title:
+                          data?.author?.role ?? data?.author?.role ?? "역할없음"),
                 ],
               ),
               trailing: InkWell(
