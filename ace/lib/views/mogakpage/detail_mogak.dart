@@ -22,7 +22,6 @@ class MogakDetail extends GetView<MogakDetailController> {
 
   @override
   Widget build(BuildContext context) {
-    final AllMogakModel? mogakDetail = Get.arguments;
     return Scaffold(
       resizeToAvoidBottomInset: true,
       appBar: SpaceAppBar(),
@@ -96,7 +95,6 @@ class MogakDetail extends GetView<MogakDetailController> {
                           child: Column(
                             children: [
                               MogakContent(
-                                  author: mogakDetail?.author ?? null,
                                   data: controller.mogakDetail.value,
                                   maxLength: 100),
                               SizedBox(
