@@ -1,8 +1,11 @@
+import 'dart:ffi';
+
 import 'package:ace/controller/mogak/mogak_cotroller.dart';
 import 'package:ace/routes/view_route.dart';
 import 'package:ace/utils/colors.dart';
 import 'package:ace/utils/typography.dart';
 import 'package:ace/widgets/mogak/mogak_card.dart';
+import 'package:ace/widgets/mogak/mogak_content.dart';
 import 'package:ace/widgets/mogak/mogak_skeleton.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -24,15 +27,23 @@ class Mogak extends GetView<MogakController> {
       body: RefreshIndicator(
         onRefresh: () => controller.refreshMogaks(),
         child: Padding(
-          padding: const EdgeInsets.only(top: 16, left: 10, right: 10),
+          padding:
+              const EdgeInsets.only(top: 16, left: 10, right: 10, bottom: 16),
           child: SingleChildScrollView(
             child: Column(
               children: [
                 Container(
                   height: 48,
                   child: TextField(
+                    onChanged: (value) {
+                      controller.searchText.value = value.trim();
+                    },
+                    onSubmitted: (value) {
+                      controller.searchMogaks();
+                    },
                     decoration: InputDecoration(
-                      contentPadding: const EdgeInsets.symmetric(vertical: 10.0),
+                      contentPadding:
+                          const EdgeInsets.symmetric(vertical: 10.0),
                       prefixIcon: const Padding(
                         padding: EdgeInsets.symmetric(horizontal: 16),
                         child: Icon(
@@ -59,23 +70,58 @@ class Mogak extends GetView<MogakController> {
                   ),
                 ),
                 Obx(
-                  () => controller.isLoading.value
-                      ? MogakSkeleton()
-                      : Padding(
-                          padding: const EdgeInsets.only(bottom: 80),
-                          child: Column(
+                  () {
+                    final searchResults = controller.searchResults;
+                    if (searchResults.isEmpty) {
+                      // 검색 결과가 없는 경우
+                      return controller.isLoading.value
+                          ? MogakSkeleton()
+                          : Padding(
+                              padding: const EdgeInsets.only(bottom: 80),
+                              child: Column(
+                                children: [
+                                  buildMogakCard(
+                                      '핫한 모각코',
+                                      controller.topMogakModels,
+                                      ViewRoute.mogakTopListPage),
+                                  buildMogakCard(
+                                      '모든 모각코',
+                                      controller.allMogakModels,
+                                      ViewRoute.mogakAllListPage),
+                                ],
+                              ),
+                            ); // 빈 위젯 반환하여 아무것도 표시하지 않습니다.
+                    } else {
+                      // 검색 결과가 있는 경우
+                      return Column(
+                        children: [
+                          Column(
                             children: [
-                              buildMogakCard(
-                                  '핫한 모각코',
-                                  controller.topMogakModels,
-                                  ViewRoute.mogakTopListPage),
-                              buildMogakCard(
-                                  '모든 모각코',
-                                  controller.allMogakModels,
-                                  ViewRoute.mogakAllListPage),
+                              Padding(
+                                padding:
+                                    const EdgeInsets.symmetric(vertical: 16),
+                                child: Text('검색결과',
+                                    style: AppTypography.popupTitleMedium),
+                              ),
+                              for (final mogak in searchResults)
+                                Card(
+                                  elevation: 0,
+                                  shape: RoundedRectangleBorder(
+                                    side: BorderSide(
+                                        color: AppColors.strokeLine10,
+                                        width: 1.0),
+                                    borderRadius: BorderRadius.circular(10),
+                                  ),
+                                  child: MogakContent(
+                                    data: mogak,
+                                  ),
+                                ),
                             ],
                           ),
-                        ),
+                        ],
+                      );
+                    }
+                  },
                 ),
               ],
             ),
@@ -85,4 +131,3 @@ class Mogak extends GetView<MogakController> {
     );
   }
 }
-
