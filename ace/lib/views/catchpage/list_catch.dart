@@ -7,7 +7,6 @@ import 'package:ace/widgets/catchup_contents.dart';
 import 'package:ace/widgets/comment_Icon.dart';
 import 'package:ace/widgets/space_appbar.dart';
 import 'package:ace/widgets/title_appbar_custom.dart';
-import 'package:ace/widgets/mogak_content.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
