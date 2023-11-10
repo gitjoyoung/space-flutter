@@ -31,7 +31,7 @@ class MogakList extends GetView<MogakController> {
             ),
             InkWell(
               onTap: () {
-                controller.sortMogaksByDate();
+                controller.sortMogaksByDate(isTopMogak);
               },
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.end,

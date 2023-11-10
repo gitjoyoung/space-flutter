@@ -15,12 +15,38 @@ class MogakController extends GetxController {
   RxList<AllMogakModel> allMogakModels = RxList<AllMogakModel>();
   RxList<AllMogakModel> topMogakModels = RxList<AllMogakModel>();
 
+// 검색어를 나타내는 RxString
+  RxString searchText = RxString('');
+  RxList<AllMogakModel> searchResults = RxList<AllMogakModel>();
+
 // 날자순 정렬 상태를 나타내는 bool값
   var isSortedList = false.obs;
 // 페이지가 통신이 완료 보여지게 하기위한 스켈레톤 bool값
   var isLoading = false.obs;
   final dio = Dio();
 
+  void searchMogaks() {
+    print('검색실행');
+    // 검색어를 가져옴
+    final query = searchText.value.trim().toLowerCase();
+
+    // 검색 결과를 초기화
+    searchResults.clear();
+
+    if (query.isNotEmpty) {
+      // 검색어가 공백이 아닌 경우에만 검색을 진행
+      searchResults.addAll(
+        allMogakModels.where(
+          (mogak) => mogak.title.toLowerCase().contains(query),
+        ),
+      );
+      searchResults.addAll(
+        topMogakModels.where(
+          (mogak) => mogak.title.toLowerCase().contains(query),
+        ),
+      );
+    }
+  }
 // 모달 리스트 가져오기
 
   Future<void> fetchListMogak(
@@ -85,17 +111,26 @@ class MogakController extends GetxController {
     }
   }
 
-  // 핫한 모각코나 모든 모각코를 정렬하는 함수
-  void sortMogaksByDate() {
-    if (isSortedList.isTrue) {
-      topMogakModels.sort((a, b) => b.createdAt.compareTo(a.createdAt));
-      allMogakModels.sort((a, b) => b.createdAt.compareTo(a.createdAt));
+  void sortMogaksByDate(bool isTopMogak) {
+    RxList<AllMogakModel> targetList;
+
+    if (isTopMogak) {
+      targetList = topMogakModels;
+    } else if (!isTopMogak) {
+      targetList = allMogakModels;
     } else {
-      topMogakModels.sort((a, b) => a.createdAt.compareTo(b.createdAt));
-      allMogakModels.sort((a, b) => a.createdAt.compareTo(b.createdAt));
+      print("Invalid list type");
+      return;
     }
-    isSortedList.toggle(); // 정렬 상태 변경
-    update(); // UI 갱신을 위해 GetX update 호출
+
+    if (isSortedList.isTrue) {
+      targetList.sort((a, b) => b.createdAt.compareTo(a.createdAt));
+    } else {
+      targetList.sort((a, b) => a.createdAt.compareTo(b.createdAt));
+    }
+
+    isSortedList.toggle();
+    update();
   }
 
   @override

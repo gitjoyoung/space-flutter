@@ -13,11 +13,10 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
 class MogakContent extends GetView<MogakController> {
-  const MogakContent({this.data, this.maxLength, this.author, super.key});
+  const MogakContent({this.data, this.maxLength, super.key});
 
   final AllMogakModel? data;
   final int? maxLength;
-  final Author? author;
 
   @override
   Widget build(BuildContext context) {
@@ -40,11 +39,15 @@ class MogakContent extends GetView<MogakController> {
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 8.0),
                     child: Text(
-                      author?.nickname ?? data?.author?.nickname ?? "닉네임없음",
+                      data?.author?.nickname ??
+                          data?.author?.nickname ??
+                          "닉네임없음",
                       style: AppTypography.button28Bold,
                     ),
                   ),
-                  Tag(title: author?.role ?? data?.author?.role ?? "역할없음"),
+                  Tag(
+                      title:
+                          data?.author?.role ?? data?.author?.role ?? "역할없음"),
                 ],
               ),
               trailing: InkWell(

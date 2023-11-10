@@ -65,6 +65,12 @@ class TalkModel {
   }
 
   String toJson() => json.encode(toMap());
+  @override
+  String toString() {
+    return 'TalkModel(id: $id, content: $content, createdAt: $createdAt, updatedAt: $updatedAt, '
+        'parentId: $parentId, authorId: $authorId, catchUpId: $catchUpId, temperature: $temperature, '
+        'mogakId: $mogakId, isDeleted: $isDeleted, author: $author)';
+  }
 
   factory TalkModel.fromJson(String source) =>
       TalkModel.fromMap(json.decode(source) as Map<String, dynamic>);

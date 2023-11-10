@@ -6,21 +6,21 @@ import 'package:ace/models/mogak/talk_model.dart';
 
 class AllMogakModel {
   final String id;
-  final String title;
-  final String content;
+  String title;
+  String content;
   final bool isDeleted;
   final int maxMember;
   final DateTime createdAt;
-  final DateTime? updatedAt;
+  DateTime? updatedAt;
   final DateTime? deletedAt;
   final String authorId;
-  final String? hashtag;
-  final String visiblityStatus;
-  final int temperature;
-  final Author? author;
-  final List<AppliedProfiles>? appliedProfiles;
+  String? hashtag;
+  String visiblityStatus;
+  int temperature;
+  Author? author;
+  List<AppliedProfiles>? appliedProfiles;
   List<TalkModel>? talks;
-  final List? upProfiles;
+  List? upProfiles;
 
   AllMogakModel({
     required this.id,
@@ -106,6 +106,16 @@ class AllMogakModel {
     } else {
       this.talks = newTalks;
     }
+  }
+
+  @override
+  String toString() {
+    return 'AllMogakModel(id: $id, title: $title, content: $content, '
+        'isDeleted: $isDeleted, maxMember: $maxMember, createdAt: $createdAt, '
+        'updatedAt: $updatedAt, deletedAt: $deletedAt, authorId: $authorId, '
+        'hashtag: $hashtag, visiblityStatus: $visiblityStatus, '
+        'temperature: $temperature, author: $author, '
+        'appliedProfiles: $appliedProfiles, talks: $talks, upProfiles: $upProfiles)';
   }
 
   factory AllMogakModel.fromJson(String source) =>

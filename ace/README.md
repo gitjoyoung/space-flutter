@@ -91,8 +91,6 @@ origin  https://github.com/9weeks-flutter-sface/Higher.git (push)
 
 ### 깃허브 브랜치 생성
 
-
-
 자신의 이름으로 브랜치를 생성
 
 예시

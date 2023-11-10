@@ -37,6 +37,10 @@ class Author {
   }
 
   String toJson() => json.encode(toMap());
+  @override
+  String toString() {
+    return 'Author(id: $id, avatar: $avatar, nickname: $nickname, badge: $badge, role: $role)';
+  }
 
   factory Author.fromJson(String source) =>
       Author.fromMap(json.decode(source) as Map<String, dynamic>);
