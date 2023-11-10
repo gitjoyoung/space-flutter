@@ -1,6 +1,5 @@
-import 'package:ace/controller/mogak/mogak_detail_cotroller.dart';
-import 'package:ace/models/mogak/mogak_model.dart';
-import 'package:ace/routes/view_route.dart';
+import 'package:ace/controller/catch/catch_controller..dart';
+import 'package:ace/models/catch/catch_model.dart';
 import 'package:ace/utils/colors.dart';
 import 'package:ace/utils/typography.dart';
 import 'package:ace/widgets/badge_avatar_custom.dart';
@@ -10,10 +9,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
-class CatchupContent extends GetView<MogakDetailController> {
+class CatchupContent extends GetView<CatchController> {
   const CatchupContent({this.data, this.maxLength, super.key});
 
-  final AllMogakModel? data;
+  final AllCatchModel? data;
   final int? maxLength;
   @override
   Widget build(BuildContext context) {
@@ -28,13 +27,15 @@ class CatchupContent extends GetView<MogakDetailController> {
               title: Row(
                 children: [
                   BadgeAvatarCustom(
+                    badge: data?.author?.badge.shortName,
+                    avatarUrl: data?.author?.avatar,
                     height: 48,
                     width: 43,
                   ),
                   Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 8.0),
                     child: Text(
-                      data?.author?.nickname ?? "",
+                      data?.author?.nickname ?? "닉네임없음",
                       style: AppTypography.button28Bold,
                     ),
                   ),
@@ -42,14 +43,14 @@ class CatchupContent extends GetView<MogakDetailController> {
                 ],
               ),
               trailing: InkWell(
-                  onTap: () {},
+                  onTap: () {
+                    print('좋아요 클릭');
+                    controller.LikeCatch(data?.id ?? "");
+                  },
                   child: SvgPicture.asset('assets/icons/icon20/like.svg')),
             ),
             InkWell(
-              onTap: () {
-                Get.toNamed(ViewRoute.mogakDetailPage, arguments: data?.id);
-                print('${data?.id}  제목 클릭');
-              },
+              onTap: () {},
               child: Padding(
                 padding: const EdgeInsets.symmetric(vertical: 8),
                 child: RichText(
@@ -70,10 +71,7 @@ class CatchupContent extends GetView<MogakDetailController> {
               ),
             ),
             InkWell(
-              onTap: () {
-                Get.toNamed(ViewRoute.mogakDetailPage, arguments: data?.id);
-                print('${data?.id}   내용 클릭');
-              },
+              onTap: () {},
               child: Text(
                 data?.content ?? "",
                 style: AppTypography.button36Regular,
@@ -90,16 +88,14 @@ class CatchupContent extends GetView<MogakDetailController> {
                   style: AppTypography.cardBody.copyWith(
                     color: AppColors.neutral40,
                   )),
-              title: Row(children: [
-                SizedBox(
-                  width: 6,
-                ),
-              ]),
             ),
-            TagsRow(
-              tagsString: (data?.hashtag?.trim().isEmpty ?? true)
-                  ? "#태그없음"
-                  : data!.hashtag!,
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: TagsRow(
+                tagsString: (data?.hashtag?.isEmpty ?? true)
+                    ? "#태그없음"
+                    : data!.hashtag!, // 태그 리스트를 공백으로 구분된 문자열로 합칩니다.
+              ),
             ),
           ]),
     );

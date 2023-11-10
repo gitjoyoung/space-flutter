@@ -25,6 +25,11 @@ class ApiRoute {
   //프로필 가져오기
 
   static const String profileApi = "${baseUrl}api/profile/";
+
+  // 캐치업 가져오기
+  static const String catchApi = "${baseUrl}api/catchup?filter=";
+  static const String catchLikeApi = "${baseUrl}api/up";
+  static const String catchTopApi = "${baseUrl}api/top/catchup";
 }
 
 
