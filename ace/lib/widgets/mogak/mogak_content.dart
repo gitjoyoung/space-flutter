@@ -5,7 +5,7 @@ import 'package:ace/routes/view_route.dart';
 import 'package:ace/utils/colors.dart';
 import 'package:ace/utils/typography.dart';
 import 'package:ace/views/mogakpage/test.dart';
-import 'package:ace/widgets/avatar_custom.dart';
+import 'package:ace/widgets/badge_avatar_custom.dart';
 import 'package:ace/widgets/card_tag.dart';
 import 'package:ace/widgets/tag_row.dart';
 import 'package:flutter/material.dart';
@@ -31,7 +31,7 @@ class MogakContent extends GetView<MogakController> {
               contentPadding: EdgeInsets.only(left: 0),
               title: Row(
                 children: [
-                  AvatarCustom(
+                  BadgeAvatarCustom(
                     authorBadge: data?.author?.badge,
                     avatarUrl: data?.author?.avatar,
                     height: 48,

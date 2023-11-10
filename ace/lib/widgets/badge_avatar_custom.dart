@@ -4,8 +4,8 @@ import 'package:ace/utils/typography.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
-class AvatarCustom extends StatelessWidget {
-  const AvatarCustom({
+class BadgeAvatarCustom extends StatelessWidget {
+  const BadgeAvatarCustom({
     super.key,
     this.avatarUrl,
     this.height,
