@@ -53,6 +53,7 @@ class AvatarController extends GetxController {
     selectedCategory.value = category;
   }
 
+  // 선택한 카테고리의 인덱스를 변경하는 함수
   void changeIndex(int index) {
     var indexMap = {
       'hair': () => hairIndex.value = index,
@@ -61,7 +62,7 @@ class AvatarController extends GetxController {
       'item': () => itemIndex.value = index,
     };
 
-    // Call the function corresponding to the selected category
+    // 선택한 카테고리에 따라 인덱스를 변경합니다.
     var func = indexMap[selectedCategory.value];
     if (func != null) {
       func();
@@ -108,7 +109,7 @@ class AvatarController extends GetxController {
       },
     };
 
-    // Return the details for the selected category, or defaults if not found
+    // 카테고리에 따른 count와 path를 반환합니다.
     return detailsMap[category] ?? {'count': 0, 'path': ''};
   }
 
