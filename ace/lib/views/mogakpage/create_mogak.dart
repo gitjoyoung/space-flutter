@@ -2,10 +2,10 @@ import 'package:ace/controller/mogak/mogak_create_contoller.dart';
 import 'package:ace/utils/button.dart';
 import 'package:ace/utils/colors.dart';
 import 'package:ace/utils/typography.dart';
-import 'package:ace/widgets/modal_custom.dart';
 import 'package:ace/widgets/space_appbar.dart';
 import 'package:ace/widgets/tag_row.dart';
 import 'package:ace/widgets/title_appbar_custom.dart';
+import 'package:dotted_dashed_line/dotted_dashed_line.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:get/get.dart';
@@ -272,7 +272,11 @@ class MogakCreate extends GetView<MogakCreateController> {
                                 ) // maxParticipants가 0이 아닌 경우 텍스트로 표시
                               : Icon(Icons.navigate_next_outlined),
                         )),
-                    Divider(),
+                    DottedDashedLine(
+                        axis: Axis.horizontal,
+                        height: 0,
+                        width: 310,
+                        dashColor: AppColors.neutral10),
                     ListTile(
                         contentPadding: EdgeInsets.zero,
                         onTap: () {
@@ -398,7 +402,11 @@ class MogakCreate extends GetView<MogakCreateController> {
                             }
                           },
                         )),
-                    Divider(),
+                    DottedDashedLine(
+                        axis: Axis.horizontal,
+                        height: 0,
+                        width: 310,
+                        dashColor: AppColors.neutral10),
                   ],
                 ),
               ),
@@ -413,7 +421,7 @@ class MogakCreate extends GetView<MogakCreateController> {
                 style: AppButton.xLarge,
                 child: Text(
                   '등록하기',
-                  style: AppTypography.button36Bold,
+                  style: AppTypography.tapButtonMedium18,
                 )),
             SizedBox(
               height: 115,
