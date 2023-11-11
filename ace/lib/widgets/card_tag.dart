@@ -13,6 +13,7 @@ class Tag extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+      elevation: 0,
       color: AppColors.background5,
       child: Padding(
         padding:
