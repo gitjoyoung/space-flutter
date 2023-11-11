@@ -16,7 +16,7 @@ import 'package:get/get.dart';
 class HomeController extends GetxController {
   String token = Get.find<AuthController>().getToken();
   RxList<BannerModel> bannerList = RxList<BannerModel>();
-
+  var pageController = PageController();
   var tabIndex = 0.obs;
   final dio = Dio();
 
@@ -26,7 +26,7 @@ class HomeController extends GetxController {
 
   void goToHome() {
     tabIndex(0);
-    Get.offAllNamed(ViewRoute.homePage);
+    Get.toNamed(ViewRoute.homePage);
   }
 
   Future<void> fetchHomeBanner() async {
