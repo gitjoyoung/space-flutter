@@ -6,7 +6,7 @@ import 'package:ace/utils/button.dart';
 import 'package:ace/utils/email_validator.dart';
 import 'package:ace/utils/typography.dart';
 import 'package:ace/views/authpage/find_password.dart';
-import 'package:ace/views/authpage/registration_page.dart';
+import 'package:ace/views/authpage/registration.dart';
 import 'package:ace/views/homepage/home_layout.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
@@ -26,7 +26,8 @@ void main() {
       home: const LoginView(),
       getPages: [
         GetPage(name: ViewRoute.loginPage, page: () => const LoginView()),
-        GetPage(name: ViewRoute.findPasswordPage, page: () => const FindPassword()),
+        GetPage(
+            name: ViewRoute.findPasswordPage, page: () => const FindPassword()),
         GetPage(
             name: ViewRoute.registrationPage, page: () => RegistrationView()),
         GetPage(name: ViewRoute.homePage, page: () => HomeLayOut()), // 이 부분을 추가

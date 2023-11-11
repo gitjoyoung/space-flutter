@@ -1,4 +1,5 @@
 import 'package:ace/controller/catch/catch_controller..dart';
+import 'package:ace/models/catch/catch_maode2.dart';
 import 'package:ace/models/catch/catch_model.dart';
 import 'package:ace/utils/colors.dart';
 import 'package:ace/utils/typography.dart';
@@ -27,7 +28,7 @@ class CatchupContent extends GetView<CatchController> {
               title: Row(
                 children: [
                   BadgeAvatarCustom(
-                    badge: data?.author?.badge.shortName,
+                    badge: data?.author?.badge?.shortName,
                     avatarUrl: data?.author?.avatar,
                     height: 48,
                     width: 43,
@@ -81,10 +82,7 @@ class CatchupContent extends GetView<CatchController> {
             ),
             ListTile(
               contentPadding: EdgeInsets.only(left: 0),
-              trailing: Text(
-                  data?.createdAt == null
-                      ? ""
-                      : "${data!.createdAt.year}.${data!.createdAt.month.toString().padLeft(2, '0')}.${data!.createdAt.day.toString().padLeft(2, '0')}",
+              trailing: Text("2023. 11 .1",
                   style: AppTypography.cardBody.copyWith(
                     color: AppColors.neutral40,
                   )),
