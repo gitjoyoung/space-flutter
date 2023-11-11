@@ -12,8 +12,8 @@ class MogakController extends GetxController {
   String token = Get.find<AuthController>().getToken();
 
 // 모각 리스트
-  RxList<AllMogakModel> allMogakModels = RxList<AllMogakModel>();
-  RxList<AllMogakModel> topMogakModels = RxList<AllMogakModel>();
+  RxList<AllMogakModel> allMogakList = RxList<AllMogakModel>();
+  RxList<AllMogakModel> topMogakList = RxList<AllMogakModel>();
 
 // 검색어를 나타내는 RxString
   RxString searchText = RxString('');
@@ -36,12 +36,12 @@ class MogakController extends GetxController {
     if (query.isNotEmpty) {
       // 검색어가 공백이 아닌 경우에만 검색을 진행
       searchResults.addAll(
-        allMogakModels.where(
+        allMogakList.where(
           (mogak) => mogak.title.toLowerCase().contains(query),
         ),
       );
       searchResults.addAll(
-        topMogakModels.where(
+        topMogakList.where(
           (mogak) => mogak.title.toLowerCase().contains(query),
         ),
       );
@@ -103,8 +103,8 @@ class MogakController extends GetxController {
     isLoading(true); // 로딩 시작
     try {
       await Future.wait([
-        fetchListMogak(ApiRoute.mogakApi, allMogakModels),
-        fetchListMogak(ApiRoute.mogakTopApi, topMogakModels),
+        fetchListMogak(ApiRoute.mogakApi, allMogakList),
+        fetchListMogak(ApiRoute.mogakTopApi, topMogakList),
       ]);
     } finally {
       isLoading(false); // 로딩 종료
@@ -115,9 +115,9 @@ class MogakController extends GetxController {
     RxList<AllMogakModel> targetList;
 
     if (isTopMogak) {
-      targetList = topMogakModels;
+      targetList = topMogakList;
     } else if (!isTopMogak) {
-      targetList = allMogakModels;
+      targetList = allMogakList;
     } else {
       print("Invalid list type");
       return;

@@ -25,40 +25,51 @@ class BadgeAvatarCustom extends StatelessWidget {
     double actualWidth = actualHeight ?? 43; // width를 height의 70%로 계산합니다.
 
     return Container(
+      margin: EdgeInsets.only(bottom: 8),
       height: actualHeight,
       width: actualHeight,
       child: Stack(
+        clipBehavior: Clip.none,
         alignment: Alignment.center,
         children: [
-          if (avatarUrl != null && avatarUrl!.contains("https"))
-            Image.network(
-              avatarUrl!,
-              width: actualWidth * 0.8,
-              height: actualHeight * 0.6,
-              fit: BoxFit.cover, // 이미지 크기를 적절히 조정
-            )
-          else
-            SvgPicture.asset(
-              'assets/icons/icon50/man-a.svg',
-              width: actualWidth * 0.8,
-              height: actualHeight * 0.55,
+          Container(
+            width: actualWidth,
+            height: actualWidth,
+            decoration: BoxDecoration(
+              color: AppColors.primary5,
+              borderRadius: BorderRadius.circular(actualHeight / 2), // 원형 설정s
             ),
-          if (authorBadge?.shortName != null)
+            child: Center(
+              child: avatarUrl != null && avatarUrl!.contains("https")
+                  ? Image.network(
+                      avatarUrl!,
+                      fit: BoxFit.cover,
+                    )
+                  : SvgPicture.asset(
+                      'assets/icons/icon50/man-a.svg',
+                      width: actualHeight * 0.7,
+                      fit: BoxFit.cover,
+                    ),
+            ),
+          ),
+          if (authorBadge?.shortName != null && authorBadge?.shortName != '')
             Positioned(
-              bottom: 0,
-              left: 0,
-              right: 0,
+              bottom: -6,
               child: Container(
+                padding: EdgeInsets.symmetric(horizontal: 5),
                 decoration: BoxDecoration(
                   color: AppColors.primary80, // 파란색 배경
                   borderRadius: BorderRadius.circular(5.0), // 라운드 값 설정
                 ),
-                height: actualHeight * 0.27,
-                width: actualWidth * 0.8,
+                height: actualHeight * 0.3,
+                width: actualWidth,
                 child: Center(
                   child: Text(authorBadge!.shortName ?? '배지 없음',
-                      style: TextStyle(
-                          fontSize: actualHeight * 0.15, color: Colors.white)),
+                      overflow: TextOverflow.ellipsis,
+                      style: AppTypography.cardBody.copyWith(
+                        fontSize: actualWidth * 0.2,
+                        color: Colors.white,
+                      )),
                 ),
               ),
             ),

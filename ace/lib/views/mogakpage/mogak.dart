@@ -82,11 +82,11 @@ class Mogak extends GetView<MogakController> {
                                 children: [
                                   buildMogakCard(
                                       '핫한 모각코',
-                                      controller.topMogakModels,
+                                      controller.allMogakList,
                                       ViewRoute.mogakTopListPage),
                                   buildMogakCard(
                                       '모든 모각코',
-                                      controller.allMogakModels,
+                                      controller.allMogakList,
                                       ViewRoute.mogakAllListPage),
                                 ],
                               ),

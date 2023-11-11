@@ -19,7 +19,7 @@ class MogakList extends GetView<MogakController> {
     final isTopMogak = title == '핫한 모각코';
 
     final listToDisplay =
-        isTopMogak ? controller.topMogakModels : controller.allMogakModels;
+        isTopMogak ? controller.topMogakList  : controller.allMogakList;
     return Scaffold(
       appBar: SpaceAppBar(),
       body: SingleChildScrollView(
