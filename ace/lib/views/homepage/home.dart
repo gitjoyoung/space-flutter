@@ -5,10 +5,7 @@ import 'package:ace/utils/colors.dart';
 import 'package:ace/utils/typography.dart';
 import 'package:ace/widgets/badge_avatar_custom.dart';
 import 'package:ace/widgets/card_tag.dart';
-import 'package:ace/widgets/comment_Icon.dart';
 import 'package:ace/widgets/mogak/mogak_card.dart';
-import 'package:ace/widgets/title_appbar_custom.dart';
-import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -31,7 +28,7 @@ class Home extends GetView<HomeController> {
               height: 157,
               child: Obx(
                 () => PageView.builder(
-                  controller: controller.pageController,
+                  controller: controller.bannerPageController,
                   itemCount: controller.bannerList.length,
                   itemBuilder: (context, index) {
                     return Image.network(
@@ -48,7 +45,8 @@ class Home extends GetView<HomeController> {
                   padding: const EdgeInsets.all(16.0),
                   child: SmoothPageIndicator(
                       axisDirection: Axis.horizontal,
-                      controller: controller.pageController, // PageController
+                      controller:
+                          controller.bannerPageController, // PageController
                       count: controller.bannerList.length,
                       effect: const SlideEffect(
                           spacing: 8.0,
@@ -93,6 +91,11 @@ class Home extends GetView<HomeController> {
                 ),
               ),
             ),
+            ElevatedButton(
+                onPressed: () {
+                  controller.fetchListRank();
+                },
+                child: Text('데이타 테스트 버튼')),
             topMogak != null
                 ? buildMogakCard('핫한 모각코', topMogak, ViewRoute.mogakTopListPage)
                 : Text('아직데이타없음'),
@@ -100,81 +103,114 @@ class Home extends GetView<HomeController> {
               contentPadding: EdgeInsets.zero,
               title: Row(
                 children: [
-                  SvgPicture.asset('assets/icons/icon20/letter.svg'),
+                  SvgPicture.asset('assets/icons/icon20/laptop.svg'),
                   SizedBox(width: 8),
-                  Text('핫한 모각코', style: AppTypography.tapButtonBold18),
+                  Text('이달의 스페이서', style: AppTypography.tapButtonBold18),
                 ],
               ),
               trailing: InkWell(
                   onTap: () {
-                    Get.toNamed(ViewRoute.mogakTopListPage);
+                    Get.toNamed(ViewRoute.spacerPage);
                   },
                   child: SvgPicture.asset('assets/icons/icon20/Right.svg')),
             ),
             Container(
               height: 200,
-              child: ListView.builder(
+              child: PageView.builder(
                 scrollDirection: Axis.horizontal,
-                itemCount: 5,
+                controller: controller.rankPageController,
+                itemCount: 6,
+                pageSnapping: true,
                 itemBuilder: (context, index) {
                   return Padding(
                     padding: const EdgeInsets.only(right: 10),
-                    child: Center(
-                      child: Stack(
-                        clipBehavior: Clip.none,
-                        children: [
-                          Container(
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(10),
-                              color: Colors.white,
+                    child: Container(
+                      height: 200,
+                      width: 143,
+                      child: Align(
+                        alignment: Alignment.bottomCenter,
+                        child: Stack(
+                          clipBehavior: Clip.none,
+                          children: [
+                            Container(
+                              decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(10),
+                                color: Colors.white,
+                              ),
+                              height: 180,
+                              width: 143,
+                              child: Column(children: [
+                                SizedBox(height: 16),
+                                BadgeAvatarCustom(
+                                  badge:
+                                      controller.rankList[index].profile.role,
+                                  avatarUrl:
+                                      controller.rankList[index].profile.avatar,
+                                  height: 73,
+                                  width: 60,
+                                ),
+                                Text(
+                                  controller.rankList[index].profile.nickname
+                                      .toString(),
+                                  overflow: TextOverflow.ellipsis,
+                                  maxLines: 1,
+                                  style: AppTypography.button36Medium,
+                                ),
+                                Tag(
+                                  title: controller.rankList[index].profile.role
+                                      .toString(),
+                                ),
+                                SizedBox(
+                                  width: 8,
+                                ),
+                                Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    SvgPicture.asset(
+                                        'assets/icons/icon20/like.svg'),
+                                    Text(
+                                      controller.rankList[index].temperature
+                                          .toString(),
+                                      style: AppTypography.cardBody
+                                          .copyWith(color: AppColors.primary80),
+                                    ),
+                                  ],
+                                ),
+                              ]),
                             ),
-                            height: 165,
-                            width: 143,
-                            child: Column(children: [
-                              SizedBox(height: 16),
-                              BadgeAvatarCustom(
-                                height: 73,
-                                width: 60,
-                              ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Text('신디', style: AppTypography.button36Medium),
-                                  SizedBox(
-                                    width: 8,
-                                  ),
-                                  Tag(title: '수료생')
-                                ],
-                              ),
-                              SizedBox(
-                                width: 8,
-                              ),
-                              Row(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  SvgPicture.asset(
-                                      'assets/icons/icon20/like.svg'),
-                                  Text(
-                                    '40',
-                                    style: AppTypography.cardBody
-                                        .copyWith(color: AppColors.primary80),
-                                  ),
-                                ],
-                              ),
-                            ]),
-                          ),
-                          Positioned(
-                            top: -17,
-                            right: 10,
-                            child: SvgPicture.asset('assets/icons/grade/1st.svg'),
-                          ),
-                        ],
+                            Positioned(
+                              top: -17,
+                              right: 10,
+                              child: SvgPicture.asset(
+                                  'assets/icons/grade/${controller.rankList[index].rank}th.svg'),
+                            ),
+                          ],
+                        ),
                       ),
                     ),
                   );
                 },
               ),
             ),
+            Obx(() => Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: SmoothPageIndicator(
+                      axisDirection: Axis.horizontal,
+                      controller:
+                          controller.rankPageController, // PageController
+                      count: 6,
+                      effect: const SlideEffect(
+                          spacing: 8.0,
+                          radius: 16,
+                          dotWidth: 6.0,
+                          dotHeight: 6.0,
+                          paintStyle: PaintingStyle.fill,
+                          strokeWidth: 1.5,
+                          dotColor: AppColors.neutral20,
+                          activeDotColor:
+                              AppColors.primary80), // your preferred effect
+                      onDotClicked: (index) {}),
+                )),
             Text(
               controller.token,
               style: AppTypography.button28Medium,

@@ -7,7 +7,9 @@ import 'package:ace/utils/typography.dart';
 import 'package:ace/widgets/mogak/mogak_card.dart';
 import 'package:ace/widgets/mogak/mogak_content.dart';
 import 'package:ace/widgets/mogak/mogak_skeleton.dart';
+import 'package:ace/widgets/title_appbar_custom.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
 class Mogak extends GetView<MogakController> {
@@ -100,8 +102,24 @@ class Mogak extends GetView<MogakController> {
                               Padding(
                                 padding:
                                     const EdgeInsets.symmetric(vertical: 16),
-                                child: Text('검색결과',
-                                    style: AppTypography.popupTitleMedium),
+                                child: ListTile(
+                                  title: Text('${controller.searchText.value}검색결과',
+                                      style: AppTypography.popupTitleMedium),
+                                  leading: IconButton(
+                                    onPressed: () {},
+                                    icon: IconButton(
+                                      onPressed: () {
+                                        controller.searchText.value = '';
+                                        // 뒤로가기 버튼 기능, 예를 들어 Navigator.pop(context);
+                                      },
+                                      icon: SvgPicture.asset(
+                                        'assets/icons/icon20/left.svg',
+                                        height: 20,
+                                        width: 20,
+                                      ),
+                                    ),
+                                  ),
+                                ),
                               ),
                               for (final mogak in searchResults)
                                 Card(
@@ -129,5 +147,6 @@ class Mogak extends GetView<MogakController> {
         ),
       ),
     );
+
   }
 }

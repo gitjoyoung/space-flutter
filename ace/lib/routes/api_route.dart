@@ -10,6 +10,7 @@ class ApiRoute {
 // 홈
 
   static const String homeBannerApi = "${baseUrl}api/course";
+  static const String homeSpacerRank = "${baseUrl}api/rank?month=10";
 
 
 // 특정 모각 가져오기 생성 삭제

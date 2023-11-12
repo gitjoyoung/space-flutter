@@ -1,7 +1,7 @@
 import 'dart:convert';
 
 class BadgeModel {
-  final String shortName;
+  String shortName;
   final String fgColor;
   final String bgColor;
   BadgeModel({
