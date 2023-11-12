@@ -26,6 +26,7 @@ import 'package:ace/views/mogakpage/create_mogak.dart';
 import 'package:ace/views/mogakpage/detail_mogak.dart';
 import 'package:ace/views/mogakpage/list_mogak.dart';
 import 'package:ace/views/mogakpage/mogak.dart';
+import 'package:ace/views/spacer/spacer.dart';
 
 import 'package:get/get.dart';
 
@@ -82,6 +83,9 @@ class AppPages {
         Get.put(HomeController());
       }),
     ),
+
+// 스페이서
+    GetPage(name: ViewRoute.spacerPage, page: () => const Spacer()),
 
     // 모각
     GetPage(

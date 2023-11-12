@@ -10,8 +10,8 @@ class ProfileModel {
   final String? bio;
   final String? avatar;
   final String? position;
-  final DateTime createdAt;
-  final DateTime updatedAt;
+  final DateTime? createdAt;
+  final DateTime? updatedAt;
   final String? urlGithub;
   final String? urlBehance;
   final String? urlBlog;
@@ -20,7 +20,7 @@ class ProfileModel {
   final String? urlPortfolio;
   final String role;
   final String? badgeId;
-  final String accountId;
+  final String? accountId;
   final double temperature;
 
   ProfileModel({
@@ -50,8 +50,8 @@ class ProfileModel {
       'bio': bio,
       'avatar': avatar,
       'position': position,
-      'createdAt': createdAt.millisecondsSinceEpoch,
-      'updatedAt': updatedAt.millisecondsSinceEpoch,
+      'createdAt': createdAt?.millisecondsSinceEpoch ,
+      'updatedAt': updatedAt?.millisecondsSinceEpoch,
       'urlGithub': urlGithub,
       'urlBehance': urlBehance,
       'urlBlog': urlBlog,
@@ -69,11 +69,11 @@ class ProfileModel {
     return ProfileModel(
       id: map['id'] as String,
       nickname: map['nickname'] as String?,
-      bio: map['bio'] as String?,
+      bio:  map['bio']  !=null ?  map['bio'] as String? : null,
       avatar: map['avatar'] != null ? map['avatar'] as String : null,
       position: map['position'] != null ? map['position'] as String : null,
-      createdAt: DateTime.parse(map['createdAt'] as String),
-      updatedAt: DateTime.parse(map['updatedAt'] as String),
+      createdAt: map['createdAt'] != null ? DateTime.parse(map['createdAt'] as String) : null,
+      updatedAt: map['updatedAt'] !=null ?  DateTime.parse(map['updatedAt'] as String) : null,
       urlGithub: map['urlGithub'] != null ? map['urlGithub'] as String : null,
       urlBehance:
           map['urlBehance'] != null ? map['urlBehance'] as String : null,
@@ -84,7 +84,7 @@ class ProfileModel {
           map['urlPortfolio'] != null ? map['urlPortfolio'] as String : null,
       role: map['role'] as String,
       badgeId: map['badgeId'] != null ? map['badgeId'] as String : null,
-      accountId: map['accountId'] as String,
+      accountId: map['accountId'] != null ? map['accountId'] as String : null,
       temperature: (map['temperature'] as num).toDouble(),
     );
   }
@@ -94,5 +94,3 @@ class ProfileModel {
   factory ProfileModel.fromJson(String source) =>
       ProfileModel.fromMap(json.decode(source) as Map<String, dynamic>);
 }
-
-

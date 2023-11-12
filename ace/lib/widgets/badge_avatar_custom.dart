@@ -21,6 +21,9 @@ class BadgeAvatarCustom extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    if (badge != null && authorBadge != null) {
+      authorBadge!.shortName = badge!;
+    }
     double actualHeight = height ?? 48;
     double actualWidth = actualHeight ?? 43; // width를 height의 70%로 계산합니다.
 

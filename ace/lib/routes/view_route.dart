@@ -12,6 +12,10 @@ class ViewRoute {
 
   static final String homePage = "/home";
 
+// 스페이서
+  static final String spacerPage = "/spacer";
+
+// 모각
   static final String mogakPage = "/mogak";
   static final String mogakDetailPage = "/mogakDetail";
   static final String mogakCreatePage = "/mogakCreate";

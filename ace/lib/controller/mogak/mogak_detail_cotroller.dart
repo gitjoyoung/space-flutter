@@ -4,7 +4,7 @@ import 'package:ace/controller/auth_controller.dart';
 import 'package:ace/models/mogak/appliedprofiles_model.dart';
 import 'package:ace/models/mogak/author_model.dart';
 import 'package:ace/models/mogak/mogak_model.dart';
-import 'package:ace/models/mogak/profile.dart';
+import 'package:ace/models/home/profile.dart';
 import 'package:ace/models/mogak/talk_model.dart';
 import 'package:ace/routes/api_route.dart';
 import 'package:ace/utils/button.dart';
