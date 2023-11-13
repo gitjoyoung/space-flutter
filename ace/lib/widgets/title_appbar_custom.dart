@@ -22,7 +22,7 @@ class TitleAppBarCustom extends StatelessWidget {
       height: 68.0, // 일반적인 앱바의 높이
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween, // 요소들을 양 끝으로 정렬
-        children: <Widget>[
+        children: [
           InkWell(
             onTap: () {
               Get.back();
