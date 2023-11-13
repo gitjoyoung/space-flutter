@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:shimmer/shimmer.dart';
 
-Widget MogakSkeleton() => SingleChildScrollView(
+Widget MogakSkeleton({int repeatCount = 2}) => SingleChildScrollView(
         child: Column(
           children: List.generate(
-              3,
+              repeatCount,
               (index) => Padding(
                     padding: const EdgeInsets.symmetric(vertical: 8.0),
                     child: Column(

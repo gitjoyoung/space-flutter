@@ -3,7 +3,7 @@ import 'package:ace/utils/colors.dart';
 import 'package:ace/utils/typography.dart';
 import 'package:ace/widgets/badge_avatar_custom.dart';
 import 'package:ace/widgets/card_tag.dart';
-import 'package:ace/widgets/space/spacer_avatar.dart';
+import 'package:ace/widgets/spacer/spacer_avatar.dart';
 import 'package:ace/widgets/space_appbar.dart';
 import 'package:ace/widgets/title_appbar_custom.dart';
 import 'package:flutter/material.dart';
