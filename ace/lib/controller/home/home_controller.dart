@@ -22,7 +22,7 @@ class HomeController extends GetxController {
 
   var bannerPageController = PageController();
   var rankPageController =
-      PageController(initialPage: 0, viewportFraction: 1);
+      PageController(initialPage: 0, viewportFraction: 0.5);
 
   var tabIndex = 0.obs;
   final dio = Dio();
