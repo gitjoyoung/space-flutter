@@ -81,8 +81,10 @@ class SpacerAvatar extends StatelessWidget {
             Positioned(
               top: -17,
               right: 10,
-              child:
-                  SvgPicture.asset('assets/icons/grade/${rankList.rank}th.svg'),
+              child: SvgPicture.asset(
+                'assets/icons/grade/${rankList.rank}th.svg',
+                height: height / 3.5,
+              ),
             ),
           ],
         ),

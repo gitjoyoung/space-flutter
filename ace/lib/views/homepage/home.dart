@@ -6,6 +6,8 @@ import 'package:ace/utils/typography.dart';
 import 'package:ace/widgets/badge_avatar_custom.dart';
 import 'package:ace/widgets/card_tag.dart';
 import 'package:ace/widgets/mogak/mogak_card.dart';
+import 'package:ace/widgets/mogak/mogak_skeleton.dart';
+import 'package:ace/widgets/spacer/spacer_skeleton.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -31,6 +33,7 @@ class Home extends GetView<HomeController> {
                 () => PageView.builder(
                   controller: controller.bannerPageController,
                   itemCount: controller.bannerList.length,
+                  
                   itemBuilder: (context, index) {
                     return Image.network(
                       controller.bannerList![index].thumbnail.toString(),
@@ -97,11 +100,11 @@ class Home extends GetView<HomeController> {
             ),
 
 // 테스트 버튼
-            ElevatedButton(
-                onPressed: () {
-                  controller.fetchListRank();
-                },
-                child: Text('데이타 테스트 버튼')),
+            // ElevatedButton(
+            //     onPressed: () {
+            //       controller.fetchListRank();
+            //     },
+            //     child: Text('데이타 테스트 버튼')),
 
 // 모각 리스트
 
@@ -109,7 +112,7 @@ class Home extends GetView<HomeController> {
               () => topMogak != null && topMogak.isNotEmpty
                   ? buildMogakCard(
                       '핫한 모각코', topMogak, ViewRoute.mogakTopListPage)
-                  : Text('아직데이타없음'),
+                  : MogakSkeleton(repeatCount: 1),
             ),
             ListTile(
               contentPadding: EdgeInsets.zero,
@@ -128,119 +131,122 @@ class Home extends GetView<HomeController> {
             ),
 
             // 스페이서
-            Container(
-              height: 200,
-              child: PageView.builder(
-                scrollDirection: Axis.horizontal,
-                controller: controller.rankPageController,
-                itemCount: controller.rankList.length,
-                pageSnapping: true,
-                itemBuilder: (context, index) {
-                  return Padding(
-                    padding: const EdgeInsets.only(right: 10),
-                    child: Obx(
-                      () => controller.rankList == null ||
-                              controller.rankList.isEmpty
-                          ? Text('데이타없음')
-                          : Container(
-                              height: 200,
-                              width: 143,
-                              child: Align(
-                                alignment: Alignment.bottomCenter,
-                                child: Stack(
-                                  clipBehavior: Clip.none,
-                                  children: [
-                                    Container(
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.circular(10),
-                                        color: Colors.white,
-                                      ),
-                                      height: 180,
-                                      width: 143,
-                                      child: Column(children: [
-                                        SizedBox(height: 16),
-                                        BadgeAvatarCustom(
-                                          badge: controller
-                                              .rankList[index].profile.role,
-                                          avatarUrl: controller
-                                              .rankList[index].profile.avatar,
-                                          height: 73,
-                                          width: 60,
-                                        ),
-                                        Text(
-                                          controller
-                                              .rankList[index].profile.nickname
-                                              .toString(),
-                                          overflow: TextOverflow.ellipsis,
-                                          maxLines: 1,
-                                          style: AppTypography.button36Medium,
-                                        ),
-                                        Tag(
-                                          title: controller
-                                              .rankList[index].profile.role
-                                              .toString(),
-                                        ),
-                                        SizedBox(
-                                          width: 8,
-                                        ),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.center,
-                                          children: [
-                                            SvgPicture.asset(
-                                                'assets/icons/icon20/like.svg'),
-                                            Text(
-                                              controller
-                                                  .rankList[index].temperature
-                                                  .toString(),
-                                              style: AppTypography.cardBody
-                                                  .copyWith(
-                                                      color:
-                                                          AppColors.primary80),
+
+            Obx(
+              () => controller.rankList == null || controller.rankList.isEmpty
+                  ? SpacerSkeleton()
+                  : Column(
+                      children: [
+                        Container(
+                          height: 200,
+                          child: PageView.builder(
+                            scrollDirection: Axis.horizontal,
+                            controller: controller.rankPageController,
+                            itemCount: controller.rankList.length,
+                            pageSnapping: true,
+                            itemBuilder: (context, index) {
+                              return Padding(
+                                padding: const EdgeInsets.only(right: 10),
+                                child: Container(
+                                  height: 200,
+                                  width: 143,
+                                  child: Align(
+                                    alignment: Alignment.bottomCenter,
+                                    child: Stack(
+                                      clipBehavior: Clip.none,
+                                      children: [
+                                        Container(
+                                          decoration: BoxDecoration(
+                                            borderRadius:
+                                                BorderRadius.circular(10),
+                                            color: Colors.white,
+                                          ),
+                                          height: 180,
+                                          width: 143,
+                                          child: Column(children: [
+                                            SizedBox(height: 16),
+                                            BadgeAvatarCustom(
+                                              badge: controller
+                                                  .rankList[index].profile.role,
+                                              avatarUrl: controller
+                                                  .rankList[index]
+                                                  .profile
+                                                  .avatar,
+                                              height: 73,
+                                              width: 60,
                                             ),
-                                          ],
+                                            Text(
+                                              controller.rankList[index].profile
+                                                  .nickname
+                                                  .toString(),
+                                              overflow: TextOverflow.ellipsis,
+                                              maxLines: 1,
+                                              style:
+                                                  AppTypography.button36Medium,
+                                            ),
+                                            Tag(
+                                              title: controller
+                                                  .rankList[index].profile.role
+                                                  .toString(),
+                                            ),
+                                            SizedBox(
+                                              width: 8,
+                                            ),
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment.center,
+                                              children: [
+                                                SvgPicture.asset(
+                                                    'assets/icons/icon20/like.svg'),
+                                                Text(
+                                                  controller.rankList[index]
+                                                      .temperature
+                                                      .toString(),
+                                                  style: AppTypography.cardBody
+                                                      .copyWith(
+                                                          color: AppColors
+                                                              .primary80),
+                                                ),
+                                              ],
+                                            ),
+                                          ]),
                                         ),
-                                      ]),
+                                        Positioned(
+                                          top: -17,
+                                          right: 10,
+                                          child: SvgPicture.asset(
+                                              'assets/icons/grade/${controller.rankList[index].rank}th.svg'),
+                                        ),
+                                      ],
                                     ),
-                                    Positioned(
-                                      top: -17,
-                                      right: 10,
-                                      child: SvgPicture.asset(
-                                          'assets/icons/grade/${controller.rankList[index].rank}th.svg'),
-                                    ),
-                                  ],
+                                  ),
                                 ),
-                              ),
-                            ),
+                              );
+                            },
+                          ),
+                        ),
+                        Padding(
+                          padding: const EdgeInsets.all(16.0),
+                          child: SmoothPageIndicator(
+                              axisDirection: Axis.horizontal,
+                              controller: controller
+                                  .rankPageController, // PageController
+                              count: controller.rankList.length,
+                              effect: const SlideEffect(
+                                  spacing: 8.0,
+                                  radius: 16,
+                                  dotWidth: 6.0,
+                                  dotHeight: 6.0,
+                                  paintStyle: PaintingStyle.fill,
+                                  strokeWidth: 1.5,
+                                  dotColor: AppColors.neutral20,
+                                  activeDotColor: AppColors.primary80),
+                              onDotClicked: (index) {}),
+                        ),
+                      ],
                     ),
-                  );
-                },
-              ),
             ),
             // 스페이서 인덱스
-            Obx(() => Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: SmoothPageIndicator(
-                      axisDirection: Axis.horizontal,
-                      controller:
-                          controller.rankPageController, // PageController
-                      count: controller.rankList.length,
-                      effect: const SlideEffect(
-                          spacing: 8.0,
-                          radius: 16,
-                          dotWidth: 6.0,
-                          dotHeight: 6.0,
-                          paintStyle: PaintingStyle.fill,
-                          strokeWidth: 1.5,
-                          dotColor: AppColors.neutral20,
-                          activeDotColor: AppColors.primary80),
-                      onDotClicked: (index) {}),
-                )),
-
-            Text(
-              controller.token,
-              style: AppTypography.button28Medium,
-            ),
           ],
         ),
       ),
