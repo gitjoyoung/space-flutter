@@ -31,7 +31,9 @@ class My extends StatelessWidget {
                     width: 1.0,
                   ),
                 ),
-                child: ListView(
+                child: Column(
+                  // physics: NeverScrollableScrollPhysics(),
+                  // shrinkWrap: true, //ListView가 자신의 내용에 맞춰서 크기를 조절
                   children: [
                     Container(
                       height: 150,
