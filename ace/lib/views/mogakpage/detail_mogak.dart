@@ -1,11 +1,9 @@
 import 'package:ace/controller/mogak/mogak_detail_cotroller.dart';
 
-import 'package:ace/models/mogak/mogak_model.dart';
 import 'package:ace/models/mogak/talk_model.dart';
 import 'package:ace/utils/button.dart';
 import 'package:ace/utils/colors.dart';
 import 'package:ace/utils/typography.dart';
-
 import 'package:ace/widgets/space_appbar.dart';
 import 'package:ace/widgets/title_appbar_custom.dart';
 import 'package:ace/widgets/badge_avatar_custom.dart';
@@ -204,8 +202,6 @@ class MogakDetail extends GetView<MogakDetailController> {
                                   physics: NeverScrollableScrollPhysics(),
                                   itemCount: talks.length, // 데이터 리스트의 길이
                                   itemBuilder: (context, index) {
-                                    final TalkModel? item = talks[index];
-
                                     return Column(
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
@@ -218,7 +214,8 @@ class MogakDetail extends GetView<MogakDetailController> {
                                                   .value
                                                   ?.author
                                                   ?.badge,
-                                              avatarUrl: item!.author.avatar,
+                                              avatarUrl:
+                                                  talks[index].author.avatar,
                                               height: 68,
                                               width: 70,
                                             ),
@@ -227,14 +224,17 @@ class MogakDetail extends GetView<MogakDetailController> {
                                                   const EdgeInsets.symmetric(
                                                       horizontal: 8),
                                               child: Text(
-                                                item!.author
+                                                talks[index]!
+                                                    .author
                                                     .nickname, // 데이터에서 이름을 가져와서 표시
                                                 style:
                                                     AppTypography.button36Bold,
                                               ),
                                             ),
                                             Tag(
-                                                title: item.author.role
+                                                title: talks[index]
+                                                    .author
+                                                    .role
                                                     .toString()), // 데이터에서 태그를 가져와서 표시
                                           ],
                                         ),
@@ -253,7 +253,8 @@ class MogakDetail extends GetView<MogakDetailController> {
                                             child: Padding(
                                               padding: const EdgeInsets.all(16),
                                               child: Text(
-                                                item.content, // 데이터에서 댓글 내용을 가져와서 표시
+                                                talks[index]
+                                                    .content, // 데이터에서 댓글 내용을 가져와서 표시
                                                 style: AppTypography
                                                     .button36Medium,
                                               ),
@@ -265,8 +266,8 @@ class MogakDetail extends GetView<MogakDetailController> {
                                               MainAxisAlignment.end,
                                           children: [
                                             Text(
-                                              item.createdAt
-                                                  .toString(), // 데이터에서 타임스탬프를 가져와서 표시
+                                              controller.formatTimeDifference(
+                                                  talks[index].createdAt),
                                               style: AppTypography.cardBody
                                                   .copyWith(
                                                       color:
@@ -278,7 +279,8 @@ class MogakDetail extends GetView<MogakDetailController> {
                                             SvgPicture.asset(
                                                 'assets/icons/icon20/like.svg'),
                                             Text(
-                                              item.temperature
+                                              talks[index]
+                                                  .temperature
                                                   .toString(), // 데이터에서 좋아요 수를 가져와서 표시
                                               style: AppTypography.cardBody
                                                   .copyWith(
