@@ -15,6 +15,12 @@ class ViewRoute {
 // 스페이서
   static final String spacerPage = "/spacer";
 
+// 톡
+  static final String talkPage = "/talk";
+  static final String talkListPage = "/talkList";
+
+  static final String talkDetailPage = "/talkDetail";
+
 // 모각
   static final String mogakPage = "/mogak";
   static final String mogakDetailPage = "/mogakDetail";

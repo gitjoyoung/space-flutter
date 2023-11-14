@@ -1,6 +1,7 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
 
+import 'package:ace/models/catch/catch_maode2.dart';
 import 'package:ace/models/mogak/badge_model.dart';
 
 class AppliedProfiles {
@@ -11,6 +12,7 @@ class AppliedProfiles {
   String position;
   BadgeModel? badge;
   int temperature;
+  Profile? profile;
   AppliedProfiles({
     required this.id,
     this.avatar,
@@ -19,6 +21,7 @@ class AppliedProfiles {
     required this.position,
     this.badge,
     required this.temperature,
+    this.profile,
   });
 
   Map<String, dynamic> toMap() {
@@ -30,6 +33,7 @@ class AppliedProfiles {
       'position': position,
       'badge': badge?.toMap(),
       'temperature': temperature,
+      'profile': profile?.toMap(),
     };
   }
 
@@ -44,6 +48,9 @@ class AppliedProfiles {
           ? BadgeModel.fromMap(map['badge'] as Map<String, dynamic>)
           : null,
       temperature: map['temperature'] as int,
+      profile: map['profile'] != null
+          ? Profile.fromMap(map['profile'] as Map<String, dynamic>)
+          : null,
     );
   }
 

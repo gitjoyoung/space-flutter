@@ -90,7 +90,7 @@ class Author {
   final Badge? badge;
   final String role;
   final String position;
-
+  int? temperature;
   Author({
     required this.id,
     this.avatar,
@@ -98,6 +98,7 @@ class Author {
     required this.badge,
     required this.role,
     required this.position,
+    this.temperature,
   });
 
   Map<String, dynamic> toMap() {
@@ -108,6 +109,7 @@ class Author {
       'badge': badge?.toMap(),
       'role': role,
       'position': position,
+      'temperature': temperature,
     };
   }
 
@@ -116,11 +118,10 @@ class Author {
       id: map['id'] as String,
       avatar: map['avatar'] != null ? map['avatar'] as String : null,
       nickname: map['nickname'] as String,
-      badge: map['badge'] != null
-          ? Badge.fromMap(map['badge'] as Map<String, dynamic>)
-          : null,
+      badge: map['badge'] != null ? Badge.fromMap(map['badge'] as Map<String,dynamic>) : null,
       role: map['role'] as String,
       position: map['position'] as String,
+      temperature: map['temperature'] != null ? map['temperature'] as int : null,
     );
   }
 
