@@ -16,7 +16,8 @@ class Talk extends GetView<TalkController> {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          controller.createTalkModal();
+          // controller.createTalkModal();
+          controller.fetchListTalk();
         },
         elevation: 0,
         backgroundColor: AppColors.primary80,
@@ -27,7 +28,7 @@ class Talk extends GetView<TalkController> {
             padding:
                 const EdgeInsets.only(top: 16, left: 10, right: 10, bottom: 16),
             child: Obx(
-              () => controller.talkModels.isEmpty
+              () => controller.talkList.isEmpty
                   ? Center(
                       child: Padding(
                         padding: const EdgeInsets.symmetric(vertical: 30),
@@ -80,15 +81,18 @@ class Talk extends GetView<TalkController> {
                         ),
                         trailing: InkWell(
                             onTap: () {
-                              Get.toNamed(ViewRoute.talkDetailPage,
-                                  arguments: '핫한 톡');
+                              Get.toNamed(ViewRoute.talkListPage, arguments: {
+                                'title': '핫한 톡', // '핫한톡' 문자열을 전달합니다.
+                                'talks': controller
+                                    .topTalkList, // `topTalkList` 데이터를 전달합니다.
+                              });
                             },
                             child: SvgPicture.asset(
                                 'assets/icons/icon20/Right.svg')),
                       ),
                       // Test
                       // 핫한 톡
-                      CustomTalkWidget(talkModel: controller.talkModels.first),
+                      CustomTalkWidget(talkModel: controller.topTalkList.first),
 
 // 톡톡톡
                       ListTile(
@@ -102,8 +106,11 @@ class Talk extends GetView<TalkController> {
                         ),
                         trailing: InkWell(
                             onTap: () {
-                              Get.toNamed(ViewRoute.talkDetailPage,
-                                  arguments: '톡톡톡');
+                              Get.toNamed(ViewRoute.talkListPage, arguments: {
+                                'title': '톡톡톡', 
+                                'talks': controller
+                                    .talkList, // `topTalkList` 데이터를 전달합니다.
+                              });
                             },
                             child: SvgPicture.asset(
                                 'assets/icons/icon20/Right.svg')),
@@ -111,12 +118,12 @@ class Talk extends GetView<TalkController> {
                       ListView.builder(
                         shrinkWrap: true,
                         physics: NeverScrollableScrollPhysics(),
-                        itemCount: controller.talkModels.length,
+                        itemCount: controller.talkList.length,
                         itemBuilder: (context, index) {
                           return Padding(
                             padding: const EdgeInsets.only(top: 10, bottom: 10),
                             child: CustomTalkWidget(
-                                talkModel: controller.talkModels[index]),
+                                talkModel: controller.talkList[index]),
                           );
                         },
                       )

@@ -1,5 +1,6 @@
 import 'package:ace/controller/talk/talk_controller.dart';
-import 'package:ace/models/mogak/talk_model.dart';
+import 'package:ace/models/talk/talk_model.dart';
+import 'package:ace/routes/view_route.dart';
 import 'package:ace/utils/colors.dart';
 import 'package:ace/utils/typography.dart';
 import 'package:ace/widgets/badge_avatar_custom.dart';
@@ -22,15 +23,15 @@ class CustomTalkWidget extends GetView<TalkController> {
             mainAxisSize: MainAxisSize.min,
             children: [
               BadgeAvatarCustom(
-                authorBadge: talkModel.author?.badge,
-                avatarUrl: talkModel.author?.avatar,
+                // authorBadge: talkModel.author?.badge? ?? '',
+                // avatarUrl: talkModel.author?.avatar ?? '',
                 height: 48,
                 width: 43,
               ),
-              Text(
-                talkModel.author?.nickname ?? "",
-                style: AppTypography.button28Bold,
-              ),
+              // Text(
+              //   talkModel.author?.nickname ?? "",
+              //   style: AppTypography.button28Bold,
+              // ),
             ],
           ),
         ),
@@ -60,9 +61,15 @@ class CustomTalkWidget extends GetView<TalkController> {
                         SizedBox(
                           height: 5,
                         ),
-                        Text(
-                          talkModel.content,
-                          style: AppTypography.button36Medium,
+                        InkWell(
+                          onTap: () {
+                            Get.toNamed(ViewRoute.talkDetailPage,
+                                arguments: talkModel);
+                          },
+                          child: Text(
+                            talkModel.content ?? "",
+                            style: AppTypography.button36Medium,
+                          ),
                         ),
                       ],
                     ),
@@ -76,7 +83,7 @@ class CustomTalkWidget extends GetView<TalkController> {
                   children: [
                     CommentIcon(
                       svgIcon: 'assets/icons/icon20/Chat2.svg',
-                      count: talkModel.temperature,
+                      count: talkModel.childrenLength ?? 0,
                     ),
                     SizedBox(width: 10),
                     CommentIcon(
