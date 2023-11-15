@@ -42,13 +42,9 @@ dependencies:
   screenshot: ^2.1.0
   shimmer: ^3.0.0
   smooth_page_indicator: ^1.1.0
-<<<<<<< HEAD
   flutter_custom_clippers: ^2.1.0
   url_launcher: ^6.1.14
 
-=======
-  url_launcher: ^6.0.12
->>>>>>> e50d151898b6ac7f0062f374fc67805d3f7398e4
 dev_dependencies:
   flutter_lints: ^2.0.0
   flutter_test:

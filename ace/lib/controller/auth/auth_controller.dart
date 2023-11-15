@@ -14,8 +14,7 @@ import 'package:get/get.dart';
 class AuthController extends GetxController {
   final Rx<String> token = Rx<String>("");
   Dio dio = Dio();
-  Rx<ProfileModel?> ProfileData = Rx<ProfileModel?>(null);
-
+  Rx<ProfileModel?> profileData = Rx<ProfileModel?>(null);
 
   @override
   void onInit() {
@@ -66,8 +65,8 @@ class AuthController extends GetxController {
       if (response.statusCode == 200) {
         var resdata = response.data['data'];
         print(resdata);
-        ProfileData.value = ProfileModel.fromMap(resdata);
-        print('프로필 업로드 : ${ProfileData.value?.toMap()}');
+        profileData.value = ProfileModel.fromMap(resdata);
+        print('프로필 업로드 : ${profileData.value?.toMap()}');
       }
     } catch (e) {
       print('like 일반 오류: $e');
@@ -106,9 +105,9 @@ class AuthController extends GetxController {
     );
     print(res.data);
     if (res.data['status'] == 'success') {
-      // 성공시 토큰값 업로드
-
       token.value = res.data['data'];
+      fetchProfile();
+
       print('로그인 성공 : ${token.value}');
       Get.toNamed(ViewRoute.homePage);
     } else {
