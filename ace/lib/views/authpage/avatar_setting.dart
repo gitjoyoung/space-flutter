@@ -1,5 +1,5 @@
-import 'package:ace/controller/auth_controller.dart';
-import 'package:ace/controller/avatar_controller.dart';
+import 'package:ace/controller/auth/auth_controller.dart';
+import 'package:ace/controller/auth/avatar_controller.dart';
 import 'package:ace/utils/button.dart';
 import 'package:ace/utils/colors.dart';
 import 'package:ace/utils/typography.dart';

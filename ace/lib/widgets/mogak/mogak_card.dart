@@ -2,7 +2,7 @@
 import 'package:ace/models/mogak/mogak_model.dart';
 import 'package:ace/utils/colors.dart';
 import 'package:ace/utils/typography.dart';
-import 'package:ace/widgets/comment_Icon.dart';
+import 'package:ace/widgets/common/comment_Icon.dart';
 import 'package:ace/widgets/mogak/mogak_content.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';

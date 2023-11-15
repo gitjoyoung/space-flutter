@@ -1,6 +1,7 @@
 import 'dart:convert';
 
-import 'package:ace/controller/auth_controller.dart';
+import 'package:ace/controller/auth/auth_controller.dart';
+import 'package:ace/models/auth/profile.dart';
 import 'package:ace/models/mogak/mogak_model.dart';
 import 'package:ace/models/mogak/mogak_talk_model.dart';
 import 'package:ace/routes/api_route.dart';
@@ -10,6 +11,8 @@ import 'package:get/get.dart';
 class MogakController extends GetxController {
 // 토큰 가져오기
   String token = Get.find<AuthController>().getToken();
+  ProfileModel Pofile = Get.find<AuthController>().ProfileData.value!;
+
 
 // 모각 리스트
   RxList<AllMogakModel> allMogakList = RxList<AllMogakModel>();

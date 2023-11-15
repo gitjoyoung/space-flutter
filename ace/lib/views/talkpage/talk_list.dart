@@ -1,7 +1,7 @@
 import 'package:ace/controller/talk/talk_controller.dart';
 import 'package:ace/models/talk/talk_model.dart';
 import 'package:ace/utils/typography.dart';
-import 'package:ace/widgets/space_appbar.dart';
+import 'package:ace/widgets/common/space_appbar.dart';
 import 'package:ace/widgets/talk/talk_content.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
