@@ -1,8 +1,9 @@
 // ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'dart:convert';
+import '../mogak/author_model.dart';
 
-import 'package:ace/models/catch/catch_maode2.dart';
 import 'package:ace/models/mogak/badge_model.dart';
+import 'package:ace/models/token_model.dart';
 
 class AppliedProfiles {
   String id;
@@ -33,7 +34,7 @@ class AppliedProfiles {
       'position': position,
       'badge': badge?.toMap(),
       'temperature': temperature,
-      'profile': profile?.toMap(),
+      // 'profile': profile?.toMap(),
     };
   }
 
