@@ -17,8 +17,8 @@ class Mogak extends GetView<MogakController> {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          controller.refreshMogaks();
-          // Get.toNamed(ViewRoute.mogakCreatePage);
+          // controller.refreshMogaks();
+          Get.toNamed(ViewRoute.mogakCreatePage);
         },
         elevation: 0,
         child: Image.asset('assets/icons/icon30/Write.png'),
