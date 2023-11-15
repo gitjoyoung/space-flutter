@@ -1,6 +1,4 @@
 import 'package:ace/controller/home/home_controller.dart';
-import 'package:ace/controller/mogak/mogak_cotroller.dart';
-import 'package:ace/controller/talk/talk_controller.dart';
 import 'package:ace/routes/view_route.dart';
 import 'package:ace/utils/colors.dart';
 import 'package:ace/utils/typography.dart';
@@ -51,8 +49,7 @@ class Home extends GetView<HomeController> {
             ),
 
             // 배너 인덱스
-            Obx(() => controller.bannerList != null &&
-                    controller.bannerList.isNotEmpty
+            Obx(() => controller.bannerList.isNotEmpty
                 ? Padding(
                     padding: const EdgeInsets.all(16.0),
                     child: SmoothPageIndicator(
@@ -131,7 +128,7 @@ class Home extends GetView<HomeController> {
                   child: SvgPicture.asset('assets/icons/icon20/Right.svg')),
             ),
             Obx(
-              () => controller.topTalk != null && controller.topTalk.isNotEmpty
+              () => controller.topTalk.isNotEmpty
                   ? ListView.builder(
                       shrinkWrap: true,
                       physics: NeverScrollableScrollPhysics(),

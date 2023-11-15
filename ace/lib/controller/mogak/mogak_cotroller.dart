@@ -15,7 +15,6 @@ import 'package:get/get.dart';
 class MogakController extends GetxController {
 // 토큰 가져오기
   String token = Get.find<AuthController>().getToken();
-  ProfileModel? Pofile = Get.find<AuthController>().ProfileData.value;
 
 // 모각 리스트
   RxList<AllMogakModel> allMogakList = RxList<AllMogakModel>();

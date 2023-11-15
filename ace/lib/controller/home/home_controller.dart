@@ -119,5 +119,4 @@ class HomeController extends GetxController {
     fetchListRank();
   }
 
-  refreshMogaks() {}
 }
