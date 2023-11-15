@@ -1,4 +1,4 @@
-import 'package:ace/controller/auth_controller.dart';
+import 'package:ace/controller/auth/auth_controller.dart';
 import 'package:ace/controller/talk/talk_controller.dart';
 import 'package:ace/models/talk/talk_detail_model.dart';
 import 'package:ace/models/talk/talk_model.dart';

@@ -5,9 +5,9 @@ import 'package:ace/routes/view_route.dart';
 import 'package:ace/utils/colors.dart';
 import 'package:ace/utils/typography.dart';
 import 'package:ace/views/mogakpage/test.dart';
-import 'package:ace/widgets/badge_avatar_custom.dart';
-import 'package:ace/widgets/card_tag.dart';
-import 'package:ace/widgets/tag_row.dart';
+import 'package:ace/widgets/common/badge_avatar_custom.dart';
+import 'package:ace/widgets/common/card_tag.dart';
+import 'package:ace/widgets/common/tag_row.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -20,6 +20,22 @@ class MogakContent extends GetView<MogakController> {
 
   @override
   Widget build(BuildContext context) {
+    print('그냥 데이타' + data!.id.toString());
+
+    print('업 한 데이타' + data!.upProfiles.toString());
+    bool isLiked = false;
+    if (data != null && data?.upProfiles != null) {
+      for (var profile in data!.upProfiles!) {
+        if (profile != null &&
+            profile['profile'] != null &&
+            profile['profile']['id'] == data?.id ) {
+          isLiked = true;
+          print('좋아요를 누름');
+          break; // Exit the loop when a match is found
+        }
+      }
+    }
+
     return Padding(
       padding: const EdgeInsets.all(10),
       child: Column(
@@ -51,11 +67,14 @@ class MogakContent extends GetView<MogakController> {
                 ],
               ),
               trailing: InkWell(
-                  onTap: () {
-                    print('좋아요 클릭');
-                    controller.fetchLikeModak(data!.id);
-                  },
-                  child: SvgPicture.asset('assets/icons/icon20/like.svg')),
+                onTap: () {
+                  print('좋아요 클릭');
+                  controller.fetchLikeModak(data!.id);
+                },
+                child: isLiked
+                    ? SvgPicture.asset('assets/icons/icon20/like.svg')
+                    : SvgPicture.asset('assets/icons/icon20/unLike.svg'),
+              ),
             ),
             InkWell(
               onTap: () {

@@ -5,23 +5,23 @@ import 'package:dio/dio.dart';
 // import 'package:get/get.dart';
 
 class ProfileModel {
-  final String id;
-  final String? nickname;
-  final String? bio;
-  final String? avatar;
-  final String? position;
-  final DateTime? createdAt;
-  final DateTime? updatedAt;
-  final String? urlGithub;
-  final String? urlBehance;
-  final String? urlBlog;
-  final String? urlWeb;
-  final String? urlEtc;
-  final String? urlPortfolio;
-  final String role;
-  final String? badgeId;
-  final String? accountId;
-  final double temperature;
+   String id;
+   String? nickname;
+   String? bio;
+   String? avatar;
+   String? position;
+   DateTime? createdAt;
+   DateTime? updatedAt;
+   String? urlGithub;
+   String? urlBehance;
+   String? urlBlog;
+   String? urlWeb;
+   String? urlEtc;
+   String? urlPortfolio;
+   String role;
+   String? badgeId;
+   String? accountId;
+   double temperature;
 
   ProfileModel({
     required this.id,

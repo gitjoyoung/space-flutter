@@ -1,6 +1,6 @@
 import 'package:ace/utils/colors.dart';
 import 'package:ace/utils/typography.dart';
-import 'package:ace/widgets/my_page.dart';
+import 'package:ace/widgets/common/my_page.dart';
 import 'package:dotted_dashed_line/dotted_dashed_line.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';

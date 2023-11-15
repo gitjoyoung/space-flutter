@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:ace/controller/auth_controller.dart';
+import 'package:ace/controller/auth/auth_controller.dart';
 import 'package:ace/models/talk/talk_model.dart';
 import 'package:ace/routes/api_route.dart';
 import 'package:ace/utils/button.dart';

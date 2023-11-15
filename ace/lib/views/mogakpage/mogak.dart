@@ -17,7 +17,8 @@ class Mogak extends GetView<MogakController> {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Get.toNamed(ViewRoute.mogakCreatePage);
+          controller.refreshMogaks();
+          // Get.toNamed(ViewRoute.mogakCreatePage);
         },
         elevation: 0,
         child: Image.asset('assets/icons/icon30/Write.png'),
@@ -81,7 +82,7 @@ class Mogak extends GetView<MogakController> {
                                 children: [
                                   buildMogakCard(
                                       '핫한 모각코',
-                                      controller.allMogakList,
+                                      controller.topMogakList,
                                       ViewRoute.mogakTopListPage),
                                   buildMogakCard(
                                       '모든 모각코',
