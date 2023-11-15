@@ -135,6 +135,27 @@ class MogakDetailController extends GetxController {
     }
   }
 
+// 시간 얼마나 지났는지 표시
+  String formatTimeDifference(DateTime? dateTime) {
+    if (dateTime == null) return '';
+
+    final now = DateTime.now();
+    final localDateTime = dateTime.toLocal(); // UTC를 로컬 시간대로 변환
+    print(localDateTime);
+
+    final difference = now.difference(localDateTime);
+
+    if (difference.inMinutes < 1) {
+      return '방금 전';
+    } else if (difference.inMinutes < 60) {
+      return '${difference.inMinutes}분 전';
+    } else if (difference.inHours < 24) {
+      return '${difference.inHours}시간 전';
+    } else {
+      return '${difference.inDays}일 전';
+    }
+  }
+
   void showCustomDialog(String mogakId) {
     Get.dialog(
       Dialog(
@@ -205,4 +226,5 @@ class MogakDetailController extends GetxController {
       ),
     );
   }
+  
 }

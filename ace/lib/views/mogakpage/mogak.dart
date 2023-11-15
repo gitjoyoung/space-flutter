@@ -1,5 +1,3 @@
-import 'dart:ffi';
-
 import 'package:ace/controller/mogak/mogak_cotroller.dart';
 import 'package:ace/routes/view_route.dart';
 import 'package:ace/utils/colors.dart';
@@ -7,7 +5,6 @@ import 'package:ace/utils/typography.dart';
 import 'package:ace/widgets/mogak/mogak_card.dart';
 import 'package:ace/widgets/mogak/mogak_content.dart';
 import 'package:ace/widgets/mogak/mogak_skeleton.dart';
-import 'package:ace/widgets/title_appbar_custom.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -103,7 +100,8 @@ class Mogak extends GetView<MogakController> {
                                 padding:
                                     const EdgeInsets.symmetric(vertical: 16),
                                 child: ListTile(
-                                  title: Text('${controller.searchText.value}검색결과',
+                                  title: Text(
+                                      '${controller.searchText.value}검색결과',
                                       style: AppTypography.popupTitleMedium),
                                   leading: IconButton(
                                     onPressed: () {},
@@ -147,6 +145,5 @@ class Mogak extends GetView<MogakController> {
         ),
       ),
     );
-
   }
 }

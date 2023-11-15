@@ -1,20 +1,9 @@
 import 'package:ace/controller/home/home_controller.dart';
-import 'package:ace/routes/pages.dart';
-import 'package:ace/routes/view_route.dart';
 import 'package:ace/utils/colors.dart';
 import 'package:ace/utils/typography.dart';
 import 'package:ace/widgets/space_appbar.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
-
-void main() {
-  runApp(GetMaterialApp(
-    home: HomeLayOut(),
-    initialRoute: ViewRoute.homePage,
-    getPages: AppPages.pages,
-  ));
-}
 
 class HomeLayOut extends GetView<HomeController> {
   const HomeLayOut({super.key});

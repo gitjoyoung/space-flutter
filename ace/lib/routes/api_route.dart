@@ -6,13 +6,20 @@ class ApiRoute {
   static const String forgetPasswordApi = "${baseUrl}api/auth/verify-email";
   static const String changePasswordApi = "${baseUrl}api/auth/change-password";
 
-
 // 홈
 
   static const String homeBannerApi = "${baseUrl}api/course";
   static const String homeSpacerRank = "${baseUrl}api/rank?month=10";
 
+// 톡톡
+  static const String talkAllApi = "${baseUrl}api/talk";
+  static const String createTalkApi = "${baseUrl}api/talk";
 
+  static const String talkApi = "${baseUrl}api/talk/";
+  static const String talkCreateApi = "${baseUrl}api/talk/";
+
+
+// 모각
 // 특정 모각 가져오기 생성 삭제
   static const String mogakApi = "${baseUrl}api/mogak/";
   static const String mogakCreateApi = "${baseUrl}api/mogak";

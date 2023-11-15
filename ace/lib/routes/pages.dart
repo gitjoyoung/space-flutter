@@ -9,6 +9,7 @@ import 'package:ace/controller/mogak/mogak_cotroller.dart';
 import 'package:ace/controller/mogak/mogak_create_contoller.dart';
 import 'package:ace/controller/mogak/mogak_detail_cotroller.dart';
 import 'package:ace/controller/signup_controller.dart';
+import 'package:ace/controller/talk/talk_controller.dart';
 import 'package:ace/routes/view_route.dart';
 import 'package:ace/views/authpage/chang_password_view.dart';
 import 'package:ace/views/authpage/find_password.dart';
@@ -18,16 +19,16 @@ import 'package:ace/views/authpage/sign_up_success.dart';
 import 'package:ace/views/authpage/splash.dart';
 import 'package:ace/views/catchpage/catch.dart';
 import 'package:ace/views/catchpage/list_catch.dart';
-
 import 'package:ace/views/homepage/home_layout.dart';
 import 'package:ace/views/homepage/profile.dart';
-
 import 'package:ace/views/main_view.dart';
 import 'package:ace/views/mogakpage/create_mogak.dart';
 import 'package:ace/views/mogakpage/detail_mogak.dart';
 import 'package:ace/views/mogakpage/list_mogak.dart';
 import 'package:ace/views/mogakpage/mogak.dart';
 import 'package:ace/views/spacer/spacer.dart';
+import 'package:ace/views/talkpage/talk.dart';
+import 'package:ace/views/talkpage/talk_list.dart';
 
 import 'package:get/get.dart';
 
@@ -88,13 +89,32 @@ class AppPages {
       binding: BindingsBuilder(() {
         Get.put(MogakController());
         Get.put(HomeController());
+        Get.put(TalkController());
       }),
+    ),
+
+// 톡
+    GetPage(
+      name: ViewRoute.talkPage,
+      page: () => const Talk(),
+      binding: BindingsBuilder(() {
+        Get.put(TalkController());
+      }),
+    ),
+    GetPage(
+      name: ViewRoute.talkListPage,
+      page: () => const TalkList(),
+    ),
+
+    GetPage(
+      name: ViewRoute.talkDetailPage,
+      page: () => const TalkList(),
     ),
 
 // 스페이서
     GetPage(name: ViewRoute.spacerPage, page: () => const Spacer()),
 
-    // 모각
+// 모각
     GetPage(
       name: ViewRoute.mogakPage,
       page: () => const Mogak(),
@@ -131,6 +151,8 @@ class AppPages {
         Get.put(CatchController());
       }),
     ),
+
+    // 캐치업
     GetPage(
       name: ViewRoute.catchlAllListPage,
       page: () => const CatchList(title: '핫한 캐치업'),
