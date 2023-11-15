@@ -155,11 +155,11 @@ class AppPages {
     // 캐치업
     GetPage(
       name: ViewRoute.catchlAllListPage,
-      page: () => const CatchList(title: '핫한 캐치업'),
+      page: () => const CatchList(title: '캐치업!'),
     ),
     GetPage(
       name: ViewRoute.catchlTopListPage,
-      page: () => const CatchList(title: '캐치업!'),
+      page: () => const CatchList(title: '핫한 캐치업'),
     ),
   ];
 }
