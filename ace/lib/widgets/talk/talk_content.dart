@@ -51,7 +51,7 @@ class CustomTalkWidget extends GetView<TalkController> {
                   nip: BubbleNip.leftCenter,
                   child: Padding(
                     padding: const EdgeInsets.only(
-                        left: 16, top: 16, bottom: 18, right: 16),
+                        left: 16, top: 5, bottom: 5, right: 16),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [

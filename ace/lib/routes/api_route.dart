@@ -12,7 +12,10 @@ class ApiRoute {
 // 홈 화면
 
   static const String homeBannerApi = "${baseUrl}api/course";
-  static const String homeSpacerRank = "${baseUrl}api/rank?month=10";
+  static const String homeSpacerRankApi = "${baseUrl}api/rank?month=10";
+
+// 마이페이지 관련
+  static const String MypageMeApi = "${baseUrl}api/me/";
 
 // 톡톡
 // 특정 톡톡 가져오기 생성 삭제
