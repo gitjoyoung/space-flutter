@@ -8,11 +8,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:screenshot/screenshot.dart';
 
-void main() {
-  Get.put(AvatarController());
-  Get.put(AuthController());
-  runApp(GetMaterialApp(home: AvatarCustomizer()));
-}
+
 
 class AvatarCustomizer extends GetView<AvatarController> {
   @override

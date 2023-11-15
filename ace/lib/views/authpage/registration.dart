@@ -14,11 +14,6 @@ import 'package:ace/widgets/common/text_filed_custom.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-void main() {
-  runApp(
-    GetMaterialApp(home: RegistrationView(), getPages: AppPages.pages),
-  );
-}
 
 class RegistrationView extends GetView<SignUpController> {
   const RegistrationView({Key? key}) : super(key: key);
