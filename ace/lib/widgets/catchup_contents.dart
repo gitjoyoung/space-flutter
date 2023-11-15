@@ -1,5 +1,5 @@
 import 'package:ace/controller/catch/catch_controller..dart';
-import 'package:ace/models/catch/catch_maode2.dart';
+
 import 'package:ace/models/catch/catch_model.dart';
 import 'package:ace/utils/colors.dart';
 import 'package:ace/utils/typography.dart';
@@ -71,15 +71,15 @@ class CatchupContent extends GetView<CatchController> {
                 ),
               ),
             ),
-            InkWell(
-              onTap: () {},
-              child: Text(
-                data?.content ?? "",
-                style: AppTypography.button36Regular,
-                maxLines: maxLength ?? 2,
-                overflow: TextOverflow.ellipsis,
-              ),
-            ),
+            // InkWell(
+            //   onTap: () {},
+            //   child: Text(
+            //     data?.content ?? "",
+            //     style: AppTypography.button36Regular,
+            //     maxLines: maxLength ?? 2,
+            //     overflow: TextOverflow.ellipsis,
+            //   ),
+            // ),
             ListTile(
               contentPadding: EdgeInsets.only(left: 0),
               trailing: Text("2023. 11 .1",

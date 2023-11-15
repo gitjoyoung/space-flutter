@@ -1,10 +1,14 @@
 import 'package:ace/controller/home/home_controller.dart';
 import 'package:ace/controller/mogak/mogak_cotroller.dart';
+import 'package:ace/controller/catch/catch_controller..dart';
 import 'package:ace/routes/view_route.dart';
 import 'package:ace/utils/colors.dart';
 import 'package:ace/utils/typography.dart';
 import 'package:ace/widgets/badge_avatar_custom.dart';
 import 'package:ace/widgets/card_tag.dart';
+import 'package:ace/widgets/catch/catch_card.dart';
+import 'package:ace/widgets/catch/catch_card_home.dart';
+import 'package:ace/widgets/catch/catch_skeleton.dart';
 import 'package:ace/widgets/mogak/mogak_card.dart';
 import 'package:ace/widgets/mogak/mogak_skeleton.dart';
 import 'package:ace/widgets/spacer/spacer_skeleton.dart';
@@ -19,6 +23,7 @@ class Home extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     var topMogak = Get.find<MogakController>().topMogakList;
+    var topCatchModels = Get.find<CatchController>().topCatchModels;
     return SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -108,7 +113,31 @@ class Home extends GetView<HomeController> {
             //       controller.fetchListRank();
             //     },
             //     child: Text('데이타 테스트 버튼')),
-
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 5.0),
+              child: Column(
+                children: [
+                  Obx(
+                    () => topCatchModels != null && topCatchModels.isNotEmpty
+                        ? buildCatchCardHome('핫한 캐치업', topCatchModels,
+                            ViewRoute.catchlTopListPage)
+                        : CatchSkeleton(repeatCount: 1),
+                  ),
+                  Obx(
+                    () => topCatchModels != null && topCatchModels.isNotEmpty
+                        ? buildCatchCardHome1('핫한 캐치업', topCatchModels,
+                            ViewRoute.catchlTopListPage)
+                        : CatchSkeleton(repeatCount: 1),
+                  ),
+                  Obx(
+                    () => topCatchModels != null && topCatchModels.isNotEmpty
+                        ? buildCatchCardHome2('핫한 캐치업', topCatchModels,
+                            ViewRoute.catchlTopListPage)
+                        : CatchSkeleton(repeatCount: 1),
+                  ),
+                ],
+              ),
+            ),
 // 모각 리스트
 
             Obx(
