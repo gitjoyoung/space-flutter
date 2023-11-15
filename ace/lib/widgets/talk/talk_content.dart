@@ -25,15 +25,15 @@ class CustomTalkWidget extends GetView<TalkController> {
             mainAxisSize: MainAxisSize.min,
             children: [
               BadgeAvatarCustom(
-                // authorBadge: talkModel.author?.badge? ?? '',
-                // avatarUrl: talkModel.author?.avatar ?? '',
+                authorBadge: talkModel.author?.badge,
+                avatarUrl: talkModel.author?.avatar,
                 height: 48,
                 width: 43,
               ),
-              // Text(
-              //   talkModel.author?.nickname ?? "",
-              //   style: AppTypography.button28Bold,
-              // ),
+              Text(
+                talkModel.author?.nickname ?? "",
+                style: AppTypography.button28Bold,
+              ),
             ],
           ),
         ),
@@ -48,7 +48,7 @@ class CustomTalkWidget extends GetView<TalkController> {
                   borderColor: AppColors.neutral10,
                   elevation: 0,
                   stick: true,
-                  nip: BubbleNip.leftBottom,
+                  nip: BubbleNip.leftCenter,
                   child: Padding(
                     padding: const EdgeInsets.only(
                         left: 16, top: 16, bottom: 18, right: 16),

@@ -15,8 +15,8 @@ class TalkModel {
   final String? mogakId;
   final bool isDeleted;
   final int temperature;
-  // final Author? author;
-  // final List<TalkModel>? children;
+  final Author? author;
+  final List<TalkModel>? children;
   final int? childrenLength;
 
   TalkModel({
@@ -31,8 +31,8 @@ class TalkModel {
     this.mogakId,
     required this.isDeleted,
     required this.temperature,
-    // this.author,
-    // this.children,
+    this.author,
+    this.children,
     this.childrenLength,
   });
 
@@ -49,8 +49,8 @@ class TalkModel {
       'mogakId': mogakId,
       'isDeleted': isDeleted,
       'temperature': temperature,
-      // 'author': author?.toMap(),
-      // 'children': children?.map((x) => x?.toMap()).toList(),
+      'author': author?.toMap(),
+      'children': children?.map((x) => x?.toMap()).toList(),
       'childrenLength': childrenLength,
     };
   }
@@ -71,10 +71,10 @@ class TalkModel {
       mogakId: map['mogakId'] as String?,
       isDeleted: map['isDeleted'] as bool,
       temperature: map['temperature'] as int,
-      // author: map['author'] != null ? Author.fromMap(map['author']) : null,
-      // children: map['children'] != null
-      //     ? (map['children'] as List).map((x) => TalkModel.fromMap(x)).toList()
-      //     : null,
+      author: map['author'] != null ? Author.fromMap(map['author']) : null,
+      children: map['children'] != null
+          ? (map['children'] as List).map((x) => TalkModel.fromMap(x)).toList()
+          : null,
       childrenLength: map['childrenLength'] as int?,
     );
   }
