@@ -1,4 +1,6 @@
 import 'package:ace/controller/auth/auth_controller.dart';
+import 'package:ace/controller/auth/avatar_controller.dart';
+
 import 'package:ace/controller/catch/catch_controller..dart';
 import 'package:ace/controller/auth/change_password_controller.dart';
 import 'package:ace/controller/auth/find_password_controller.dart';
@@ -75,7 +77,13 @@ class AppPages {
     GetPage(name: ViewRoute.splashPage, page: () => const SplashPage()),
     GetPage(
         name: ViewRoute.signupSuccessPage, page: () => const SignUpSuccess()),
-    GetPage(name: ViewRoute.profilePage, page: () => const Profile()),
+    GetPage(
+      name: ViewRoute.profilePage,
+      page: () => const Profile(),
+      binding: BindingsBuilder(() {
+        Get.put(AvatarController());
+      }),
+    ),
 
     // 홈페이지
     GetPage(
@@ -85,6 +93,11 @@ class AppPages {
         Get.put(TalkController());
         Get.put(MogakController());
         Get.put(HomeController());
+<<<<<<< HEAD
+=======
+        Get.put(TalkController());
+        Get.put(CatchController());
+>>>>>>> e50d151898b6ac7f0062f374fc67805d3f7398e4
       }),
     ),
 
@@ -146,19 +159,17 @@ class AppPages {
     GetPage(
       name: ViewRoute.catchPage,
       page: () => const Catch(),
-      binding: BindingsBuilder(() {
-        Get.put(CatchController());
-      }),
+      binding: BindingsBuilder(() {}),
     ),
 
     // 캐치업
     GetPage(
       name: ViewRoute.catchlAllListPage,
-      page: () => const CatchList(title: '핫한 캐치업'),
+      page: () => const CatchList(title: '캐치업!'),
     ),
     GetPage(
       name: ViewRoute.catchlTopListPage,
-      page: () => const CatchList(title: '캐치업!'),
+      page: () => const CatchList(title: '핫한 캐치업'),
     ),
   ];
 }

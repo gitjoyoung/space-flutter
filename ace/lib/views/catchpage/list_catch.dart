@@ -1,5 +1,6 @@
 import 'package:ace/controller/catch/catch_controller..dart';
-import 'package:ace/models/catch/catch_maode2.dart';
+
+import 'package:ace/models/catch/catch_model.dart';
 
 import 'package:ace/utils/colors.dart';
 import 'package:ace/utils/typography.dart';
@@ -17,10 +18,10 @@ class CatchList extends GetView<CatchController> {
 
   @override
   Widget build(BuildContext context) {
-    // final isTopMogak = title == '핫한 캐치업';
+    final isTopCatch = title == '핫한 캐치업';
 
-    // final listToDisplay =
-    //     isTopMogak ? controller.topCatchModels : controller.allCatchModels;
+    final listToDisplay =
+        isTopCatch ? controller.topCatchModels : controller.allCatchModels;
     return Scaffold(
       appBar: SpaceAppBar(),
       body: SingleChildScrollView(
@@ -30,49 +31,63 @@ class CatchList extends GetView<CatchController> {
             TitleAppBarCustom(
               title: title,
             ),
-            InkWell(
-              onTap: () {},
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.end,
-                children: [
-                  SvgPicture.asset(
-                    'assets/icons/icon30/Filter.svg',
-                    height: 16,
-                    width: 16,
+            Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              children: [
+                // CatchController의 buildHashTagButton 함수를 호출하여 해시 태그 버튼 생성
+                InkWell(
+                  onTap: () {
+                    controller.selectedHashTag();
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 3.0),
+                    child: SvgPicture.asset('assets/icons/icon50/Flutter.svg'),
+                    // 여기에 원하는 간격을 추가
                   ),
-                  SizedBox(
-                    width: 3,
+                ),
+                InkWell(
+                  onTap: () {
+                    controller.selectedHashTag();
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 3.0),
+                    child:
+                        // 여기에 원하는 간격을 추가
+                        SvgPicture.asset('assets/icons/icon50/Python.svg'),
                   ),
-                  Text(
-                    '날자순',
-                    style: AppTypography.cardBody
-                        .copyWith(color: AppColors.primary80),
-                  )
-                ],
-              ),
+                ),
+                InkWell(
+                  onTap: () {
+                    controller.selectedHashTag();
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 3.0),
+                    child: SvgPicture.asset('assets/icons/icon50/Js.svg'),
+                  ),
+                ),
+                InkWell(
+                  onTap: () {
+                    controller.selectedHashTag();
+                  },
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 3.0),
+                    child: SvgPicture.asset('assets/icons/icon50/React.svg'),
+                  ),
+                ),
+              ],
             ),
             SizedBox(
               height: 16,
             ),
             Obx(() {
-              // allMogakModels 리스트를 이용하여 ListView.builder로 목록을 구성합니다.
+              // allCatchModels 리스트를 이용하여 ListView.builder로 목록을 구성합니다.
               return ListView.builder(
                 physics: NeverScrollableScrollPhysics(),
                 shrinkWrap:
                     true, // SingleChildScrollView 내부에서 ListView를 사용하려면 이를 추가합니다.
-                itemCount: 1,
+                itemCount: listToDisplay.length,
                 itemBuilder: (context, index) {
-                  final item = AllCatchModel(
-                      id: "clo2q884r0001la085w99s7zm",
-                      title: "안드로이드 플러터 앱 release",
-                      content: "안드로이드 플러터 앱 release.",
-                      url:
-                          "https://velog.io/@kw2577/%EC%95%88%EB%93%9C%EB%A1%9C%EC%9D%B4%EB%93%9C-%ED%94%8C%EB%9F%AC%ED%84%B0-%EC%95%B1-release",
-                      thumbnail:
-                          "https://velog.velcdn.com/images/kw2577/post/bc2868ed-b910-40ad-adcd-a1099befc091/image.png",
-                      authorId: "clo2moojy0001mg08zd57870v",
-                      temperature: 0,
-                      status: "PUBLISHED");
+                  final item = listToDisplay[index];
                   return Column(
                     children: [
                       Card(
@@ -95,13 +110,13 @@ class CatchList extends GetView<CatchController> {
                           children: [
                             CommentIcon(
                               svgIcon: 'assets/icons/icon20/like.svg',
-                              count: item.temperature,
+                              count: item.temperature!,
                             ),
                           ],
                         ),
                       ),
                     ],
-                  ); // MogakContent 위젯에 데이터를 전달합니다.
+                  ); //
                 },
               );
             }),

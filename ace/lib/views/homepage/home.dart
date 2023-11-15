@@ -1,7 +1,10 @@
 import 'package:ace/controller/home/home_controller.dart';
+import 'package:ace/controller/catch/catch_controller..dart';
 import 'package:ace/routes/view_route.dart';
 import 'package:ace/utils/colors.dart';
 import 'package:ace/utils/typography.dart';
+import 'package:ace/widgets/catch/catch_card_home.dart';
+import 'package:ace/widgets/catch/catch_skeleton.dart';
 import 'package:ace/widgets/common/badge_avatar_custom.dart';
 import 'package:ace/widgets/common/card_tag.dart';
 import 'package:ace/widgets/mogak/mogak_card.dart';
@@ -18,6 +21,7 @@ class Home extends GetView<HomeController> {
 
   @override
   Widget build(BuildContext context) {
+    var topCatchModels = Get.find<CatchController>().topCatchModels;
     return SingleChildScrollView(
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 10),
@@ -145,6 +149,33 @@ class Home extends GetView<HomeController> {
                   : MogakSkeleton(repeatCount: 1),
             ),
 
+
+// 캐치업
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 5.0),
+              child: Column(
+                children: [
+                  Obx(
+                    () => topCatchModels != null && topCatchModels.isNotEmpty
+                        ? buildCatchCardHome('핫한 캐치업', topCatchModels,
+                            ViewRoute.catchlTopListPage)
+                        : CatchSkeleton(repeatCount: 1),
+                  ),
+                  Obx(
+                    () => topCatchModels != null && topCatchModels.isNotEmpty
+                        ? buildCatchCardHome1('핫한 캐치업', topCatchModels,
+                            ViewRoute.catchlTopListPage)
+                        : CatchSkeleton(repeatCount: 1),
+                  ),
+                  Obx(
+                    () => topCatchModels != null && topCatchModels.isNotEmpty
+                        ? buildCatchCardHome2('핫한 캐치업', topCatchModels,
+                            ViewRoute.catchlTopListPage)
+                        : CatchSkeleton(repeatCount: 1),
+                  ),
+                ],
+              ),
+            ),
 // 모각 리스트
 
             Obx(

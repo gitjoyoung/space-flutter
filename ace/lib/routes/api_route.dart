@@ -39,7 +39,7 @@ class ApiRoute {
   // 캐치업 가져오기
   static const String catchApi = "${baseUrl}api/catchup?filter=";
   static const String catchLikeApi = "${baseUrl}api/up";
-  static const String catchTopApi = "${baseUrl}api/top/catchup";
+  static const String catchTopApi = "${baseUrl}api/top/catchup/";
 }
 
 
