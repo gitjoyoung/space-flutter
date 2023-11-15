@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:ace/controller/mogak/mogak_create_contoller.dart';
 import 'package:ace/utils/button.dart';
 import 'package:ace/utils/colors.dart';
@@ -75,9 +77,7 @@ class MogakCreate extends GetView<MogakCreateController> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       TextField(
-                        onChanged: (value) {
-                          controller.postTitle(value);
-                        },
+                        controller: controller.postTitle,
                         style: AppTypography.tapButtonNavgation16,
                         decoration: InputDecoration(
                           hintStyle: AppTypography.tapButtonNavgation16
@@ -87,9 +87,7 @@ class MogakCreate extends GetView<MogakCreateController> {
                         ),
                       ),
                       TextFormField(
-                        onChanged: (value) {
-                          controller.postContent(value);
-                        },
+                        controller: controller.postContent,
                         style: AppTypography.button36Regular,
                         keyboardType: TextInputType.multiline,
                         maxLines: null, // 또는 특정 숫자를 지정할 수 있습니다.
@@ -103,8 +101,9 @@ class MogakCreate extends GetView<MogakCreateController> {
                         validator: (value) {},
                       ),
                       TextField(
+                        controller: controller.postHashTag,
                         onChanged: (value) {
-                          controller.postHashTag(value);
+                          controller.postHashSubTag(value);
                         },
                         style: AppTypography.button36Regular,
                         decoration: InputDecoration(
@@ -117,7 +116,7 @@ class MogakCreate extends GetView<MogakCreateController> {
                       Obx(() => SingleChildScrollView(
                           scrollDirection: Axis.horizontal,
                           child: TagsRow(
-                              tagsString: controller.postHashTag.value))),
+                              tagsString: controller.postHashSubTag.value))),
                     ]),
               ),
             ),
@@ -416,11 +415,18 @@ class MogakCreate extends GetView<MogakCreateController> {
             ),
             ElevatedButton(
                 onPressed: () {
-                  controller.createMogak();
+                  if (controller.isEdit == true) {
+                    print('수정 버튼');
+                    controller.fetchEditMogak(controller.mogakDetail.value!.id);
+                  } else {
+                    print('생성 버튼');
+
+                    controller.createMogak();
+                  }
                 },
                 style: AppButton.xLarge,
                 child: Text(
-                  '등록하기',
+                  controller.isEdit ? '수정하기' : '등록하기',
                   style: AppTypography.tapButtonMedium18,
                 )),
             SizedBox(
