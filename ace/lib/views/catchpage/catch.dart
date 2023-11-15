@@ -1,11 +1,11 @@
-import 'package:ace/controller/auth_controller.dart';
+import 'package:ace/controller/auth/auth_controller.dart';
 import 'package:ace/controller/catch/catch_controller..dart';
 import 'package:ace/models/catch/catch_maode2.dart';
 import 'package:ace/routes/view_route.dart';
 import 'package:ace/utils/colors.dart';
 import 'package:ace/utils/typography.dart';
-import 'package:ace/widgets/catchup_contents.dart';
-import 'package:ace/widgets/comment_Icon.dart';
+import 'package:ace/widgets/common/catchup_contents.dart';
+import 'package:ace/widgets/common/comment_Icon.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';

@@ -1,6 +1,6 @@
 import 'package:ace/utils/colors.dart';
 import 'package:ace/utils/typography.dart';
-import 'package:ace/widgets/my_page.dart';
+import 'package:ace/widgets/common/my_page.dart';
 import 'package:dotted_dashed_line/dotted_dashed_line.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -31,7 +31,9 @@ class My extends StatelessWidget {
                     width: 1.0,
                   ),
                 ),
-                child: ListView(
+                child: Column(
+                  // physics: NeverScrollableScrollPhysics(),
+                  // shrinkWrap: true, //ListView가 자신의 내용에 맞춰서 크기를 조절
                   children: [
                     Container(
                       height: 150,
@@ -96,28 +98,28 @@ class My extends StatelessWidget {
                   width: 370,
                   height: 249,
                   headerTitle: '나의 톡!',
-                  svgAssetPath: 'assets/icons/Icon20/fire.svg',
+                  svgAssetPath: 'assets/icons/icon20/fire.svg',
                   titles: ['내가 쓴 톡', '좋아요 한 톡', '내가 쓴 이어달린 톡']),
               SizedBox(height: 16),
               myPageCustom(
                   width: 370,
                   height: 193,
                   headerTitle: '나의 캐치업!',
-                  svgAssetPath: 'assets/icons/Icon20/fire.svg',
+                  svgAssetPath: 'assets/icons/icon20/dart.svg',
                   titles: ['내 캐치업', '좋아요 한 캐치업']),
               SizedBox(height: 16),
               myPageCustom(
                   width: 370,
                   height: 193,
                   headerTitle: '나의 모칵코!',
-                  svgAssetPath: 'assets/icons/Icon20/fire.svg',
+                  svgAssetPath: 'assets/icons/icon20/dart.svg',
                   titles: ['내가 만든 그룹', '참여중인 그룹']),
               SizedBox(height: 16),
               myPageCustom(
                   width: 370,
                   height: 305,
                   headerTitle: '설정',
-                  svgAssetPath: 'assets/icons/Icon20/fire.svg',
+                  svgAssetPath: 'assets/icons/icon20/Setting.svg',
                   titles: ['내 정보 수정하기', '비밀번호 변경', '로그아웃', '회원탈퇴'])
             ],
           ),

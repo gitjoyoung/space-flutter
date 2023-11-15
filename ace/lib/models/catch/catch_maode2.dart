@@ -60,33 +60,46 @@ class AllCatchModel {
 }
 
 class Author {
-  String id;
-  String? avatar;
-  String? nickname;
-  Badge? badge;
-  String? role;
-  String? position;
-  int? temperature;
 
+  final String id;
+  final String? avatar;
+  final String nickname;
+  final Badge? badge;
+  final String role;
+  final String position;
+  int? temperature;
   Author({
     required this.id,
     this.avatar,
-    this.nickname,
-    this.badge,
-    this.role,
-    this.position,
+    required this.nickname,
+    required this.badge,
+    required this.role,
+    required this.position,
     this.temperature,
   });
 
-  factory Author.fromJson(Map<String, dynamic> json) {
+  Map<String, dynamic> toMap() {
+    return <String, dynamic>{
+      'id': id,
+      'avatar': avatar,
+      'nickname': nickname,
+      'badge': badge?.toMap(),
+      'role': role,
+      'position': position,
+      'temperature': temperature,
+    };
+  }
+
+  factory Author.fromMap(Map<String, dynamic> map) {
     return Author(
-      id: json['id'],
-      avatar: json['avatar'],
-      nickname: json['nickname'],
-      badge: json['badge'] != null ? Badge.fromJson(json['badge']) : null,
-      role: json['role'],
-      position: json['position'],
-      temperature: json['temperature'] as int?,
+      id: map['id'] as String,
+      avatar: map['avatar'] != null ? map['avatar'] as String : null,
+      nickname: map['nickname'] as String,
+      badge: map['badge'] != null ? Badge.fromMap(map['badge'] as Map<String,dynamic>) : null,
+      role: map['role'] as String,
+      position: map['position'] as String,
+      temperature: map['temperature'] != null ? map['temperature'] as int : null,
+
     );
   }
 }

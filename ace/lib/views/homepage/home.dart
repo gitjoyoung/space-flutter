@@ -3,8 +3,8 @@ import 'package:ace/controller/mogak/mogak_cotroller.dart';
 import 'package:ace/routes/view_route.dart';
 import 'package:ace/utils/colors.dart';
 import 'package:ace/utils/typography.dart';
-import 'package:ace/widgets/badge_avatar_custom.dart';
-import 'package:ace/widgets/card_tag.dart';
+import 'package:ace/widgets/common/badge_avatar_custom.dart';
+import 'package:ace/widgets/common/card_tag.dart';
 import 'package:ace/widgets/mogak/mogak_card.dart';
 import 'package:ace/widgets/mogak/mogak_skeleton.dart';
 import 'package:ace/widgets/spacer/spacer_skeleton.dart';
@@ -33,7 +33,6 @@ class Home extends GetView<HomeController> {
                 () => PageView.builder(
                   controller: controller.bannerPageController,
                   itemCount: controller.bannerList.length,
-                  
                   itemBuilder: (context, index) {
                     return Image.network(
                       controller.bannerList![index].thumbnail.toString(),
@@ -45,26 +44,30 @@ class Home extends GetView<HomeController> {
                 ),
               ),
             ),
+
             // 배너 인덱스
-            Obx(() => Padding(
-                  padding: const EdgeInsets.all(16.0),
-                  child: SmoothPageIndicator(
-                      axisDirection: Axis.horizontal,
-                      controller:
-                          controller.bannerPageController, // PageController
-                      count: controller.bannerList.length,
-                      effect: const SlideEffect(
-                          spacing: 8.0,
-                          radius: 16,
-                          dotWidth: 6.0,
-                          dotHeight: 6.0,
-                          paintStyle: PaintingStyle.fill,
-                          strokeWidth: 1.5,
-                          dotColor: AppColors.neutral20,
-                          activeDotColor:
-                              AppColors.primary80), // your preferred effect
-                      onDotClicked: (index) {}),
-                )),
+            Obx(() => controller.bannerList != null &&
+                    controller.bannerList.isNotEmpty
+                ? Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: SmoothPageIndicator(
+                        axisDirection: Axis.horizontal,
+                        controller:
+                            controller.bannerPageController, // PageController
+                        count: controller.bannerList.length ?? 0,
+                        effect: const SlideEffect(
+                            spacing: 8.0,
+                            radius: 16,
+                            dotWidth: 6.0,
+                            dotHeight: 6.0,
+                            paintStyle: PaintingStyle.fill,
+                            strokeWidth: 1.5,
+                            dotColor: AppColors.neutral20,
+                            activeDotColor:
+                                AppColors.primary80), // your preferred effect
+                        onDotClicked: (index) {}),
+                  )
+                : Container()),
 
 // 검색 바
             Container(
@@ -225,24 +228,26 @@ class Home extends GetView<HomeController> {
                             },
                           ),
                         ),
-                        Padding(
-                          padding: const EdgeInsets.all(16.0),
-                          child: SmoothPageIndicator(
-                              axisDirection: Axis.horizontal,
-                              controller: controller
-                                  .rankPageController, // PageController
-                              count: controller.rankList.length,
-                              effect: const SlideEffect(
-                                  spacing: 8.0,
-                                  radius: 16,
-                                  dotWidth: 6.0,
-                                  dotHeight: 6.0,
-                                  paintStyle: PaintingStyle.fill,
-                                  strokeWidth: 1.5,
-                                  dotColor: AppColors.neutral20,
-                                  activeDotColor: AppColors.primary80),
-                              onDotClicked: (index) {}),
-                        ),
+                        if (controller.rankList != null &&
+                            controller.rankList.isNotEmpty)
+                          Padding(
+                            padding: const EdgeInsets.all(16.0),
+                            child: SmoothPageIndicator(
+                                axisDirection: Axis.horizontal,
+                                controller: controller
+                                    .rankPageController, // PageController
+                                count: controller.bannerList.length,
+                                effect: const SlideEffect(
+                                    spacing: 8.0,
+                                    radius: 16,
+                                    dotWidth: 6.0,
+                                    dotHeight: 6.0,
+                                    paintStyle: PaintingStyle.fill,
+                                    strokeWidth: 1.5,
+                                    dotColor: AppColors.neutral20,
+                                    activeDotColor: AppColors.primary80),
+                                onDotClicked: (index) {}),
+                          ),
                       ],
                     ),
             ),

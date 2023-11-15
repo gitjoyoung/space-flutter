@@ -1,10 +1,11 @@
 import 'dart:convert';
 
+import 'package:ace/models/auth/profile.dart';
 import 'package:ace/routes/api_route.dart';
 import 'package:ace/routes/view_route.dart';
 import 'package:ace/utils/colors.dart';
 import 'package:ace/utils/email_validator.dart';
-import 'package:ace/widgets/modal_custom.dart';
+import 'package:ace/widgets/common/modal_custom.dart';
 
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
@@ -13,6 +14,8 @@ import 'package:get/get.dart';
 class AuthController extends GetxController {
   final Rx<String> token = Rx<String>("");
   Dio dio = Dio();
+  Rx<ProfileModel?> ProfileData = Rx<ProfileModel?>(null);
+
 
   @override
   void onInit() {
@@ -52,6 +55,23 @@ class AuthController extends GetxController {
         Get.back();
       },
     );
+  }
+
+  Future<void> fetchProfile() async {
+    try {
+      final response = await dio.get(
+        ApiRoute.profileApi,
+        options: Options(headers: {"Authorization": token.value}),
+      );
+      if (response.statusCode == 200) {
+        var resdata = response.data['data'];
+        print(resdata);
+        ProfileData.value = ProfileModel.fromMap(resdata);
+        print('프로필 업로드 : ${ProfileData.value?.toMap()}');
+      }
+    } catch (e) {
+      print('like 일반 오류: $e');
+    }
   }
 
   login(String email, String password) async {

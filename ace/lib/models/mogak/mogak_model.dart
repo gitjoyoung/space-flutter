@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:ace/models/mogak/appliedprofiles_model.dart';
 import 'package:ace/models/mogak/author_model.dart';
-import 'package:ace/models/mogak/talk_model.dart';
+import 'package:ace/models/mogak/mogak_talk_model.dart';
 
 class AllMogakModel {
   final String id;
@@ -19,7 +19,7 @@ class AllMogakModel {
   int temperature;
   Author? author;
   List<AppliedProfiles>? appliedProfiles;
-  List<TalkModel>? talks;
+  List<MogakTalkModel>? talks;
   List? upProfiles;
 
   AllMogakModel({
@@ -91,7 +91,7 @@ class AllMogakModel {
           : null,
       talks: map['talks'] != null
           ? (map['talks'] as List<dynamic>)
-              .map((item) => TalkModel.fromMap(item as Map<String, dynamic>))
+              .map((item) => MogakTalkModel.fromMap(item as Map<String, dynamic>))
               .toList()
           : [], // 추가 (리스트 변환을 위해 적절한 처리 필요)
       upProfiles: map['upProfiles'], // 추가 (리스트 변환을 위해 적절한 처리 필요)
@@ -100,7 +100,7 @@ class AllMogakModel {
 
   String toJson() => json.encode(toMap());
 
-  void addTalks(List<TalkModel> newTalks) {
+  void addTalks(List<MogakTalkModel> newTalks) {
     if (this.talks != null) {
       this.talks!.addAll(newTalks);
     } else {
