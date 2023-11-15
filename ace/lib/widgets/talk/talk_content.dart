@@ -5,7 +5,6 @@ import 'package:ace/utils/colors.dart';
 import 'package:ace/utils/typography.dart';
 import 'package:ace/widgets/common/badge_avatar_custom.dart';
 import 'package:ace/widgets/common/comment_Icon.dart';
-import 'package:ace/widgets/talk/talk_dox.dart';
 import 'package:bubble/bubble.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -51,7 +50,7 @@ class CustomTalkWidget extends GetView<TalkController> {
                   nip: BubbleNip.leftCenter,
                   child: Padding(
                     padding: const EdgeInsets.only(
-                        left: 16, top: 16, bottom: 18, right: 16),
+                        left: 16, top: 5, bottom: 5, right: 16),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [

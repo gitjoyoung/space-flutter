@@ -56,7 +56,6 @@ Widget buildMogakCard(
           ],
         ),
       ),
-      SizedBox(height: 25),
     ],
   );
 }

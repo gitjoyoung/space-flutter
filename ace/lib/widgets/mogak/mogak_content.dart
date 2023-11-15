@@ -1,3 +1,4 @@
+import 'package:ace/controller/auth/auth_controller.dart';
 import 'package:ace/controller/mogak/mogak_cotroller.dart';
 import 'package:ace/models/mogak/author_model.dart';
 import 'package:ace/models/mogak/mogak_model.dart';
@@ -24,7 +25,8 @@ class MogakContent extends GetView<MogakController> {
     RxBool isLiked = false.obs;
     if (data != null && data!.upProfiles != null) {
       for (var profile in data!.upProfiles!) {
-        if (profile['profile']['id'] == controller.profile?.id) {
+        if (profile['profile']['id'] ==
+            Get.find<AuthController>().profileData.value?.id) {
           isLiked.value = true;
           break;
         }
@@ -161,7 +163,7 @@ class MogakContent extends GetView<MogakController> {
                 ),
               ),
             ]),
-        data?.authorId != controller.profile?.id
+        data?.authorId != Get.find<AuthController>().profileData.value?.id
             ? const SizedBox()
             : Positioned(
                 bottom: 20,
