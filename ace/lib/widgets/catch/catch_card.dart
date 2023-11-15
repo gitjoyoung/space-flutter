@@ -2,7 +2,7 @@ import 'package:ace/models/catch/catch_model.dart';
 import 'package:ace/utils/colors.dart';
 import 'package:ace/utils/typography.dart';
 import 'package:ace/widgets/catch/catch_content.dart';
-import 'package:ace/widgets/comment_Icon.dart';
+import 'package:ace/widgets/common/comment_Icon.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';

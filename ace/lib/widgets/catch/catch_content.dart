@@ -2,9 +2,11 @@ import 'package:ace/controller/catch/catch_controller..dart';
 import 'package:ace/models/catch/catch_model.dart';
 import 'package:ace/utils/colors.dart';
 import 'package:ace/utils/typography.dart';
-import 'package:ace/widgets/card_tag.dart';
+
 import 'package:ace/widgets/catch/catch_badge_avatar_custom.dart';
-import 'package:ace/widgets/tag_row.dart';
+import 'package:ace/widgets/common/card_tag.dart';
+import 'package:ace/widgets/common/tag_row.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';

@@ -1,5 +1,5 @@
-
 import 'package:ace/controller/auth/auth_controller.dart';
+import 'package:ace/controller/auth/avatar_controller.dart';
 
 import 'package:ace/controller/catch/catch_controller..dart';
 import 'package:ace/controller/auth/change_password_controller.dart';
@@ -93,6 +93,7 @@ class AppPages {
         Get.put(MogakController());
         Get.put(HomeController());
         Get.put(TalkController());
+        Get.put(CatchController());
       }),
     ),
 
@@ -154,9 +155,7 @@ class AppPages {
     GetPage(
       name: ViewRoute.catchPage,
       page: () => const Catch(),
-      binding: BindingsBuilder(() {
-        Get.put(CatchController());
-      }),
+      binding: BindingsBuilder(() {}),
     ),
 
     // 캐치업
