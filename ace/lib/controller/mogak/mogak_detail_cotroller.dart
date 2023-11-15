@@ -38,6 +38,7 @@ class MogakDetailController extends GetxController {
     }
   }
 
+// 내가 프로필 권한이 있는지
   bool isUserApplied() {
     return mogakDetail.value?.appliedProfiles
             ?.any((profile) => profile.id == token) ??
@@ -81,11 +82,16 @@ class MogakDetailController extends GetxController {
           options: Options(headers: {"Authorization": token}));
       if (response.statusCode == 200) {
         var jsonArray = response.data['data'];
+
+        mogakDetail.value?.title = jsonArray['title'];
+        mogakDetail.value?.content = jsonArray['content'];
         mogakDetail.value?.talks = List<MogakTalkModel>.from(
             jsonArray['talks'].map((x) => MogakTalkModel.fromMap(x)));
         mogakDetail.value?.appliedProfiles = List<AppliedProfiles>.from(
             jsonArray['appliedProfiles']
                 .map((x) => AppliedProfiles.fromMap(x)));
+
+        print('수정했어요 :'+mogakDetail.value.toString());
         mogakDetail.refresh();
       } else {
         print('모각 상세조회  통신 실패');
@@ -97,19 +103,7 @@ class MogakDetailController extends GetxController {
     }
   }
 
-// 글 수정
-  Future<void> fetchEditMogak() async {
-    var res = await dio.get(ApiRoute.mogakApi,
-        data: {
-          // "title": "모각코 이름 변경 테스트",
-          "content": postContent,
-          // "maxMember": 4,
-          "visiblityStatus": visiblityStatus
-        },
-        options: Options(headers: {"Authorization": token}));
-    print(res.data);
-  }
-
+// 모각 참여
   Future<void> fetchJoinMogak(String mogakId) async {
     try {
       print('통신 실행');
@@ -226,5 +220,5 @@ class MogakDetailController extends GetxController {
       ),
     );
   }
-  
+
 }

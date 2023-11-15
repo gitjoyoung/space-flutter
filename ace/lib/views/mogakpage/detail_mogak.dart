@@ -14,9 +14,8 @@ import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
 class MogakDetail extends GetView<MogakDetailController> {
-  final VoidCallback? onPressed;
 
-  const MogakDetail({Key? key, this.onPressed}) : super(key: key);
+  const MogakDetail({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
