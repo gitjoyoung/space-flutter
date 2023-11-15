@@ -1,4 +1,5 @@
 import 'package:ace/controller/auth_controller.dart';
+import 'package:ace/controller/avatar_controller.dart';
 import 'package:ace/controller/catch/catch_controller..dart';
 import 'package:ace/controller/change_password_controller.dart';
 import 'package:ace/controller/find_password_controller.dart';
@@ -72,7 +73,13 @@ class AppPages {
     GetPage(name: ViewRoute.splashPage, page: () => const SplashPage()),
     GetPage(
         name: ViewRoute.signupSuccessPage, page: () => const SignUpSuccess()),
-    GetPage(name: ViewRoute.profilePage, page: () => const Profile()),
+    GetPage(
+      name: ViewRoute.profilePage,
+      page: () => const Profile(),
+      binding: BindingsBuilder(() {
+        Get.put(AvatarController());
+      }),
+    ),
 
     // 홈페이지
     GetPage(
