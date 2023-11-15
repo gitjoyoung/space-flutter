@@ -8,11 +8,7 @@ import 'package:ace/widgets/common/text_filed_custom.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-void main() {
-  Get.put(FindPasswordController());
 
-  runApp(const GetMaterialApp(home: FindPassword()));
-}
 
 class FindPassword extends GetView<FindPasswordController> {
   const FindPassword({super.key});

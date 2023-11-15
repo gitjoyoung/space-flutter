@@ -43,6 +43,8 @@ class ProfileModel {
     required this.temperature,
   });
 
+  ProfileModel? get value => null;
+
   Map<String, dynamic> toMap() {
     return <String, dynamic>{
       'id': id,
