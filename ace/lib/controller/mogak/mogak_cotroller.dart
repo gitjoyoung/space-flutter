@@ -2,7 +2,7 @@ import 'dart:convert';
 
 import 'package:ace/controller/auth_controller.dart';
 import 'package:ace/models/mogak/mogak_model.dart';
-import 'package:ace/models/mogak/talk_model.dart';
+import 'package:ace/models/mogak/mogak_talk_model.dart';
 import 'package:ace/routes/api_route.dart';
 import 'package:dio/dio.dart';
 import 'package:get/get.dart';
@@ -65,8 +65,8 @@ class MogakController extends GetxController {
           if (detailResponse.statusCode == 200) {
             final List<dynamic> talksJson =
                 detailResponse.data['data']['talks'];
-            final List<TalkModel> talksList = talksJson
-                .map((jsonItem) => TalkModel.fromJson(json.encode(jsonItem)))
+            final List<MogakTalkModel> talksList = talksJson
+                .map((jsonItem) => MogakTalkModel.fromJson(json.encode(jsonItem)))
                 .toList();
 
             mogak.addTalks(talksList);

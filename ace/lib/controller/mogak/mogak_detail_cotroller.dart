@@ -5,7 +5,7 @@ import 'package:ace/models/mogak/appliedprofiles_model.dart';
 import 'package:ace/models/mogak/author_model.dart';
 import 'package:ace/models/mogak/mogak_model.dart';
 import 'package:ace/models/home/profile.dart';
-import 'package:ace/models/mogak/talk_model.dart';
+import 'package:ace/models/mogak/mogak_talk_model.dart';
 import 'package:ace/routes/api_route.dart';
 import 'package:ace/utils/button.dart';
 import 'package:ace/utils/colors.dart';
@@ -81,8 +81,8 @@ class MogakDetailController extends GetxController {
           options: Options(headers: {"Authorization": token}));
       if (response.statusCode == 200) {
         var jsonArray = response.data['data'];
-        mogakDetail.value?.talks = List<TalkModel>.from(
-            jsonArray['talks'].map((x) => TalkModel.fromMap(x)));
+        mogakDetail.value?.talks = List<MogakTalkModel>.from(
+            jsonArray['talks'].map((x) => MogakTalkModel.fromMap(x)));
         mogakDetail.value?.appliedProfiles = List<AppliedProfiles>.from(
             jsonArray['appliedProfiles']
                 .map((x) => AppliedProfiles.fromMap(x)));

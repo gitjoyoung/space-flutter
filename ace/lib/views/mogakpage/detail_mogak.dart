@@ -1,6 +1,6 @@
 import 'package:ace/controller/mogak/mogak_detail_cotroller.dart';
 
-import 'package:ace/models/mogak/talk_model.dart';
+import 'package:ace/models/mogak/mogak_talk_model.dart';
 import 'package:ace/utils/button.dart';
 import 'package:ace/utils/colors.dart';
 import 'package:ace/utils/typography.dart';
@@ -157,151 +157,150 @@ class MogakDetail extends GetView<MogakDetailController> {
                       ),
                     ),
 
-                    SizedBox(
-                      height: 10,
-                    ),
-
+             
                     // 댓글 위젯
-                    Card(
-                      margin: EdgeInsets.all(0),
-                      elevation: 0,
-                      child: Padding(
-                        padding: const EdgeInsets.only(
-                          right: 10,
-                          left: 10,
-                          top: 30,
-                        ),
-                        child: Column(
-                          children: [
-                            Row(children: [
-                              SvgPicture.asset(
-                                  'assets/icons/icon20/speaker.svg'),
+                    Padding(
+                      padding: const EdgeInsets.only(top: 10 , bottom: 150),
+                      child: Card(
+                        margin: EdgeInsets.all(0),
+                        elevation: 0,
+                        child: Padding(
+                          padding: const EdgeInsets.only(
+                            right: 10,
+                            left: 10,
+                            top: 30,
+                          ),
+                          child: Column(
+                            children: [
+                              Row(children: [
+                                SvgPicture.asset(
+                                    'assets/icons/icon20/speaker.svg'),
+                                SizedBox(
+                                  width: 8,
+                                ),
+                                Text(
+                                  '이어달린 톡',
+                                  style: AppTypography.tapButtonBold18,
+                                )
+                              ]),
                               SizedBox(
-                                width: 8,
+                                height: 16,
                               ),
-                              Text(
-                                '이어달린 톡',
-                                style: AppTypography.tapButtonBold18,
-                              )
-                            ]),
-                            SizedBox(
-                              height: 16,
-                            ),
-                            Obx(() {
-                              final talks = controller.mogakDetail.value?.talks;
-                              if (talks == null || talks.isEmpty) {
-                                return SizedBox(
-                                  height: 100,
-                                  child: Center(child: Text('댓글이 없습니다!')),
-                                ); // 혹은 다른 적절한 위젯을 반환하여 렌더링을 하지 않도록 처리
-                              }
-                              return Padding(
-                                padding: const EdgeInsets.only(bottom: 20),
-                                child: ListView.builder(
-                                  shrinkWrap: true,
-                                  physics: NeverScrollableScrollPhysics(),
-                                  itemCount: talks.length, // 데이터 리스트의 길이
-                                  itemBuilder: (context, index) {
-                                    return Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Row(
-                                          children: [
-                                            BadgeAvatarCustom(
-                                              authorBadge: controller
-                                                  .mogakDetail
-                                                  .value
-                                                  ?.author
-                                                  ?.badge,
-                                              avatarUrl:
-                                                  talks[index].author.avatar,
-                                              height: 68,
-                                              width: 70,
-                                            ),
-                                            Padding(
-                                              padding:
-                                                  const EdgeInsets.symmetric(
-                                                      horizontal: 8),
-                                              child: Text(
-                                                talks[index]!
-                                                    .author
-                                                    .nickname, // 데이터에서 이름을 가져와서 표시
-                                                style:
-                                                    AppTypography.button36Bold,
+                              Obx(() {
+                                final talks = controller.mogakDetail.value?.talks;
+                                if (talks == null || talks.isEmpty) {
+                                  return SizedBox(
+                                    height: 100,
+                                    child: Center(child: Text('댓글이 없습니다!')),
+                                  ); // 혹은 다른 적절한 위젯을 반환하여 렌더링을 하지 않도록 처리
+                                }
+                                return Padding(
+                                  padding: const EdgeInsets.only(bottom: 20),
+                                  child: ListView.builder(
+                                    shrinkWrap: true,
+                                    physics: NeverScrollableScrollPhysics(),
+                                    itemCount: talks.length, // 데이터 리스트의 길이
+                                    itemBuilder: (context, index) {
+                                      return Column(
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Row(
+                                            children: [
+                                              BadgeAvatarCustom(
+                                                authorBadge: controller
+                                                    .mogakDetail
+                                                    .value
+                                                    ?.author
+                                                    ?.badge,
+                                                avatarUrl:
+                                                    talks[index].author.avatar,
+                                                height: 68,
+                                                width: 70,
                                               ),
-                                            ),
-                                            Tag(
-                                                title: talks[index]
-                                                    .author
-                                                    .role
-                                                    .toString()), // 데이터에서 태그를 가져와서 표시
-                                          ],
-                                        ),
-                                        SizedBox(
-                                          height: 10,
-                                        ),
-                                        SizedBox(
-                                          width: double.infinity,
-                                          child: Card(
-                                            shape: RoundedRectangleBorder(
-                                              borderRadius:
-                                                  BorderRadius.circular(10),
-                                            ),
-                                            elevation: 0,
-                                            color: AppColors.strokeLine05,
-                                            child: Padding(
-                                              padding: const EdgeInsets.all(16),
-                                              child: Text(
-                                                talks[index]
-                                                    .content, // 데이터에서 댓글 내용을 가져와서 표시
-                                                style: AppTypography
-                                                    .button36Medium,
+                                              Padding(
+                                                padding:
+                                                    const EdgeInsets.symmetric(
+                                                        horizontal: 8),
+                                                child: Text(
+                                                  talks[index]!
+                                                      .author
+                                                      .nickname, // 데이터에서 이름을 가져와서 표시
+                                                  style:
+                                                      AppTypography.button36Bold,
+                                                ),
+                                              ),
+                                              Tag(
+                                                  title: talks[index]
+                                                      .author
+                                                      .role
+                                                      .toString()), // 데이터에서 태그를 가져와서 표시
+                                            ],
+                                          ),
+                                          SizedBox(
+                                            height: 10,
+                                          ),
+                                          SizedBox(
+                                            width: double.infinity,
+                                            child: Card(
+                                              shape: RoundedRectangleBorder(
+                                                borderRadius:
+                                                    BorderRadius.circular(10),
+                                              ),
+                                              elevation: 0,
+                                              color: AppColors.strokeLine05,
+                                              child: Padding(
+                                                padding: const EdgeInsets.all(16),
+                                                child: Text(
+                                                  talks[index]
+                                                      .content, // 데이터에서 댓글 내용을 가져와서 표시
+                                                  style: AppTypography
+                                                      .button36Medium,
+                                                ),
                                               ),
                                             ),
                                           ),
-                                        ),
-                                        Row(
-                                          mainAxisAlignment:
-                                              MainAxisAlignment.end,
-                                          children: [
-                                            Text(
-                                              controller.formatTimeDifference(
-                                                  talks[index].createdAt),
-                                              style: AppTypography.cardBody
-                                                  .copyWith(
-                                                      color:
-                                                          AppColors.neutral40),
-                                            ),
-                                            SizedBox(
-                                              width: 16,
-                                            ),
-                                            SvgPicture.asset(
-                                                'assets/icons/icon20/like.svg'),
-                                            Text(
-                                              talks[index]
-                                                  .temperature
-                                                  .toString(), // 데이터에서 좋아요 수를 가져와서 표시
-                                              style: AppTypography.cardBody
-                                                  .copyWith(
-                                                      color:
-                                                          AppColors.primary80),
-                                            ),
-                                          ],
-                                        )
-                                      ],
-                                    );
-                                  },
-                                ),
-                              );
-                            }),
-                          ],
+                                          Row(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.end,
+                                            children: [
+                                              Text(
+                                                controller.formatTimeDifference(
+                                                    talks[index].createdAt),
+                                                style: AppTypography.cardBody
+                                                    .copyWith(
+                                                        color:
+                                                            AppColors.neutral40),
+                                              ),
+                                              SizedBox(
+                                                width: 16,
+                                              ),
+                                              SvgPicture.asset(
+                                                  'assets/icons/icon20/like.svg'),
+                                              Text(
+                                                talks[index]
+                                                    .temperature
+                                                    .toString(), // 데이터에서 좋아요 수를 가져와서 표시
+                                                style: AppTypography.cardBody
+                                                    .copyWith(
+                                                        color:
+                                                            AppColors.primary80),
+                                              ),
+                                            ],
+                                          )
+                                        ],
+                                      );
+                                    },
+                                  ),
+                                );
+                              }),
+                            ],
+                          ),
                         ),
                       ),
                     ),
-                    SizedBox(
-                      height: 150,
-                    ),
+                    
+          
 
                     // 댓글 이미지
                   ],

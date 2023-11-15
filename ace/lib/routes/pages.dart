@@ -9,6 +9,7 @@ import 'package:ace/controller/mogak/mogak_create_contoller.dart';
 import 'package:ace/controller/mogak/mogak_detail_cotroller.dart';
 import 'package:ace/controller/signup_controller.dart';
 import 'package:ace/controller/talk/talk_controller.dart';
+import 'package:ace/controller/talk/talk_detail_controller.dart';
 import 'package:ace/routes/view_route.dart';
 import 'package:ace/views/authpage/chang_password_view.dart';
 import 'package:ace/views/authpage/find_password.dart';
@@ -27,6 +28,7 @@ import 'package:ace/views/mogakpage/list_mogak.dart';
 import 'package:ace/views/mogakpage/mogak.dart';
 import 'package:ace/views/spacer/spacer.dart';
 import 'package:ace/views/talkpage/talk.dart';
+import 'package:ace/views/talkpage/talk_detail.dart';
 import 'package:ace/views/talkpage/talk_list.dart';
 
 import 'package:get/get.dart';
@@ -92,6 +94,7 @@ class AppPages {
       page: () => const Talk(),
       binding: BindingsBuilder(() {
         Get.put(TalkController());
+        Get.put(TalkDetailController());
       }),
     ),
     GetPage(
@@ -101,7 +104,10 @@ class AppPages {
 
     GetPage(
       name: ViewRoute.talkDetailPage,
-      page: () => const TalkList(),
+      page: () => const TalkDetail(),
+      binding: BindingsBuilder(() {
+        Get.put(TalkDetailController());
+      }),
     ),
 
 // 스페이서
