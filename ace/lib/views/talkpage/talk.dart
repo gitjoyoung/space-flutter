@@ -1,9 +1,11 @@
+
 import 'package:ace/controller/talk/talk_controller.dart';
 import 'package:ace/routes/view_route.dart';
 import 'package:ace/utils/colors.dart';
 import 'package:ace/utils/typography.dart';
 import 'package:ace/widgets/talk/talk_content.dart';
 import 'package:ace/widgets/talk/talk_skeleton.dart';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -13,6 +15,7 @@ class Talk extends GetView<TalkController> {
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () {
@@ -139,6 +142,7 @@ class Talk extends GetView<TalkController> {
               )),
         ),
       ),
+
     );
   }
 }

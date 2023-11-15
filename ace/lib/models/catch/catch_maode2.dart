@@ -1,89 +1,66 @@
-import 'dart:convert';
-
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 class AllCatchModel {
-  final String id;
-  final String title;
-  final String content;
-  final String url;
-  final String thumbnail;
-  final String authorId;
-  final int temperature;
-  final String status;
-  // final DateTime createdAt;
-  // final DateTime? updatedAt;
-  // final String category;
-  final String? hashtag;
-  final Author? author;
-  final List<Profile>? upProfiles;
+  String id;
+  String title;
+  String? slug;
+  String content;
+  String url;
+  String thumbnail;
+  String? authorId;
+  int? temperature;
+  String? status;
+  DateTime? createdAt;
+  DateTime? updatedAt;
+  String? category;
+  String? hashtag;
+  Author? author;
+  List<Profile>? upProfiles;
+
   AllCatchModel({
     required this.id,
     required this.title,
+    this.slug,
     required this.content,
     required this.url,
     required this.thumbnail,
-    required this.authorId,
-    required this.temperature,
-    required this.status,
-    // required this.createdAt,
-    // this.updatedAt,
-    // required this.category,
+    this.authorId,
+    this.temperature,
+    this.status,
+    this.createdAt,
+    this.updatedAt,
+    this.category,
     this.hashtag,
     this.author,
     this.upProfiles,
   });
 
-  Map<String, dynamic> toMap() {
-    return <String, dynamic>{
-      'id': id,
-      'title': title,
-      'content': content,
-      'url': url,
-      'thumbnail': thumbnail,
-      'authorId': authorId,
-      'temperature': temperature,
-      'status': status,
-      // 'createdAt': createdAt.millisecondsSinceEpoch,
-      // 'updatedAt': updatedAt?.millisecondsSinceEpoch,
-      // 'category': category,
-      'hashtag': hashtag,
-      'author': author?.toMap(),
-      'upProfiles': upProfiles?.map((x) => x.toMap()).toList(),
-    };
-  }
-
-  factory AllCatchModel.fromMap(Map<String, dynamic> map) {
+  factory AllCatchModel.fromJson(Map<String, dynamic> json) {
     return AllCatchModel(
-      id: map['id'] as String,
-      title: map['title'] as String,
-      content: map['content'] as String,
-      url: map['url'] as String,
-      thumbnail: map['thumbnail'] as String,
-      authorId: map['authorId'] as String,
-      temperature: map['temperature'] as int,
-      status: map['status'] as String,
-      // createdAt: DateTime.parse(map['createdAt'] as String),
-      // updatedAt: map['updatedAt'] != null
-      //     ? DateTime.parse(map['updatedAt'] as String)
-      //     : null,
-      // category: map['category'] as String,
-      hashtag: map['hashtag'] as String?,
-      author: map['author'] != null
-          ? Author.fromMap(map['author'] as Map<String, dynamic>)
-          : null,
-      upProfiles: (map['upProfiles'] as List<dynamic>?)
-          ?.map((x) => Profile.fromMap(x as Map<String, dynamic>))
-          .toList(),
+      id: json['id'],
+      title: json['title'],
+      slug: json['slug'],
+      content: json['content'],
+      url: json['url'],
+      thumbnail: json['thumbnail'],
+      authorId: json['authorId'],
+      temperature: json['temperature'] as int?,
+      status: json['status'],
+      createdAt: DateTime.parse(json['createdAt']),
+      updatedAt: DateTime.parse(json['updatedAt']),
+      category: json['category'],
+      hashtag: json['hashtag'],
+      author: json['author'] != null ? Author.fromJson(json['author']) : null,
+      upProfiles: List<Profile>.from(
+          json['upProfiles'].map((x) => Profile.fromJson(x))),
     );
   }
-
-  String toJson() => json.encode(toMap());
-
-  factory AllCatchModel.fromJson(String source) =>
-      AllCatchModel.fromMap(json.decode(source) as Map<String, dynamic>);
+  @override
+  String toString() {
+    return 'AllCatchModel{id: $id, title: $title, slug: $slug, content: $content, url: $url, thumbnail: $thumbnail, authorId: $authorId, status: $status, createdAt: $createdAt, updatedAt: $updatedAt, category: $category, hashtag: $hashtag}';
+  }
 }
 
 class Author {
+
   final String id;
   final String? avatar;
   final String nickname;
@@ -122,71 +99,44 @@ class Author {
       role: map['role'] as String,
       position: map['position'] as String,
       temperature: map['temperature'] != null ? map['temperature'] as int : null,
+
     );
   }
-
-  String toJson() => json.encode(toMap());
-
-  factory Author.fromJson(String source) =>
-      Author.fromMap(json.decode(source) as Map<String, dynamic>);
 }
 
 class Badge {
-  final String shortName;
-  final String fgColor;
-  final String bgColor;
+  String shortName;
+  String fgColor;
+  String? bgColor;
+
   Badge({
     required this.shortName,
     required this.fgColor,
-    required this.bgColor,
+    this.bgColor,
   });
 
-  Map<String, dynamic> toMap() {
-    return <String, dynamic>{
-      'shortName': shortName,
-      'fgColor': fgColor,
-      'bgColor': bgColor,
-    };
-  }
-
-  factory Badge.fromMap(Map<String, dynamic> map) {
+  factory Badge.fromJson(Map<String, dynamic> json) {
     return Badge(
-      shortName: map['shortName'] as String,
-      fgColor: map['fgColor'] as String,
-      bgColor: map['bgColor'] as String,
+      shortName: json['shortName'],
+      fgColor: json['fgColor'],
+      bgColor: json['bgColor'],
     );
   }
-
-  String toJson() => json.encode(toMap());
-
-  factory Badge.fromJson(String source) =>
-      Badge.fromMap(json.decode(source) as Map<String, dynamic>);
 }
 
 class Profile {
-  final String id;
-  final Author profile;
+  String id;
+  Author? profile;
+
   Profile({
     required this.id,
-    required this.profile,
+    this.profile,
   });
 
-  Map<String, dynamic> toMap() {
-    return <String, dynamic>{
-      'id': id,
-      'profile': profile.toMap(),
-    };
-  }
-
-  factory Profile.fromMap(Map<String, dynamic> map) {
+  factory Profile.fromJson(Map<String, dynamic> json) {
     return Profile(
-      id: map['id'] as String,
-      profile: Author.fromMap(map['profile'] as Map<String, dynamic>),
+      id: json['id'],
+      profile: Author.fromJson(json['profile']),
     );
   }
-
-  // String toJson() => json.encode(toMap());
-
-  // factory Profile.fromJson(String source) =>
-  //     Profile.fromMap(json.decode(source) as Map<String, dynamic>);
 }

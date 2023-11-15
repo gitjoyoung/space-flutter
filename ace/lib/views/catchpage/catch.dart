@@ -148,17 +148,17 @@ class Catch extends GetView<CatchController> {
                       borderRadius: BorderRadius.circular(10), // 윤곽선 둥글기 설정
                     ),
                     child: CatchupContent(
-                      data: AllCatchModel(
-                          id: "clo2q884r0001la085w99s7zm",
-                          title: "안드로이드 플러터 앱 release",
-                          content: "안드로이드 플러터 앱 release.",
-                          url:
-                              "https://velog.io/@kw2577/%EC%95%88%EB%93%9C%EB%A1%9C%EC%9D%B4%EB%93%9C-%ED%94%8C%EB%9F%AC%ED%84%B0-%EC%95%B1-release",
-                          thumbnail:
-                              "https://velog.velcdn.com/images/kw2577/post/bc2868ed-b910-40ad-adcd-a1099befc091/image.png",
-                          authorId: "clo2moojy0001mg08zd57870v",
-                          temperature: 0,
-                          status: "PUBLISHED"),
+                      // data: AllCatchModel(
+                      //     id: "clo2q884r0001la085w99s7zm",
+                      //     title: "안드로이드 플러터 앱 release",
+                      //     content: "안드로이드 플러터 앱 release.",
+                      //     url:
+                      //         "https://velog.io/@kw2577/%EC%95%88%EB%93%9C%EB%A1%9C%EC%9D%B4%EB%93%9C-%ED%94%8C%EB%9F%AC%ED%84%B0-%EC%95%B1-release",
+                      //     thumbnail:
+                      //         "https://velog.velcdn.com/images/kw2577/post/bc2868ed-b910-40ad-adcd-a1099befc091/image.png",
+                      //     authorId: "clo2moojy0001mg08zd57870v",
+                      //     temperature: 0,
+                      //     status: "PUBLISHED"),
                       maxLength: 3,
                     ),
                   ),
