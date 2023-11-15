@@ -3,19 +3,20 @@ import 'dart:convert';
 
 import 'package:ace/models/mogak/author_model.dart';
 
-class TalkModel {
+class MogakTalkModel {
   final String id;
-  final String content;
+   String content;
   final DateTime createdAt;
-  final DateTime? updatedAt;
+  DateTime? updatedAt;
   final String? parentId;
   final String authorId;
   final String? catchUpId;
-  final int temperature;
+  int temperature;
   final String? mogakId;
   final bool isDeleted;
   final Author author;
-  TalkModel({
+  int? childrenLength;
+  MogakTalkModel({
     required this.id,
     required this.content,
     required this.createdAt,
@@ -27,6 +28,7 @@ class TalkModel {
     this.mogakId,
     required this.isDeleted,
     required this.author,
+    this.childrenLength,
   });
 
   Map<String, dynamic> toMap() {
@@ -42,11 +44,12 @@ class TalkModel {
       'mogakId': mogakId,
       'isDeleted': isDeleted,
       'author': author.toMap(),
+      'childrenLength': childrenLength,
     };
   }
 
-  factory TalkModel.fromMap(Map<String, dynamic> map) {
-    return TalkModel(
+  factory MogakTalkModel.fromMap(Map<String, dynamic> map) {
+    return MogakTalkModel(
       id: map['id'] as String,
       content: map['content'] as String,
       createdAt:
@@ -61,17 +64,13 @@ class TalkModel {
       mogakId: map['mogakId'] != null ? map['mogakId'] as String : null,
       isDeleted: map['isDeleted'] as bool,
       author: Author.fromMap(map['author'] as Map<String, dynamic>),
+      childrenLength: map['childrenLength'] as int?,
     );
   }
 
   String toJson() => json.encode(toMap());
-  @override
-  String toString() {
-    return 'TalkModel(id: $id, content: $content, createdAt: $createdAt, updatedAt: $updatedAt, '
-        'parentId: $parentId, authorId: $authorId, catchUpId: $catchUpId, temperature: $temperature, '
-        'mogakId: $mogakId, isDeleted: $isDeleted, author: $author)';
-  }
 
-  factory TalkModel.fromJson(String source) =>
-      TalkModel.fromMap(json.decode(source) as Map<String, dynamic>);
+
+  factory MogakTalkModel.fromJson(String source) =>
+      MogakTalkModel.fromMap(json.decode(source) as Map<String, dynamic>);
 }

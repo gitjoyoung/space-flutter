@@ -1,5 +1,5 @@
-import 'package:ace/controller/auth_controller.dart';
-import 'package:ace/controller/avatar_controller.dart';
+import 'package:ace/controller/auth/auth_controller.dart';
+import 'package:ace/controller/auth/avatar_controller.dart';
 import 'package:ace/routes/view_route.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';

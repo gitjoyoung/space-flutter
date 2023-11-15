@@ -1,4 +1,4 @@
-import 'package:ace/widgets/card_tag.dart';
+import 'package:ace/widgets/common/card_tag.dart';
 import 'package:flutter/material.dart';
 // 필요한 경우 여기에 Tag 위젯을 임포트해야 합니다.
 // 예: import 'package:myapp/widgets/tag.dart';

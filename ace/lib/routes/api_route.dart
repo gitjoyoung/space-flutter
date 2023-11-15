@@ -1,17 +1,21 @@
 class ApiRoute {
   static const String baseUrl = 'https://dev.sniperfactory.com/';
+
+// 로그인 회원가입 비밀번호 찾기
   static const String loginAPi = "${baseUrl}api/auth/login";
   static const String signupAPi = "${baseUrl}api/auth/signup";
 
   static const String forgetPasswordApi = "${baseUrl}api/auth/verify-email";
   static const String changePasswordApi = "${baseUrl}api/auth/change-password";
+  static const String profileApi = "${baseUrl}api/me/profile";
 
-// 홈
+// 홈 화면
 
   static const String homeBannerApi = "${baseUrl}api/course";
   static const String homeSpacerRank = "${baseUrl}api/rank?month=10";
 
 // 톡톡
+// 특정 톡톡 가져오기 생성 삭제
   static const String talkAllApi = "${baseUrl}api/talk";
   static const String createTalkApi = "${baseUrl}api/talk";
 
@@ -28,10 +32,6 @@ class ApiRoute {
 
   static const String avatarUploadApi = "${baseUrl}api/upload";
   static const String mogakLikeApi = "${baseUrl}api/up";
-
-  //프로필 가져오기
-
-  static const String profileApi = "${baseUrl}api/profile/";
 
   // 캐치업 가져오기
   static const String catchApi = "${baseUrl}api/catchup?filter=";

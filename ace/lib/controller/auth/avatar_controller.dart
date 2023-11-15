@@ -1,6 +1,6 @@
 import 'dart:typed_data';
 
-import 'package:ace/controller/auth_controller.dart';
+import 'package:ace/controller/auth/auth_controller.dart';
 import 'package:dio/dio.dart';
 import 'package:get/get.dart' hide MultipartFile, FormData;
 

@@ -1,7 +1,7 @@
-import 'package:ace/controller/auth_controller.dart';
+import 'package:ace/controller/auth/auth_controller.dart';
+import 'package:ace/models/catch/catch_model.dart';
 
-import 'package:ace/models/catch/catch_model.dart';
-import 'package:ace/models/catch/catch_model.dart';
+// import 'package:ace/models/catch/catch_model.dart';
 import 'package:ace/routes/api_route.dart';
 import 'package:ace/routes/view_route.dart';
 import 'package:dio/dio.dart';
