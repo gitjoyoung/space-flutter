@@ -4,6 +4,8 @@ import 'package:ace/models/catch/catch_model.dart';
 
 import 'package:ace/utils/colors.dart';
 import 'package:ace/utils/typography.dart';
+import 'package:ace/widgets/catch/catch_content.dart';
+import 'package:ace/widgets/catch/hashtag_button.dart';
 import 'package:ace/widgets/common/catchup_contents.dart';
 import 'package:ace/widgets/common/comment_Icon.dart';
 import 'package:ace/widgets/common/space_appbar.dart';
@@ -35,44 +37,21 @@ class CatchList extends GetView<CatchController> {
               mainAxisAlignment: MainAxisAlignment.start,
               children: [
                 // CatchController의 buildHashTagButton 함수를 호출하여 해시 태그 버튼 생성
-                InkWell(
-                  onTap: () {
-                    controller.selectedHashTag();
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 3.0),
-                    child: SvgPicture.asset('assets/icons/icon50/Flutter.svg'),
-                    // 여기에 원하는 간격을 추가
-                  ),
+                HashTagButton(
+                  hashTags: ['플러터', 'flutter'],
+                  assetPath: 'assets/icons/icon50/Flutter.svg',
                 ),
-                InkWell(
-                  onTap: () {
-                    controller.selectedHashTag();
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 3.0),
-                    child:
-                        // 여기에 원하는 간격을 추가
-                        SvgPicture.asset('assets/icons/icon50/Python.svg'),
-                  ),
+                HashTagButton(
+                  hashTags: ['파이썬', 'Python'],
+                  assetPath: 'assets/icons/icon50/Python.svg',
                 ),
-                InkWell(
-                  onTap: () {
-                    controller.selectedHashTag();
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 3.0),
-                    child: SvgPicture.asset('assets/icons/icon50/Js.svg'),
-                  ),
+                HashTagButton(
+                  hashTags: ['자바', 'Java'],
+                  assetPath: 'assets/icons/icon50/Js.svg',
                 ),
-                InkWell(
-                  onTap: () {
-                    controller.selectedHashTag();
-                  },
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 3.0),
-                    child: SvgPicture.asset('assets/icons/icon50/React.svg'),
-                  ),
+                HashTagButton(
+                  hashTags: ['리액트', 'React'],
+                  assetPath: 'assets/icons/icon50/React.svg',
                 ),
               ],
             ),
@@ -80,6 +59,7 @@ class CatchList extends GetView<CatchController> {
               height: 16,
             ),
             Obx(() {
+              final listToDisplay = controller.filteredCatchModels;
               // allCatchModels 리스트를 이용하여 ListView.builder로 목록을 구성합니다.
               return ListView.builder(
                 physics: NeverScrollableScrollPhysics(),
@@ -91,18 +71,41 @@ class CatchList extends GetView<CatchController> {
                   return Column(
                     children: [
                       Card(
-                          elevation: 0, // 그림자 제거
-                          shape: RoundedRectangleBorder(
-                            side: BorderSide(
-                                color: AppColors.strokeLine10,
-                                width: 1.0), // 윤곽선 색과 두께 설정
-                            borderRadius:
-                                BorderRadius.circular(10), // 윤곽선 둥글기 설정
-                          ),
-                          child: CatchupContent(
-                            data: item,
-                            maxLength: 5,
-                          )),
+                        elevation: 0,
+                        shape: RoundedRectangleBorder(
+                          side: BorderSide(
+                              color: AppColors.strokeLine10, width: 1.0),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: Row(
+                          children: [
+                            Expanded(
+                              child: CatchContent(
+                                data: item,
+                                maxLength: 3,
+                              ),
+                              flex: 2,
+                            ),
+                            Expanded(
+                              child: Container(
+                                  height: 220,
+                                  decoration: BoxDecoration(
+                                    // 이미지를 추가하고 싶다면 아래처럼 사용:
+                                    image: DecorationImage(
+                                      image: AssetImage(
+                                          'assets/profile/rocket.png'), // 이미지 에셋의 경로를 지정
+                                      fit: BoxFit.cover, // 이미지를 꽉 채우도록 설정
+                                    ),
+                                    borderRadius: BorderRadius.only(
+                                      topRight: Radius.circular(10),
+                                      bottomRight: Radius.circular(10),
+                                    ),
+                                  )),
+                              flex: 1,
+                            ),
+                          ],
+                        ),
+                      ),
                       Padding(
                         padding: const EdgeInsets.only(top: 8, bottom: 16),
                         child: Row(

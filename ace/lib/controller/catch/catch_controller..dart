@@ -18,6 +18,8 @@ class CatchController extends GetxController {
   RxString searchText = RxString('');
   RxString selectedHashTag = ''.obs;
   RxList<AllCatchModel> searchResults = RxList<AllCatchModel>();
+  RxList<AllCatchModel> filteredCatchModels = RxList<AllCatchModel>();
+  // 필터링된 데이터 리스트
 
 // 날자순 정렬 상태를 나타내는 bool값
   var isSortedList = false.obs;
@@ -25,11 +27,7 @@ class CatchController extends GetxController {
   final dio = Dio();
 
   void searchCatchs() {
-    refreshCatchs();
     print('검색실행');
-    print(allCatchModels);
-    print('검색실행');
-    print(topCatchModels);
 
     // 검색어를 가져옴
     final query = searchText.value.trim().toLowerCase();
@@ -53,11 +51,24 @@ class CatchController extends GetxController {
   }
 
   void updateSelectedHashTag(String hashTag) {
-    selectedHashTag.value = hashTag;
-  }
+    if (selectedHashTag.value == hashTag) {
+      // 이미 선택된 해시태그가 다시 선택되면 선택을 해제합니다.
+      selectedHashTag.value = '';
+    } else {
+      // 새로운 해시태그를 선택합니다.
+      selectedHashTag.value = hashTag;
+    }
 
-  void clearSelectedHashTag() {
-    selectedHashTag.value = '';
+    // 선택된 해시태그에 따라 데이터 필터링
+    if (selectedHashTag.value.isEmpty) {
+      // 해시태그가 선택되지 않았을 때는 모든 데이터를 보여줍니다.
+      filteredCatchModels.value = allCatchModels;
+    } else {
+      // 선택된 해시태그를 포함하는 데이터로 필터링합니다.
+      filteredCatchModels.value = allCatchModels.where((model) {
+        return model.hashtag?.contains(selectedHashTag.value) ?? false;
+      }).toList();
+    }
   }
 
   Future<void> fetchAllCatchModels(
@@ -176,5 +187,6 @@ class CatchController extends GetxController {
   void onInit() {
     super.onInit();
     refreshCatchs(); // onInit에서 데이터 새로고침을 호출
+    updateSelectedHashTag('');
   }
 }
