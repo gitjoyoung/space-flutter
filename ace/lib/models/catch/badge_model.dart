@@ -1,27 +1,19 @@
-// class Badge {
-//   final String? shortName;
-//   final String? fgColor;
-//   final String? bgColor;
+class BadgeModel {
+  String shortName;
+  String? fgColor;
+  String? bgColor;
 
-//   Badge({
-//      this.shortName,
-//      this.fgColor,
-//      this.bgColor,
-//   });
+  BadgeModel({
+    required this.shortName,
+    this.fgColor,
+    this.bgColor,
+  });
 
-//   factory Badge.fromJson(Map<String, dynamic> json) {
-//     return Badge(
-//       shortName: json['shortName'] as String,
-//       fgColor: json['fgColor'] as String,
-//       bgColor: json['bgColor'] as String,
-//     );
-//   }
-
-//   Map<String, dynamic> toJson() {
-//     return {
-//       'shortName': shortName,
-//       'fgColor': fgColor,
-//       'bgColor': bgColor,
-//     };
-//   }
-// }
+  factory BadgeModel.fromJson(Map<String, dynamic> json) {
+    return BadgeModel(
+      shortName: json['shortName'],
+      fgColor: json['fgColor'],
+      bgColor: json['bgColor'],
+    );
+  }
+}

@@ -31,17 +31,6 @@ class ViewRoute {
   static final String catchPage = "/catch";
   static final String catchlAllListPage = "/catchAllList";
   static final String catchlTopListPage = "/catchTopList";
-
-  static final String Mypage = "/my";
-  static final String Mytalkpage = "/mytalk";
-  static final String LikeTalkpage = "/liketalk";
-  static final String FollowUpTalkPage = "/followuptalk";
-  static final String MyCatchUpPage = "/mycatchup";
-  static final String LikedCatchPage = "/likedcatch";
-  static final String MyCreatedGroupsPage = "/mycreatedgroups";
-  static final String MyJoinedGroupsPage = "/myjoinedgroups";
-  static final String EditProfilePage = "/editprofile";
-  static final String PasswordUpdatePage = "/passwordupdate";
 }
 
 

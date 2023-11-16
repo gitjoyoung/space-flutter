@@ -1,4 +1,6 @@
-import 'package:ace/controller/auth_controller.dart';
+import 'package:ace/controller/auth/auth_controller.dart';
+import 'package:ace/controller/mogak/mogak_detail_cotroller.dart';
+import 'package:ace/models/mogak/mogak_model.dart';
 import 'package:ace/routes/api_route.dart';
 import 'package:ace/utils/button.dart';
 import 'package:ace/utils/colors.dart';
@@ -8,21 +10,44 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class MogakCreateController extends GetxController {
-  RxString postTitle = RxString(''); // 제목
-  RxString postContent = RxString(''); // 내용
+  TextEditingController postTitle = TextEditingController();
+  TextEditingController postContent = TextEditingController();
+  TextEditingController postHashTag = TextEditingController();
+  RxString postHashSubTag = RxString('');
   RxInt maxParticipants = RxInt(0); // 최대 참여 인원
-  RxString postHashTag = RxString(''); // 해시태그
   RxString visiblityStatus = RxString(''); // 모집 상태
+  Rx<AllMogakModel?> mogakDetail = Rx<AllMogakModel?>(null);
+
+  bool isEdit = false;
   var dio = Dio();
 
   String token = Get.find<AuthController>().getToken();
 
+  @override
+  void onInit() {
+    super.onInit();
+
+    // 이전 화면에서 데이터를 가져옵니다.
+    // YourDataType에 맞게 타입 캐스팅합니다.
+
+    if (Get.arguments != null) {
+      mogakDetail.value = Get.arguments as AllMogakModel?;
+      isEdit = true;
+      postTitle.text = mogakDetail.value!.title;
+      postContent.text = mogakDetail.value!.content;
+      postHashTag.text = mogakDetail.value!.hashtag ?? '';
+
+      maxParticipants.value = mogakDetail.value!.maxMember;
+      visiblityStatus.value = mogakDetail.value!.visiblityStatus;
+    } else {}
+  }
+
   Future<void> createMogak() async {
-    if (postTitle.isEmpty) {
+    if (postTitle.text.isEmpty) {
       showErrorDialog('제목이 비어있습니다!');
       return;
     }
-    if (postContent.isEmpty) {
+    if (postContent.text.isEmpty) {
       showErrorDialog('내용이 비어있습니다!');
       return;
     }
@@ -39,10 +64,10 @@ class MogakCreateController extends GetxController {
       var response = await dio.post(
         ApiRoute.mogakCreateApi,
         data: {
-          "title": postTitle.value,
-          "content": postContent.value,
+          "title": postTitle.text,
+          "content": postContent.text,
           "maxMember": maxParticipants.value,
-          "hashtag": postHashTag.value,
+          "hashtag": postHashTag.text,
           "visiblityStatus": visiblityStatus.value
         },
         options: Options(
@@ -62,6 +87,21 @@ class MogakCreateController extends GetxController {
       showErrorDialog('에러 발생: $e');
       print('An unknown error occurred: $e');
     }
+  }
+
+// 글 수정
+  Future<void> fetchEditMogak(String mogakId) async {
+    var res = await dio.put(ApiRoute.mogakApi + mogakId,
+        data: {
+          "title": postTitle.text,
+          "content": postContent.text,
+          "maxMember": maxParticipants.value,
+          "visiblityStatus": visiblityStatus.value
+        },
+        options: Options(headers: {"Authorization": token}));
+    print('수정된 내용');
+    Get.find<MogakDetailController>().fetchDetailMogak(mogakId);
+    Get.back();
   }
 
   void showErrorDialog(String message) {

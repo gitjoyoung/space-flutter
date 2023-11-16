@@ -1,12 +1,15 @@
 import 'dart:convert';
 
-
 import 'package:ace/controller/auth/auth_controller.dart';
-
+import 'package:ace/models/auth/profile.dart';
 import 'package:ace/models/mogak/mogak_model.dart';
-import 'package:ace/models/mogak/talk_model.dart';
+import 'package:ace/models/mogak/mogak_talk_model.dart';
 import 'package:ace/routes/api_route.dart';
+import 'package:ace/utils/button.dart';
+import 'package:ace/utils/colors.dart';
+import 'package:ace/utils/typography.dart';
 import 'package:dio/dio.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 class MogakController extends GetxController {
@@ -21,11 +24,18 @@ class MogakController extends GetxController {
   RxString searchText = RxString('');
   RxList<AllMogakModel> searchResults = RxList<AllMogakModel>();
 
+  ProfileModel? profile = Get.find<AuthController>().profileData.value;
 // 날자순 정렬 상태를 나타내는 bool값
   var isSortedList = false.obs;
 // 페이지가 통신이 완료 보여지게 하기위한 스켈레톤 bool값
   var isLoading = false.obs;
   final dio = Dio();
+
+  @override
+  void onInit() {
+    super.onInit();
+    refreshMogaks(); // onInit에서 데이터 새로고침을 호출
+  }
 
   void searchMogaks() {
     print('검색실행');
@@ -67,8 +77,9 @@ class MogakController extends GetxController {
           if (detailResponse.statusCode == 200) {
             final List<dynamic> talksJson =
                 detailResponse.data['data']['talks'];
-            final List<TalkModel> talksList = talksJson
-                .map((jsonItem) => TalkModel.fromJson(json.encode(jsonItem)))
+            final List<MogakTalkModel> talksList = talksJson
+                .map((jsonItem) =>
+                    MogakTalkModel.fromJson(json.encode(jsonItem)))
                 .toList();
 
             mogak.addTalks(talksList);
@@ -135,9 +146,87 @@ class MogakController extends GetxController {
     update();
   }
 
-  @override
-  void onInit() {
-    super.onInit();
-    refreshMogaks(); // onInit에서 데이터 새로고침을 호출
+  Future<void> fetchCommentMogak(String mogakId) async {
+    try {
+      var response = await dio.delete(
+        ApiRoute.mogakApi + mogakId,
+        options: Options(headers: {"Authorization": token}),
+      );
+      if (response.statusCode == 200) {
+        print('삭제 성공');
+      } else {
+        print('통신 오류: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('일반 에러: $e');
+    } finally {}
+  }
+
+  void showDeleteDialog(String mogakId) {
+    Get.dialog(
+      Dialog(
+        shape: RoundedRectangleBorder(
+          borderRadius: BorderRadius.circular(10), // 라운드 테두리를 줄 값 설정
+        ),
+        child: Container(
+          width: 242,
+          height: 140,
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              const Padding(
+                padding:
+                    EdgeInsets.only(bottom: 16, left: 8, right: 8, top: 16),
+                child: Text(
+                  "모각을 삭제 하시겠습니까?",
+                  style: AppTypography.tapButtonCardTitle16,
+                ),
+              ),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SizedBox(
+                    width: 100,
+                    child: ElevatedButton(
+                      style: AppButton.smallOutLine.copyWith(
+                        elevation: MaterialStateProperty.all<double?>(0),
+                      ),
+                      onPressed: () {
+                        Get.back();
+                      },
+                      child: Text(
+                        '취소하기',
+                        style: AppTypography.button36Regular
+                            .copyWith(color: AppColors.primaryColor),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(width: 10),
+                  SizedBox(
+                    width: 100,
+                    child: ElevatedButton(
+                      style: AppButton.small.copyWith(
+                        elevation: MaterialStateProperty.all<double?>(0),
+                      ),
+                      onPressed: () {
+                        fetchCommentMogak(mogakId);
+                        Get.back(); // 참여하기 버튼 클릭시 실행될 동작
+                      },
+                      child: Text(
+                        '삭제하기',
+                        style: AppTypography.button36Regular
+                            .copyWith(color: Colors.white),
+                      ),
+                    ),
+                  ),
+                  // 버튼 사이 간격 조절
+                ],
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
   }
 }

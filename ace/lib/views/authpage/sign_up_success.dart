@@ -9,11 +9,6 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 
-void main() {
-  runApp(GetMaterialApp(home: const SignUpSuccess(), getPages: [
-    GetPage(name: ViewRoute.profilePage, page: () => const Profile()),
-  ]));
-}
 
 class SignUpSuccess extends GetView {
   const SignUpSuccess({super.key});
