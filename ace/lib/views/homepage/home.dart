@@ -109,21 +109,15 @@ class Home extends GetView<HomeController> {
             //     },
             //     child: Text('데이타 테스트 버튼')),
 
-// 모각 리스트
 
-            Obx(
-              () => topMogak != null && topMogak.isNotEmpty
-                  ? buildMogakCard(
-                      '핫한 모각코', topMogak, ViewRoute.mogakTopListPage)
-                  : MogakSkeleton(repeatCount: 1),
-            ),
+// 톡톡
             ListTile(
               contentPadding: EdgeInsets.zero,
               title: Row(
                 children: [
-                  SvgPicture.asset('assets/icons/icon20/laptop.svg'),
+                  SvgPicture.asset('assets/icons/icon20/fire.svg'),
                   SizedBox(width: 8),
-                  Text('이달의 스페이서', style: AppTypography.tapButtonBold18),
+                  Text('핫한 톡', style: AppTypography.tapButtonBold18),
                 ],
               ),
               trailing: InkWell(
@@ -132,11 +126,61 @@ class Home extends GetView<HomeController> {
                   },
                   child: SvgPicture.asset('assets/icons/icon20/Right.svg')),
             ),
+            Obx(
+              () => controller.topTalk.isNotEmpty
+                  ? ListView.builder(
+                      shrinkWrap: true,
+                      physics: NeverScrollableScrollPhysics(),
+                      itemCount: controller.topTalk.length,
+                      itemBuilder: (context, index) {
+                        return Padding(
+                          padding: const EdgeInsets.only(
+                              top: 10, bottom: 10, right: 10, left: 10),
+                          child: CustomTalkWidget(
+                              talkModel: controller.topTalk[index]),
+                        );
+                      },
+                    )
+                  : MogakSkeleton(repeatCount: 1),
+            ),
+
+
+// 캐치업
+            Padding(
+              padding: const EdgeInsets.symmetric(vertical: 5.0),
+              child: Column(
+                children: [
+                  Obx(
+                    () => topCatchModels != null && topCatchModels.isNotEmpty
+                        ? buildCatchCardHome('핫한 캐치업', topCatchModels,
+                            ViewRoute.catchlTopListPage)
+                        : CatchSkeleton(repeatCount: 1),
+                  ),
+                  Obx(
+                    () => topCatchModels != null && topCatchModels.isNotEmpty
+                        ? buildCatchCardHome1('핫한 캐치업', topCatchModels,
+                            ViewRoute.catchlTopListPage)
+                        : CatchSkeleton(repeatCount: 1),
+                  ),
+                  Obx(
+                    () => topCatchModels != null && topCatchModels.isNotEmpty
+                        ? buildCatchCardHome2('핫한 캐치업', topCatchModels,
+                            ViewRoute.catchlTopListPage)
+                        : CatchSkeleton(repeatCount: 1),
+                  ),
+                ],
+              ),
+            ),
+// 모각 리스트
+
+            Obx(
+              () => controller.topMogak.isNotEmpty
+
 
             // 스페이서
 
             Obx(
-              () => controller.rankList == null || controller.rankList.isEmpty
+              () => controller.rankList.isEmpty
                   ? SpacerSkeleton()
                   : Column(
                       children: [

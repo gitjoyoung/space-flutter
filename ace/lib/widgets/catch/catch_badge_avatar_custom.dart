@@ -1,4 +1,4 @@
-import 'package:ace/models/catch/badge_model.dart';
+import 'package:ace/models/mogak/badge_model.dart';
 import 'package:ace/utils/colors.dart';
 import 'package:ace/utils/typography.dart';
 import 'package:flutter/material.dart';
