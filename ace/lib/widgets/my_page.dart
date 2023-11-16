@@ -1,9 +1,11 @@
+import 'package:ace/routes/view_route.dart';
 import 'package:ace/utils/colors.dart';
 import 'package:ace/utils/typography.dart';
 import 'package:dotted_dashed_line/dotted_dashed_line.dart';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:get/get.dart';
 
 // myPageCustom(
 //   width: 300.0,
@@ -12,22 +14,22 @@ import 'package:flutter_svg/flutter_svg.dart';
 //   svgAssetPath: 'assets/icons/custom_icon.svg',
 //   titles: ['내가 쓴 톡', '좋아요 한 톡', '내가 쓴 이어달린 톡'],
 // )
-
 class myPageCustom extends StatelessWidget {
   final double width;
   final double height;
   final String headerTitle;
   final String svgAssetPath;
   final List<String> titles;
-
-  const myPageCustom({
-    Key? key,
-    required this.width,
-    required this.height,
-    required this.headerTitle,
-    required this.svgAssetPath,
-    required this.titles,
-  }) : super(key: key);
+  final Function(String) onTap;
+  const myPageCustom(
+      {Key? key,
+      required this.width,
+      required this.height,
+      required this.headerTitle,
+      required this.svgAssetPath,
+      required this.titles,
+      required this.onTap})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -60,7 +62,8 @@ class myPageCustom extends StatelessWidget {
             ...titles
                 .map((title) => Column(
                       children: [
-                        _buildListTile(title, Icons.arrow_forward_ios),
+                        _buildListTile(title, Icons.arrow_forward_ios,
+                            context), // Modified
                         DottedDashedLine(
                             axis: Axis.horizontal,
                             height: 0,
@@ -75,17 +78,21 @@ class myPageCustom extends StatelessWidget {
     );
   }
 
-  ListTile _buildListTile(String title, IconData icon) {
-    return ListTile(
-      title: Text(
-        title,
-        style: AppTypography.tapButtonNavgation16
-            .copyWith(color: AppColors.neutral80),
-      ),
-      trailing: Icon(
-        icon,
-        color: Colors.grey,
-        size: 16.0,
+  Widget _buildListTile(String title, IconData icon, BuildContext context) {
+    // Modified
+    return GestureDetector(
+      onTap: () => onTap(title), // Add this line
+      child: ListTile(
+        title: Text(
+          title,
+          style: AppTypography.tapButtonNavgation16
+              .copyWith(color: AppColors.neutral80),
+        ),
+        trailing: Icon(
+          icon,
+          color: Colors.grey,
+          size: 16.0,
+        ),
       ),
     );
   }
