@@ -90,10 +90,11 @@ class AppPages {
       name: ViewRoute.homePage,
       page: () => const HomeLayOut(),
       binding: BindingsBuilder(() {
+        Get.put(CatchController());
+
+        Get.put(TalkController());
         Get.put(MogakController());
         Get.put(HomeController());
-        Get.put(TalkController());
-        Get.put(CatchController());
       }),
     ),
 

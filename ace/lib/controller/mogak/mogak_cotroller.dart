@@ -15,7 +15,6 @@ import 'package:get/get.dart';
 class MogakController extends GetxController {
 // 토큰 가져오기
   String token = Get.find<AuthController>().getToken();
-  ProfileModel? Pofile = Get.find<AuthController>().ProfileData.value;
 
 // 모각 리스트
   RxList<AllMogakModel> allMogakList = RxList<AllMogakModel>();
@@ -25,7 +24,7 @@ class MogakController extends GetxController {
   RxString searchText = RxString('');
   RxList<AllMogakModel> searchResults = RxList<AllMogakModel>();
 
-  ProfileModel? profile = Get.find<AuthController>().ProfileData.value;
+  ProfileModel? profile = Get.find<AuthController>().profileData.value;
 // 날자순 정렬 상태를 나타내는 bool값
   var isSortedList = false.obs;
 // 페이지가 통신이 완료 보여지게 하기위한 스켈레톤 bool값

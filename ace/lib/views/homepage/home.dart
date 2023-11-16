@@ -1,5 +1,4 @@
 import 'package:ace/controller/home/home_controller.dart';
-import 'package:ace/controller/mogak/mogak_cotroller.dart';
 import 'package:ace/controller/catch/catch_controller..dart';
 import 'package:ace/routes/view_route.dart';
 import 'package:ace/utils/colors.dart';
@@ -11,6 +10,7 @@ import 'package:ace/widgets/common/card_tag.dart';
 import 'package:ace/widgets/mogak/mogak_card.dart';
 import 'package:ace/widgets/mogak/mogak_skeleton.dart';
 import 'package:ace/widgets/spacer/spacer_skeleton.dart';
+import 'package:ace/widgets/talk/talk_content.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
@@ -21,7 +21,6 @@ class Home extends GetView<HomeController> {
 
   @override
   Widget build(BuildContext context) {
-    var topMogak = Get.find<MogakController>().topMogakList;
     var topCatchModels = Get.find<CatchController>().topCatchModels;
     return SingleChildScrollView(
       child: Padding(
@@ -38,11 +37,15 @@ class Home extends GetView<HomeController> {
                   controller: controller.bannerPageController,
                   itemCount: controller.bannerList.length,
                   itemBuilder: (context, index) {
-                    return Image.network(
-                      controller.bannerList![index].thumbnail.toString(),
-                      width: 390,
-                      height: 157,
-                      fit: BoxFit.cover,
+                    return InkWell(
+                      onTap: () => controller
+                          .movelaunchUrl('https://sniperfactory.com/course'),
+                      child: Image.network(
+                        controller.bannerList![index].thumbnail.toString(),
+                        width: 390,
+                        height: 157,
+                        fit: BoxFit.cover,
+                      ),
                     );
                   },
                 ),
@@ -50,8 +53,7 @@ class Home extends GetView<HomeController> {
             ),
 
             // 배너 인덱스
-            Obx(() => controller.bannerList != null &&
-                    controller.bannerList.isNotEmpty
+            Obx(() => controller.bannerList.isNotEmpty
                 ? Padding(
                     padding: const EdgeInsets.all(16.0),
                     child: SmoothPageIndicator(
@@ -112,6 +114,43 @@ class Home extends GetView<HomeController> {
             //       controller.fetchListRank();
             //     },
             //     child: Text('데이타 테스트 버튼')),
+
+// 톡톡
+            ListTile(
+              contentPadding: EdgeInsets.zero,
+              title: Row(
+                children: [
+                  SvgPicture.asset('assets/icons/icon20/fire.svg'),
+                  SizedBox(width: 8),
+                  Text('핫한 톡', style: AppTypography.tapButtonBold18),
+                ],
+              ),
+              trailing: InkWell(
+                  onTap: () {
+                    Get.toNamed(ViewRoute.spacerPage);
+                  },
+                  child: SvgPicture.asset('assets/icons/icon20/Right.svg')),
+            ),
+            Obx(
+              () => controller.topTalk.isNotEmpty
+                  ? ListView.builder(
+                      shrinkWrap: true,
+                      physics: NeverScrollableScrollPhysics(),
+                      itemCount: 3,
+                      itemBuilder: (context, index) {
+                        return Padding(
+                          padding: const EdgeInsets.only(
+                              top: 10, bottom: 10, right: 10, left: 10),
+                          child: CustomTalkWidget(
+                              talkModel: controller.topTalk[index]),
+                        );
+                      },
+                    )
+                  : MogakSkeleton(repeatCount: 1),
+            ),
+
+
+// 캐치업
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 5.0),
               child: Column(
@@ -140,11 +179,14 @@ class Home extends GetView<HomeController> {
 // 모각 리스트
 
             Obx(
-              () => topMogak != null && topMogak.isNotEmpty
+              () => controller.topMogak != null &&
+                      controller.topMogak.isNotEmpty
                   ? buildMogakCard(
-                      '핫한 모각코', topMogak, ViewRoute.mogakTopListPage)
+                      '핫한 모각코', controller.topMogak, ViewRoute.mogakTopListPage)
                   : MogakSkeleton(repeatCount: 1),
             ),
+
+// 스페이서 리스트
             ListTile(
               contentPadding: EdgeInsets.zero,
               title: Row(
@@ -160,8 +202,6 @@ class Home extends GetView<HomeController> {
                   },
                   child: SvgPicture.asset('assets/icons/icon20/Right.svg')),
             ),
-
-            // 스페이서
 
             Obx(
               () => controller.rankList == null || controller.rankList.isEmpty

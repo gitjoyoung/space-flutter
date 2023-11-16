@@ -7,6 +7,7 @@ import 'package:ace/widgets/spacer/spacer_avatar.dart';
 import 'package:ace/widgets/common/space_appbar.dart';
 import 'package:ace/widgets/common/title_appbar_custom.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
@@ -23,14 +24,11 @@ class Spacer extends GetView<HomeController> {
           child: Column(
             children: [
               Stack(children: [
-                Container(
-                  height: 300,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.only(
-                      bottomLeft: Radius.circular(150), // 왼쪽 아래 코너 라운드 설정
-                      bottomRight: Radius.circular(150),
-                    ), // 반지름 값 설정 (원의 반지름은 너비와 높이의 절반과 같음)
-                    color: AppColors.primary80, // 배경색 설정
+                ClipPath(
+                  clipper: OvalBottomBorderClipper(),
+                  child: Container(
+                    height: 300,
+                    color: AppColors.primary80,
                   ),
                 ),
                 Padding(
@@ -72,8 +70,11 @@ class Spacer extends GetView<HomeController> {
                         ),
                       ),
                       SvgPicture.asset("assets/icons/grade/Graphic.svg"),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      Wrap(
+                        direction: Axis.horizontal,
+                        alignment: WrapAlignment.center,
+                        crossAxisAlignment: WrapCrossAlignment.center,
+                        spacing: 5,
                         children: [
                           SpacerAvatar(
                             rankList: controller.rankList[1],
