@@ -1,7 +1,7 @@
 import 'package:ace/controller/home/home_controller.dart';
 import 'package:ace/utils/colors.dart';
 import 'package:ace/utils/typography.dart';
-import 'package:ace/widgets/common/space_appbar.dart';
+import 'package:ace/widgets/space_appbar.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 

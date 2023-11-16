@@ -6,6 +6,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
+void main() {
+  runApp(GetMaterialApp(home: const SplashPage(), getPages: [
+    GetPage(name: ViewRoute.loginPage, page: () => const LoginView()),
+  ]));
+}
 
 class SplashPage extends StatelessWidget {
   const SplashPage({super.key});
