@@ -1,9 +1,11 @@
+import 'package:ace/routes/view_route.dart';
 import 'package:ace/utils/colors.dart';
 import 'package:ace/utils/typography.dart';
 import 'package:ace/widgets/my_page.dart';
 import 'package:dotted_dashed_line/dotted_dashed_line.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:get/get.dart';
 
 class My extends StatelessWidget {
   const My({super.key});
@@ -99,28 +101,79 @@ class My extends StatelessWidget {
                   height: 249,
                   headerTitle: '나의 톡!',
                   svgAssetPath: 'assets/icons/icon20/fire.svg',
-                  titles: ['내가 쓴 톡', '좋아요 한 톡', '내가 쓴 이어달린 톡']),
+                  titles: ['내가 쓴 톡', '좋아요 한 톡', '내가 쓴 이어달린 톡'],
+                  onTap: (String title) {
+                    switch (title) {
+                      case '내가 쓴 톡':
+                        Get.toNamed(ViewRoute.Mytalkpage);
+                        break;
+                      case '좋아요 한 톡':
+                        Get.toNamed(ViewRoute.LikeTalkpage);
+                        break;
+                      case '내가 쓴 이어달린 톡':
+                        Get.toNamed(ViewRoute.FollowUpTalkPage);
+                        break;
+                    }
+                  }),
               SizedBox(height: 16),
               myPageCustom(
                   width: 370,
                   height: 193,
                   headerTitle: '나의 캐치업!',
                   svgAssetPath: 'assets/icons/icon20/dart.svg',
-                  titles: ['내 캐치업', '좋아요 한 캐치업']),
+                  titles: ['내 캐치업', '좋아요 한 캐치업'],
+                  onTap: (String title) {
+                    switch (title) {
+                      case '내 캐치업':
+                        Get.toNamed(ViewRoute.MyCatchUpPage);
+                        break;
+                      case '좋아요 한 캐치업':
+                        Get.toNamed(ViewRoute.LikedCatchPage);
+                        break;
+                    }
+                  }),
               SizedBox(height: 16),
               myPageCustom(
-                  width: 370,
-                  height: 193,
-                  headerTitle: '나의 모칵코!',
-                  svgAssetPath: 'assets/icons/icon20/dart.svg',
-                  titles: ['내가 만든 그룹', '참여중인 그룹']),
+                width: 370,
+                height: 193,
+                headerTitle: '나의 모칵코!',
+                svgAssetPath: 'assets/icons/icon20/dart.svg',
+                titles: ['내가 만든 그룹', '참여중인 그룹'],
+                onTap: (String title) {
+                  switch (title) {
+                    case '내가 만든 그룹':
+                      Get.toNamed(ViewRoute.MyCreatedGroupsPage);
+                      break;
+                    case '참여중인 그룹':
+                      Get.toNamed(ViewRoute.MyJoinedGroupsPage);
+                      break;
+                  }
+                },
+              ),
               SizedBox(height: 16),
               myPageCustom(
-                  width: 370,
-                  height: 305,
-                  headerTitle: '설정',
-                  svgAssetPath: 'assets/icons/icon20/Setting.svg',
-                  titles: ['내 정보 수정하기', '비밀번호 변경', '로그아웃', '회원탈퇴'])
+                width: 370,
+                height: 305,
+                headerTitle: '설정',
+                svgAssetPath: 'assets/icons/icon20/Setting.svg',
+                titles: ['내 정보 수정하기', '비밀번호 변경', '로그아웃', '회원탈퇴'],
+                onTap: (String title) {
+                  switch (title) {
+                    case '내 정보 수정하기':
+                      Get.toNamed(ViewRoute.EditProfilePage);
+                      break;
+                    case '비밀번호 변경':
+                      Get.toNamed(ViewRoute.PasswordUpdatePage);
+                      break;
+                    case '로그아웃':
+                      // dialog
+                      break;
+                    case '회원탈퇴':
+                      // dialog
+                      break;
+                  }
+                },
+              )
             ],
           ),
         ),
