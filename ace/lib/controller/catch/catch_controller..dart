@@ -1,7 +1,6 @@
 import 'package:ace/controller/auth/auth_controller.dart';
 import 'package:ace/models/catch/catch_model.dart';
 
-// import 'package:ace/models/catch/catch_model.dart';
 import 'package:ace/routes/api_route.dart';
 import 'package:ace/routes/view_route.dart';
 import 'package:dio/dio.dart';
@@ -26,7 +25,11 @@ class CatchController extends GetxController {
   final dio = Dio();
 
   void searchCatchs() {
+    refreshCatchs();
     print('검색실행');
+    print(allCatchModels);
+    print('검색실행');
+    print(topCatchModels);
 
     // 검색어를 가져옴
     final query = searchText.value.trim().toLowerCase();
