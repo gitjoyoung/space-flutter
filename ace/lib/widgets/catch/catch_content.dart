@@ -30,7 +30,7 @@ class CatchContent extends GetView<CatchController> {
               title: Row(
                 children: [
                   BadgeAvatarCustom(
-                    // authorBadge: data?.author!.badge,
+                    authorBadge: data?.author?.badge,
                     avatarUrl: data?.author?.avatar,
                     height: 48,
                     width: 43,

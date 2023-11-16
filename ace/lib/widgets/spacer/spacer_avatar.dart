@@ -1,8 +1,8 @@
 import 'package:ace/models/home/rank.dart';
 import 'package:ace/utils/colors.dart';
 import 'package:ace/utils/typography.dart';
-import 'package:ace/widgets/badge_avatar_custom.dart';
-import 'package:ace/widgets/card_tag.dart';
+import 'package:ace/widgets/common/badge_avatar_custom.dart';
+import 'package:ace/widgets/common/card_tag.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 

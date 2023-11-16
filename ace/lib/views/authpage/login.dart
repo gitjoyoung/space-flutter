@@ -1,6 +1,6 @@
-import 'package:ace/controller/auth_controller.dart';
-import 'package:ace/controller/find_password_controller.dart';
-import 'package:ace/controller/login_controller.dart';
+import 'package:ace/controller/auth/auth_controller.dart';
+import 'package:ace/controller/auth/find_password_controller.dart';
+import 'package:ace/controller/auth/login_controller.dart';
 import 'package:ace/routes/view_route.dart';
 import 'package:ace/utils/button.dart';
 import 'package:ace/utils/email_validator.dart';
@@ -14,29 +14,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
 import '../../utils/colors.dart';
-import '../../widgets/text_filed_custom.dart';
-
-void main() {
-  Get.put(LoginController());
-  Get.put(AuthController());
-  Get.put(FindPasswordController());
-
-  runApp(
-    GetMaterialApp(
-      home: const LoginView(),
-      getPages: [
-        GetPage(name: ViewRoute.loginPage, page: () => const LoginView()),
-        GetPage(
-            name: ViewRoute.findPasswordPage, page: () => const FindPassword()),
-        GetPage(
-            name: ViewRoute.registrationPage, page: () => RegistrationView()),
-        GetPage(name: ViewRoute.homePage, page: () => HomeLayOut()), // 이 부분을 추가
-        // 이 부분을 추가
-        // 다른 라우트들
-      ],
-    ),
-  );
-}
+import '../../widgets/common/text_filed_custom.dart';
 
 class LoginView extends GetView<LoginController> {
   const LoginView({Key? key}) : super(key: key);
@@ -122,10 +100,10 @@ class LoginView extends GetView<LoginController> {
                       return ElevatedButton(
                         onPressed: controller.isButtonEnabled.value
                             ? () async {
-                                // Attempt login and get the token
                                 await controller.authController.login(
                                     controller.email.text,
                                     controller.password.text);
+                                await controller.authController.fetchProfile();
                               }
                             : null,
                         child: const Text(

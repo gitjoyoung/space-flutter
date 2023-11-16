@@ -4,20 +4,20 @@ import 'package:flutter/material.dart';
 import 'package:bubble/bubble.dart';
 
 // HeartBubble(
-//   text1: "시간",
+//   text1: "텍스트1",
 //   text2: "텍스트2",
 //   onTap: () {
 //     print("아이콘이 탭되었습니다.");
 //   },
 // )
 class HeartBubble extends StatelessWidget {
-  final String time1;
+  final String text1;
   final String text2;
   final VoidCallback? onTap;
 
   HeartBubble({
     Key? key,
-    required this.time1,
+    required this.text1,
     required this.text2,
     this.onTap,
   }) : super(key: key);
@@ -41,7 +41,7 @@ class HeartBubble extends StatelessWidget {
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
-                    Text(time1,
+                    Text(text1,
                         style: AppTypography.cardBody
                             .copyWith(color: AppColors.neutral40)),
                     SizedBox(height: 8),

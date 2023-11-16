@@ -1,6 +1,8 @@
 import 'dart:convert';
 
-import 'package:ace/controller/auth_controller.dart';
+import 'package:ace/controller/auth/auth_controller.dart';
+import 'package:ace/controller/mogak/mogak_cotroller.dart';
+import 'package:ace/controller/talk/talk_controller.dart';
 import 'package:ace/models/home/banner.dart';
 import 'package:ace/models/home/rank.dart';
 import 'package:ace/routes/api_route.dart';
@@ -13,6 +15,7 @@ import 'package:ace/views/talkpage/talk.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class HomeController extends GetxController {
   String token = Get.find<AuthController>().getToken();
@@ -20,7 +23,14 @@ class HomeController extends GetxController {
 
   RxList<RankModel> rankList = RxList<RankModel>();
 
+  // 홈 위젯
+  var topTalk = Get.find<TalkController>().topTalkList;
+  var topMogak = Get.find<MogakController>().topMogakList;
+
+// 배너
   var bannerPageController = PageController();
+
+// 스페이서 랭크 페이지
   var rankPageController =
       PageController(initialPage: 0, viewportFraction: 0.5);
 
@@ -43,7 +53,7 @@ class HomeController extends GetxController {
       );
       if (response.statusCode == 200) {
         var resdata = response.data['data'];
-        print('배너 데이타' +resdata);
+        print(resdata);
         List<BannerModel> data = resdata
             .map<BannerModel>((item) => BannerModel.fromMap(item))
             .toList();
@@ -75,7 +85,7 @@ class HomeController extends GetxController {
 
   Future<void> fetchListRank() async {
     try {
-      final response = await dio.get(ApiRoute.homeSpacerRank,
+      final response = await dio.get(ApiRoute.homeSpacerRankApi,
           options: Options(headers: {"Authorization": token}));
       if (response.statusCode == 200) {
         final List<dynamic> jsonArray = response.data['data']['res'];
@@ -93,6 +103,14 @@ class HomeController extends GetxController {
     }
   }
 
+// 페이지이동
+  Future<void> movelaunchUrl(String urlString) async {
+    final Uri url = Uri.parse(urlString); // 문자열 URL을 Uri 객체로 변환
+    if (!await launchUrl(url)) {
+      throw 'Could not launch $urlString';
+    }
+  }
+
   @override
   void onInit() {
     // TODO: implement onInit
@@ -101,5 +119,4 @@ class HomeController extends GetxController {
     fetchListRank();
   }
 
-  refreshMogaks() {}
 }

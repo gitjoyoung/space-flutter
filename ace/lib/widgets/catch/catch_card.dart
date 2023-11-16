@@ -40,7 +40,7 @@ Widget buildCatchCard(
                   children: [
                     Expanded(
                       child: CatchContent(
-                        // data: catchModels.first,
+                        data: catchModels.first,
                         maxLength: 3,
                       ),
                       flex: 2,

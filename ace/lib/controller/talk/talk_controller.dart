@@ -1,7 +1,7 @@
 import 'dart:convert';
 
-import 'package:ace/controller/auth_controller.dart';
-import 'package:ace/models/mogak/talk_model.dart';
+import 'package:ace/controller/auth/auth_controller.dart';
+import 'package:ace/models/talk/talk_model.dart';
 import 'package:ace/routes/api_route.dart';
 import 'package:ace/utils/button.dart';
 import 'package:ace/utils/colors.dart';
@@ -13,7 +13,9 @@ import 'package:get/get.dart';
 class TalkController extends GetxController {
   String token = Get.find<AuthController>().getToken();
   var talkContent = TextEditingController();
-  RxList<TalkModel> talkModels = RxList<TalkModel>();
+  RxList<TalkModel> talkList = RxList<TalkModel>();
+  RxList<TalkModel> topTalkList = RxList<TalkModel>();
+
   final dio = Dio();
 
 // 토크 리스트 가져오기
@@ -24,15 +26,36 @@ class TalkController extends GetxController {
       );
       if (response.statusCode == 200) {
         var resdata = response.data['data'];
+
         final List<TalkModel> talksList = resdata
             .map<TalkModel>((jsonItem) => TalkModel.fromMap(jsonItem))
             .toList();
         // // 데이터를 talkModels 리스트에 추가
-        talkModels.assignAll(talksList);
-        print('talkModels: $talkModels');
+        talkList.assignAll(talksList);
+        TopTalks();
+        print('talkModels: $talkList');
       }
     } catch (e) {
       print('like 일반 오류: $e');
+    }
+  }
+
+  // 핫한 토크 리스트 정렬
+  Future<void> TopTalks() async {
+    try {
+      print('탑 톡 리스트');
+      final List<TalkModel> sortedTalkList = [...talkList];
+
+      sortedTalkList.sort((a, b) {
+        final aScore = a.temperature + (a.childrenLength ?? 0);
+        final bScore = b.temperature + (b.childrenLength ?? 0);
+        return bScore.compareTo(aScore);
+      });
+
+      final top5Talks = sortedTalkList.take(5).toList();
+      topTalkList.assignAll(top5Talks);
+    } catch (e) {
+      print('오류 발생: $e');
     }
   }
 
@@ -53,7 +76,7 @@ class TalkController extends GetxController {
       if (response.statusCode == 200) {
         var resdata = response.data['data'];
 
-        print('톡 생성 완료 톡 내용 : $talkModels');
+        print('톡 생성 완료 톡 내용 : $talkList');
       }
     } catch (e) {
       print('like 일반 오류: $e');
