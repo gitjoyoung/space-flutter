@@ -53,7 +53,7 @@ class HomeController extends GetxController {
       );
       if (response.statusCode == 200) {
         var resdata = response.data['data'];
-        print(resdata);
+        print('배너 데이타' +resdata);
         List<BannerModel> data = resdata
             .map<BannerModel>((item) => BannerModel.fromMap(item))
             .toList();

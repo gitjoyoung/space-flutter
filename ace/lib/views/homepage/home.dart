@@ -136,7 +136,7 @@ class Home extends GetView<HomeController> {
                   ? ListView.builder(
                       shrinkWrap: true,
                       physics: NeverScrollableScrollPhysics(),
-                      itemCount: 3,
+                      itemCount: controller.topTalk.length,
                       itemBuilder: (context, index) {
                         return Padding(
                           padding: const EdgeInsets.only(
@@ -179,8 +179,7 @@ class Home extends GetView<HomeController> {
 // 모각 리스트
 
             Obx(
-              () => controller.topMogak != null &&
-                      controller.topMogak.isNotEmpty
+              () => controller.topMogak.isNotEmpty
                   ? buildMogakCard(
                       '핫한 모각코', controller.topMogak, ViewRoute.mogakTopListPage)
                   : MogakSkeleton(repeatCount: 1),
@@ -204,7 +203,7 @@ class Home extends GetView<HomeController> {
             ),
 
             Obx(
-              () => controller.rankList == null || controller.rankList.isEmpty
+              () => controller.rankList.isEmpty
                   ? SpacerSkeleton()
                   : Column(
                       children: [

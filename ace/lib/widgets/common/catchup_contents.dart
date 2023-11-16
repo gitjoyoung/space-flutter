@@ -1,6 +1,6 @@
 import 'package:ace/controller/catch/catch_controller..dart';
-
 import 'package:ace/models/catch/catch_model.dart';
+
 import 'package:ace/utils/colors.dart';
 import 'package:ace/utils/typography.dart';
 import 'package:ace/widgets/common/badge_avatar_custom.dart';
