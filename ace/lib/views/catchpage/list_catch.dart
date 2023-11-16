@@ -1,4 +1,5 @@
 import 'package:ace/controller/catch/catch_controller..dart';
+import 'package:ace/controller/catch/catch_filter.dart';
 
 import 'package:ace/models/catch/catch_model.dart';
 
@@ -54,6 +55,27 @@ class CatchList extends GetView<CatchController> {
                   assetPath: 'assets/icons/icon50/React.svg',
                 ),
               ],
+            ),
+            InkWell(
+              onTap: () => showCustomDialog(context),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  SvgPicture.asset(
+                    'assets/icons/icon30/Filter.svg',
+                    height: 16,
+                    width: 16,
+                  ),
+                  SizedBox(
+                    width: 3,
+                  ),
+                  Text(
+                    '날자순',
+                    style: AppTypography.cardBody
+                        .copyWith(color: AppColors.primary80),
+                  )
+                ],
+              ),
             ),
             SizedBox(
               height: 16,

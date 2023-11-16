@@ -140,8 +140,6 @@ class CatchController extends GetxController {
         fetchTopCatchModels(ApiRoute.catchTopApi, topCatchModels)
       ]);
       print('캐치업');
-      print(allCatchModels);
-      print(allCatchModels); // 결과 확인
     } catch (e) {
       print('Error: $e');
     } finally {

@@ -19,15 +19,10 @@ class ApiRoute {
   static const String myLikeTalklApi = "${baseUrl}api/me/up?type=talk";
   static const String myCommentTalklApi = "${baseUrl}api/me/talk/children";
 
-  
   static const String myMogakApi = "${baseUrl}api/me/mogak";
   static const String myJoinMogakApi = "${baseUrl}api/me/mogak";
   static const String myLikeMogaklApi = "${baseUrl}api/me/up?type=mogak";
-
-
-
-
-
+  static const String myLikeCatchApi = "${baseUrl}api/me/up?type=catchup";
 
 // 톡톡
 // 특정 톡톡 가져오기 생성 삭제

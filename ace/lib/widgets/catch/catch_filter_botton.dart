@@ -1,11 +1,14 @@
-import 'package:ace/utils/colors.dart';
+// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:flutter/material.dart';
+
+import 'package:ace/utils/colors.dart';
 
 class FilterButton extends StatefulWidget {
   final double width;
   final double height;
   final String text;
   final VoidCallback onTap;
+  final bool isSelected;
 
   FilterButton({
     Key? key,
@@ -13,6 +16,7 @@ class FilterButton extends StatefulWidget {
     required this.height,
     required this.text,
     required this.onTap,
+    required this.isSelected,
   }) : super(key: key);
 
   @override
