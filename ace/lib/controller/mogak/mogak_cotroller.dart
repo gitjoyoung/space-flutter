@@ -36,7 +36,7 @@ class MogakController extends GetxController {
     super.onInit();
     refreshMogaks(); // onInit에서 데이터 새로고침을 호출
   }
-
+// 검색
   void searchMogaks() {
     print('검색실행');
     // 검색어를 가져옴
@@ -59,8 +59,8 @@ class MogakController extends GetxController {
       );
     }
   }
-// 모달 리스트 가져오기
 
+// 모달 리스트 가져오기
   Future<void> fetchListMogak(
       String apiRoute, RxList<AllMogakModel> targetList) async {
     try {
@@ -94,7 +94,7 @@ class MogakController extends GetxController {
       print('상세 모각 정보 가져오기 주소 문제나 여러 기타 오류: $e');
     }
   }
-
+// 모각 좋아요
   Future<void> fetchLikeModak(
     String mogakId,
   ) async {
@@ -111,7 +111,7 @@ class MogakController extends GetxController {
       print('like 일반 오류: $e');
     }
   }
-
+// 모각 새로고침
   Future<void> refreshMogaks() async {
     isLoading(true); // 로딩 시작
     try {
@@ -124,6 +124,7 @@ class MogakController extends GetxController {
     }
   }
 
+// 모각 정렬
   void sortMogaksByDate(bool isTopMogak) {
     RxList<AllMogakModel> targetList;
 
@@ -145,7 +146,7 @@ class MogakController extends GetxController {
     isSortedList.toggle();
     update();
   }
-
+// 모각 댓글
   Future<void> fetchCommentMogak(String mogakId) async {
     try {
       var response = await dio.delete(
@@ -162,6 +163,7 @@ class MogakController extends GetxController {
     } finally {}
   }
 
+// 모각 모달
   void showDeleteDialog(String mogakId) {
     Get.dialog(
       Dialog(

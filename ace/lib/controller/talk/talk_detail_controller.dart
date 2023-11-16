@@ -18,6 +18,7 @@ class TalkDetailController extends GetxController {
   final dio = Dio();
   late String talkId;
 
+// 톡 댓글 시간 몇분전 계산
   var formatTimeDifference = Get.find<TalkController>().formatTimeDifference;
   @override
   void onInit() {
@@ -32,7 +33,8 @@ class TalkDetailController extends GetxController {
     }
   }
 
- Future<void> fetchCommentTalk() async {
+// 톡 댓글 조회
+  Future<void> fetchCommentTalk() async {
     try {
       var response = await dio.post(
         ApiRoute.mogakTalkApi,
@@ -55,6 +57,7 @@ class TalkDetailController extends GetxController {
     }
   }
 
+// 톡 개별 조회
   Future<void> fetchDetailTalk(String id) async {
     try {
       final response = await dio.get(

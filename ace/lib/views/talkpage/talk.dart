@@ -132,7 +132,8 @@ class Talk extends GetView<TalkController> {
                                   talkModel: controller.talkList[index]),
                             );
                           },
-                        )
+                        ),
+                        SizedBox(height: 100)
                       ]),
 
                 //

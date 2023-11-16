@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:ace/controller/auth/auth_controller.dart';
 import 'package:ace/models/talk/talk_model.dart';
 import 'package:ace/routes/api_route.dart';
@@ -18,6 +16,27 @@ class TalkController extends GetxController {
 
   final dio = Dio();
 
+  Future<void> talkLike(String id) async {
+    try {
+      var response = await dio.post(
+        ApiRoute.talkLikeApi,
+        data: {
+          "talkId": id,
+        },
+        options: Options(headers: {"Authorization": token}),
+      );
+      if (response.statusCode == 200) {
+        print("톡 좋아요 성공: ${response.data}");
+      } else {
+        print('톡 좋아요 통신실패: ${response.statusCode}');
+      }
+    } catch (e) {
+      print('일반 에러: $e');
+    } finally {
+      fetchListTalk();
+    }
+  }
+
 // 토크 리스트 가져오기
   Future<void> fetchListTalk() async {
     try {
@@ -32,7 +51,7 @@ class TalkController extends GetxController {
             .toList();
         // // 데이터를 talkModels 리스트에 추가
         talkList.assignAll(talksList);
-        TopTalks();
+        topTalks();
         print('talkModels: $talkList');
       }
     } catch (e) {
@@ -41,7 +60,7 @@ class TalkController extends GetxController {
   }
 
   // 핫한 토크 리스트 정렬
-  Future<void> TopTalks() async {
+  Future<void> topTalks() async {
     try {
       print('탑 톡 리스트');
       final List<TalkModel> sortedTalkList = [...talkList];
@@ -83,7 +102,7 @@ class TalkController extends GetxController {
     }
   }
 
-// 몇 분전 표시
+// 톡의 시간 몇 분전 표시
   String formatTimeDifference(DateTime? dateTime) {
     if (dateTime == null) return '';
 

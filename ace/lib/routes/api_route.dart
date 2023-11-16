@@ -15,12 +15,25 @@ class ApiRoute {
   static const String homeSpacerRankApi = "${baseUrl}api/rank?month=10";
 
 // 마이페이지 관련
-  static const String MypageMeApi = "${baseUrl}api/me/";
+  static const String myTalklApi = "${baseUrl}api/me/talk";
+  static const String myLikeTalklApi = "${baseUrl}api/me/up?type=talk";
+  static const String myCommentTalklApi = "${baseUrl}api/me/talk/children";
+
+  
+  static const String myMogakApi = "${baseUrl}api/me/mogak";
+  static const String myJoinMogakApi = "${baseUrl}api/me/mogak";
+  static const String myLikeMogaklApi = "${baseUrl}api/me/up?type=mogak";
+
+
+
+
+
 
 // 톡톡
 // 특정 톡톡 가져오기 생성 삭제
   static const String talkAllApi = "${baseUrl}api/talk";
   static const String createTalkApi = "${baseUrl}api/talk";
+  static const String talkLikeApi = "${baseUrl}api/up";
 
   static const String talkApi = "${baseUrl}api/talk/";
   static const String talkCreateApi = "${baseUrl}api/talk/";

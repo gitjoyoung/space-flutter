@@ -72,7 +72,7 @@ class Mogak extends GetView<MogakController> {
                 Obx(
                   () {
                     final searchResults = controller.searchResults;
-                    if (searchResults.isEmpty) {
+                    if (searchResults.isEmpty || searchResults.isEmpty) {
                       // 검색 결과가 없는 경우
                       return controller.isLoading.value
                           ? MogakSkeleton()
@@ -90,32 +90,29 @@ class Mogak extends GetView<MogakController> {
                                       ViewRoute.mogakAllListPage),
                                 ],
                               ),
-                            ); // 빈 위젯 반환하여 아무것도 표시하지 않습니다.
+                            ); 
                     } else {
                       // 검색 결과가 있는 경우
                       return Column(
                         children: [
                           Column(
                             children: [
-                              Padding(
-                                padding:
-                                    const EdgeInsets.symmetric(vertical: 16),
-                                child: ListTile(
-                                  title: Text(
-                                      '${controller.searchText.value}검색결과',
-                                      style: AppTypography.popupTitleMedium),
-                                  leading: IconButton(
-                                    onPressed: () {},
-                                    icon: IconButton(
-                                      onPressed: () {
-                                        controller.searchText.value = '';
-                                        // 뒤로가기 버튼 기능, 예를 들어 Navigator.pop(context);
-                                      },
-                                      icon: SvgPicture.asset(
-                                        'assets/icons/icon20/left.svg',
-                                        height: 20,
-                                        width: 20,
-                                      ),
+                              ListTile(
+                                contentPadding: EdgeInsets.zero,
+                                title: Text(
+                                    '${controller.searchText.value}의 검색결과',
+                                    style: AppTypography.popupTitleMedium),
+                                leading: IconButton(
+                                  onPressed: () {},
+                                  icon: IconButton(
+                                    onPressed: () {
+                                      controller.searchText.value = '';
+                                      controller.searchMogaks();
+                                    },
+                                    icon: SvgPicture.asset(
+                                      'assets/icons/icon20/left.svg',
+                                      height: 20,
+                                      width: 20,
                                     ),
                                   ),
                                 ),
