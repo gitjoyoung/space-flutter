@@ -7,6 +7,7 @@ import 'package:ace/widgets/common/badge_avatar_custom.dart';
 import 'package:ace/widgets/common/comment_Icon.dart';
 import 'package:bubble/bubble.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
 class CustomTalkWidget extends GetView<TalkController> {
@@ -48,34 +49,53 @@ class CustomTalkWidget extends GetView<TalkController> {
                   elevation: 0,
                   stick: true,
                   nip: BubbleNip.leftCenter,
-                  child: Padding(
-                    padding: const EdgeInsets.only(
-                        left: 16, top: 5, bottom: 5, right: 16),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                            controller.formatTimeDifference(
-                                    talkModel.createdAt) ??
-                                "",
-                            style: AppTypography.cardBody
-                                .copyWith(color: AppColors.neutral40)),
-                        SizedBox(
-                          height: 5,
-                        ),
-                        InkWell(
-                          onTap: () {
-                            Get.toNamed(ViewRoute.talkDetailPage,
-                                arguments: talkModel);
-                          },
-                          child: Text(
-                            talkModel.content ?? "",
-                            style: AppTypography.button36Medium,
+                  child: Stack(children: [
+                    Padding(
+                      padding: const EdgeInsets.only(
+                          left: 16, top: 5, bottom: 5, right: 16),
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(
+                              controller.formatTimeDifference(
+                                      talkModel.createdAt) ??
+                                  "",
+                              style: AppTypography.cardBody
+                                  .copyWith(color: AppColors.neutral40)),
+                          SizedBox(
+                            height: 5,
                           ),
-                        ),
-                      ],
+                          InkWell(
+                            onTap: () {
+                              Get.toNamed(ViewRoute.talkDetailPage,
+                                  arguments: talkModel);
+                            },
+                            child: Text(
+                              talkModel.content ?? "",
+                              style: AppTypography.button36Medium,
+                            ),
+                          ),
+                        ],
+                      ),
                     ),
-                  ),
+                    Positioned(
+                      right: 0,
+                      top: 5,
+                      child: InkWell(
+                        onTap: () {
+                          controller.talkLike(talkModel.id);
+                        },
+                        child: SvgPicture.asset(
+                          'assets/icons/icon20/like.svg',
+                          height: 15,
+                          width: 15,
+                          color: talkModel.isDeleted == true
+                              ? AppColors.systemWarnin
+                              : AppColors.neutral40,
+                        ),
+                      ),
+                    ),
+                  ]),
                 ),
               ),
               Padding(
