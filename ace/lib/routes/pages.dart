@@ -25,6 +25,16 @@ import 'package:ace/views/mogakpage/create_mogak.dart';
 import 'package:ace/views/mogakpage/detail_mogak.dart';
 import 'package:ace/views/mogakpage/list_mogak.dart';
 import 'package:ace/views/mogakpage/mogak.dart';
+import 'package:ace/views/mypage/password_update.dart';
+import 'package:ace/views/mypage/edit_profile.dart';
+import 'package:ace/views/mypage/follow_up_talks.dart';
+import 'package:ace/views/mypage/joined_group.dart';
+import 'package:ace/views/mypage/liked_catch.dart';
+import 'package:ace/views/mypage/liked_talks.dart';
+import 'package:ace/views/mypage/my.dart';
+import 'package:ace/views/mypage/my_catch_up.dart';
+import 'package:ace/views/mypage/my_created_groups.dart';
+import 'package:ace/views/mypage/my_talk.dart';
 import 'package:ace/views/spacer/spacer.dart';
 import 'package:ace/views/talkpage/talk.dart';
 import 'package:ace/views/talkpage/talk_list.dart';
@@ -153,6 +163,54 @@ class AppPages {
     GetPage(
       name: ViewRoute.catchlTopListPage,
       page: () => const CatchList(title: '캐치업!'),
+    ),
+
+    //마이페이지
+    GetPage(name: ViewRoute.Mypage, page: () => const My()),
+    //내가 쓴 톡
+    GetPage(
+      name: ViewRoute.Mytalkpage,
+      page: () => const MyTalk(),
+    ),
+    //좋아요 한 톡
+    GetPage(
+      name: ViewRoute.LikeTalkpage,
+      page: () => const LikeTalk(),
+    ),
+    //내가 쓴 이어달린 톡
+    GetPage(
+      name: ViewRoute.FollowUpTalkPage,
+      page: () => const FollowUpTalks(),
+    ),
+    //내 캐치업
+    GetPage(
+      name: ViewRoute.MyCatchUpPage,
+      page: () => const MyCatchUp(),
+    ),
+    //좋아요 한 캐치업
+    GetPage(
+      name: ViewRoute.LikedCatchPage,
+      page: () => const LikedCatch(),
+    ),
+    //내가 만든 그룹
+    GetPage(
+      name: ViewRoute.MyCreatedGroupsPage,
+      page: () => const MyCreatedGroups(),
+    ),
+    //참여중인 그룹
+    GetPage(
+      name: ViewRoute.MyJoinedGroupsPage,
+      page: () => const JoindeGroups(),
+    ),
+    //내 정보 수정하기
+    GetPage(
+      name: ViewRoute.EditProfilePage,
+      page: () => const EditProfile(),
+    ),
+    //비밀번호 변경하기
+    GetPage(
+      name: ViewRoute.PasswordUpdatePage,
+      page: () => const PasswordUpdate(),
     ),
   ];
 }
