@@ -10,7 +10,7 @@ class FollowUpTalks extends StatelessWidget {
         home: Scaffold(
       appBar: SpaceAppBar(),
       body: Center(
-        child: Text('follow_up_talk'),
+        child: Text('follow_up_talks'),
       ),
     ));
   }
