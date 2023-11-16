@@ -4,6 +4,7 @@ import 'package:ace/routes/view_route.dart';
 import 'package:ace/utils/colors.dart';
 import 'package:ace/utils/typography.dart';
 import 'package:ace/widgets/catch/catch_card_home.dart';
+import 'package:ace/widgets/catch/catch_home_skeleton.dart';
 import 'package:ace/widgets/catch/catch_skeleton.dart';
 import 'package:ace/widgets/common/badge_avatar_custom.dart';
 import 'package:ace/widgets/common/card_tag.dart';
@@ -149,7 +150,6 @@ class Home extends GetView<HomeController> {
                   : MogakSkeleton(repeatCount: 1),
             ),
 
-
 // 캐치업
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 5.0),
@@ -159,19 +159,19 @@ class Home extends GetView<HomeController> {
                     () => topCatchModels != null && topCatchModels.isNotEmpty
                         ? buildCatchCardHome('핫한 캐치업', topCatchModels,
                             ViewRoute.catchlTopListPage)
-                        : CatchSkeleton(repeatCount: 1),
+                        : CatchCardHomeSkeleton(),
                   ),
                   Obx(
                     () => topCatchModels != null && topCatchModels.isNotEmpty
                         ? buildCatchCardHome1('핫한 캐치업', topCatchModels,
                             ViewRoute.catchlTopListPage)
-                        : CatchSkeleton(repeatCount: 1),
+                        : CatchCardHomeSkeleton(),
                   ),
                   Obx(
                     () => topCatchModels != null && topCatchModels.isNotEmpty
                         ? buildCatchCardHome2('핫한 캐치업', topCatchModels,
                             ViewRoute.catchlTopListPage)
-                        : CatchSkeleton(repeatCount: 1),
+                        : CatchCardHomeSkeleton(),
                   ),
                 ],
               ),

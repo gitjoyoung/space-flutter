@@ -35,34 +35,33 @@ Widget buildCatchCard(
                 side: BorderSide(color: AppColors.strokeLine10, width: 1.0),
                 borderRadius: BorderRadius.circular(10),
               ),
-              child: IntrinsicHeight(
-                child: Row(
-                  children: [
-                    Expanded(
-                      child: CatchContent(
-                        data: catchModels.first,
-                        maxLength: 3,
-                      ),
-                      flex: 2,
+              child: Row(
+                children: [
+                  Expanded(
+                    child: CatchContent(
+                      data: catchModels.first,
+                      maxLength: 3,
                     ),
-                    Expanded(
-                      child: Container(
-                          decoration: BoxDecoration(
-                        // 이미지를 추가하고 싶다면 아래처럼 사용:
-                        image: DecorationImage(
-                          image: AssetImage(
-                              'assets/profile/rocket.png'), // 이미지 에셋의 경로를 지정
-                          fit: BoxFit.cover, // 이미지를 꽉 채우도록 설정
-                        ),
-                        borderRadius: BorderRadius.only(
-                          topRight: Radius.circular(10),
-                          bottomRight: Radius.circular(10),
-                        ),
-                      )),
-                      flex: 1,
-                    ),
-                  ],
-                ),
+                    flex: 2,
+                  ),
+                  Expanded(
+                    child: Container(
+                        height: 220,
+                        decoration: BoxDecoration(
+                          // 이미지를 추가하고 싶다면 아래처럼 사용:
+                          image: DecorationImage(
+                            image: AssetImage(
+                                'assets/profile/rocket.png'), // 이미지 에셋의 경로를 지정
+                            fit: BoxFit.cover, // 이미지를 꽉 채우도록 설정
+                          ),
+                          borderRadius: BorderRadius.only(
+                            topRight: Radius.circular(10),
+                            bottomRight: Radius.circular(10),
+                          ),
+                        )),
+                    flex: 1,
+                  ),
+                ],
               ),
             ),
       SizedBox(height: 8),
