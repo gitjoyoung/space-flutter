@@ -1,5 +1,6 @@
 import 'package:ace/controller/talk/talk_controller.dart';
 import 'package:ace/models/talk/talk_model.dart';
+import 'package:ace/utils/colors.dart';
 import 'package:ace/utils/typography.dart';
 import 'package:ace/widgets/common/space_appbar.dart';
 import 'package:ace/widgets/talk/talk_content.dart';
@@ -17,6 +18,14 @@ class TalkList extends GetView {
     final List<TalkModel>? talkList =
         Get.arguments['talks'] as List<TalkModel>?;
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          controller.createTalkModal();
+        },
+        elevation: 0,
+        backgroundColor: AppColors.primary80,
+        child: Image.asset('assets/icons/icon50/Community.png'),
+      ),
       appBar: SpaceAppBar(),
       body: SingleChildScrollView(
         child: Column(
@@ -62,6 +71,7 @@ class TalkList extends GetView {
                     );
                   },
                 )),
+                SizedBox(height: 100,)
           ],
         ),
       ),

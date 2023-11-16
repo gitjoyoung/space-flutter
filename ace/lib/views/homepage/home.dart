@@ -128,7 +128,10 @@ class Home extends GetView<HomeController> {
               ),
               trailing: InkWell(
                   onTap: () {
-                    Get.toNamed(ViewRoute.spacerPage);
+                    Get.toNamed(ViewRoute.talkListPage, arguments: {
+                      'title': '핫한 톡', // '핫한톡' 문자열을 전달합니다.
+                      'talks': controller.topTalk, // `topTalkList` 데이터를 전달합니다.
+                    });
                   },
                   child: SvgPicture.asset('assets/icons/icon20/Right.svg')),
             ),

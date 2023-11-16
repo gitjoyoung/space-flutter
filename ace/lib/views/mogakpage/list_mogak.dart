@@ -19,8 +19,17 @@ class MogakList extends GetView<MogakController> {
     final isTopMogak = title == '핫한 모각코';
 
     final listToDisplay =
-        isTopMogak ? controller.topMogakList  : controller.allMogakList;
+        isTopMogak ? controller.topMogakList : controller.allMogakList;
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {
+          // controller.refreshMogaks();
+          Get.toNamed(ViewRoute.mogakCreatePage);
+        },
+        elevation: 0,
+        child: Image.asset('assets/icons/icon30/Write.png'),
+        backgroundColor: AppColors.primary80,
+      ),
       appBar: SpaceAppBar(),
       body: SingleChildScrollView(
         child: Padding(
@@ -99,6 +108,7 @@ class MogakList extends GetView<MogakController> {
                 },
               );
             }),
+            SizedBox(height: 100,)
           ]),
         ),
       ),

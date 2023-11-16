@@ -10,6 +10,7 @@ import 'package:ace/controller/mogak/mogak_cotroller.dart';
 import 'package:ace/controller/mogak/mogak_create_contoller.dart';
 import 'package:ace/controller/mogak/mogak_detail_cotroller.dart';
 import 'package:ace/controller/auth/signup_controller.dart';
+import 'package:ace/controller/my/my_controller.dart';
 import 'package:ace/controller/talk/talk_controller.dart';
 import 'package:ace/controller/talk/talk_detail_controller.dart';
 import 'package:ace/routes/view_route.dart';
@@ -105,6 +106,8 @@ class AppPages {
         Get.put(TalkController());
         Get.put(MogakController());
         Get.put(HomeController());
+        Get.put(MyController());
+
       }),
     ),
 
@@ -180,13 +183,24 @@ class AppPages {
     ),
 
     //마이페이지
-    GetPage(name: ViewRoute.Mypage, page: () => const My()),
+    GetPage(
+      name: ViewRoute.Mypage,
+      page: () => const My(),
+      binding: BindingsBuilder(() {
+        Get.put(MyController());
+      }),
+    ),
 
     //내가 쓴 톡
     GetPage(name: ViewRoute.Mytalkpage, page: () => const MyTalk()),
 
     //좋아요 한 톡
-    GetPage(name: ViewRoute.LikeTalkpage, page: () => const LikeTalk()),
+    GetPage(
+      name: ViewRoute.LikeTalkpage,
+      page: () => const LikeTalk(),
+      binding: BindingsBuilder(() {
+      }),
+    ),
 
     //내가 쓴 이어달린 톡
     GetPage(
