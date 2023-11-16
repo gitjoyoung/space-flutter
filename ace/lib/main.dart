@@ -1,4 +1,4 @@
-import 'package:ace/controller/auth/auth_controller.dart';
+import 'package:ace/controller/auth_controller.dart';
 import 'package:ace/routes/pages.dart';
 import 'package:ace/routes/view_route.dart';
 import 'package:flutter/material.dart';

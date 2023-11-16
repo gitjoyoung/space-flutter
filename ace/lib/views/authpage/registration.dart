@@ -1,7 +1,7 @@
 // ignore_for_file: prefer_const_constructors, prefer_const_literals_to_create_immutables
 
-import 'package:ace/controller/auth/auth_controller.dart';
-import 'package:ace/controller/auth/signup_controller.dart';
+import 'package:ace/controller/auth_controller.dart';
+import 'package:ace/controller/signup_controller.dart';
 import 'package:ace/routes/pages.dart';
 import 'package:ace/routes/view_route.dart';
 import 'package:ace/utils/button.dart';
@@ -10,10 +10,15 @@ import 'package:ace/utils/email_validator.dart';
 import 'package:ace/utils/typography.dart';
 import 'package:ace/views/authpage/login.dart';
 import 'package:ace/views/authpage/sign_up_success.dart';
-import 'package:ace/widgets/common/text_filed_custom.dart';
+import 'package:ace/widgets/text_filed_custom.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+void main() {
+  runApp(
+    GetMaterialApp(home: RegistrationView(), getPages: AppPages.pages),
+  );
+}
 
 class RegistrationView extends GetView<SignUpController> {
   const RegistrationView({Key? key}) : super(key: key);

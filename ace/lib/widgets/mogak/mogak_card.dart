@@ -1,11 +1,13 @@
+
 import 'package:ace/models/mogak/mogak_model.dart';
 import 'package:ace/utils/colors.dart';
 import 'package:ace/utils/typography.dart';
-import 'package:ace/widgets/common/comment_Icon.dart';
+import 'package:ace/widgets/comment_Icon.dart';
 import 'package:ace/widgets/mogak/mogak_content.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
+
 
 Widget buildMogakCard(
     String title, RxList<AllMogakModel> mogakModels, String route) {
@@ -39,23 +41,22 @@ Widget buildMogakCard(
                 maxLength: 3,
               ),
             ),
-      Padding(
-        padding: const EdgeInsets.only(right: 10),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.end,
-          children: [
-            CommentIcon(
-              svgIcon: 'assets/icons/icon20/Chat2.svg',
-              count: mogakModels.first.talks!.length,
-            ),
-            SizedBox(width: 10),
-            CommentIcon(
-              svgIcon: 'assets/icons/icon20/like.svg',
-              count: mogakModels.first.temperature,
-            ),
-          ],
-        ),
+      SizedBox(height: 8),
+      Row(
+        mainAxisAlignment: MainAxisAlignment.end,
+        children: [
+          CommentIcon(
+            svgIcon: 'assets/icons/icon20/Chat2.svg',
+            count: mogakModels.first.talks!.length,
+          ),
+          SizedBox(width: 10),
+          CommentIcon(
+            svgIcon: 'assets/icons/icon20/like.svg',
+            count: mogakModels.first.temperature,
+          ),
+        ],
       ),
+      SizedBox(height: 25),
     ],
   );
 }

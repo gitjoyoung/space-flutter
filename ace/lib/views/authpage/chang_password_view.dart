@@ -1,16 +1,26 @@
 // ignore_for_file: prefer_const_constructors
 
-import 'package:ace/controller/auth/change_password_controller.dart';
+import 'package:ace/controller/change_password_controller.dart';
 import 'package:ace/routes/view_route.dart';
 import 'package:ace/utils/button.dart';
 import 'package:ace/utils/colors.dart';
 import 'package:ace/utils/typography.dart';
 import 'package:ace/views/authpage/login.dart';
-import 'package:ace/widgets/common/text_filed_custom.dart';
+import 'package:ace/widgets/text_filed_custom.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:get/get.dart';
 
+void main() {
+  Get.put(ChangePasswordController());
+
+  runApp(GetMaterialApp(home: ChangePasswordView(), getPages: [
+    GetPage(
+        name: ViewRoute.changePasswordPage,
+        page: () => const ChangePasswordView()),
+    GetPage(name: ViewRoute.loginPage, page: () => const LoginView()),
+  ]));
+}
 
 class ChangePasswordView extends GetView<ChangePasswordController> {
   const ChangePasswordView({Key? key}) : super(key: key);

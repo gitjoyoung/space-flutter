@@ -1,13 +1,12 @@
 import 'package:ace/controller/home/home_controller.dart';
 import 'package:ace/utils/colors.dart';
 import 'package:ace/utils/typography.dart';
-import 'package:ace/widgets/common/badge_avatar_custom.dart';
-import 'package:ace/widgets/common/card_tag.dart';
+import 'package:ace/widgets/badge_avatar_custom.dart';
+import 'package:ace/widgets/card_tag.dart';
 import 'package:ace/widgets/spacer/spacer_avatar.dart';
-import 'package:ace/widgets/common/space_appbar.dart';
-import 'package:ace/widgets/common/title_appbar_custom.dart';
+import 'package:ace/widgets/space_appbar.dart';
+import 'package:ace/widgets/title_appbar_custom.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_custom_clippers/flutter_custom_clippers.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:get/get.dart';
 
@@ -24,11 +23,14 @@ class Spacer extends GetView<HomeController> {
           child: Column(
             children: [
               Stack(children: [
-                ClipPath(
-                  clipper: OvalBottomBorderClipper(),
-                  child: Container(
-                    height: 300,
-                    color: AppColors.primary80,
+                Container(
+                  height: 300,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(150), // 왼쪽 아래 코너 라운드 설정
+                      bottomRight: Radius.circular(150),
+                    ), // 반지름 값 설정 (원의 반지름은 너비와 높이의 절반과 같음)
+                    color: AppColors.primary80, // 배경색 설정
                   ),
                 ),
                 Padding(
@@ -70,11 +72,8 @@ class Spacer extends GetView<HomeController> {
                         ),
                       ),
                       SvgPicture.asset("assets/icons/grade/Graphic.svg"),
-                      Wrap(
-                        direction: Axis.horizontal,
-                        alignment: WrapAlignment.center,
-                        crossAxisAlignment: WrapCrossAlignment.center,
-                        spacing: 5,
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
                           SpacerAvatar(
                             rankList: controller.rankList[1],
