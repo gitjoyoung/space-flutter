@@ -17,3 +17,10 @@
 
 손성민 : 회원가입 ui, 마이페이지 ui
 
+## 시현
+### 홈
+![홈](https://github.com/9weeks-flutter-sface/Higher/assets/126527025/e5a96cfc-4125-4b79-8ea2-5f19f496704b)
+### 톡톡
+![톡톡](https://github.com/9weeks-flutter-sface/Higher/assets/126527025/d0eb5d19-7b01-4da6-9632-176dbdf31d56)
+### 모각
+![모각](https://github.com/9weeks-flutter-sface/Higher/assets/126527025/023de647-9621-424d-9962-b1bca0b5d0e5)
