@@ -207,7 +207,7 @@ class Home extends GetView<HomeController> {
             ),
 
             Obx(
-              () => controller.rankList == null || controller.rankList.isEmpty
+              () => controller.rankList.isEmpty
                   ? SpacerSkeleton()
                   : Column(
                       children: [
@@ -296,6 +296,7 @@ class Home extends GetView<HomeController> {
                                   ),
                                 ),
                               );
+                             
                             },
                           ),
                         ),

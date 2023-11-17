@@ -55,7 +55,6 @@ class MogakCreate extends GetView<MogakCreateController> {
 
   @override
   Widget build(BuildContext context) {
-    Get.put(MogakCreateController());
     return Scaffold(
       appBar: SpaceAppBar(),
       body: Padding(

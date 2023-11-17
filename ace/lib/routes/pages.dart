@@ -155,6 +155,7 @@ class AppPages {
       name: ViewRoute.mogakCreatePage,
       page: () => const MogakCreate(),
       binding: BindingsBuilder(() {
+
         Get.put(MogakCreateController());
       }),
     ),

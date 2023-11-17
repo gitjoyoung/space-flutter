@@ -12,7 +12,7 @@ class ApiRoute {
 // 홈 화면
 
   static const String homeBannerApi = "${baseUrl}api/course";
-  static const String homeSpacerRankApi = "${baseUrl}api/rank?month=10";
+  static const String homeSpacerRankApi = "${baseUrl}api/rank?month=11";
 
 // 마이페이지 관련
   static const String myTalklApi = "${baseUrl}api/me/talk";

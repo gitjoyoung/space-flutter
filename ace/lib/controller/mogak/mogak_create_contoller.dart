@@ -100,7 +100,7 @@ class MogakCreateController extends GetxController {
         },
         options: Options(headers: {"Authorization": token}));
     print('수정된 내용');
-    Get.find<MogakDetailController>().fetchDetailMogak(mogakId);
+    // Get.find<MogakDetailController>().fetchDetailMogak(mogakId);
     Get.back();
   }
 

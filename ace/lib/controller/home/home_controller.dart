@@ -20,7 +20,6 @@ import 'package:url_launcher/url_launcher.dart';
 class HomeController extends GetxController {
   String token = Get.find<AuthController>().getToken();
   RxList<BannerModel> bannerList = RxList<BannerModel>();
-
   RxList<RankModel> rankList = RxList<RankModel>();
 
   // 홈 위젯
@@ -90,7 +89,7 @@ class HomeController extends GetxController {
       if (response.statusCode == 200) {
         final List<dynamic> jsonArray = response.data['data']['res'];
 
-        print('받아온 통신' + jsonArray.toString());
+        print('랭크 리스트 받아온 통신' + jsonArray.toString());
         final newRankList =
             jsonArray.map((jsonItem) => RankModel.fromMap(jsonItem)).toList();
 
