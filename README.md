@@ -31,15 +31,12 @@
 
 ### 홈
 ![홈](https://github.com/9weeks-flutter-sface/Higher/assets/126527025/e5a96cfc-4125-4b79-8ea2-5f19f496704b)
-- 홈 페이지에 대한 설명
 
 ### 모각
 ![모각](https://github.com/9weeks-flutter-sface/Higher/assets/126527025/023de647-9621-424d-9962-b1bca0b5d0e5)
-- 모각 페이지에 대한 설명
 
 ### 톡톡
 ![톡톡](https://github.com/9weeks-flutter-sface/Higher/assets/126527025/d0eb5d19-7b01-4da6-9632-176dbdf31d56)
-- 톡톡 페이지에 대한 설명
 
 ## 피그마 디자인
 [피그마 디자인](https://www.figma.com/file/KHF3vIjf5KLFFVqKCEwiL6/Design-SFACE?type=design&node-id=0-1&mode=design&t=lHJs2Xly7gkHYMaU-0)
